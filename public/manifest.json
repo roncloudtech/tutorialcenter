@@ -1,6 +1,9 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Tutorial Center",
+  "name": "Tutorial Center | Empowering Minds, Acheiving Excellence",
+  "lang": "en-US",
+  "orientation": "portrait",
+  "description": "Tutorial Center, a subsidiary of Roncloud Technologies, is an e-learning platform empowering Nigerian students for JAMB, WAEC, NECO, and GCE exams. Offering on-demand tutorials, live classes, and interactive resources, it tackles limited access to quality education, aiming to become Nigeria's leading online education provider.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +23,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#09314f",
   "background_color": "#ffffff"
 }
