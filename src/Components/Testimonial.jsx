@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Tcard from "./Tcard";
+import TestimonialCard from "./Cards/Tcard";
 
 //Testimonial data structure
 const data = [
@@ -44,7 +44,7 @@ export default function Testimonial() {
             </div>
             <div className="flex gap-2 flex-1">
               {data.map((item,index) => (
-                <Tcard
+                <TestimonialCard
                  key={index}
                   name={item.name}
                   title={item.title}
