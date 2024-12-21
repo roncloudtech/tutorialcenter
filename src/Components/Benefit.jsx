@@ -1,5 +1,6 @@
 import React from "react";
 
+// details for the benefit section
 const data = [
   {
     title: `Personalized Learning at Your Convenience`,

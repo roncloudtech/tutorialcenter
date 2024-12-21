@@ -36,7 +36,9 @@ export default function Navbar() {
             </div>
             {/* Apply button */}
             <div className="">
-              <Link className="mr-7 font-bold">Login</Link>
+              <Link to="/login" className="mr-7 font-bold">
+                Login
+              </Link>
               <Link className="bg-primary text-white px-4 py-2 rounded-lg">
                 Apply Now
               </Link>
