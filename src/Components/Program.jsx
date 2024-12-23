@@ -1,5 +1,8 @@
-import React from "react";
-import Card from "./Card";
+import React, { useState } from "react";
+import ProgramCard from "./Cards/ProgramCard";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const program = [
   {
@@ -15,7 +18,7 @@ const program = [
     path: "/learnMore",
   },
   {
-    title: "JAMB",
+    title: "NECO",
     subject: "4 Subjects",
     month: "5,000",
     quarter: "14,000",
@@ -65,11 +68,43 @@ const program = [
 ];
 
 export default function Program() {
+ // slider settings from react-slick
+var settings = {
+  infinite: true,
+  fade: false,
+  dots: true,
+  cssEase: "ease",
+  speed: 2000,
+  autoplay: true,
+  autoplaySpeed: 3000,
+  slidesToShow: 2,
+  slidesToScroll: 2,
+  initialSlide: 0,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2,
+        infinite: true,
+      },
+    },
+    {
+      breakpoint: 1023,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        initialSlide: 1,
+      },
+    },
+  ],
+};
+
   return (
     <>
       <div className="Container">
         <div className="area-wrapper">
-          <div className="mb-7">
+          <div className="mb-9">
             <h2 className="uppercase lg:text-xl text-base font-bold mb-4">
               Our program
             </h2>
@@ -81,25 +116,24 @@ export default function Program() {
               with confidence and ease
             </p>
           </div>
-          <div className="hidden">
-            {
-                program.map((item,index) => (
-                    <div className=" " key={index}>
-                        <Card
-                         subject={item.subject}
-                         title={item.title}
-                         month={item.month}
-                         quarter={item.quarter}
-                         year={item.year}
-                         topic1={item.topic1}
-                         topic2={item.topic2}
-                         topic3={item.topic3}
-                         topic4={item.topic4}
-                         path={item.path}
-                        />
-                    </div>
-                ))
-            }
+          <div className="">
+            <Slider {...settings} className="">
+              {program.map((item, index) => (
+                <ProgramCard
+                  key={index}
+                  subject={item.subject}
+                  title={item.title}
+                  month={item.month}
+                  quarter={item.quarter}
+                  year={item.year}
+                  topic1={item.topic1}
+                  topic2={item.topic2}
+                  topic3={item.topic3}
+                  topic4={item.topic4}
+                  path={item.path}
+                />
+              ))}
+            </Slider>
           </div>
         </div>
       </div>

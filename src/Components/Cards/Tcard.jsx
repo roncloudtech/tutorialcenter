@@ -1,7 +1,7 @@
 import React from "react";
-import icon from "../Assets/Frame.png";
+import icon from "../../Assets/Frame.png";
 
-export default function Tcard({image,title,desc,name}) {
+export default function TestimonialCard({image,title,desc,name}) {
   return (
     <>
       <div className="w-[300px] rounded-3xl bg-[#E336291F] p-6 text-center mt-8 relative">
