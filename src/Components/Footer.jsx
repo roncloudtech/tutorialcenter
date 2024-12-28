@@ -6,11 +6,11 @@ export default function Footer() {
   return (
     <>
       <div className="footer bg-gradient-to-r from-[#09314F] to-[#E83831] text-white">
-        <div className="h-12 spacer"/>
+        <div className="h-12 spacer" />
         <div className="Container">
           <div className="area-wrapper flex flex-col items-center justify-center text-center">
-            <div className="footer-content mb-6">
-              <div className="sign up mb-4">
+            <div className="footer-content mb-9">
+              <div className="sign up mb-6">
                 <h2 className="mb-2 font-semibold lg:text-lg sm:text-base text-xs">
                   Want product news and updates?{" "}
                 </h2>
@@ -24,7 +24,7 @@ export default function Footer() {
                     <input
                       type="text"
                       placeholder="Your email address"
-                      className="shadow border border-[#94A3B8] rounded-xl py-1 px-2"
+                      className="shadow bg-white border border-[#94A3B8] rounded-xl py-1  px-2"
                     />
                     <button
                       type="submit"
@@ -37,7 +37,7 @@ export default function Footer() {
               </div>
             </div>
             <div className="socials">
-              <p className="mb-4">
+              <p className="mb-5 underline">
                 We care about the protection of your data. Read our{" "}
                 <Link>Privacy Policy</Link> .{" "}
               </p>
@@ -124,16 +124,18 @@ export default function Footer() {
                       height="26"
                       style={{ color: "white" }}
                     />
-                    <span className="text-white">Apple Store</span>
+                    <span className="text-white">Play Store</span>
                   </a>
                 </div>
               </div>
             </div>
           </div>
-            <div className="copyright py-5">
-              <div className="border border-" />
-              <p className="mt-4 text-center">Copyright © 2025 Tutorial Center | All Rights Reserved</p>
-            </div>
+          <div className="copyright py-5">
+            <div className="border border-" />
+            <p className="mt-4 text-center">
+              Copyright © 2025 Tutorial Center | All Rights Reserved
+            </p>
+          </div>
         </div>
       </div>
     </>

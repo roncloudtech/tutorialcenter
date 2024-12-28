@@ -9,7 +9,7 @@ export default function Contact() {
         <div className="h-7" />
         <div className="Container">
           <div className="area-wrapper ">
-            <div className="flex">
+            <div className="flex max-md:flex-col">
               <div className="flex-1 py-4 pr-7">
                 <div className="content mb-8">
                   <h2 className="text-primary text-lg font-bold mb-2">
@@ -45,7 +45,7 @@ export default function Contact() {
               <div className="flex-1 py-4 pl-7 [&_input]:w-full [&_input]:shadow [&_input]:border [&_input]:border-[#94A3B8] [&_input]:rounded-lg [&_input]:p-2 ">
                 {/* form input */}
                 <form action="" method="post">
-                  <div className="flex gap-4 mb-4">
+                  <div className="flex max-[466px]:flex-col gap-4 mb-4">
                     <input type="text" placeholder="First Name" />
                     <input type="text" placeholder="Last Name" />
                   </div>
