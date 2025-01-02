@@ -118,13 +118,6 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-
-      <div className="bg-primary py-2 text-center block max-sm:hidden">
-        <p className="text-white ">
-          Click here to join our students in archiving excellence...{" "}
-          <span className="text-ascent font-bold">Apply Now</span>
-        </p>
-      </div>
     </>
   );
 }

@@ -51,7 +51,11 @@ export default function Contact() {
                   </div>
                   <input type="text" placeholder="Email" />
                   <div className="mt-4">
-                    <textarea placeholder="Message" rows={3} className="shadow w-full rounded-lg p-2 border border-[#94A3B8]" />
+                    <textarea
+                      placeholder="Message"
+                      rows={3}
+                      className="shadow w-full rounded-lg p-2 border border-[#94A3B8]"
+                    />
                   </div>
                   <div className="flex justify-end mt-3">
                     <button className="bg-gradient-to-r from-[#09314F] to-[#E83831] text-white text-sm px-5 py-1 rounded-full font-medium">

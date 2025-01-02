@@ -37,9 +37,9 @@ export default function Footer() {
               </div>
             </div>
             <div className="socials">
-              <p className="mb-5 underline">
+              <p className="mb-5 ">
                 We care about the protection of your data. Read our{" "}
-                <Link>Privacy Policy</Link> .{" "}
+                <Link className="underline">Privacy Policy</Link> .{" "}
               </p>
               <div className="Social_links flex justify-center items-center gap-3 mb-6">
                 <a

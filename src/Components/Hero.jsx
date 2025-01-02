@@ -7,6 +7,12 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 export default function Hero() {
   return (
     <>
+      <div className="bg-primary py-2 text-center block max-sm:hidden">
+        <p className="text-white ">
+          Click here to join our students in archiving excellence...{" "}
+          <span className="text-ascent font-bold">Apply Now</span>
+        </p>
+      </div>
       {/* Hero Section for extra large screen */}
       <div className="pt-12 max-[1279px]:p-0">
         <div className="Container">
