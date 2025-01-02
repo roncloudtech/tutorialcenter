@@ -116,7 +116,7 @@ var settings = {
               with confidence and ease
             </p>
           </div>
-          <div className="">
+          <div className="hidden">
             <Slider {...settings} className="">
               {program.map((item, index) => (
                 <ProgramCard
