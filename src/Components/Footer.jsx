@@ -100,7 +100,7 @@ export default function Footer() {
               </div>
               <div className="download_app">
                 <p className="mb-3">Click to download our app. Download Now!</p>
-                <div className="flex gap-4">
+                <div className="flex sm:flex-row flex-col items-center justify-center gap-4">
                   <a
                     href=""
                     className="flex justify-center items-center gap-2 w-40 bg-sencondary py-[6px] rounded-lg"

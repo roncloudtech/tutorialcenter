@@ -39,49 +39,47 @@ export default function Hero() {
               </div>
             </div>
             <div className="h-[470px] flex-1">
-              <div className="content">
-                <div className="flex ">
-                  <div className="w-[430px] h-[430px] translate-x-36 -translate-y-16 flex-1">
-                    <img
-                      src={student_image}
-                      alt=""
-                      className="w-full h-full object-contain "
-                    />
+              <div className="flex ">
+                <div className="w-[430px] h-[430px] translate-x-36 -translate-y-16 flex-1">
+                  <img
+                    src={student_image}
+                    alt=""
+                    className="w-full h-full object-contain "
+                  />
+                </div>
+                <div className="w-[280px] h-[270px] rounded-lg translate-y-32 -translate-x-9 relative">
+                  <img
+                    src={teacher}
+                    alt=""
+                    className="w-full h-full object-contain "
+                  />
+                  {/* chat with us icon */}
+                  <div className="absolute top-11 -right-6 w-[110px] py-3 bg-[#EAEBEC] shadow-2xl rounded-3xl flex flex-col items-center justify-center">
+                    <div className="mb-1 w-7 h-7 bg-primary rounded-full flex justify-center items-center">
+                      <Icon
+                        icon="tabler:message-chatbot"
+                        width="18"
+                        height="18"
+                        className="text-ascent"
+                      />
+                    </div>
+                    <span className="text-ascent text-[5px] font-semibold">
+                      Chat with us{" "}
+                    </span>
                   </div>
-                  <div className="w-[280px] h-[270px] rounded-lg translate-y-32 -translate-x-9 relative">
-                    <img
-                      src={teacher}
-                      alt=""
-                      className="w-full h-full object-contain "
-                    />
-                    {/* chat with us icon */}
-                    <div className="absolute top-11 -right-6 w-[110px] py-3 bg-[#EAEBEC] shadow-2xl rounded-3xl flex flex-col items-center justify-center">
-                      <div className="mb-1 w-7 h-7 bg-primary rounded-full flex justify-center items-center">
-                        <Icon
-                          icon="tabler:message-chatbot"
-                          width="18"
-                          height="18"
-                          className="text-ascent"
-                        />
-                      </div>
-                      <span className="text-ascent text-[5px] font-semibold">
-                        Chat with us{" "}
-                      </span>
+                  {/* Back To Top */}
+                  <div className="fixed bottom-5 -right-8 w-[90px] py-3 bg-[#EAEBEC] shadow-2xl rounded-3xl flex flex-col items-center justify-center">
+                    <div className="mb-2 w-7 h-7 bg-primary rounded-full flex justify-center items-center">
+                      <Icon
+                        icon="tabler:message-chatbot"
+                        width="18"
+                        height="18"
+                        className="text-ascent"
+                      />
                     </div>
-                    {/* Back To Top */}
-                    <div className="fixed bottom-5 -right-8 w-[90px] py-3 bg-[#EAEBEC] shadow-2xl rounded-3xl flex flex-col items-center justify-center">
-                      <div className="mb-2 w-7 h-7 bg-primary rounded-full flex justify-center items-center">
-                        <Icon
-                          icon="tabler:message-chatbot"
-                          width="18"
-                          height="18"
-                          className="text-ascent"
-                        />
-                      </div>
-                      <span className="text-ascent text-[5px] font-semibold">
-                        Back to top{" "}
-                      </span>
-                    </div>
+                    <span className="text-ascent text-[5px] font-semibold">
+                      Back to top{" "}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -89,7 +87,7 @@ export default function Hero() {
           </div>
         </div>
       </div>
-      {/* Hero Section for smaller large screen */}
+      {/* Hero Section for smaller and large screen */}
       <div className="max-xl:block hidden w-full">
         <div className=" relative w-full h-[450px]">
           {/* background color cover */}
@@ -101,7 +99,7 @@ export default function Hero() {
           />
           {/* background content */}
           <div className="flex-1 absolute top-8 left-0 z-50 px-7">
-            <h1 className="font-bold text-[32px] mb-3 uppercase leading-[1.47]">
+            <h1 className="font-bold sm:text-[32px] text-2xl text-white  mb-3 uppercase leading-[1.47]">
               <span className="text-ascent">Ace</span> Your <br />
               <span className="text-ascent">Exams</span> , Secure <br /> Your
               Future!

@@ -61,18 +61,20 @@ export default function Navbar() {
                   style={{ color: "#000" }}
                 />
               </button>
-              <div className={`${visible ? "hidden" : "block"}`}>
+              <div className={``}>
                 {/* background Cover */}
                 <div
-                  className={`${
-                    visible ? "translate-x-full" : "translate-x-0"
-                  } background-shadow transition-all duration-500 ease-linear`}
+                  className={` background-shadow transition-all duration-300 ease-custom
+                    ${visible ? "translate-x-full" : "translate-x-0"} `}
                   onClick={() => {
                     setVisible(true);
                   }}
                 />
                 {/* Menu Items */}
-                <div className="fixed right-0 top-0 bottom-0 z-[600] w-full max-w-[240px] bg-white">
+                <div
+                  className={`${visible ? "translate-x-full" : "translate-x-0"}
+                  fixed right-0 top-0 bottom-0 z-[600] w-full max-w-[240px] bg-white transition-all duration-300 ease-custom`}
+                >
                   <div className="flex flex-col justify-end ">
                     <div className="flex flex-col justify-center items-center p-3">
                       <button
@@ -101,14 +103,17 @@ export default function Navbar() {
                         ))}
                         {/* Apply button for mobile menu */}
                       </div>
-                        <div className="flex flex-col md:flex-row items-center justify-center gap-3 self-end">
-                          <Link className="block text-xs bg-primary text-white py-2 px-3 rounded-xl">
-                            Apply Now
-                          </Link>
-                          <Link to="/login" className="block font-bold border border-[#94A3B8] bg-white shadow rounded-xl px-3 py-2">
-                            Login
-                          </Link>
-                        </div>
+                      <div className="flex flex-col md:flex-row items-center justify-center gap-3 self-end">
+                        <Link className="block text-xs bg-primary text-white py-2 px-3 rounded-xl">
+                          Apply Now
+                        </Link>
+                        <Link
+                          to="/login"
+                          className="block font-bold border border-[#94A3B8] bg-white shadow rounded-xl px-3 py-2"
+                        >
+                          Login
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>

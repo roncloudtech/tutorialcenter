@@ -39,7 +39,7 @@ export default function Testimonial() {
                 Get Started{" "}
               </Link>
             </div>
-            <div className="flex gap-2 flex-1">
+            <div className="lg:flex gap-2 flex-1 hidden">
               {data.map((item, index) => (
                 <TestimonialCard
                   key={index}

@@ -26,7 +26,7 @@ export default function Contact() {
                   <p className="text-sm font-semibold">
                     feel free to reach out to us via email or on phone
                   </p>
-                  <div className="flex gap-6 mt-3">
+                  <div className="flex sm:flex-row flex-col gap-6 mt-3">
                     <a
                       href=""
                       className="text-sencondary font-semibold text-sm"
@@ -42,7 +42,7 @@ export default function Contact() {
                   </div>
                 </div>
               </div>
-              <div className="flex-1 py-4 pl-7 [&_input]:w-full [&_input]:shadow [&_input]:border [&_input]:border-[#94A3B8] [&_input]:rounded-lg [&_input]:p-2 ">
+              <div className="flex-1 py-4 sm:pl-7 [&_input]:w-full [&_input]:shadow [&_input]:border [&_input]:border-[#94A3B8] [&_input]:rounded-lg [&_input]:p-2 ">
                 {/* form input */}
                 <form action="" method="post">
                   <div className="flex max-[466px]:flex-col gap-4 mb-4">

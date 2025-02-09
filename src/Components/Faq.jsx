@@ -46,6 +46,7 @@ const FaqQuestion = [
 ];
 export default function Faq() {
   const [visible, setVisible] = useState(Array(FaqQuestion.length).fill(false));
+  // function to toggle the display of the faq answers when the question is clicked
   const toggleVisible = (index) => {
     setVisible((prev) => {
       const newVisibleItems = [...prev];
@@ -88,11 +89,17 @@ export default function Faq() {
                     width="35"
                     height="35"
                     style={{ color: "#000" }}
-                    className={`${visible[index] ? "rotate-180" : ""}`}
+                    className={`${
+                      visible[index] ? "rotate-180" : "rotate-90"
+                    } transition-all ease-custom duration-300`}
                   />
                 </button>
-                <div className={`${visible[index] ? "block" : "hidden"} pr-8`}>
-                  <p className="mt-2 text-[14.4px]">{item.answers}</p>
+                <div
+                  className={`${
+                    visible[index] ? "mt-2 visible h-[auto]" : "invisible h-0"
+                  } pr-8 transition-height ease-custom duration-300`}
+                >
+                  <p className="text-[14.4px]">{item.answers}</p>
                 </div>
               </div>
             ))}
