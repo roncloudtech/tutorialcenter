@@ -35,17 +35,109 @@ img {
   object-fit: cover;
 }
 input,
-select, form {
+select,
+form {
   display: block;
   background: inherit;
-} 
-input:focus{
+}
+input:focus {
   outline: none;
   border: none;
 }
+textarea:focus {
+  outline: none;
+  border: none;
+}
+::placeholder {
+  font-style: italic;
+  font-size: 16px;
+}
 .Container {
-  @apply 2xl:max-w-full xl:max-w-[1170px] lg:max-w-[990px] md:max-w-[734px] w-full mx-auto 2xl:px-5 lg:px-4 px-3 relative;
+  @apply 2xl:max-w-[1600px] xl:max-w-[1200px]  w-full mx-auto 2xl:px-7 lg:px-6 md:px-5 px-3 relative;
 }
 .area-wrapper {
   @apply lg:py-8 lg:px-6 sm:py-6 px-5 p-2;
+}
+/* background cover */
+.background-shadow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 200;
+}
+
+/* Customize the full calender component  */
+.fc .fc-toolbar-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+.fc-direction-ltr .fc-toolbar > * > :not(:first-child) {
+  display: none;
+}
+.fc .fc-button .fc-icon {
+  font-size: 16px;
+}
+.fc .fc-button {
+  padding: 5px;
+  background-color: transparent;
+  color: black;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+}
+.fc .fc-button-primary:hover {
+  background-color: transparent;
+  color: black;
+  border: none;
+}
+.fc .fc-button-primary:not(:disabled).fc-button-active,
+.fc .fc-button-primary:not(:disabled):active {
+  background-color: transparent;
+  color: black;
+  border: none;
+}
+.fc-h-event {
+  background: transparent;
+  border: none;
+}
+.fc-h-event .fc-event-main {
+  color: white;
+  font-size: 14px;
+}
+.fc .fc-daygrid-day.fc-day-today {
+  background-color: #a9c1d3;
+}
+/* Small Calender */
+.react-calendar__navigation__label__labelText--from {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+.react-calendar {
+  width: 100% !important;
+  background: none !important;
+  border: none !important;
+  font-family: inherit !important;
+}
+.react-calendar__navigation {
+  height: 20px !important;
+  margin-bottom: 0.9rem !important;
+}
+.react-calendar__month-view__weekdays {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+}
+.react-calendar__tile {
+  font-size: 8px !important;
+  padding: 5px !important;
+}
+.react-calendar__tile--active {
+  background: white !important;
+  color: black !important;
+  border-radius: 5px;
+}
+abbr:where([title]) {
+  text-decoration: none !important;
 }

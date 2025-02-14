@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function Layout({ title, semititle, desc, Sdesc, btnTitle, btnPath }) {
   return (
     <>
-      <div className="bg-gradient-to-r from-[#09314F] to-[#E83831]">
+      <div className="bg-gradient-to-r from-[#09314F] to-[#E83831] relative">
         <div className="Container">
           <div className="area-wrapper">
             <div className="py-6">
@@ -15,10 +15,13 @@ export default function Layout({ title, semititle, desc, Sdesc, btnTitle, btnPat
                 <p className="text-xs text-ascent">{Sdesc}</p>
               </div>
               <div className="">
-                <Link className="text-white text-xs bg-sencondary px-10 py-3 rounded-md " to={btnPath}>{btnTitle}</Link>
+                <Link className="text-white text-xs bg-sencondary px-8 py-3 rounded-3xl " to={btnPath}>{btnTitle}</Link>
               </div>
             </div>
           </div>
+        </div>
+        <div className="">
+
         </div>
       </div>
     </>

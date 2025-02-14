@@ -5,6 +5,9 @@ import Benefit from "../Components/Benefit";
 import Layout from "../Components/Layout";
 import Program from "../Components/Program";
 import Testimonial from "../Components/Testimonial";
+import Faq from "../Components/Faq";
+import Contact from "../Components/Contact";
+import Footer from "../Components/Footer";
 export default function Home() {
   return (
     <>
@@ -23,6 +26,9 @@ export default function Home() {
       />
       <Program/>
       <Testimonial/>
+      <Faq/>
+      <Contact/>
+      <Footer/>
     </>
   );
 }

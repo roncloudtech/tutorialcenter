@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import TestimonialCard from "./Cards/Tcard";
+import Title from "./Cards/Title";
 
-//Testimonial data structure
+//Testimonial data
 const data = [
   {
     name: "Chizoba Tina",
@@ -23,13 +24,9 @@ const data = [
 export default function Testimonial() {
   return (
     <>
-      <div className="bg-primary py-4">
-        <h2 className="font-extrabold uppercase text-[25px] text-center text-white">
-          Testimonials
-        </h2>
-      </div>
+      <Title title={"testimonial"} />
       <div className="Container">
-        <div className="area-wrapper">
+        <div className="area-wrapper !py-16">
           <div className="flex gap-4 items-center justify-center">
             <div className="blockContent flex-1">
               <h4 className="font-bold text-lg leading-6 text-[#020D14] mb-6">
@@ -42,10 +39,10 @@ export default function Testimonial() {
                 Get Started{" "}
               </Link>
             </div>
-            <div className="flex gap-2 flex-1">
-              {data.map((item,index) => (
+            <div className="lg:flex gap-2 flex-1 hidden">
+              {data.map((item, index) => (
                 <TestimonialCard
-                 key={index}
+                  key={index}
                   name={item.name}
                   title={item.title}
                   image={item.image}
