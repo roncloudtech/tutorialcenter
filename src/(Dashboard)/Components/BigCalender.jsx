@@ -49,8 +49,6 @@ export default function BigCalender() {
           center: "title",
           right: "dayGridMonth,timeGridWeek,timeGridDay",
         }}
-        onViewChange={(info) => handleViewChange(info.view.type)} // Handle view change
-        height={"90%"}
       />
     </>
   );

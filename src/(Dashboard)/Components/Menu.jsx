@@ -171,11 +171,11 @@ export default function Menu() {
   const { toggle } = useSchoolContext();
 
   return (
-    <>
+    <div className="">
       {menuItems.map((item, index) => (
         <div key={index} className="">
           <NavLink
-            className="flex justify-between p-2 [&.active]:bg-white rounded-lg"
+            className="flex justify-between p-2 [&.active]:bg-white [&.active]:font-bold rounded-lg"
             onClick={() => toggleMenu(index)}
             to={item.path}
           >
@@ -184,7 +184,7 @@ export default function Menu() {
               <span
                 className={`${
                   toggle ? "block" : "hidden"
-                } text-[14px] 2xl:text-sm`}
+                } text-[13px] 2xl:text-sm `}
               >
                 {item.label}
               </span>
@@ -233,6 +233,6 @@ export default function Menu() {
           )}
         </div>
       ))}
-    </>
+    </div>
   );
 }
