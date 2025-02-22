@@ -12,10 +12,13 @@ export default function Layout2({
     <div
       className={`${
         reverse ? "flex-row-reverse" : ""
-      } w-screen lg:flex overflow-x-hidden`}
+      } w-screen lg:flex overflow-y-hidden scroll`}
     >
-      <div className="lg:w-[57%] w-full h-screen bg-white">{children}</div>
-      <div className="hidden lg:block w-[43%] bg-primary relative bg-no-repeat bg-cover bg-center"
+      <div className="lg:w-[57%] w-full h-screen bg-white overflow-y-scroll">
+        {children}
+      </div>
+      <div
+        className="hidden lg:block w-[43%] bg-primary relative bg-no-repeat bg-cover bg-center"
         style={{ backgroundImage: `url(${bgImage})` }}
       >
         {btnTitle && (

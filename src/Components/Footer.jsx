@@ -11,10 +11,10 @@ export default function Footer() {
           <div className="area-wrapper flex flex-col items-center justify-center text-center">
             <div className="footer-content mb-9">
               <div className="sign up mb-6">
-                <h2 className="mb-2 font-semibold lg:text-lg sm:text-base text-xs">
+                <h2 className="mb-2 font-semibold lg:text-xl sm:text-xl text-xs">
                   Want product news and updates?{" "}
                 </h2>
-                <p className="font-medium">
+                <p className="font-medium text-sm">
                   Sign up for our newsletter to stay up to date{" "}
                 </p>
               </div>
@@ -24,11 +24,11 @@ export default function Footer() {
                     <input
                       type="text"
                       placeholder="Your email address"
-                      className="shadow bg-white border border-[#94A3B8] rounded-xl py-1  px-2"
+                      className="shadow bg-white border border-[#94A3B8] rounded-full py-2.5 pl-2 w-[320px]"
                     />
                     <button
                       type="submit"
-                      className="text-sm text-white px-3 py-1 bg-primary rounded-xl"
+                      className="text-sm text-white px-5 py-2.5 bg-primary rounded-full"
                     >
                       Notify me
                     </button>
@@ -37,7 +37,7 @@ export default function Footer() {
               </div>
             </div>
             <div className="socials">
-              <p className="mb-5 ">
+              <p className="mb-5 text-xs">
                 We care about the protection of your data. Read our{" "}
                 <Link className="underline">Privacy Policy</Link> .{" "}
               </p>
@@ -99,7 +99,9 @@ export default function Footer() {
                 </a>
               </div>
               <div className="download_app">
-                <p className="mb-3">Click to download our app. Download Now!</p>
+                <p className="mb-3 text-xs">
+                  Click to download our app. Download Now!
+                </p>
                 <div className="flex sm:flex-row flex-col items-center justify-center gap-4">
                   <a
                     href=""
@@ -132,7 +134,7 @@ export default function Footer() {
           </div>
           <div className="copyright py-5">
             <div className="border border-" />
-            <p className="mt-4 text-center">
+            <p className="mt-4 text-center text-sm">
               Copyright © 2025 Tutorial Center | All Rights Reserved
             </p>
           </div>

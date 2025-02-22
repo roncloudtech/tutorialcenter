@@ -10,7 +10,7 @@ export default function Login() {
         btnTitle={"Sign Up"}
         reverse={true}
         bgImage={
-          'https://s3-alpha-sig.figma.com/img/b1c7/888c/2024ce8a72cc6d3912a58e0b88041d94?Expires=1736726400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=NetA6YLM1AZG-9ptqmgqNPonpGympdnjVHZFKNTA5BybXC57Wb6Kjq0gtuKgGKZnVgQC4XFF3QBGe3OPn5C~5xW6xD0Vj4nFbJr8e0VrEONx16dGilnEkgEpqYILI9jKpw68JDzMyCKXsgFZ44L~Bw-2nHn6NYF8ozEKnwLYf1UbrOkyJDsxR2PYXpnFg4jq0gd6YZCDmUI3rSUXFkaSEO7QUi7xlnmMcPX5KdBhhWBiWVoLcQWRxzB2NBBgvVABGzywJ43MO9htbcOJSqhJMZXInsUGpq3YFt7kqfAVVVttRIdAb1CND~pfePU3Un8kfBmbjvX8niPpDB1MvtyvGg__'
+          "https://s3-alpha-sig.figma.com/img/b1c7/888c/2024ce8a72cc6d3912a58e0b88041d94?Expires=1736726400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=NetA6YLM1AZG-9ptqmgqNPonpGympdnjVHZFKNTA5BybXC57Wb6Kjq0gtuKgGKZnVgQC4XFF3QBGe3OPn5C~5xW6xD0Vj4nFbJr8e0VrEONx16dGilnEkgEpqYILI9jKpw68JDzMyCKXsgFZ44L~Bw-2nHn6NYF8ozEKnwLYf1UbrOkyJDsxR2PYXpnFg4jq0gd6YZCDmUI3rSUXFkaSEO7QUi7xlnmMcPX5KdBhhWBiWVoLcQWRxzB2NBBgvVABGzywJ43MO9htbcOJSqhJMZXInsUGpq3YFt7kqfAVVVttRIdAb1CND~pfePU3Un8kfBmbjvX8niPpDB1MvtyvGg__"
         }
       >
         <div className="Container">
@@ -28,7 +28,7 @@ export default function Login() {
                   </p>
                 </div>
               </div>
-              <div className="max-w-[390px] px-9 py-5 bg-[#FBFAFA] rounded-md shadow-md mt-3">
+              <div className="w-[410px] px-9 py-5 bg-[#FBFAFA] rounded-md shadow-md mt-3">
                 {/* Form Inputs */}
                 <div className="w-full">
                   <form action="" method="post">
@@ -39,7 +39,7 @@ export default function Login() {
                       >
                         Email / Phone Number
                       </label>
-                      <div className="mt-1 flex gap-2 px-2 py-[6px] bg-[#D1D5DB] rounded-lg shadow-sm w-full">
+                      <div className="mt-1 flex gap-2 pl-2 py-[10px] bg-[#D1D5DB] rounded-lg shadow-sm w-full">
                         <Icon
                           icon="ic:baseline-email"
                           width="24"
@@ -60,7 +60,7 @@ export default function Login() {
                       >
                         Password
                       </label>
-                      <div className="mt-1 flex gap-2 px-2 py-[6px] bg-[#D1D5DB] rounded-lg shadow-sm w-full">
+                      <div className="mt-1 flex gap-2 pl-2 py-[10px] bg-[#D1D5DB] rounded-lg shadow-sm w-full">
                         <Icon
                           icon="mdi:eye"
                           width="24"

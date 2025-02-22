@@ -10,6 +10,20 @@
   }
 }
 
+.scroll ::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.scroll .position ::-webkit-scrollbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+.scroll ::-webkit-scrollbar-thumb {
+  background: green;
+  border-radius: 10px;
+}
+
 * {
   box-sizing: border-box;
   font-family: "DM Sans", serif;
@@ -21,9 +35,6 @@ body {
 }
 a {
   font-weight: 500;
-  font-size: 16px;
-}
-p {
   font-size: 16px;
 }
 li {
@@ -39,6 +50,7 @@ select,
 form {
   display: block;
   background: inherit;
+  font-size: 16px;
 }
 input:focus {
   outline: none;

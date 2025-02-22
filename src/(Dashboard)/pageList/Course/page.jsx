@@ -6,10 +6,10 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 export default function Coursepage() {
   return (
     <>
-      <DashboardLayout title={"Courses"}>
-        <div className="grid grid-cols-[1fr_290px] ">
+      <DashboardLayout>
+        <div className="grid grid-cols-[1fr_0.3fr]">
           {/* left Side */}
-          <div className="item1 pr-4">
+          <div className="item1 px-4">
             {/* hearder */}
             <div className="flex justify-between items-center  py-2 rounded-md">
               <h3 className="uppercase  font-semibold ">Courses</h3>
@@ -87,7 +87,7 @@ export default function Coursepage() {
                 </div>
               </div>
             </div>
-            {/* Right Side */}
+
             <div className="Right Side">
               {/* Download Course Material */}
               <div className="w-full">
@@ -151,7 +151,54 @@ export default function Coursepage() {
               </div>
             </div>
           </div>
-          <div className="bg-[#8695A0]"></div>
+          {/* Right Side */}
+          <div className="bg-[#8695A0] rounded-md p-2 space-y-2">
+            <div className="bg-white px-2 py-3 rounded-md">
+              <h3 className="text-[#D1D5DB] text-[10px] font-bold uppercase text-nowrap mb-2">
+                Need private session with a teacher?
+              </h3>
+              <div className="flex justify-between items-center text-[5px] font-semibold mb-2">
+                <p>Cost/Duration:</p>
+                <p>N2000 / 2hrs</p>
+              </div>
+              <button className="w-full py-2 rounded-lg bg-[#D1D5DB] text-[12px] text-white font-semibold">
+                Book A Session
+              </button>
+            </div>
+            <div className="bg-white px-2 py-3 rounded-md">
+              <h3 className="text-[#D1D5DB] text-[10px] font-bold uppercase mb-2">
+                master class
+              </h3>
+              <div className="flex justify-between 2xl:gap-6 gap-2">
+                <div className="flex justify-between  w-full">
+                  <div className="uppercase !text-[8px] font-semibold space-y-1">
+                    <p className="">monday</p>
+                    <p>tuesday</p>
+                    <p>wednesday</p>
+                    <p>thursday</p>
+                  </div>
+                  <div className="uppercase !text-[8px] font-semibold space-y-1">
+                    <p>5-7 pm</p>
+                    <p>5-7 pm</p>
+                    <p>5-7 pm</p>
+                    <p>5-7 pm</p>
+                  </div>
+                </div>
+                <div className="flex justify-between  w-full">
+                  <div className="uppercase text-[6px] font-semibold space-y-1">
+                    <p>friday</p>
+                    <p>saturday</p>
+                    <p>sunday</p>
+                  </div>
+                  <div className="uppercase text-[6px] font-semibold space-y-1">
+                    <p>5-7 pm</p>
+                    <p>5-7 pm</p>
+                    <p>5-7 pm</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </DashboardLayout>
     </>
