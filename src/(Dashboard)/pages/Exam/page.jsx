@@ -11,13 +11,14 @@ export default function Exampage() {
         <div className="px-4">
           {/* hearder */}
           <div className="flex justify-between items-center  py-2 rounded-md mb-4">
-            <h3 className="uppercase  font-semibold ">exam practice</h3>
-            <div className="w-9 h-9 flex justify-center items-center bg-slate-300 rounded-md">
+            <h3 className="uppercase text-mainBlue dark:text-lightGrey font-semibold">
+              exam practice
+            </h3>
+            <div className="w-9 h-9 flex justify-center items-center bg-mainBlue text-lightGrey dark:bg-lightGrey dark:text-mainBlue rounded-md">
               <Icon
                 icon="iconoir:bell-notification-solid"
                 width="24"
                 height="24"
-                style={{ color: "#000" }}
               />
             </div>
           </div>
@@ -37,7 +38,7 @@ export default function Exampage() {
 
 const ExamPractice = ({ setActive }) => {
   return (
-    <div className="Exam Practice">
+    <div className="Exam Practice dark:text-lightGrey">
       <div className="flex justify-between items-center mb-4">
         <button onClick={() => setActive(true)}>
           <Icon icon="iconamoon:arrow-left-2-light" width="35" height="35" />
@@ -48,18 +49,18 @@ const ExamPractice = ({ setActive }) => {
           <span className="text-sm font-semibold">15mins</span>
         </div>
       </div>
-      <div className="font-semibold flex justify-between items-center mb-5">
+      <div className="font-semibold flex justify-between items-center mb-5 dark:text-lightGrey text-mainBlack">
         <div className="flex flex-col justify-center">
-          <p className="text-[8px]">course</p>
+          <p className="text-[8px] font-light">course</p>
           <h3 className="text-sm uppercase">Jamb</h3>
         </div>
         <h1 className="text-lg">50 QUESTIONS</h1>
         <div className="flex flex-col justify-center">
-          <p className="text-[8px] uppercase">Subject</p>
+          <p className="text-[8px] uppercase font-light">Subject</p>
           <h3 className="text-sm ">English</h3>
         </div>
       </div>
-      <div className="px-6 py-5 rounded-md bg-[#EAEBEC] mb-5">
+      <div className="px-6 py-5 rounded-md bg-white text-mainBlack dark:bg-whiteFade mb-5">
         <div className="flex justify-between items-center mb-3  border-b-[1.1px]  border-solid border-black text-[16px] font-semibold uppercase">
           <p>Question 5</p>
           <div className="text-[16px] font-semibold flex gap-4 capitalize">
@@ -67,7 +68,7 @@ const ExamPractice = ({ setActive }) => {
             <p>unanswered: 25/30</p>
           </div>
         </div>
-        <p className="text-xs text-[#121D24]">
+        <p className="text-[15px] dark:text-lightGrey mb-4">
           Students taking the exam can pre-select the duration for practice, but
           not beyond the default exam time. They can also pre-select and
           increase the number of questions beyond the default limit. For
@@ -76,19 +77,19 @@ const ExamPractice = ({ setActive }) => {
           encouraging quick thinking and reading skills. The pass mark is set at
           70, while a score of 85 and above is considered excellent.
         </p>
-      </div>
-      <div className="grid grid-cols-2 gap-4 mb-5">
-        <div className="px-5 py-3 bg-[#EAEBEC] text-xs rounded-md">
-          <p>A. Thgsbfyhjfnajfnsaj</p>
-        </div>
-        <div className="px-5 py-3 bg-[#EAEBEC] text-xs rounded-md">
-          <p>A. Thgsbfyhjfnajfnsaj</p>
-        </div>
-        <div className="px-5 py-3 bg-[#EAEBEC] text-xs rounded-md">
-          <p>A. Thgsbfyhjfnajfnsaj</p>
-        </div>
-        <div className="px-5 py-3 bg-[#EAEBEC] text-xs rounded-md">
-          <p>A. Thgsbfyhjfnajfnsaj</p>
+        <div className="grid grid-cols-2 gap-4 text-mainBlack">
+          <div className="px-5 py-3 bg-lightGrey dark:bg-whiteFade text-xs rounded-md">
+            <p>A. Thgsbfyhjfnajfnsaj</p>
+          </div>
+          <div className="px-5 py-3 bg-lightGrey dark:bg-whiteFade text-xs rounded-md">
+            <p>B. Thgsbfyhjfnajfnsaj</p>
+          </div>
+          <div className="px-5 py-3 bg-lightGrey dark:bg-whiteFade text-xs rounded-md">
+            <p>C. Thgsbfyhjfnajfnsaj</p>
+          </div>
+          <div className="px-5 py-3 bg-lightGrey dark:bg-whiteFade text-xs rounded-md">
+            <p>D. Thgsbfyhjfnajfnsaj</p>
+          </div>
         </div>
       </div>
       {/* PAGINATE */}
@@ -114,10 +115,6 @@ const ExamPractice = ({ setActive }) => {
             <button>11</button>
             <button>12</button>
             <button>13</button>
-            <button>13</button>
-            <button>13</button>
-            <button>13</button>
-            <button>13</button>
           </div>
           <Icon
             icon="iconamoon:arrow-left-2-light"
@@ -127,15 +124,15 @@ const ExamPractice = ({ setActive }) => {
           />
         </div>
         <div className="flex gap-3">
-          <button className="w-full bg-[#D1D5DB] font-semibold text-center text-xs py-1.5 rounded-md uppercase">
+          <button className="w-full bg-mainLightBlue text-mainBlue  font-semibold text-center text-xs py-2 rounded-md uppercase">
             previous
           </button>
-          <button className="w-full bg-[#D1D5DB] font-semibold text-center text-xs py-1.5 rounded-md uppercase">
+          <button className="w-full bg-mainLightBlue text-mainBlue  font-semibold text-center text-xs py-2 rounded-md uppercase">
             next
           </button>
         </div>
       </div>
-      <button className="w-full rounded-md bg-[#D1D5DB] py-2 uppercase text-xs font-semibold mb-3">
+      <button className="w-full rounded-md shadow-custom-1 bg-mainBlue text-mainWhite dark:bg-darkMode py-2.5 uppercase text-xs font-semibold mb-3">
         submit
       </button>
     </div>
@@ -143,14 +140,23 @@ const ExamPractice = ({ setActive }) => {
 };
 
 const ExamInstruction = ({ setActive }) => {
+  const courses = ["Jamb", "waec", "neco", "gce"];
+  const subjects = [
+    "mathematics",
+    "english",
+    "chemistry",
+    "physics",
+    "geography",
+    "agriculture",
+  ];
   return (
     <div className="Exam Instruction space-y-6">
-      <div className="px-6 py-5 rounded-md bg-[#EAEBEC]">
-        <div className="flex justify-between items-center mb-3  border-b-[1.1px]  border-solid border-black text-sm font-semibold uppercase">
+      <div className="px-6 py-5 rounded-md bg-mainWhite dark:bg-whiteFade shadow-custom-1">
+        <div className="flex justify-between items-center mb-3 border-b-[1.1px]  border-solid border-black dark:border-lightGrey text-xs text-mainBlack dark:text-lightGrey font-semibold uppercase">
           <p>instruction </p>
           <p>Default Time: 50 mins</p>
         </div>
-        <p className="text-xs text-[#121D24]">
+        <p className="text-[14px] text-mainBlack dark:text-lightGrey">
           Students taking the exam can pre-select the duration for practice, but
           not beyond the default exam time. They can also pre-select and
           increase the number of questions beyond the default limit. For
@@ -161,67 +167,71 @@ const ExamInstruction = ({ setActive }) => {
         </p>
       </div>
       <div className="w-full flex flex-col gap-5">
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-6 text-mainBlack dark:text-lightGrey">
           <h3 className="text-xs font-semibold uppercase">course</h3>
-          <div className="p-1 w-max bg-[#EAEBEC] rounded-md ">
-            <button className="uppercase font-semibold text-[12px] px-6 py-[6px] rounded-md focus:text-white focus:bg-black">
-              jamb
-            </button>
-            <button className="uppercase font-semibold text-[12px] px-6 py-[6px] rounded-md focus:text-white focus:bg-black">
-              waec
-            </button>
-            <button className="uppercase font-semibold text-[12px] px-6 py-[6px] rounded-md focus:text-white focus:bg-black">
-              neco
-            </button>
-            <button className="uppercase font-semibold text-[12px] px-6 py-[6px] rounded-md focus:text-white focus:bg-black">
-              gce
-            </button>
+          <div className="p-1 w-max bg-lightGrey dark:bg-whiteFade text-mainBlue dark:text-lightGrey rounded-md">
+            <UseButtonEffects
+              items={courses}
+              classNames={
+                "uppercase font-semibold text-[12px] px-6 py-[6px] rounded-md"
+              }
+            />
           </div>
         </div>
-        <div className="flex items-center gap-6">
+        <div className="flex flex-wrap items-center gap-6 text-mainBlack dark:text-lightGrey">
           <h3 className="text-xs font-semibold uppercase">subject</h3>
-          <div className="p-1 w-max bg-[#EAEBEC] rounded-md">
-            <button className="capitalize font-semibold text-[10px] px-3 py-[6px] rounded-md focus:text-white focus:bg-black">
-              mathematics
-            </button>
-            <button className="capitalize font-semibold text-[12px] px-3 py-[6px] rounded-md focus:text-white focus:bg-black">
-              english
-            </button>
-            <button className="capitalize font-semibold text-[12px] px-3 py-[6px] rounded-md focus:text-white focus:bg-black">
-              chemistry
-            </button>
-            <button className="capitalize font-semibold text-[12px] px-3 py-[6px] rounded-md focus:text-white focus:bg-black">
-              physics
-            </button>
-            <button className="capitalize font-semibold text-[12px] px-3 py-[6px] rounded-md focus:text-white focus:bg-black">
-              geography
-            </button>
-            <button className="capitalize font-semibold text-[12px] px-3 py-[6px] rounded-md focus:text-white focus:bg-black">
-              agriculture
-            </button>
+          <div className="p-1 w-max bg-lightGrey dark:bg-whiteFade text-mainBlue dark:text-lightGrey rounded-md">
+            <UseButtonEffects
+              items={subjects}
+              classNames={
+                "capitalize font-semibold text-[10px] px-3 py-[6px] rounded-md"
+              }
+            />
           </div>
         </div>
-        <div className="flex items-center gap-6">
-          <h3 className="text-xs font-semibold uppercase">time</h3>
+        <div className="flex items-center gap-6 dark:text-lightGrey text-mainBlack">
+          <h3 className="text-[12px] font-semibold uppercase">time</h3>
           <div className="flex items-center gap-4 text-[12px] font-semibold">
-            <span className="px-3 py-1 bg-[#D1D5DB]">00:00</span>
+            <span className="px-3 py-1 bg-lightGrey text-mainBlue dark:bg-whiteFade rounded-custom">
+              --:--
+            </span>
             <span>/ 50:00 mins</span>
           </div>
         </div>
-        <div className="flex items-center gap-6">
-          <h3 className="text-xs font-semibold uppercase">question</h3>
+        <div className="flex items-center gap-6 dark:text-lightGrey text-mainBlack">
+          <h3 className="text-[12px] font-semibold uppercase">question</h3>
           <div className="flex items-center gap-4 text-[12px] font-semibold">
-            <span className="px-3 py-1 bg-[#D1D5DB]">00:00</span>
+            <span className="px-3 py-1 bg-lightGrey text-mainBlue dark:bg-whiteFade rounded-custom">
+              --
+            </span>
             <span>/ 100</span>
           </div>
         </div>
       </div>
       <button
         onClick={() => setActive(false)}
-        className="uppercase text-xs py-2  w-full  text-center bg-[#D1D5DB] rounded-md font-semibold"
+        className="uppercase text-xs py-2  w-full  text-center bg-mainBlue text-mainWhite dark:bg-darkMode dark:text-lightGrey rounded-md font-semibold"
       >
         start exam
       </button>
     </div>
   );
+};
+
+const UseButtonEffects = ({ items, classNames }) => {
+  const [active, setActive] = useState(null);
+  const handleClick = (index) => {
+    setActive(index);
+  };
+  return items.map((item, i) => (
+    <button
+      key={i}
+      onClick={() => handleClick(i)}
+      className={`${
+        active === i ? "text-mainWhite bg-mainBlue dark:bg-darkMode" : ""
+      } ${classNames} `}
+    >
+      {item}
+    </button>
+  ));
 };

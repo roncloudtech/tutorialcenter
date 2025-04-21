@@ -1,7 +1,7 @@
 import React from "react";
 
 // details for the benefit section
-const data = [
+const benefit = [
   {
     title: `Personalized Learning at Your Convenience`,
     description:
@@ -55,15 +55,15 @@ export default function Benefit() {
               Here’s why Tutorial Center is your ultimate e-learning partner:
             </h3>
             <div className="grid lg:grid-cols-2 gap-x-10 gap-y-5">
-              {data.map((item,index) => (
-                <div className="relative bg-[#E336290D] py-5 pr-6 pl-9 rounded-2xl" key={index}>
-                  <div className="h-full w-4 bg-sencondary rounded-l-2xl absolute z-20 top-0 left-0"/>
-                  <div className="">
-                    <h4 className="text-base font-bold text-sencondary mb-3 ">
-                      {item.title}
-                    </h4>
-                    <p className="leading-6 text-[14.5px]">{item.description}</p>
-                  </div>
+              {benefit.map((item, index) => (
+                <div
+                  className="bg-[#E336290D] shadow-xl py-5 px-5 rounded-3xl border-l-[15px] border-l-[#E83831]"
+                  key={index}
+                >
+                  <h4 className="text-base font-bold text-sencondary mb-3 ">
+                    {item.title}
+                  </h4>
+                  <p className="leading-6 text-[14.5px]">{item.description}</p>
                 </div>
               ))}
             </div>
