@@ -76,7 +76,7 @@ export default function Faq() {
                 onClick={() => toggleVisible(index)}
                 key={index}
               >
-                <button className="w-full h-full flex justify-between ">
+                <button className="w-full h-full flex justify-between items-center">
                   <span
                     className={`${
                       visible[index] ? "text-[#8695A0]" : "text-primary"

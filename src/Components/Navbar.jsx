@@ -5,8 +5,7 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 
 const navigation = [
   { path: "/", name: "Home" },
-  { path: "/training", name: "Training" },
-  { path: "/tuition", name: "Tuition" },
+  { path: "/training", name: "Training / Tuition" },
   { path: "/about", name: "About Us" },
   { path: "/contact", name: "Contact Us" },
   { path: "/blog", name: "News / Blog" },
@@ -61,11 +60,11 @@ export default function Navbar() {
                   style={{ color: "#000" }}
                 />
               </button>
-              <div className={``}>
+              <div>
                 {/* background Cover */}
                 <div
                   className={` background-shadow transition-all duration-300 ease-custom
-                    ${visible ? "translate-x-full" : "translate-x-0"} `}
+                    ${visible ? "opacity-0" : "opacity-full"} `}
                   onClick={() => {
                     setVisible(true);
                   }}

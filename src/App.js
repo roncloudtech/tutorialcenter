@@ -5,15 +5,16 @@ import Contact from "./Pages/Contact";
 import Home from "./Pages/Home";
 import SignUp from "./Pages/SignUp";
 import Login from "./Pages/Login";
-import Coursepage from "./(Dashboard)/pageList/Course/page";
-import Calender from "./(Dashboard)/pageList/Calender/page";
-import Dashboard from "./(Dashboard)/pageList/Dashboard/page";
-import Exampage from "./(Dashboard)/pageList/Exam/page";
-import Group from "./(Dashboard)/pageList/Group/page";
-import PaymentPage from "./(Dashboard)/pageList/Payment/page";
-import Settings from "./(Dashboard)/pageList/Settings/page";
-import Help from "./(Dashboard)/pageList/Help/page";
+import Coursepage from "./(Dashboard)/pages/Course/page";
+import Calender from "./(Dashboard)/pages/Calender/page";
+import Exampage from "./(Dashboard)/pages/Exam/page";
+import Group from "./(Dashboard)/pages/Group/page";
+import PaymentPage from "./(Dashboard)/pages/Payment/page";
+import Settings from "./(Dashboard)/pages/Settings/page";
+import Help from "./(Dashboard)/pages/Help/page";
 import TrainingSelection from "./Pages/Training";
+import StudentDashboard from "./(Dashboard)/pages/Dashboard/StudentDashboard";
+import ParentDashboard from "./(Dashboard)/pages/Dashboard/ParentDashboard";
 
 export default function App() {
   return (
@@ -27,7 +28,8 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/training-selection" element={<TrainingSelection />} />
           {/* DASHBBOARD ROUTES */}
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/student-dashboard" element={<StudentDashboard />} />
+          <Route path="/parent-dashboard" element={<ParentDashboard />} />
           <Route path="/courses" element={<Coursepage />} />
           <Route path="/calender" element={<Calender />} />
           <Route path="/exam" element={<Exampage />} />

@@ -27,6 +27,7 @@
 * {
   box-sizing: border-box;
   font-family: "DM Sans", serif;
+  @apply transition-all ease-custom duration-200;
 }
 body {
   background: white;
@@ -78,7 +79,7 @@ textarea:focus {
   bottom: 0;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.4);
-  z-index: 200;
+  z-index: 30;
 }
 
 /* Customize the full calender component  */
@@ -126,11 +127,18 @@ textarea:focus {
 .react-calendar__navigation__label__labelText--from {
   font-size: 14px !important;
   font-weight: 500 !important;
+  @apply dark:text-lightGrey;
+}
+.react-calendar__navigation button {
+  @apply dark:!text-lightGrey;
 }
 .react-calendar {
+  padding: 8px;
   width: 100% !important;
-  background: none !important;
+  background: #ffffff !important;
+  @apply dark:!bg-darkMode;
   border: none !important;
+  border-radius: 8px !important;
   font-family: inherit !important;
 }
 .react-calendar__navigation {
@@ -140,14 +148,20 @@ textarea:focus {
 .react-calendar__month-view__weekdays {
   font-size: 12px !important;
   font-weight: 500 !important;
+  @apply dark:!text-lightGrey;
 }
 .react-calendar__tile {
-  font-size: 8px !important;
+  font-size: 10px !important;
+  @apply dark:text-lightGrey;
   padding: 5px !important;
 }
+.react-calendar__month-view__days__day--neighboringMonth,
+.react-calendar__decade-view__years__year--neighboringDecade,
+.react-calendar__century-view__decades__decade--neighboringCentury {
+  @apply dark:text-mainGrey;
+}
 .react-calendar__tile--active {
-  background: white !important;
-  color: black !important;
+  @apply dark:!bg-lightGrey dark:!text-mainBlue !bg-mainBlue !text-mainWhite;
   border-radius: 5px;
 }
 abbr:where([title]) {
