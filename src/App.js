@@ -14,7 +14,13 @@ import Settings from "./(Dashboard)/pages/Settings/page";
 import Help from "./(Dashboard)/pages/Help/page";
 import TrainingSelection from "./Pages/Training";
 import StudentDashboard from "./(Dashboard)/pages/Dashboard/StudentDashboard";
-import ParentDashboard from "./(Dashboard)/pages/Dashboard/ParentDashboard";
+import ParentDashboard from "./(PARENT)/pages/Dashboard";
+import ParentCalender from "./(PARENT)/pages/Calender";
+import ParentExamPractice from "./(PARENT)/pages/ExamPractice";
+import ParentPayment from "./(PARENT)/pages/Payment";
+import ParentSettings from "./(PARENT)/pages/Settings";
+import ParentHelp from "./(PARENT)/pages/Help";
+import ParentOverview from "./(PARENT)/pages/Overview";
 
 export default function App() {
   return (
@@ -27,9 +33,9 @@ export default function App() {
           <Route path="/register" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/training-selection" element={<TrainingSelection />} />
-          {/* DASHBBOARD ROUTES */}
-          <Route path="/student-dashboard" element={<StudentDashboard />} />
-          <Route path="/parent-dashboard" element={<ParentDashboard />} />
+          {/*ALL DASHBBOARD ROUTES */}
+          {/* STUDENT ROUTES */}
+          <Route path="/dashboard" element={<StudentDashboard />} />
           <Route path="/courses" element={<Coursepage />} />
           <Route path="/calender" element={<Calender />} />
           <Route path="/exam" element={<Exampage />} />
@@ -37,6 +43,18 @@ export default function App() {
           <Route path="/payment" element={<PaymentPage />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/help" element={<Help />} />
+
+          {/* PARENT ROUTES */}
+          <Route path="/parent-dashboard" element={<ParentDashboard />} />
+          <Route path="/parent-calender" element={<ParentCalender />} />
+          <Route
+            path="/parent-exam-practice"
+            element={<ParentExamPractice />}
+          />
+          <Route path="/parent-payment" element={<ParentPayment />} />
+          <Route path="/parent-settings" element={<ParentSettings />} />
+          <Route path="/parent-help" element={<ParentHelp />} />
+          <Route path="/parent-overview" element={<ParentOverview />} />
         </Routes>
       </BrowserRouter>
     </>

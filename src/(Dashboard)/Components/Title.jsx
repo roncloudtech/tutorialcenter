@@ -31,7 +31,7 @@ export default function Title({ title }) {
         </div>
       </div>
 
-      {visible ? <SIDEBAR visible={visible} setVisible={setVisible} /> : null}
+      <SIDEBAR visible={visible} setVisible={setVisible} />
     </div>
   );
 }
@@ -39,11 +39,15 @@ export default function Title({ title }) {
 // SIDE BAR FOR MOBILE MENU
 const SIDEBAR = ({ setVisible, visible }) => {
   return (
-    <div className="w-full h-full relative flex xl:hidden">
+    <div
+      className={`w-full h-full relative flex xl:hidden ${
+        visible ? "" : "invisible"
+      }`}
+    >
       {/* background Cover */}
       <div
         className={`background-shadow transition-all  duration-300 ease-custom ${
-          visible ? "opacity-full" : "opacity-0"
+          visible ? "opacity-100" : "opacity-0 invisible"
         } `}
         onClick={() => {
           setVisible(false);
@@ -51,7 +55,7 @@ const SIDEBAR = ({ setVisible, visible }) => {
       />
       <div
         className={`w-[350px] max-w-[calc(100vw-150px)] fixed left-0 top-0 bottom-0 z-50 transition-all duration-300 ease-custom ${
-          visible ? "translate-x-0" : "-translate-x-full"
+          visible ? "-translate-x-0" : "-translate-x-full invisible"
         } `}
       >
         <div

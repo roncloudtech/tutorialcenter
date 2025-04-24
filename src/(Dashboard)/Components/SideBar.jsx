@@ -4,7 +4,7 @@ import logo from "../../Assets/tutorial_logo.png";
 import logo2 from "../../Assets/TC 1.png";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Menu from "./Menu";
-export default function SideBar({ toggle, setToggle, visible }) {
+export default function SideBar({ toggle, setToggle }) {
   return (
     <div
       className={`scroll position  overflow-y-hidden hidden xl:flex bg-mainWhite dark:bg-darkMode  shadow-custom-1 p-3 flex-col gap-3 rounded-lg relative ${
