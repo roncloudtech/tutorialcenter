@@ -1,2 +1,2 @@
 // TEMPORARY DATA
-export const role = "parent";
+export const role = "teacher";

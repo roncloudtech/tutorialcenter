@@ -21,6 +21,11 @@ import ParentPayment from "./(PARENT)/pages/Payment";
 import ParentSettings from "./(PARENT)/pages/Settings";
 import ParentHelp from "./(PARENT)/pages/Help";
 import ParentOverview from "./(PARENT)/pages/Overview";
+import TeacherDashboard from "./(TEACHER)/pages/Dashboard";
+import Assesment from "./(TEACHER)/pages/Assesment";
+import TeacherGroups from "./(TEACHER)/pages/Groups";
+import TeacherSettings from "./(TEACHER)/pages/Settings";
+import TeacherResult from "./(TEACHER)/pages/Result";
 
 export default function App() {
   return (
@@ -55,6 +60,13 @@ export default function App() {
           <Route path="/parent-settings" element={<ParentSettings />} />
           <Route path="/parent-help" element={<ParentHelp />} />
           <Route path="/parent-overview" element={<ParentOverview />} />
+
+          {/* TEACHER ROUTES */}
+          <Route path="/teacher-dashboard" element={<TeacherDashboard />} />
+          <Route path="/teacher-assessment" element={<Assesment />} />
+          <Route path="/teacher-group" element={<TeacherGroups />} />
+          <Route path="/teacher-settings" element={<TeacherSettings />} />
+          <Route path="/teacher-result" element={<TeacherResult />} />
         </Routes>
       </BrowserRouter>
     </>

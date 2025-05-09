@@ -29,15 +29,13 @@ export default function Testimonial() {
         <div className="area-wrapper !py-16">
           <div className="flex gap-4 items-center justify-center">
             <div className="blockContent flex-1">
-              <h4 className="font-bold text-lg leading-6 text-[#020D14] mb-6">
-                Check out what our clients are <br /> saying about us
+              <h4 className="font-bold semi-title text-[#020D14] mb-6">
+                Check out what our clients <br /> are saying about us
               </h4>
               <p className="text-[#020D14] text-sm font-medium mb-6">
                 So what are you waiting for join us now
               </p>
-              <Link className="px-10 py-2 rounded-lg bg-gradient-to-r from-[#09314F] to-[#E83831] text-white ">
-                Get Started{" "}
-              </Link>
+              <Link className="btn-title">Get Started </Link>
             </div>
             <div className="lg:flex gap-2 flex-1 hidden">
               {data.map((item, index) => (

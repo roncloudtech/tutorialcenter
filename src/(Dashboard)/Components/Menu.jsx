@@ -83,7 +83,6 @@ const menuItems = [
   },
 
   // PARENT ROUTES
-
   {
     label: "Dashboard",
     path: "/parent-dashboard",
@@ -126,9 +125,55 @@ const menuItems = [
   },
   {
     label: "Help",
-    path: "/parent-help",
+    path: "/help",
     icon: <Icon icon="material-symbols:help-center" width="20" height="20" />,
     visible: ["parent"],
+  },
+
+  // TEACHER || TUTOR ROUTES
+  {
+    label: "Dashboard",
+    path: "/teacher-dashboard",
+    icon: (
+      <Icon icon="material-symbols:dashboard-rounded" width="20" height="20" />
+    ),
+    visible: ["teacher"],
+  },
+  {
+    label: "Calender",
+    path: "/calender",
+    icon: <Icon icon="uis:calender" width="20" height="20" />,
+    visible: ["teacher"],
+  },
+  {
+    label: "Assessment",
+    path: "/teacher-assessment",
+    icon: <Icon icon="uis:calender" width="20" height="20" />,
+    visible: ["teacher"],
+  },
+  {
+    label: "Groups",
+    path: "/teacher-group",
+    icon: <Icon icon="fluent:payment-32-filled" width="20" height="20" />,
+    visible: ["teacher"],
+  },
+  {
+    label: "Results",
+    path: "/teacher-result",
+    icon: <Icon icon="fluent:payment-32-filled" width="20" height="20" />,
+    visible: ["teacher"],
+  },
+  {
+    label: "Settings",
+    path: "/teacher-settings",
+    icon: <Icon icon="lets-icons:setting-fill" width="20" height="20" />,
+    visible: ["teacher"],
+  },
+  {
+    label: "Help",
+    path: "/help",
+    icon: <Icon icon="material-symbols:help-center" width="20" height="20" />,
+    visible: ["teacher"],
   },
 ];
 

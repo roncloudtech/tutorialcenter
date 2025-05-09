@@ -16,7 +16,7 @@ export default function Home() {
       <StickyButtons />
       <Hero />
       <Benefit />
-      {/* <Slider /> */}
+      <Slider />
       <Program />
       <Testimonial />
       <Faq />

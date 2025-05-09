@@ -25,7 +25,7 @@ const slide = [
 ];
 export default function Slider() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const autoSlideInterval = 3000;
+  const autoSlideInterval = 4000;
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();

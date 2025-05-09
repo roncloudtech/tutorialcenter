@@ -12,7 +12,7 @@ export default function Contact() {
             <div className="flex max-md:flex-col">
               <div className="flex-1 py-4 pr-7">
                 <div className="content mb-8">
-                  <h2 className="text-primary text-lg font-bold mb-2">
+                  <h2 className="text-primary header-title mb-2">
                     Get in touch
                   </h2>
                   <p className="text-sm leading-[28px]">
@@ -57,10 +57,8 @@ export default function Contact() {
                       className="shadow w-full rounded-lg p-2 border border-[#94A3B8]"
                     />
                   </div>
-                  <div className="flex justify-end mt-3">
-                    <button className="bg-gradient-to-r from-[#09314F] to-[#E83831] text-white text-sm px-5 py-1 rounded-full font-medium">
-                      Submit
-                    </button>
+                  <div className="flex justify-end mt-5">
+                    <button className="btn-title">Submit</button>
                   </div>
                 </form>
               </div>

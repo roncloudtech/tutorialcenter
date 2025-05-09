@@ -4,6 +4,7 @@ import BigCalender from "../../Components/BigCalender";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import SmallCalendar from "../../Components/Calender";
 import { useToggleState } from "../../../Hooks/useToggleState";
+import Title from "../../Components/Title";
 
 export default function Calender() {
   const [toggle, setToggle] = useToggleState(true);
@@ -11,20 +12,9 @@ export default function Calender() {
   return (
     <>
       <DashboardLayout>
-        <div className="grid grid-cols-[1fr_0.45fr]  w-full h-full pt-0.5">
+        <div className="grid grid-cols-[1fr_0.45fr] w-full pt-0.5">
           <div className="px-4 ">
-            <div className="flex justify-between items-center  py-2 rounded-md">
-              <h3 className="uppercase text-mainBlue dark:text-lightGrey  font-semibold ">
-                Calender
-              </h3>
-              <div className="w-9 h-9 flex justify-center items-center bg-slate-300 rounded-md dark:bg-lightGrey dark:text-mainBlue">
-                <Icon
-                  icon="iconoir:bell-notification-solid"
-                  width="24"
-                  height="24"
-                />
-              </div>
-            </div>
+            <Title title={"CALENDER"} />
             <div className="w-full h-full">
               <BigCalender />
             </div>
@@ -44,10 +34,8 @@ export default function Calender() {
               />
             </div>
             <div
-              className={`flex flex-col gap-4 transition-all ease-custom  ${
-                toggle
-                  ? "invisible h-0 -translate-y-6"
-                  : "visible -translate-y-0 h-auto"
+              className={`flex flex-col gap-4 transition-height  ${
+                toggle ? "invisible h-0" : "visible h-auto"
               }`}
             >
               <div className="flex items-center justify-between">
@@ -93,17 +81,15 @@ export default function Calender() {
                 icon="weui:arrow-filled"
                 width="20"
                 height="20"
-                className={`cursor-pointer transition-all ease-custom ${
+                className={`cursor-pointer transition-all ${
                   toggle1 ? "rotate-90" : "-rotate-90"
                 }`}
                 onClick={setToggle1}
               />
             </div>
             <div
-              className={`flex flex-col gap-4 transition-all ease-custom  ${
-                toggle1
-                  ? "visible h-auto -translate-y-0"
-                  : "invisible h-0 -translate-y-6"
+              className={`flex flex-col gap-4 transition-height ${
+                toggle1 ? "visible h-auto" : "invisible h-0"
               }`}
             >
               <div className="flex items-center justify-between">

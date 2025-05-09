@@ -11,21 +11,65 @@ const training = [
   "neco Progress",
   "gce Progress",
 ];
-const topics = [
+
+const SubjectGradesData = [
   {
-    name: "Noun",
-    score: 51,
+    subject: "English",
+    total: 51,
+    score: 60,
+    topics: [
+      {
+        name: "Noun",
+        score: 51,
+      },
+      {
+        name: "Adjective",
+        score: 51,
+      },
+      {
+        name: "Pronoun",
+        score: 51,
+      },
+      {
+        name: "verb",
+      },
+    ],
   },
   {
-    name: "Adjective",
-    score: 51,
+    subject: "Mathematics",
+    total: 51,
+    score: 60,
+    topics: [
+      {
+        name: "trigonometry",
+        score: 51,
+      },
+      {
+        name: "indices",
+      },
+      {
+        name: "propability",
+        score: 51,
+      },
+    ],
   },
   {
-    name: "Pronoun",
-    score: 51,
-  },
-  {
-    name: "verb",
+    subject: "Chemistry",
+    total: 51,
+    score: 60,
+    topics: [
+      {
+        name: "trigonometry",
+        score: 51,
+      },
+      {
+        name: "indices",
+        score: 51,
+      },
+      {
+        name: "propability",
+      },
+    ],
   },
 ];
 export default function ParentOverview() {
@@ -47,12 +91,12 @@ export default function ParentOverview() {
               <span className="text-[12px] ">45%</span>
             </div>
             <div className="flex items-center justify-between flex-1">
-              <div className=" text-[12px] font-medium space-y-3">
+              <div className=" text-[12px] font-semibold space-y-3">
                 <p>Name:</p>
                 <p>Department :</p>
                 <p>Training :</p>
               </div>
-              <div className=" text-[12px] font-medium space-y-3 text-right">
+              <div className=" text-[12px] font-semibold space-y-3 text-right">
                 <p>John Doe</p>
                 <p>Science</p>
                 <p>Waec & Jamb</p>
@@ -64,7 +108,7 @@ export default function ParentOverview() {
             {training.map((item, i) => (
               <div
                 key={i}
-                className="flex flex-col items-center justify-center gap-3 text-[12px] dark:text-lightGrey dark:bg-whiteFade rounded-lg py-2"
+                className="flex flex-col items-center justify-center gap-3 text-[12px] border-[0.4px] border-solid border-black bg-mainWhite shadow-custom-1 dark:text-lightGrey dark:bg-whiteFade rounded-lg py-2"
               >
                 <p>{item}</p>
                 <div className="elipse w-14 h-14 relative">
@@ -86,51 +130,7 @@ export default function ParentOverview() {
               </div>
             ))}
           </div>
-          <div className="">
-            <div className="dark:bg-darkMode shadow-custom-1 rounded-custom p-2">
-              <div className="flex justify-between items-center">
-                <div className="flex gap-3 text-xs dark:text-lightGrey flex-1">
-                  <Icon
-                    icon="streamline:business-progress-bar-2-solid"
-                    width="16"
-                    height="16"
-                  />
-                  <span>Mathematics</span>
-                </div>
-                <div className="Progress flex-1">
-                  <div className="w-full h-2.5 bg-lightGrey dark:bg-whiteFade rounded-sm relative">
-                    <div className="h-full bg-mainBlue dark:bg-lightGrey rounded-sm w-1/4 " />
-                    <label className="text-[8px] text-mainWhite dark:text-darkMode font-medium absolute left-4 -top-[2px]">
-                      6%{" "}
-                    </label>
-                  </div>
-                  <div className="flex justify-between items-center mt-1 text-[8px] font-medium dark:text-lightGrey">
-                    <p>START</p>
-                    <p>FINISH</p>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-2 flex items-center justify-between text-xs text-lightGrey">
-                <div className="flex gap-3">
-                  <p>Topics</p>
-                  <p>50</p>
-                </div>
-                <p>Total score: 60</p>
-              </div>
-            </div>
-            {/* TOPICS */}
-            <div className="space-y-2 my-3 mx-2">
-              {topics.map((topic, i) => (
-                <div
-                  key={i}
-                  className="dark:bg-whiteFade flex justify-between items-center text-[12px] dark:text-lightGrey p-2.5 rounded-custom"
-                >
-                  <p>{topic.name}</p>
-                  <p>score: {topic?.score || "-"}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+          <SubjectGrades setToggleModal={setActiveModal} />
         </div>
         {/* LEFT SIDE */}
         <StudentProfileList />
@@ -139,6 +139,99 @@ export default function ParentOverview() {
     </DashboardLayout>
   );
 }
+
+const SubjectGrades = ({ setToggleModal }) => {
+  const [visible, setVisible] = useState(
+    Array(SubjectGrades.length).fill(false)
+  );
+  const handleToggleVisible = (index) => {
+    setVisible((prev) => {
+      const newVisible = [...prev];
+      newVisible[index] = !newVisible[index];
+      return newVisible;
+    });
+  };
+  return (
+    <div className="space-y-2">
+      {SubjectGradesData.map((item, i) => (
+        <div key={i} className="Modules Grades">
+          <div
+            onClick={() => handleToggleVisible(i)}
+            className={`${
+              visible[i]
+                ? "dark:bg-darkMode bg-mainBlue text-mainWhite"
+                : "dark:bg-whiteFade"
+            }  cursor-pointer  shadow-custom-1 rounded-custom p-2 border-[0.4px] border-solid border-black`}
+          >
+            <div className="flex justify-between items-center">
+              <div className="flex gap-3 text-xs dark:text-lightGrey flex-1">
+                <Icon
+                  icon="streamline:business-progress-bar-2-solid"
+                  width="16"
+                  height="16"
+                />
+                <span>{item?.subject}</span>
+              </div>
+              <div className="Progress flex-1">
+                <div className="w-full h-2.5 bg-lightGrey dark:bg-whiteFade rounded-sm relative">
+                  <div
+                    className={`${
+                      visible[i]
+                        ? "bg-mainWhite"
+                        : "bg-mainBlue dark:bg-lightGrey"
+                    } h-full rounded-sm w-1/4`}
+                  />
+                  <label
+                    className={`${
+                      visible[i]
+                        ? "text-mainBlue"
+                        : "text-mainWhite dark:text-darkMode"
+                    } text-[8px]  font-medium absolute left-4 -top-[2px]`}
+                  >
+                    6%{" "}
+                  </label>
+                </div>
+                <div className="flex justify-between items-center mt-1 text-[8px] font-medium dark:text-lightGrey">
+                  <p>START</p>
+                  <p>FINISH</p>
+                </div>
+              </div>
+            </div>
+            <div
+              className={`${
+                visible[i]
+                  ? "text-mainWhite"
+                  : "text-mainBlack dark:text-lightGrey"
+              } mt-2 flex items-center justify-between font-medium text-xs`}
+            >
+              <div className="flex gap-3">
+                <p>Topics</p>
+                <p>{item.total}</p>
+              </div>
+              <p>Total score: {item.score}</p>
+            </div>
+          </div>
+          {/* TOPICS */}
+          <div
+            className={`${visible[i] ? "block" : "hidden"} space-y-2 my-3 mx-2`}
+          >
+            {item.topics.map((topic, i) => (
+              <div
+                onClick={() => setToggleModal(true)}
+                key={i}
+                className="cursor-pointer bg-mainWhite shadow-custom-1 dark:bg-whiteFade flex justify-between items-center text-[12px] dark:text-lightGrey p-2.5 rounded-custom"
+              >
+                <p>{topic.name}</p>
+                <p>score: {topic?.score || "-"}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
 const PerformanceModal = ({ setToggleModal }) => {
   return (
     <>
@@ -162,7 +255,7 @@ const PerformanceModal = ({ setToggleModal }) => {
           <select
             name="Topic"
             id="Topic"
-            className="mt-1.5 w-full dark:bg-whiteFade rounded-custom p-2.5 flex justify-between"
+            className="mt-1.5 w-full dark:bg-whiteFade bg-[#EAEBEC] rounded-custom p-2.5 flex justify-between"
           >
             <option value="">Noun</option>
           </select>

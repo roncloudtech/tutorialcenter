@@ -45,12 +45,13 @@ const FaqQuestion = [
   },
 ];
 export default function Faq() {
-  const [visible, setVisible] = useState(Array(FaqQuestion.length).fill(false));
+  const questionLengths = Array(FaqQuestion.length).fill(false);
+  const [visible, setVisible] = useState(questionLengths);
   // function to toggle the display of the faq answers when the question is clicked
   const toggleVisible = (index) => {
     setVisible((prev) => {
-      const newVisibleItems = [...prev];
-      newVisibleItems[index] = !newVisibleItems[index];
+      const newVisibleItems = questionLengths; // Reset all to false
+      newVisibleItems[index] = !prev[index]; // Toggle the clicked item
       return newVisibleItems;
     });
   };
@@ -60,7 +61,7 @@ export default function Faq() {
       <div className="Container">
         <div className="area-wrapper !pt-16 !pb-0">
           <div className="text-center mb-10">
-            <h2 className="text-lg text-primary font-bold mb-2">
+            <h2 className="header-title text-primary mb-2">
               Frequently Asked Questions
             </h2>
             <p className="text-sm">
@@ -105,7 +106,7 @@ export default function Faq() {
             ))}
           </div>
           <div className="text-center mb-3 mt-10 max-w-[650px] mx-auto">
-            <h2 className="text-lg text-primary font-bold mb-2">
+            <h2 className="header-title text-primary mb-2">
               Still have questions?
             </h2>
             <p className="text-sm ">

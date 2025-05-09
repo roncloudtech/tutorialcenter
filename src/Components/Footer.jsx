@@ -11,10 +11,10 @@ export default function Footer() {
           <div className="area-wrapper flex flex-col items-center justify-center text-center">
             <div className="footer-content mb-9">
               <div className="sign up mb-6">
-                <h2 className="mb-2 font-semibold lg:text-xl sm:text-xl text-sm">
+                <h2 className="mb-2 font-semibold lg:text-[28px] leading-[38px] text-sm">
                   Want product news and updates?{" "}
                 </h2>
-                <p className="text-[12px] text-mainWhite">
+                <p className="text-[12px] lg:text-[18px] text-mainWhite">
                   Sign up for our newsletter to stay up to date{" "}
                 </p>
               </div>
@@ -24,11 +24,11 @@ export default function Footer() {
                     <input
                       type="text"
                       placeholder="Your email address"
-                      className="shadow bg-[#FFFDFD1A] rounded-lg py-2.5 pl-2"
+                      className="shadow bg-[#EAEBEC] w-full p-2 rounded-full "
                     />
                     <button
                       type="submit"
-                      className="px-5 py-2.5 bg-mainWhite text-mainBlue font-medium rounded-lg"
+                      className="px-4 text-xs text-nowrap bg-mainBlue text-mainWhite font-medium rounded-full"
                     >
                       Notify me
                     </button>
@@ -37,7 +37,7 @@ export default function Footer() {
               </div>
             </div>
             <div className="socials">
-              <p className="mb-5 text-[13px] text-left">
+              <p className="mb-5 text-xs text-left">
                 We care about the protection of your data. Read our{" "}
                 <Link className="underline text-[14px]">Privacy Policy</Link> .{" "}
               </p>

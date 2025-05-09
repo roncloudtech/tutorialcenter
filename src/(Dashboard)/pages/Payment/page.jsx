@@ -261,7 +261,7 @@ const Modal = ({ setToggleModal }) => {
   return (
     <>
       <div
-        className="w-full h-full bg-[#121D244D] absolute top-0 left-0 z-40 cursor-pointer flex items-center justify-center"
+        className="w-full h-[-webkit-fill-available] bg-[#121D244D] absolute top-0 left-0 z-40 cursor-pointer flex items-center justify-center"
         onClick={() => setToggleModal(false)}
       ></div>
       <div className="p-4 w-[335px] h-[171px] bg-white shadow-xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 border-[0.5px] border-[#D1D5DB] border-solid rounded-xl">

@@ -9,9 +9,7 @@ const navigation = [
   { path: "/about", name: "About Us" },
   { path: "/contact", name: "Contact Us" },
   { path: "/blog", name: "News / Blog" },
-  ,
 ];
-
 export default function Navbar() {
   const [visible, setVisible] = useState(true);
 
@@ -19,7 +17,7 @@ export default function Navbar() {
     <>
       <div className="py-3 sticky top-0 z-[100] w-full bg-white">
         <div className="Container">
-          <div className="flex items-center justify-between ">
+          <div className="flex items-center justify-between">
             {/* Tutotrial Logo */}
             <div className="">
               <img src={logo} alt="" className="max-w-[150px]" />
@@ -41,7 +39,10 @@ export default function Navbar() {
               <Link to="/login" className="mr-7 font-bold">
                 Login
               </Link>
-              <Link className="bg-primary text-white px-4 py-2 rounded-lg">
+              <Link
+                to="/register"
+                className="bg-primary text-white px-4 py-2 rounded-lg"
+              >
                 Apply Now
               </Link>
             </div>
@@ -72,7 +73,9 @@ export default function Navbar() {
 
 const MobileNavigation = ({ setVisible, visible }) => {
   return (
-    <div className={`relative ${visible ? "invisible" : "visible"}`}>
+    <div
+      className={`relative z-[100] ${visible ? "invisible" : "visible p-4"}`}
+    >
       {/* background Cover */}
       <div
         className={` background-shadow transition-all duration-300 ease-custom
