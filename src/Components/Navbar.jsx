@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import logo from "../Assets/tutorial_logo.png";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Icon } from "@iconify/react/dist/iconify.js";
 
 const navigation = [
@@ -15,23 +15,21 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="py-3 sticky top-0 z-[100] w-full bg-white">
+      <div className="py-3.5 sticky top-0 z-[100] w-full bg-white shadow-custom-1">
         <div className="Container">
           <div className="flex items-center justify-between">
             {/* Tutotrial Logo */}
-            <div className="">
-              <img src={logo} alt="" className="max-w-[150px]" />
-            </div>
+            <img src={logo} alt="" className="max-w-[120px]" />
             {/* navigation Links */}
             <div className="hidden lg:block">
               {navigation.map((item, index) => (
-                <Link
+                <NavLink
                   to={item.path}
                   key={index}
-                  className="text-xs  font-semibold text-gray-800 hover:text-gray-900 mx-3"
+                  className="text-xs  font-semibold text-mainGrey mx-3 [&.active]:text-mainBlack"
                 >
                   {item.name}
-                </Link>
+                </NavLink>
               ))}
             </div>
             {/* Apply button */}
@@ -41,7 +39,7 @@ export default function Navbar() {
               </Link>
               <Link
                 to="/register"
-                className="bg-primary text-white px-4 py-2 rounded-lg"
+                className="bg-primary text-white px-4 py-2 rounded-full"
               >
                 Apply Now
               </Link>

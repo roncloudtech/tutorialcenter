@@ -32,7 +32,10 @@ export default function Hero() {
                 <Link className="bg-gradient-to-r from-[#09314F] to-[#E83831] border-[2px]  border-solid border-x-[#E83831] border-y-[#09314F] mr-3 bg-clip-text text-transparent ">
                   View Training
                 </Link>
-                <Link className="bg-gradient-to-r from-[#09314F] to-[#E83831] text-white">
+                <Link
+                  to="/register"
+                  className="bg-gradient-to-r from-[#09314F] to-[#E83831] text-white"
+                >
                   Apply Now{" "}
                 </Link>
               </div>

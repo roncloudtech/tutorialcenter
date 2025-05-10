@@ -8,7 +8,7 @@ const slide = [
     desc: "We invite you to enroll in our online Master Class, where you can immerse yourself in advanced learning and gain valuable insights from our tutors.",
     Sdesc: "Be present for your future!",
     btnTitle: "Apply Now",
-    btnPath: "/login",
+    btnPath: "/register",
     imgPath:
       "https://images.pexels.com/photos/8617960/pexels-photo-8617960.jpeg?auto=compress&cs=tinysrgb&w=600",
   },
@@ -18,7 +18,7 @@ const slide = [
     desc: "We invite you to enroll in our online Master Class, where you can immerse yourself in advanced learning and gain valuable insights from our tutors.",
     Sdesc: "Be present for your future!",
     btnTitle: "Apply Now",
-    btnPath: "/login",
+    btnPath: "/register",
     imgPath:
       "https://images.pexels.com/photos/8617960/pexels-photo-8617960.jpeg?auto=compress&cs=tinysrgb&w=600",
   },
@@ -37,7 +37,7 @@ export default function Slider() {
     setCurrentSlide((prev) => (prev + 1) % slide.length);
   };
   return (
-    <div className="w-full overflow-hidden">
+    <div className="w-full overflow-hidden mb-8">
       <div
         className="flex w-full transition-transform ease-custom duration-500"
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}

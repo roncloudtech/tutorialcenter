@@ -68,16 +68,16 @@ export default function Faq() {
               Here are the most frequently asked questions
             </p>
           </div>
-          <div className="faqs">
+          <div className="faqs space-y-3">
             {FaqQuestion.map((item, index) => (
-              <div
-                className={`p-3 mb-3 ${
+              <button
+                className={`p-3 block w-full text-start  ${
                   visible[index] ? "bg-[#E336290D]" : "bg-white shadow"
-                } border border-solid border-[#A9C1D3] rounded-xl`}
+                } border border-solid border-[rgb(169,193,211)] rounded-xl`}
                 onClick={() => toggleVisible(index)}
                 key={index}
               >
-                <button className="w-full h-full flex justify-between items-center">
+                <div className="w-full h-full flex justify-between items-center">
                   <span
                     className={`${
                       visible[index] ? "text-[#8695A0]" : "text-primary"
@@ -94,7 +94,7 @@ export default function Faq() {
                       visible[index] ? "rotate-180" : "rotate-90"
                     } transition-all ease-custom duration-300`}
                   />
-                </button>
+                </div>
                 <div
                   className={`${
                     visible[index] ? "mt-2 visible h-[auto]" : "invisible h-0"
@@ -102,7 +102,7 @@ export default function Faq() {
                 >
                   <p className="text-[14.4px]">{item.answers}</p>
                 </div>
-              </div>
+              </button>
             ))}
           </div>
           <div className="text-center mb-3 mt-10 max-w-[650px] mx-auto">

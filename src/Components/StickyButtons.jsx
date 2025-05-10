@@ -6,7 +6,7 @@ import LiveChat from "../Pages/LiveChat";
 export default function StickyButtons() {
   return (
     <>
-      <div className="fixed top-[60%] sm:right-8 right-3.5 z-[60] space-y-3">
+      <div className="fixed top-[calc(100vh-150px)] sm:right-8 right-3.5 z-[60] space-y-3">
         {/* CHAT WITH US */}
         <div className="group relative mb-1 w-[50px] h-[50px] bg-lightGrey text-darkMode rounded-full flex justify-center items-center cursor-pointer">
           <NotifyBadge title="chat with us" />
