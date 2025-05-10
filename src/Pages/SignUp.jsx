@@ -1,13 +1,15 @@
+import axios from "axios";
 import { useState } from "react";
 import logo from "../Assets/tutorial_logo.png";
 import { Icon } from "@iconify/react/dist/iconify.js";
-
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
-// import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Layout2 from "../Components/Layout2";
 
 export default function SignUp() {
+  const API_BASE_URL = process.env.REACT_APP_API_URL || "http://tutorialcenter-app.test";
   const [role, setRole] = useState(false);
+  // console.log(role)
 
   // Caturing the user info
   // For Both Student and Guardian
@@ -19,8 +21,9 @@ export default function SignUp() {
     confirmPassword: "",
   });
 
+  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -34,28 +37,31 @@ export default function SignUp() {
 
   const validateForm = () => {
     const newErrors = {};
+
     if (!formData.firstName.trim())
       newErrors.firstName = "First name is required";
+
     if (!formData.lastName.trim()) newErrors.lastName = "Last name is required";
+
     if (!formData.email.trim()) {
       newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = "Invalid email address";
     }
+
     if (!formData.password) {
       newErrors.password = "Password is required";
     } else if (formData.password.length < 8) {
       newErrors.password = "Password must be at least 8 characters";
+    } else if (formData.password !== formData.confirmPassword) {
+      newErrors.password = "Passwords do not match";
+      newErrors.confirmPassword = "Passwords do not match";
     }
-    // if (
-    //   formData.phoneNumber &&
-    //   !/^\+234[789][01]\d{8}$|^0[789][01]\d{8}$/.test(formData.phoneNumber)
-    // ) {
-    //   newErrors.phoneNumber = "Invalid phone number format";
-    // }
 
-    if (!formData.role) {
-      newErrors.role = "Role is required";
+    if (!formData.confirmPassword) {
+      newErrors.confirmPassword = "Confirm Password is required";
+    } else if (formData.password.length < 8) {
+      newErrors.password = "Confirm Password must be at least 8 characters";
     }
 
     setErrors(newErrors);
@@ -64,8 +70,39 @@ export default function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('This is role', role)
     if (!validateForm()) return;
-  }
+
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        `${
+          role
+            ? `${API_BASE_URL}/api/guardians`
+            : `${API_BASE_URL}/api/students`
+        }/register`,
+        {
+          firstname: formData.firstName,
+          lastname: formData.lastName,
+          email: formData.email,
+          password: formData.password,
+        }
+      );
+
+      if (response.status === 201) {
+        navigate("/login");
+      }
+    } catch (error) {
+      console.log(error);
+      if (error.response?.data?.errors) {
+        setErrors(error.response.data.errors);
+      } else {
+        console.error("Registration error:", error);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <>
       <Layout2
@@ -167,7 +204,7 @@ export default function SignUp() {
 
                     <div>
                       <label className="block text-sm font-medium text-blue-900 mb-2">
-                        Email Address/Phone Number
+                        Email Address
                       </label>
                       <input
                         name="email"
@@ -224,7 +261,7 @@ export default function SignUp() {
                     {/* Confirm Password Input */}
                     <div>
                       <label className="block text-sm font-medium text-blue-900 mb-2">
-                        Password
+                        Confirm Password
                       </label>
                       <div className="relative">
                         <input
@@ -252,29 +289,24 @@ export default function SignUp() {
                           )}
                         </span>
                       </div>
-                      {errors.password && (
+                      {errors.confirmPassword && (
                         <p className="mt-1 text-sm text-red-500">
-                          {errors.password}
+                          {errors.confirmPassword}
                         </p>
                       )}
                     </div>
-                    <div className="formItems flex gap-2 my-3">
-                      <input
-                        type="checkbox"
-                        className="flex justify-start items-start "
-                      />
-                      <span className="text-[13.5px] font-semibold ">
-                        Remember me
-                      </span>
-                    </div>
-                    <div className="mt-1 flex gap-2 py-[10px] bg-gradient-to-r from-[#09314F] to-[#E83831] rounded-lg shadow-sm w-full">
-                      <button
-                        type="submit"
-                        className="w-full h-full text-white text-[17px] font-semibold"
-                      >
-                        Sign Up
-                      </button>
-                    </div>
+                    {/* Sign Up Button */}
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className={`w-full py-3 px-4 rounded-lg font-medium ${
+                        loading
+                          ? "bg-gray-400 cursor-not-allowed"
+                          : "bg-gradient-to-r from-[#09314F] to-[#E83831] hover:bg-green-800"
+                      } text-white transition-colors`}
+                    >
+                      Register
+                    </button>
                   </form>
                   <div className="flex justify-center items-center my-4 gap-2">
                     <div className="w-full h-[1.5px] bg-black" />
