@@ -12,8 +12,8 @@ export default function Layout({
 }) {
   return (
     <>
-      <div className="bg-[#09314F] grid grid-cols-2 items-center justify-center min-w-full">
-        <div className="pl-[75px]">
+      <div className="bg-[#09314F] flex  flex-col-reverse md:grid grid-cols-2 items-center justify-center min-w-full">
+        <div className="md:pl-[75px] max-md:px-5 my-5 md:my-0">
           <div className="blockContent mb-14">
             <h2 className=" text-white header-title uppercase mb-5">{title}</h2>
             <h4 className="text-ascent text-sm font-semibold mb-3">

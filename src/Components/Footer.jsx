@@ -24,11 +24,11 @@ export default function Footer() {
                     <input
                       type="text"
                       placeholder="Your email address"
-                      className="shadow bg-[#EAEBEC] w-full p-2 rounded-full "
+                      className="shadow bg-[#EAEBEC] text-black w-full p-2 rounded-full"
                     />
                     <button
                       type="submit"
-                      className="px-4 text-xs text-nowrap bg-mainBlue text-mainWhite font-medium rounded-full"
+                      className="px-4 text-xs p-2 text-nowrap bg-mainBlue text-mainWhite font-medium rounded-full"
                     >
                       Notify me
                     </button>

@@ -26,6 +26,7 @@ import Assesment from "./(TEACHER)/pages/Assesment";
 import TeacherGroups from "./(TEACHER)/pages/Groups";
 import TeacherSettings from "./(TEACHER)/pages/Settings";
 import TeacherResult from "./(TEACHER)/pages/Result";
+import EmailVerfication from "./Pages/EmailVerfication";
 
 export default function App() {
   return (
@@ -36,6 +37,7 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/register" element={<SignUp />} />
+          <Route path="/email-verification" element={<EmailVerfication />} />
           <Route path="/login" element={<Login />} />
           <Route path="/training-selection" element={<TrainingSelection />} />
           {/*ALL DASHBBOARD ROUTES */}

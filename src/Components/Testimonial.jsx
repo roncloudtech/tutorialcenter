@@ -35,7 +35,9 @@ export default function Testimonial() {
               <p className="text-[#020D14] text-sm font-medium mb-6">
                 So what are you waiting for join us now
               </p>
-              <Link className="btn-title">Get Started </Link>
+              <Link to="/register" className="btn-title">
+                Get Started{" "}
+              </Link>
             </div>
             <div className="lg:flex gap-2 flex-1 hidden">
               {data.map((item, index) => (
