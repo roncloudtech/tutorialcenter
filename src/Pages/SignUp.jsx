@@ -1,11 +1,71 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import logo from "../Assets/tutorial_logo.png";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { Link } from "react-router-dom";
+
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+// import { Link } from "react-router-dom";
 import Layout2 from "../Components/Layout2";
 
 export default function SignUp() {
   const [role, setRole] = useState(false);
+
+  // Caturing the user info
+  // For Both Student and Guardian
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const [errors, setErrors] = useState({});
+  // const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  // Capture each user entries
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.firstName.trim())
+      newErrors.firstName = "First name is required";
+    if (!formData.lastName.trim()) newErrors.lastName = "Last name is required";
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Invalid email address";
+    }
+    if (!formData.password) {
+      newErrors.password = "Password is required";
+    } else if (formData.password.length < 8) {
+      newErrors.password = "Password must be at least 8 characters";
+    }
+    // if (
+    //   formData.phoneNumber &&
+    //   !/^\+234[789][01]\d{8}$|^0[789][01]\d{8}$/.test(formData.phoneNumber)
+    // ) {
+    //   newErrors.phoneNumber = "Invalid phone number format";
+    // }
+
+    if (!formData.role) {
+      newErrors.role = "Role is required";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+  }
   return (
     <>
       <Layout2
@@ -59,28 +119,145 @@ export default function SignUp() {
                     action=""
                     method="post"
                     className="space-y-3.5"
+                    onSubmit={handleSubmit}
                   >
-                    <InputFields
-                      type="email"
-                      label="Email / Phone Number"
-                      placeholder="Email address"
-                      icon="ic:baseline-email"
-                      name="email"
-                    />
-                    <InputFields
-                      type="password"
-                      label="Password"
-                      placeholder="password"
-                      icon="mdi:eye"
-                      name="password"
-                    />
-                    <InputFields
-                      type="password"
-                      label="Confirm Password"
-                      placeholder="password"
-                      icon="mdi:eye"
-                      name="password"
-                    />
+                    {/* First Name Input */}
+                    <div>
+                      <label className="block text-sm font-medium text-blue-900 mb-2">
+                        First Name
+                      </label>
+                      <input
+                        name="firstName"
+                        type="text"
+                        value={formData.firstName}
+                        onChange={handleChange}
+                        className={`w-full px-4 py-2 border rounded-lg ${
+                          errors.firstName
+                            ? "border-red-500"
+                            : "border-gray-300"
+                        } focus:ring-2 focus:ring-blue-900 focus:border-transparent`}
+                      />
+                      {errors.firstName && (
+                        <p className="mt-1 text-sm text-red-500">
+                          {errors.firstName}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Last Name Input */}
+                    <div>
+                      <label className="block text-sm font-medium text-blue-900 mb-2">
+                        Last Name
+                      </label>
+                      <input
+                        name="lastName"
+                        type="text"
+                        value={formData.lastName}
+                        onChange={handleChange}
+                        className={`w-full px-4 py-2 border rounded-lg ${
+                          errors.lastName ? "border-red-500" : "border-gray-300"
+                        } focus:ring-2 focus:ring-blue-900 focus:border-transparent`}
+                      />
+                      {errors.lastName && (
+                        <p className="mt-1 text-sm text-red-500">
+                          {errors.lastName}
+                        </p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-blue-900 mb-2">
+                        Email Address/Phone Number
+                      </label>
+                      <input
+                        name="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        className={`w-full px-4 py-2 border rounded-lg ${
+                          errors.email ? "border-red-500" : "border-gray-300"
+                        } focus:ring-2 focus:ring-blue-900 focus:border-transparent`}
+                      />
+                      {errors.email && (
+                        <p className="mt-1 text-sm text-red-500">
+                          {errors.email}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Password Input */}
+                    <div>
+                      <label className="block text-sm font-medium text-blue-900 mb-2">
+                        Password
+                      </label>
+                      <div className="relative">
+                        <input
+                          id="password"
+                          name="password"
+                          type={showPassword ? "text" : "password"}
+                          value={formData.password}
+                          onChange={handleChange}
+                          className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 ${
+                            errors.password
+                              ? "border-red-500 focus:ring-red-500"
+                              : "border-gray-300 focus:ring-blue-900"
+                          }`}
+                        />
+                        <span
+                          className="absolute right-3 top-3.5 text-gray-400 hover:text-blue-500 transition-colors cursor-pointer"
+                          onClick={() => setShowPassword(!showPassword)}
+                        >
+                          {showPassword ? (
+                            <EyeSlashIcon className="h-4 w-5" />
+                          ) : (
+                            <EyeIcon className="h-4 w-5" />
+                          )}
+                        </span>
+                      </div>
+                      {errors.password && (
+                        <p className="mt-1 text-sm text-red-500">
+                          {errors.password}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Confirm Password Input */}
+                    <div>
+                      <label className="block text-sm font-medium text-blue-900 mb-2">
+                        Password
+                      </label>
+                      <div className="relative">
+                        <input
+                          id="confirmPassword"
+                          name="confirmPassword"
+                          type={showConfirmPassword ? "text" : "password"}
+                          value={formData.confirmPassword}
+                          onChange={handleChange}
+                          className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 ${
+                            errors.confirmPassword
+                              ? "border-red-500 focus:ring-red-500"
+                              : "border-gray-300 focus:ring-blue-900"
+                          }`}
+                        />
+                        <span
+                          className="absolute right-3 top-3.5 text-gray-400 hover:text-blue-500 transition-colors cursor-pointer"
+                          onClick={() =>
+                            setShowConfirmPassword(!showConfirmPassword)
+                          }
+                        >
+                          {showConfirmPassword ? (
+                            <EyeSlashIcon className="h-4 w-5" />
+                          ) : (
+                            <EyeIcon className="h-4 w-5" />
+                          )}
+                        </span>
+                      </div>
+                      {errors.password && (
+                        <p className="mt-1 text-sm text-red-500">
+                          {errors.password}
+                        </p>
+                      )}
+                    </div>
                     <div className="formItems flex gap-2 my-3">
                       <input
                         type="checkbox"
@@ -122,21 +299,21 @@ export default function SignUp() {
   );
 }
 
-const InputFields = ({ label, type, name, placeholder, icon }) => {
-  return (
-    <div className="formItems">
-      <label htmlFor="" className="text-[13.5px] font-semibold">
-        {label}
-      </label>
-      <div className="mt-1.5 flex gap-2 px-2 py-[10px] bg-[#D1D5DB] rounded-lg shadow-sm w-full">
-        <Icon icon={icon} width="24" height="24" />
-        <input
-          type={type}
-          name={name}
-          placeholder={placeholder}
-          className="placeholder:italic placeholder:text-xs"
-        />
-      </div>
-    </div>
-  );
-};
+// const InputFields = ({ label, type, name, placeholder, icon }) => {
+//   return (
+//     <div className="formItems">
+//       <label htmlFor="" className="text-[13.5px] font-semibold">
+//         {label}
+//       </label>
+//       <div className="mt-1.5 flex gap-2 px-2 py-[10px] bg-[#D1D5DB] rounded-lg shadow-sm w-full">
+//         <Icon icon={icon} width="24" height="24" />
+//         <input
+//           type={type}
+//           name={name}
+//           placeholder={placeholder}
+//           className="placeholder:italic placeholder:text-xs"
+//         />
+//       </div>
+//     </div>
+//   );
+// };
