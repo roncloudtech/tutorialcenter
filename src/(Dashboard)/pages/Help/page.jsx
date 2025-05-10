@@ -96,12 +96,13 @@ const FAQ = () => {
         " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
     },
   ];
-  const [visible, setVisible] = useState(Array(FaqQuestion.length).fill(false));
+  const questionLengths = Array(FaqQuestion.length).fill(false);
+  const [visible, setVisible] = useState(questionLengths);
   // function to toggle the display of the faq answers when the question is clicked
   const toggleVisible = (index) => {
     setVisible((prev) => {
-      const newVisibleItems = [...prev];
-      newVisibleItems[index] = !newVisibleItems[index];
+      const newVisibleItems = questionLengths;
+      newVisibleItems[index] = !prev[index];
       return newVisibleItems;
     });
   };

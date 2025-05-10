@@ -5,21 +5,14 @@ import { useSchoolContext } from "../../Context/SchoolContext";
 import { role } from "../../data";
 
 const menuItems = [
+  // STUDENT ROUTES
   {
     label: "Dashboard",
-    path: "/student-dashboard",
+    path: "/dashboard",
     icon: (
       <Icon icon="material-symbols:dashboard-rounded" width="20" height="20" />
     ),
     visible: ["student"],
-  },
-  {
-    label: "Dashboard",
-    path: "/student-dashboard",
-    icon: (
-      <Icon icon="material-symbols:dashboard-rounded" width="20" height="20" />
-    ),
-    visible: ["parent", "admin"],
   },
   {
     label: "Courses",
@@ -54,13 +47,13 @@ const menuItems = [
     label: "Calender",
     path: "/calender",
     icon: <Icon icon="uis:calender" width="20" height="20" />,
-    visible: ["student", "parent", "admin"],
+    visible: ["student"],
   },
   {
     label: "Exam Practice",
     path: "/exam",
     icon: <Icon icon="ph:exam-fill" width="20" height="20" />,
-    visible: ["student", "parent", "admin"],
+    visible: ["student"],
   },
   {
     label: "Groups",
@@ -68,25 +61,119 @@ const menuItems = [
     icon: (
       <Icon icon="material-symbols:groups-rounded" width="20" height="20" />
     ),
-    visible: ["student", "admin"],
+    visible: ["student"],
   },
   {
     label: "Payment",
     path: "/payment",
     icon: <Icon icon="fluent:payment-32-filled" width="20" height="20" />,
-    visible: ["student", "parent", "admin"],
+    visible: ["student"],
   },
   {
     label: "Settings",
     path: "/settings",
     icon: <Icon icon="lets-icons:setting-fill" width="20" height="20" />,
-    visible: ["student", "parent", "admin"],
+    visible: ["student"],
   },
   {
     label: "Help",
     path: "/help",
     icon: <Icon icon="material-symbols:help-center" width="20" height="20" />,
-    visible: ["student", "parent", "admin"],
+    visible: ["student"],
+  },
+
+  // PARENT ROUTES
+  {
+    label: "Dashboard",
+    path: "/parent-dashboard",
+    icon: (
+      <Icon icon="material-symbols:dashboard-rounded" width="20" height="20" />
+    ),
+    visible: ["parent"],
+  },
+  {
+    label: "Overview",
+    path: "/parent-overview",
+    icon: (
+      <Icon icon="material-symbols:dashboard-rounded" width="20" height="20" />
+    ),
+    visible: ["parent"],
+  },
+  {
+    label: "Calender",
+    path: "/parent-calender",
+    icon: <Icon icon="uis:calender" width="20" height="20" />,
+    visible: ["parent"],
+  },
+  {
+    label: "Exam Practice",
+    path: "/parent-exam-practice",
+    icon: <Icon icon="ph:exam-fill" width="20" height="20" />,
+    visible: ["parent"],
+  },
+  {
+    label: "Payment",
+    path: "/parent-payment",
+    icon: <Icon icon="fluent:payment-32-filled" width="20" height="20" />,
+    visible: ["parent"],
+  },
+  {
+    label: "Settings",
+    path: "/parent-settings",
+    icon: <Icon icon="lets-icons:setting-fill" width="20" height="20" />,
+    visible: ["parent"],
+  },
+  {
+    label: "Help",
+    path: "/help",
+    icon: <Icon icon="material-symbols:help-center" width="20" height="20" />,
+    visible: ["parent"],
+  },
+
+  // TEACHER || TUTOR ROUTES
+  {
+    label: "Dashboard",
+    path: "/teacher-dashboard",
+    icon: (
+      <Icon icon="material-symbols:dashboard-rounded" width="20" height="20" />
+    ),
+    visible: ["teacher"],
+  },
+  {
+    label: "Calender",
+    path: "/calender",
+    icon: <Icon icon="uis:calender" width="20" height="20" />,
+    visible: ["teacher"],
+  },
+  {
+    label: "Assessment",
+    path: "/teacher-assessment",
+    icon: <Icon icon="uis:calender" width="20" height="20" />,
+    visible: ["teacher"],
+  },
+  {
+    label: "Groups",
+    path: "/teacher-group",
+    icon: <Icon icon="fluent:payment-32-filled" width="20" height="20" />,
+    visible: ["teacher"],
+  },
+  {
+    label: "Results",
+    path: "/teacher-result",
+    icon: <Icon icon="fluent:payment-32-filled" width="20" height="20" />,
+    visible: ["teacher"],
+  },
+  {
+    label: "Settings",
+    path: "/teacher-settings",
+    icon: <Icon icon="lets-icons:setting-fill" width="20" height="20" />,
+    visible: ["teacher"],
+  },
+  {
+    label: "Help",
+    path: "/help",
+    icon: <Icon icon="material-symbols:help-center" width="20" height="20" />,
+    visible: ["teacher"],
   },
 ];
 
@@ -103,7 +190,7 @@ export default function Menu() {
   return (
     <>
       {menuItems.map((item, index) => {
-        if (item.visible.includes(role)) {
+        if (item.visible?.includes(role)) {
           return (
             <div key={index}>
               <NavLink

@@ -11,24 +11,24 @@ export default function Footer() {
           <div className="area-wrapper flex flex-col items-center justify-center text-center">
             <div className="footer-content mb-9">
               <div className="sign up mb-6">
-                <h2 className="mb-2 font-semibold lg:text-xl sm:text-xl text-xs">
+                <h2 className="mb-2 font-semibold lg:text-[28px] leading-[38px] text-sm">
                   Want product news and updates?{" "}
                 </h2>
-                <p className="font-medium text-sm">
+                <p className="text-[12px] lg:text-[18px] text-mainWhite">
                   Sign up for our newsletter to stay up to date{" "}
                 </p>
               </div>
               <div className="form">
                 <form action="" method="post">
-                  <div className="flex justify-center gap-5 ">
+                  <div className="flex flex-col sm:flex-row justify-center gap-5 text-sm">
                     <input
                       type="text"
                       placeholder="Your email address"
-                      className="shadow bg-white border border-[#94A3B8] rounded-full py-2.5 pl-2 w-[320px]"
+                      className="shadow bg-[#EAEBEC] w-full p-2 rounded-full "
                     />
                     <button
                       type="submit"
-                      className="text-sm text-white px-5 py-2.5 bg-primary rounded-full"
+                      className="px-4 text-xs text-nowrap bg-mainBlue text-mainWhite font-medium rounded-full"
                     >
                       Notify me
                     </button>
@@ -37,9 +37,9 @@ export default function Footer() {
               </div>
             </div>
             <div className="socials">
-              <p className="mb-5 text-xs">
+              <p className="mb-5 text-xs text-left">
                 We care about the protection of your data. Read our{" "}
-                <Link className="underline">Privacy Policy</Link> .{" "}
+                <Link className="underline text-[14px]">Privacy Policy</Link> .{" "}
               </p>
               <div className="Social_links flex justify-center items-center gap-3 mb-6">
                 <a
@@ -98,27 +98,26 @@ export default function Footer() {
                   />
                 </a>
               </div>
-              <div className="download_app">
-                <p className="mb-3 text-xs">
+              <div className="download_app text-[12px]">
+                <p className="mb-3 ">
                   Click to download our app. Download Now!
                 </p>
-                <div className="flex sm:flex-row flex-col items-center justify-center gap-4">
+                <div className="flex flex-row items-center justify-between gap-4">
                   <a
                     href=""
-                    className="flex justify-center items-center gap-2 w-40 bg-sencondary py-[6px] rounded-lg"
+                    className="w-full flex justify-center items-center gap-2 bg-sencondary py-[6px] rounded-lg"
                   >
                     <Icon
                       icon="ic:twotone-apple"
                       width="28"
                       height="28"
                       style={{ color: "white" }}
-                      className=""
                     />
-                    <span className="text-white">Apple Store</span>
+                    <span className="text-white  text-[12px]">Apple Store</span>
                   </a>
                   <a
                     href=""
-                    className="flex justify-center items-center gap-2 w-40 bg-primary py-[6px] rounded-lg"
+                    className="w-full flex justify-center items-center gap-2 bg-primary py-[6px] rounded-lg"
                   >
                     <Icon
                       icon="mage:playstore"
@@ -126,7 +125,7 @@ export default function Footer() {
                       height="26"
                       style={{ color: "white" }}
                     />
-                    <span className="text-white">Play Store</span>
+                    <span className="text-white text-[12px]">Play Store</span>
                   </a>
                 </div>
               </div>
@@ -134,7 +133,7 @@ export default function Footer() {
           </div>
           <div className="copyright py-5">
             <div className="border border-" />
-            <p className="mt-4 text-center text-sm">
+            <p className="mt-4 text-center text-[12px] sm:text-sm">
               Copyright © 2025 Tutorial Center | All Rights Reserved
             </p>
           </div>

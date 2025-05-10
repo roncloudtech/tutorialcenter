@@ -13,11 +13,9 @@ export default function Layout({
   return (
     <>
       <div className="bg-[#09314F] grid grid-cols-2 items-center justify-center min-w-full">
-        <div className="pl-[90px]">
+        <div className="pl-[75px]">
           <div className="blockContent mb-14">
-            <h2 className="font-bold text-white uppercase lg:text-xl text-base mb-5">
-              {title}
-            </h2>
+            <h2 className=" text-white header-title uppercase mb-5">{title}</h2>
             <h4 className="text-ascent text-sm font-semibold mb-3">
               {semititle}
             </h4>

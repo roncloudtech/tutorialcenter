@@ -105,9 +105,7 @@ export default function Program() {
       <div className="Container">
         <div className="area-wrapper">
           <div className="mb-9">
-            <h2 className="uppercase lg:text-xl text-base font-bold mb-4">
-              Our program
-            </h2>
+            <h2 className="uppercase header-title mb-4">Our program</h2>
             <p className="text-sm leading-6">
               At Tutorial Center, we understand the challenges faced by Nigerian
               students preparing for critical exams like JAMB, WAEC, NECO, and

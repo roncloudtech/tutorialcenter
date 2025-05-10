@@ -1,28 +1,18 @@
 import React, { useState } from "react";
-import DashboardLayout from "../../DashboardLayout";
+import DashboardLayout from "../../(Dashboard)/DashboardLayout";
+import Title from "../../(Dashboard)/Components/Title";
+import StudentProfileList from "../../(Dashboard)/Components/StudentProfileList";
 import { Icon } from "@iconify/react/dist/iconify.js";
 
-export default function PaymentPage() {
+export default function ParentPayment() {
   const [payment, setPayment] = useState(true);
   const [training, setTraining] = useState(true);
-
   return (
-    <>
-      <DashboardLayout>
-        <div className="px-5">
-          {/* hearder */}
-          <div className="flex justify-between items-center py-2 rounded-md mb-5">
-            <h3 className="uppercase text-mainBlue dark:text-lightGrey font-semibold">
-              payment
-            </h3>
-            <div className="w-9 h-9 flex justify-center items-center bg-mainBlue text-lightGrey dark:bg-lightGrey dark:text-mainBlue rounded-md">
-              <Icon
-                icon="iconoir:bell-notification-solid"
-                width="24"
-                height="24"
-              />
-            </div>
-          </div>
+    <DashboardLayout>
+      <div className="xl:grid grid-cols-[1fr_0.39fr] p-2.5 xl:p-0">
+        {/* RIGHT SIDE */}
+        <div className="xl:px-4 space-y-7">
+          <Title title={"PAYMENT"} />
           {payment ? (
             <div className={`space-y-2 ${training ? "" : "hidden"}`}>
               <button
@@ -43,8 +33,10 @@ export default function PaymentPage() {
           )}
           {training ? "" : <Training setTraining={setTraining} />}
         </div>
-      </DashboardLayout>
-    </>
+        {/* LEFT SIDE */}
+        <StudentProfileList />
+      </div>
+    </DashboardLayout>
   );
 }
 
@@ -261,7 +253,7 @@ const Modal = ({ setToggleModal }) => {
   return (
     <>
       <div
-        className="w-full h-[-webkit-fill-available] bg-[#121D244D] absolute top-0 left-0 z-40 cursor-pointer flex items-center justify-center"
+        className="overflow-hidden w-full h-[-webkit-fill-available]  bg-[#121D244D] absolute top-0 left-0 z-40 cursor-pointer flex items-center justify-center"
         onClick={() => setToggleModal(false)}
       ></div>
       <div className="p-4 w-[335px] h-[171px] bg-white shadow-xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 border-[0.5px] border-[#D1D5DB] border-solid rounded-xl">

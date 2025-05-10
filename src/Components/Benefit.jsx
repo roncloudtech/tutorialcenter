@@ -39,7 +39,7 @@ export default function Benefit() {
       <div className="py-8 ">
         <div className="Container">
           <div className="mb-4 area-wrapper">
-            <h3 className="font-extrabold uppercase text-[27px] text-center mb-4">
+            <h3 className="header-title uppercase text-center mb-4">
               Our Core Benefits
             </h3>
             <p className="text-sm leading-6 text-center">
@@ -57,7 +57,7 @@ export default function Benefit() {
             <div className="grid lg:grid-cols-2 gap-x-10 gap-y-5">
               {benefit.map((item, index) => (
                 <div
-                  className="bg-[#E336290D] shadow-xl py-5 px-5 rounded-3xl border-l-[15px] border-l-[#E83831]"
+                  className="bg-[#E336290D] shadow-xl py-5 px-5 rounded-3xl border-l-[10px] border-l-[#E83831]"
                   key={index}
                 >
                   <h4 className="text-base font-bold text-sencondary mb-3 ">

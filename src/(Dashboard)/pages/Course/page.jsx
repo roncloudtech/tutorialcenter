@@ -3,29 +3,19 @@ import DashboardLayout from "../../DashboardLayout";
 import ProgressBar from "../../Components/ProgressBar";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Chat from "../../Components/Chat";
+import Title from "../../Components/Title";
 
 export default function Coursepage() {
   return (
     <>
       <DashboardLayout>
-        <div className="grid grid-cols-[1fr_0.38fr] pt-0.5">
+        <div className="xl:grid grid-cols-[1fr_0.38fr] p-2.5 xl:p-0">
           {/* left Side */}
-          <div className="item1 px-4">
+          <div className="item1 xl:px-4">
             {/* hearder */}
-            <div className="flex justify-between items-center  py-2 rounded-md">
-              <h3 className="uppercase text-mainBlue dark:text-lightGrey font-semibold">
-                Courses
-              </h3>
-              <div className="w-9 h-9 flex justify-center items-center bg-mainBlue text-lightGrey dark:bg-lightGrey dark:text-mainBlue  rounded-md">
-                <Icon
-                  icon="iconoir:bell-notification-solid"
-                  width="24"
-                  height="24"
-                />
-              </div>
-            </div>
+            <Title title={"COURSE"} />
             {/* PROGRESS SECTION */}
-            <div className="w-full">
+            <div className="w-full mt-3">
               <div className="jamb progress bar">
                 <ProgressBar title="jamb progress bar" />
               </div>

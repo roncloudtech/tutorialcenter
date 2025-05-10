@@ -9,7 +9,7 @@ export default function Group() {
   return (
     <DashboardLayout>
       <div className="grid grid-cols-[1fr_300px] h-full">
-        <div className="px-5">
+        <div className="px-4">
           {/* hearder */}
           <div className="flex justify-between items-center  py-2 rounded-md mb-4">
             <h3 className="uppercase text-mainBlue dark:text-lightGrey font-bold">
@@ -41,59 +41,45 @@ export default function Group() {
             />
           </div>
           <div className="space-y-3">
-            <div
-              onClick={() => setActive(false)}
-              className="flex gap-2 p-2 rounded-lg cursor-pointer"
-            >
-              <div className="flex-1">
-                <div className="w-[55px] h-[53px] bg-lightGrey text-mainBlue shadow-custom-1 rounded-full flex justify-center items-center text-[6px] font-medium">
-                  #WE24
-                </div>
-              </div>
-              <div className="flex gap-1 dark:text-lightGrey">
-                <div className="WAEC">
-                  <p className="text-[13px]">WAEC ENGLISH</p>
-                  <p className="text-[8px] font-thin ">
-                    <span className="font-medium">Grace:</span> Hey there! 🌼
-                    Did you catch the latest episode of this series, it...
-                  </p>
-                </div>
-                <div className="flex flex-col items-center justify-between">
-                  <span className="text-[10px] font-light">5s</span>
-                  <div className="w-[17px] h-[17px] bg-[#FF3636B0] text-white text-[8px] font-medium rounded-full flex items-center justify-center">
-                    12
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="flex gap-2 p-2 rounded-lg cursor-pointer">
-              <div className="flex-1">
-                <div className="w-[55px] h-[53px] bg-lightGrey text-mainBlue shadow-custom-1 rounded-full flex justify-center items-center text-[6px] font-medium">
-                  #WE24
-                </div>
-              </div>
-              <div className="flex gap-1 dark:text-lightGrey">
-                <div className="WAEC">
-                  <p className="text-[13px]">WAEC ENGLISH</p>
-                  <p className="text-[8px] font-thin ">
-                    <span className="font-medium">Grace:</span> Hey there! 🌼
-                    Did you catch the latest episode of this series, it...
-                  </p>
-                </div>
-                <div className="flex flex-col items-center justify-between">
-                  <span className="text-[10px] font-light">5s</span>
-                  <div className="w-[17px] h-[17px] bg-[#FF3636B0] text-white text-[8px] font-medium rounded-full flex items-center justify-center">
-                    12
-                  </div>
-                </div>
-              </div>
-            </div>
+            <GroupInfo setActive={setActive} />
+            <GroupInfo setActive={setActive} />
+            <GroupInfo setActive={setActive} />
           </div>
         </div>
       </div>
     </DashboardLayout>
   );
 }
+
+const GroupInfo = ({ setActive }) => {
+  return (
+    <div
+      onClick={() => setActive(false)}
+      className="flex gap-2 p-2 rounded-lg cursor-pointer"
+    >
+      <div className="flex-1">
+        <div className="w-[55px] h-[53px] bg-lightGrey text-mainBlue shadow-custom-1 rounded-full flex justify-center items-center text-[6px] font-medium">
+          #WE24
+        </div>
+      </div>
+      <div className="flex gap-1 dark:text-lightGrey">
+        <div className="WAEC">
+          <p className="text-[13px]">WAEC ENGLISH</p>
+          <p className="text-[8px] font-thin ">
+            <span className="font-medium">Grace:</span> Hey there! 🌼 Did you
+            catch the latest episode of this series, it...
+          </p>
+        </div>
+        <div className="flex flex-col items-center justify-between">
+          <span className="text-[10px] font-light">5s</span>
+          <div className="w-[17px] h-[17px] bg-[#FF3636B0] text-white text-[8px] font-medium rounded-full flex items-center justify-center">
+            12
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 // GROUP SUBJECT
 const GroupSubject = () => {
