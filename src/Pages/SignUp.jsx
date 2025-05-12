@@ -9,7 +9,6 @@ import Layout2 from "../Components/Layout2";
 export default function SignUp() {
   const API_BASE_URL = process.env.REACT_APP_API_URL || "http://tutorialcenter-app.test";
   const [role, setRole] = useState(false);
-  // console.log(role)
 
   // Caturing the user info
   // For Both Student and Guardian
@@ -70,7 +69,7 @@ export default function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('This is role', role)
+    // console.log('This is role', role);
     if (!validateForm()) return;
 
     setLoading(true);
@@ -90,7 +89,7 @@ export default function SignUp() {
       );
 
       if (response.status === 201) {
-        navigate("/login");
+        navigate(`/email-verification?identifier=${formData.email}&role=${role}`);
       }
     } catch (error) {
       console.log(error);
@@ -330,22 +329,3 @@ export default function SignUp() {
     </>
   );
 }
-
-// const InputFields = ({ label, type, name, placeholder, icon }) => {
-//   return (
-//     <div className="formItems">
-//       <label htmlFor="" className="text-[13.5px] font-semibold">
-//         {label}
-//       </label>
-//       <div className="mt-1.5 flex gap-2 px-2 py-[10px] bg-[#D1D5DB] rounded-lg shadow-sm w-full">
-//         <Icon icon={icon} width="24" height="24" />
-//         <input
-//           type={type}
-//           name={name}
-//           placeholder={placeholder}
-//           className="placeholder:italic placeholder:text-xs"
-//         />
-//       </div>
-//     </div>
-//   );
-// };
