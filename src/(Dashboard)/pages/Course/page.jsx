@@ -9,9 +9,9 @@ export default function Coursepage() {
   return (
     <>
       <DashboardLayout>
-        <div className="xl:grid grid-cols-[1fr_0.38fr] p-2.5 xl:p-0">
+        <div className="xl:grid grid-cols-[1fr_0.38fr] p-2.5 xl:p-0 h-full overflow-y-hidden ">
           {/* left Side */}
-          <div className="item1 xl:px-4">
+          <div className="item1 xl:px-4 hideScrollbar overflow-y-scroll">
             {/* hearder */}
             <Title title={"COURSE"} />
             {/* PROGRESS SECTION */}
@@ -142,7 +142,7 @@ export default function Coursepage() {
             </div>
           </div>
           {/* Right Side */}
-          <div className="bg-mainWhite dark:bg-whiteFade shadow-custom-1 rounded-md p-2 space-y-2">
+          <div className="bg-mainWhite hideScrollbar dark:bg-whiteFade overflow-y-scroll shadow-custom-1 rounded-md p-2 space-y-2">
             <div className="ring-[0.5px] ring-mainBlue dark:bg-darkMode px-2 py-3 rounded-md">
               <div className="flex justify-between text-[10px] font-bold text-mainBlack dark:text-lightGrey mb-2">
                 <h3>MASTER CLASS [JAMB]</h3>

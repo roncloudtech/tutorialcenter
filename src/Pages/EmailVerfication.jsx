@@ -9,16 +9,16 @@ export default function EmailVerfication() {
       <Navbar />
       <section className="my-16">
         <div className="Container flex items-center justify-center">
-          <div className="w-96 p-10 bg-white shadow-md rounded-lg flex flex-col items-center justify-center">
+          <div className="md:w-96 w-full md:p-10 bg-white md:shadow-md rounded-lg flex flex-col items-center justify-center">
             <div className="logo mb-4">
               <img
-                className="max-w-[60px] max-md:max-w-[50px]"
+                className="max-w-[80px] max-md:max-w-[70px]"
                 src={logo1}
                 alt="logo"
               />
             </div>
             <div className="description-text">
-              <h2 className="text-2xl font-semibold">
+              <h2 className="md:text-2xl text-xl font-semibold">
                 Please check your email
               </h2>
               <p className="text-sm text-gray-400 mt-2">

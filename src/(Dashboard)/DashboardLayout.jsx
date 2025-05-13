@@ -14,7 +14,7 @@ export default function DashboardLayout({ children }) {
         {/* LEFT */}
         <SideBar toggle={toggle} setToggle={setToggle} />
         {/* RIGHT */}
-        <div className="h-full w-full  overflow-y-scroll">{children}</div>
+        <div className="h-full w-full  overflow-y-hidden">{children}</div>
       </div>
     </>
   );
