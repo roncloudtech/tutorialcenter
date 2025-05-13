@@ -1,7 +1,7 @@
 import React from "react";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { Link } from "react-router-dom";
-import LiveChat from "../Pages/LiveChat";
+// import { Link } from "react-router-dom";
+// import LiveChat from "../Pages/LiveChat";
 
 export default function StickyButtons() {
   return (

@@ -1,11 +1,107 @@
-import React, { useState } from "react";
+import axios from "axios";
+import { useState } from "react";
 import logo from "../Assets/tutorial_logo.png";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { Link } from "react-router-dom";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router-dom";
 import Layout2 from "../Components/Layout2";
 
 export default function SignUp() {
+  const API_BASE_URL = process.env.REACT_APP_API_URL || "http://tutorialcenter-app.test";
   const [role, setRole] = useState(false);
+
+  // Caturing the user info
+  // For Both Student and Guardian
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const navigate = useNavigate();
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  // Capture each user entries
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!formData.firstName.trim())
+      newErrors.firstName = "First name is required";
+
+    if (!formData.lastName.trim()) newErrors.lastName = "Last name is required";
+
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Invalid email address";
+    }
+
+    if (!formData.password) {
+      newErrors.password = "Password is required";
+    } else if (formData.password.length < 8) {
+      newErrors.password = "Password must be at least 8 characters";
+    } else if (formData.password !== formData.confirmPassword) {
+      newErrors.password = "Passwords do not match";
+      newErrors.confirmPassword = "Passwords do not match";
+    }
+
+    if (!formData.confirmPassword) {
+      newErrors.confirmPassword = "Confirm Password is required";
+    } else if (formData.password.length < 8) {
+      newErrors.password = "Confirm Password must be at least 8 characters";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // console.log('This is role', role);
+    if (!validateForm()) return;
+
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        `${
+          role
+            ? `${API_BASE_URL}/api/guardians`
+            : `${API_BASE_URL}/api/students`
+        }/register`,
+        {
+          firstname: formData.firstName,
+          lastname: formData.lastName,
+          email: formData.email,
+          password: formData.password,
+        }
+      );
+
+      if (response.status === 201) {
+        navigate(`/email-verification?identifier=${formData.email}&role=${role}`);
+      }
+    } catch (error) {
+      console.log(error);
+      if (error.response?.data?.errors) {
+        setErrors(error.response.data.errors);
+      } else {
+        console.error("Registration error:", error);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <>
       <Layout2
@@ -59,45 +155,157 @@ export default function SignUp() {
                     action=""
                     method="post"
                     className="space-y-3.5"
+                    onSubmit={handleSubmit}
                   >
-                    <InputFields
-                      type="email"
-                      label="Email / Phone Number"
-                      placeholder="Email address"
-                      icon="ic:baseline-email"
-                      name="email"
-                    />
-                    <InputFields
-                      type="password"
-                      label="Password"
-                      placeholder="password"
-                      icon="mdi:eye"
-                      name="password"
-                    />
-                    <InputFields
-                      type="password"
-                      label="Confirm Password"
-                      placeholder="password"
-                      icon="mdi:eye"
-                      name="password"
-                    />
-                    <div className="formItems flex gap-2 my-3">
+                    {/* First Name Input */}
+                    <div>
+                      <label className="block text-sm font-medium text-blue-900 mb-2">
+                        First Name
+                      </label>
                       <input
-                        type="checkbox"
-                        className="flex justify-start items-start "
+                        name="firstName"
+                        type="text"
+                        value={formData.firstName}
+                        onChange={handleChange}
+                        className={`w-full px-4 py-2 border rounded-lg ${
+                          errors.firstName
+                            ? "border-red-500"
+                            : "border-gray-300"
+                        } focus:ring-2 focus:ring-blue-900 focus:border-transparent`}
                       />
-                      <span className="text-[13.5px] font-semibold ">
-                        Remember me
-                      </span>
+                      {errors.firstName && (
+                        <p className="mt-1 text-sm text-red-500">
+                          {errors.firstName}
+                        </p>
+                      )}
                     </div>
-                    <div className="mt-1 flex gap-2 py-[10px] bg-gradient-to-r from-[#09314F] to-[#E83831] rounded-lg shadow-sm w-full">
-                      <button
-                        type="submit"
-                        className="w-full h-full text-white text-[17px] font-semibold"
-                      >
-                        Sign Up
-                      </button>
+
+                    {/* Last Name Input */}
+                    <div>
+                      <label className="block text-sm font-medium text-blue-900 mb-2">
+                        Last Name
+                      </label>
+                      <input
+                        name="lastName"
+                        type="text"
+                        value={formData.lastName}
+                        onChange={handleChange}
+                        className={`w-full px-4 py-2 border rounded-lg ${
+                          errors.lastName ? "border-red-500" : "border-gray-300"
+                        } focus:ring-2 focus:ring-blue-900 focus:border-transparent`}
+                      />
+                      {errors.lastName && (
+                        <p className="mt-1 text-sm text-red-500">
+                          {errors.lastName}
+                        </p>
+                      )}
                     </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-blue-900 mb-2">
+                        Email Address
+                      </label>
+                      <input
+                        name="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        className={`w-full px-4 py-2 border rounded-lg ${
+                          errors.email ? "border-red-500" : "border-gray-300"
+                        } focus:ring-2 focus:ring-blue-900 focus:border-transparent`}
+                      />
+                      {errors.email && (
+                        <p className="mt-1 text-sm text-red-500">
+                          {errors.email}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Password Input */}
+                    <div>
+                      <label className="block text-sm font-medium text-blue-900 mb-2">
+                        Password
+                      </label>
+                      <div className="relative">
+                        <input
+                          id="password"
+                          name="password"
+                          type={showPassword ? "text" : "password"}
+                          value={formData.password}
+                          onChange={handleChange}
+                          className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 ${
+                            errors.password
+                              ? "border-red-500 focus:ring-red-500"
+                              : "border-gray-300 focus:ring-blue-900"
+                          }`}
+                        />
+                        <span
+                          className="absolute right-3 top-3.5 text-gray-400 hover:text-blue-500 transition-colors cursor-pointer"
+                          onClick={() => setShowPassword(!showPassword)}
+                        >
+                          {showPassword ? (
+                            <EyeSlashIcon className="h-4 w-5" />
+                          ) : (
+                            <EyeIcon className="h-4 w-5" />
+                          )}
+                        </span>
+                      </div>
+                      {errors.password && (
+                        <p className="mt-1 text-sm text-red-500">
+                          {errors.password}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Confirm Password Input */}
+                    <div>
+                      <label className="block text-sm font-medium text-blue-900 mb-2">
+                        Confirm Password
+                      </label>
+                      <div className="relative">
+                        <input
+                          id="confirmPassword"
+                          name="confirmPassword"
+                          type={showConfirmPassword ? "text" : "password"}
+                          value={formData.confirmPassword}
+                          onChange={handleChange}
+                          className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 ${
+                            errors.confirmPassword
+                              ? "border-red-500 focus:ring-red-500"
+                              : "border-gray-300 focus:ring-blue-900"
+                          }`}
+                        />
+                        <span
+                          className="absolute right-3 top-3.5 text-gray-400 hover:text-blue-500 transition-colors cursor-pointer"
+                          onClick={() =>
+                            setShowConfirmPassword(!showConfirmPassword)
+                          }
+                        >
+                          {showConfirmPassword ? (
+                            <EyeSlashIcon className="h-4 w-5" />
+                          ) : (
+                            <EyeIcon className="h-4 w-5" />
+                          )}
+                        </span>
+                      </div>
+                      {errors.confirmPassword && (
+                        <p className="mt-1 text-sm text-red-500">
+                          {errors.confirmPassword}
+                        </p>
+                      )}
+                    </div>
+                    {/* Sign Up Button */}
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className={`w-full py-3 px-4 rounded-lg font-medium ${
+                        loading
+                          ? "bg-gray-400 cursor-not-allowed"
+                          : "bg-gradient-to-r from-[#09314F] to-[#E83831] hover:bg-green-800"
+                      } text-white transition-colors`}
+                    >
+                      Register
+                    </button>
                   </form>
                   <div className="flex justify-center items-center my-4 gap-2">
                     <div className="w-full h-[1.5px] bg-black" />
@@ -121,22 +329,3 @@ export default function SignUp() {
     </>
   );
 }
-
-const InputFields = ({ label, type, name, placeholder, icon }) => {
-  return (
-    <div className="formItems">
-      <label htmlFor="" className="text-[13.5px] font-semibold">
-        {label}
-      </label>
-      <div className="mt-1.5 flex gap-2 px-2 py-[10px] bg-[#D1D5DB] rounded-lg shadow-sm w-full">
-        <Icon icon={icon} width="24" height="24" />
-        <input
-          type={type}
-          name={name}
-          placeholder={placeholder}
-          className="placeholder:italic placeholder:text-xs"
-        />
-      </div>
-    </div>
-  );
-};
