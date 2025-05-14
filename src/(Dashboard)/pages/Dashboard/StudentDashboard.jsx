@@ -9,9 +9,9 @@ import ProgressSlider from "../../Components/ProgressSlider";
 export default function StudentDashboard() {
   return (
     <DashboardLayout>
-      <div className="xl:grid grid-cols-[1fr_0.38fr] p-2.5 xl:p-0">
+      <div className="xl:grid grid-cols-[1fr_0.38fr] p-2.5 xl:p-0 h-full scroll overflow-y-auto">
         {/* RIGHT SIDE */}
-        <div className="xl:px-4">
+        <div className="xl:px-4 scroll overflow-y-auto">
           <Title title={"DASHBOARD"} />
           {/* PROGRESS LEVEL */}
           <div className="my-3">
@@ -20,7 +20,7 @@ export default function StudentDashboard() {
           <ProgressSlider />
         </div>
         {/* LEFT SIDE */}
-        <div className="dark:bg-darkMode bg-mainWhite shadow-custom-1 rounded-md p-1.5 overflow-scroll hidden xl:block">
+        <div className="dark:bg-darkMode scroll bg-mainWhite shadow-custom-1 rounded-md py-2 pl-2  overflow-y-auto hidden xl:block">
           <SmallCalendar />
           <Notification />
         </div>

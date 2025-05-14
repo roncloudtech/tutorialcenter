@@ -98,7 +98,7 @@ export default function Faq() {
                 <div
                   className={`${
                     visible[index] ? "mt-2 visible h-[auto]" : "invisible h-0"
-                  } pr-8 transition-height ease-custom duration-300`}
+                  } md:pr-8 transition-height ease-custom duration-300`}
                 >
                   <p className="text-[14.4px]">{item.answers}</p>
                 </div>

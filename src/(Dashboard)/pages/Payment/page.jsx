@@ -1,28 +1,16 @@
 import React, { useState } from "react";
 import DashboardLayout from "../../DashboardLayout";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import Title from "../../Components/Title";
 
 export default function PaymentPage() {
   const [payment, setPayment] = useState(true);
   const [training, setTraining] = useState(true);
-
   return (
     <>
       <DashboardLayout>
-        <div className="px-5">
-          {/* hearder */}
-          <div className="flex justify-between items-center py-2 rounded-md mb-5">
-            <h3 className="uppercase text-mainBlue dark:text-lightGrey font-semibold">
-              payment
-            </h3>
-            <div className="w-9 h-9 flex justify-center items-center bg-mainBlue text-lightGrey dark:bg-lightGrey dark:text-mainBlue rounded-md">
-              <Icon
-                icon="iconoir:bell-notification-solid"
-                width="24"
-                height="24"
-              />
-            </div>
-          </div>
+        <div className="xl:px-4 overflow-y-auto h-full scroll">
+          <Title title={"PAYMENT"} />
           {payment ? (
             <div className={`space-y-2 ${training ? "" : "hidden"}`}>
               <button
@@ -149,7 +137,7 @@ const Training = ({ setTraining }) => {
 };
 const CardDetails = () => {
   return (
-    <div className="CARD DETAILS text-mainBlack dark:text-lightGrey">
+    <div className="CARD DETAILS text-mainBlack dark:text-lightGrey h-full scroll">
       <p className="text-sm font-medium mb-2 dark:text-lightGrey text-mainBlack">
         Select Card
       </p>

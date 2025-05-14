@@ -3,11 +3,12 @@ import { useState } from "react";
 import logo from "../Assets/tutorial_logo.png";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Layout2 from "../Components/Layout2";
 
 export default function SignUp() {
-  const API_BASE_URL = process.env.REACT_APP_API_URL || "http://tutorialcenter-app.test";
+  const API_BASE_URL =
+    process.env.REACT_APP_API_URL || "http://tutorialcenter-app.test";
   const [role, setRole] = useState(false);
 
   // Caturing the user info
@@ -89,7 +90,9 @@ export default function SignUp() {
       );
 
       if (response.status === 201) {
-        navigate(`/email-verification?identifier=${formData.email}&role=${role}`);
+        navigate(
+          `/email-verification?identifier=${formData.email}&role=${role}`
+        );
       }
     } catch (error) {
       console.log(error);
@@ -114,7 +117,7 @@ export default function SignUp() {
         <div className="Container">
           <div className="area-wrapper !py-4">
             <div className="flex flex-col justify-center items-center">
-              <div className="w-[410px]">
+              <div className="max-w-[410px] w-full">
                 <div className="blockContent mb-3">
                   <div className="mb-3 grid justify-center">
                     <img src={logo} alt="" className="max-w-24" />
@@ -126,7 +129,7 @@ export default function SignUp() {
                     </p>
                   </div>
                   <div className="grid grid-cols-2 relative text-xs">
-                    <p
+                    <button
                       onClick={() => setRole(false)}
                       className={`border-solid ${
                         role
@@ -135,8 +138,8 @@ export default function SignUp() {
                       }  pb-1.5 text-center border-mainBlue font-bold`}
                     >
                       Student
-                    </p>
-                    <p
+                    </button>
+                    <button
                       onClick={() => setRole(true)}
                       className={`border-solid ${
                         role
@@ -145,174 +148,48 @@ export default function SignUp() {
                       }  pb-1.5 text-center border-mainBlue font-bold`}
                     >
                       Guardian / Parents
-                    </p>
+                    </button>
                   </div>
                 </div>
-                <div className="px-9 py-5 bg-[#FBFAFA] rounded-md shadow-md mt-3 w-full">
+                <div className="lg:px-9 py-5 lg:bg-[#FBFAFA] lg:shadow-md rounded-md mt-3 w-full">
                   {/* Form Inputs */}
-                  <form
-                    autoComplete="off"
-                    action=""
-                    method="post"
-                    className="space-y-3.5"
-                    onSubmit={handleSubmit}
-                  >
-                    {/* First Name Input */}
-                    <div>
-                      <label className="block text-sm font-medium text-blue-900 mb-2">
-                        First Name
-                      </label>
-                      <input
-                        name="firstName"
-                        type="text"
-                        value={formData.firstName}
-                        onChange={handleChange}
-                        className={`w-full px-4 py-2 border rounded-lg ${
-                          errors.firstName
-                            ? "border-red-500"
-                            : "border-gray-300"
-                        } focus:ring-2 focus:ring-blue-900 focus:border-transparent`}
-                      />
-                      {errors.firstName && (
-                        <p className="mt-1 text-sm text-red-500">
-                          {errors.firstName}
-                        </p>
-                      )}
-                    </div>
-
-                    {/* Last Name Input */}
-                    <div>
-                      <label className="block text-sm font-medium text-blue-900 mb-2">
-                        Last Name
-                      </label>
-                      <input
-                        name="lastName"
-                        type="text"
-                        value={formData.lastName}
-                        onChange={handleChange}
-                        className={`w-full px-4 py-2 border rounded-lg ${
-                          errors.lastName ? "border-red-500" : "border-gray-300"
-                        } focus:ring-2 focus:ring-blue-900 focus:border-transparent`}
-                      />
-                      {errors.lastName && (
-                        <p className="mt-1 text-sm text-red-500">
-                          {errors.lastName}
-                        </p>
-                      )}
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-blue-900 mb-2">
-                        Email Address
-                      </label>
-                      <input
-                        name="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className={`w-full px-4 py-2 border rounded-lg ${
-                          errors.email ? "border-red-500" : "border-gray-300"
-                        } focus:ring-2 focus:ring-blue-900 focus:border-transparent`}
-                      />
-                      {errors.email && (
-                        <p className="mt-1 text-sm text-red-500">
-                          {errors.email}
-                        </p>
-                      )}
-                    </div>
-
-                    {/* Password Input */}
-                    <div>
-                      <label className="block text-sm font-medium text-blue-900 mb-2">
-                        Password
-                      </label>
-                      <div className="relative">
-                        <input
-                          id="password"
-                          name="password"
-                          type={showPassword ? "text" : "password"}
-                          value={formData.password}
-                          onChange={handleChange}
-                          className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 ${
-                            errors.password
-                              ? "border-red-500 focus:ring-red-500"
-                              : "border-gray-300 focus:ring-blue-900"
-                          }`}
-                        />
-                        <span
-                          className="absolute right-3 top-3.5 text-gray-400 hover:text-blue-500 transition-colors cursor-pointer"
-                          onClick={() => setShowPassword(!showPassword)}
-                        >
-                          {showPassword ? (
-                            <EyeSlashIcon className="h-4 w-5" />
-                          ) : (
-                            <EyeIcon className="h-4 w-5" />
-                          )}
-                        </span>
-                      </div>
-                      {errors.password && (
-                        <p className="mt-1 text-sm text-red-500">
-                          {errors.password}
-                        </p>
-                      )}
-                    </div>
-
-                    {/* Confirm Password Input */}
-                    <div>
-                      <label className="block text-sm font-medium text-blue-900 mb-2">
-                        Confirm Password
-                      </label>
-                      <div className="relative">
-                        <input
-                          id="confirmPassword"
-                          name="confirmPassword"
-                          type={showConfirmPassword ? "text" : "password"}
-                          value={formData.confirmPassword}
-                          onChange={handleChange}
-                          className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 ${
-                            errors.confirmPassword
-                              ? "border-red-500 focus:ring-red-500"
-                              : "border-gray-300 focus:ring-blue-900"
-                          }`}
-                        />
-                        <span
-                          className="absolute right-3 top-3.5 text-gray-400 hover:text-blue-500 transition-colors cursor-pointer"
-                          onClick={() =>
-                            setShowConfirmPassword(!showConfirmPassword)
-                          }
-                        >
-                          {showConfirmPassword ? (
-                            <EyeSlashIcon className="h-4 w-5" />
-                          ) : (
-                            <EyeIcon className="h-4 w-5" />
-                          )}
-                        </span>
-                      </div>
-                      {errors.confirmPassword && (
-                        <p className="mt-1 text-sm text-red-500">
-                          {errors.confirmPassword}
-                        </p>
-                      )}
-                    </div>
-                    {/* Sign Up Button */}
-                    <button
-                      type="submit"
-                      disabled={loading}
-                      className={`w-full py-3 px-4 rounded-lg font-medium ${
-                        loading
-                          ? "bg-gray-400 cursor-not-allowed"
-                          : "bg-gradient-to-r from-[#09314F] to-[#E83831] hover:bg-green-800"
-                      } text-white transition-colors`}
-                    >
-                      Register
-                    </button>
-                  </form>
-                  <div className="flex justify-center items-center my-4 gap-2">
+                  {role ? (
+                    /* Show Student Form
+                       handle the submit registration logic for the student
+                    */
+                    <Form
+                      onSubmit={handleSubmit}
+                      formData={formData}
+                      handleChange={handleChange}
+                      loading={loading}
+                      errors={errors}
+                      setShowPassword={setShowPassword}
+                      showPassword={showPassword}
+                      showConfirmPassword={showConfirmPassword}
+                      setShowConfirmPassword={setShowConfirmPassword}
+                    />
+                  ) : (
+                    /* Show Parent Form
+                       handle the submit registration logic for the parent
+                    */
+                    <Form
+                      onSubmit={handleSubmit}
+                      formData={formData}
+                      handleChange={handleChange}
+                      loading={loading}
+                      errors={errors}
+                      setShowPassword={setShowPassword}
+                      showPassword={showPassword}
+                      showConfirmPassword={showConfirmPassword}
+                      setShowConfirmPassword={setShowConfirmPassword}
+                    />
+                  )}
+                  <div className="flex justify-center items-center my-6 gap-2">
                     <div className="w-full h-[1.5px] bg-black" />
                     <p className="text-xs text-nowrap">Or continue with</p>
                     <div className="w-full h-[1.5px] bg-black" />
                   </div>
-                  <button className="w-full flex items-center justify-center ">
+                  <button className="w-full flex items-center justify-center mb-5">
                     <div className="flex items-center justify-center w-max gap-3 bg-white shadow-md py-2 px-3.5 rounded-lg">
                       <Icon icon="devicon:google" width="20" height="20" />
                       <span className="text-[#8695A0] text-xs">
@@ -320,6 +197,16 @@ export default function SignUp() {
                       </span>
                     </div>
                   </button>
+                  <p className="text-xs text-center font-medium text-mainBlack">
+                    {" "}
+                    Already have an account?{" "}
+                    <Link
+                      to="/login"
+                      className="font-semibold text-red-600 hover:underline transition-all"
+                    >
+                      Log In
+                    </Link>
+                  </p>
                 </div>
               </div>
             </div>
@@ -329,3 +216,161 @@ export default function SignUp() {
     </>
   );
 }
+
+const Form = ({
+  onSubmit,
+  formData,
+  handleChange,
+  errors,
+  showPassword,
+  setShowPassword,
+  showConfirmPassword,
+  setShowConfirmPassword,
+  loading,
+}) => {
+  return (
+    <form
+      autoComplete="off"
+      action=""
+      method="post"
+      className="space-y-5"
+      onSubmit={onSubmit}
+    >
+      {/* First Name Input */}
+      <div>
+        <label className="block text-sm font-medium text-blue-900 mb-2">
+          First Name
+        </label>
+        <input
+          name="firstName"
+          type="text"
+          value={formData.firstName}
+          onChange={handleChange}
+          className={`w-full px-4 py-2 border rounded-lg ${
+            errors.firstName ? "border-red-500" : "border-gray-300"
+          } focus:ring-2 focus:ring-blue-900 focus:border-transparent`}
+        />
+        {errors.firstName && (
+          <p className="mt-1 text-sm text-red-500">{errors.firstName}</p>
+        )}
+      </div>
+
+      {/* Last Name Input */}
+      <div>
+        <label className="block text-sm font-medium text-blue-900 mb-2">
+          Last Name
+        </label>
+        <input
+          name="lastName"
+          type="text"
+          value={formData.lastName}
+          onChange={handleChange}
+          className={`w-full px-4 py-2 border rounded-lg ${
+            errors.lastName ? "border-red-500" : "border-gray-300"
+          } focus:ring-2 focus:ring-blue-900 focus:border-transparent`}
+        />
+        {errors.lastName && (
+          <p className="mt-1 text-sm text-red-500">{errors.lastName}</p>
+        )}
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-blue-900 mb-2">
+          Email Address
+        </label>
+        <input
+          name="email"
+          type="email"
+          value={formData.email}
+          onChange={handleChange}
+          className={`w-full px-4 py-2 border rounded-lg ${
+            errors.email ? "border-red-500" : "border-gray-300"
+          } focus:ring-2 focus:ring-blue-900 focus:border-transparent`}
+        />
+        {errors.email && (
+          <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+        )}
+      </div>
+
+      {/* Password Input */}
+      <div>
+        <label className="block text-sm font-medium text-blue-900 mb-2">
+          Password
+        </label>
+        <div className="relative">
+          <input
+            id="password"
+            name="password"
+            type={showPassword ? "text" : "password"}
+            value={formData.password}
+            onChange={handleChange}
+            className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 ${
+              errors.password
+                ? "border-red-500 focus:ring-red-500"
+                : "border-gray-300 focus:ring-blue-900"
+            }`}
+          />
+          <span
+            className="absolute right-3 top-3.5 text-gray-400 hover:text-blue-500 transition-colors cursor-pointer"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? (
+              <EyeSlashIcon className="h-4 w-5" />
+            ) : (
+              <EyeIcon className="h-4 w-5" />
+            )}
+          </span>
+        </div>
+        {errors.password && (
+          <p className="mt-1 text-sm text-red-500">{errors.password}</p>
+        )}
+      </div>
+
+      {/* Confirm Password Input */}
+      <div>
+        <label className="block text-sm font-medium text-blue-900 mb-2">
+          Confirm Password
+        </label>
+        <div className="relative">
+          <input
+            id="confirmPassword"
+            name="confirmPassword"
+            type={showConfirmPassword ? "text" : "password"}
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 ${
+              errors.confirmPassword
+                ? "border-red-500 focus:ring-red-500"
+                : "border-gray-300 focus:ring-blue-900"
+            }`}
+          />
+          <span
+            className="absolute right-3 top-3.5 text-gray-400 hover:text-blue-500 transition-colors cursor-pointer"
+            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+          >
+            {showConfirmPassword ? (
+              <EyeSlashIcon className="h-4 w-5" />
+            ) : (
+              <EyeIcon className="h-4 w-5" />
+            )}
+          </span>
+        </div>
+        {errors.confirmPassword && (
+          <p className="mt-1 text-sm text-red-500">{errors.confirmPassword}</p>
+        )}
+      </div>
+      {/* Sign Up Button */}
+      <button
+        type="submit"
+        disabled={loading}
+        className={`w-full py-3 px-4 rounded-lg font-medium ${
+          loading
+            ? "bg-gray-400 cursor-not-allowed"
+            : "bg-gradient-to-r from-[#09314F] to-[#E83831] hover:bg-green-800"
+        } text-white transition-colors`}
+      >
+        Register
+      </button>
+    </form>
+  );
+};

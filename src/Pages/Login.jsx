@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../Assets/tutorial_logo.png";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Layout2 from "../Components/Layout2";
+import { Link } from "react-router-dom";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 export default function Login() {
+  const [showPassword, setShowPassword] = useState(false);
   return (
     <>
       <Layout2
@@ -21,88 +24,96 @@ export default function Login() {
                   <img src={logo} alt="" className="max-w-24" />
                 </div>
                 <div className="text-center mb-2">
-                  <h1 className="text-[1.2rem] font-bold mb-3">Login</h1>
+                  <h1 className="semi-title mb-3">Login</h1>
                   <p className="text-[0.70rem] font-semibold ">
                     Welcome back! Log in to continue your journey <br /> with
                     us.{" "}
                   </p>
                 </div>
               </div>
-              <div className="w-[410px] px-9 py-5 bg-[#FBFAFA] rounded-md shadow-md mt-3">
+              <div className="max-w-[410px] w-full lg:px-9 py-5 lg:bg-[#FBFAFA] rounded-md lg:shadow-md mt-3">
                 {/* Form Inputs */}
-                <div className="w-full">
-                  <form action="" method="post">
-                    <div className="formItems">
-                      <label
-                        htmlFor=""
-                        className="text-[13.5px] font-semibold "
-                      >
-                        Email / Phone Number
-                      </label>
-                      <div className="mt-1 flex gap-2 pl-2 py-[10px] bg-[#D1D5DB] rounded-lg shadow-sm w-full">
-                        <Icon
-                          icon="ic:baseline-email"
-                          width="24"
-                          height="24"
-                          style={{ color: "#000" }}
-                        />
-                        <input
-                          type="text"
-                          placeholder="Email address"
-                          className="placeholder:italic placeholder:text-xs "
-                        />
-                      </div>
-                    </div>
-                    <div className="formItems my-3">
-                      <label
-                        htmlFor=""
-                        className="text-[13.5px] font-semibold "
-                      >
-                        Password
-                      </label>
-                      <div className="mt-1 flex gap-2 pl-2 py-[10px] bg-[#D1D5DB] rounded-lg shadow-sm w-full">
-                        <Icon
-                          icon="mdi:eye"
-                          width="24"
-                          height="24"
-                          style={{ color: "#000" }}
-                        />
-                        <input type="password" />
-                      </div>
-                    </div>
-
-                    <div className="formItems flex gap-2 my-3">
-                      <input
-                        type="checkbox"
-                        className="flex justify-start items-start "
-                      />
-                      <span htmlFor="" className="text-[13.5px] font-semibold ">
-                        Remember me
-                      </span>
-                    </div>
-                    <div className="mt-1 flex gap-2 px-2 py-[8px] bg-gradient-to-r from-[#09314F] to-[#E83831] rounded-lg shadow-sm w-full">
-                      <button
-                        type="submit"
-                        className="w-full h-full text-white text-[17px] font-semibold"
-                      >
-                        Login
-                      </button>
-                    </div>
-                  </form>
-                  <div className="flex justify-center items-center my-4 gap-2">
-                    <div className="w-full h-[1.5px] bg-black" />
-                    <p className="text-xs text-nowrap">Or continue with</p>
-                    <div className="w-full h-[1.5px] bg-black" />
+                <form
+                  action=""
+                  method="post"
+                  autoComplete="off"
+                  className="space-y-5"
+                >
+                  <div>
+                    <label className="block text-sm font-medium text-blue-900 mb-2">
+                      Email Address
+                    </label>
+                    <input
+                      name="email"
+                      type="email"
+                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent`}
+                    />
                   </div>
-                  <div className="grid justify-center ">
-                    <div className="flex gap-3 bg-white shadow-md px-4 py-2 rounded-lg">
-                      <Icon icon="devicon:google" width="20" height="20" />
-                      <span className="text-[#8695A0] text-xs">
-                        Sign up with google
+                  {/* Password Input */}
+                  <div>
+                    <label className="block text-sm font-medium text-blue-900 mb-2">
+                      Password
+                    </label>
+                    <div className="relative">
+                      <input
+                        id="password"
+                        name="password"
+                        type={showPassword ? "text" : "password"}
+                        className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2`}
+                      />
+                      <span
+                        className="absolute right-3 top-3.5 text-gray-400 hover:text-blue-500 transition-colors cursor-pointer"
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        {showPassword ? (
+                          <EyeSlashIcon className="h-4 w-5" />
+                        ) : (
+                          <EyeIcon className="h-4 w-5" />
+                        )}
                       </span>
                     </div>
+                  </div>
+                  <div className="formItems flex gap-2 my-5">
+                    <input
+                      type="checkbox"
+                      className="flex justify-start items-start "
+                    />
+                    <span htmlFor="" className="text-[13.5px] font-semibold ">
+                      Remember me
+                    </span>
+                  </div>
+                  <div className="mt-1 flex gap-2 py-[10px] bg-gradient-to-r from-[#09314F] to-[#E83831] rounded-lg shadow-sm w-full">
+                    <button
+                      type="submit"
+                      className="w-full h-full text-white text-[17px] font-semibold"
+                    >
+                      Login
+                    </button>
+                  </div>
+                </form>
+                <div className="flex justify-center items-center my-6 gap-2">
+                  <div className="w-full h-[1.5px] bg-black" />
+                  <p className="text-xs text-nowrap">Or continue with</p>
+                  <div className="w-full h-[1.5px] bg-black" />
+                </div>
+                <div className="grid justify-center mb-5">
+                  <div className="flex gap-3 bg-white shadow-md px-4 py-2 rounded-lg">
+                    <Icon icon="devicon:google" width="20" height="20" />
+                    <span className="text-[#8695A0] text-xs">
+                      Sign up with google
+                    </span>
                   </div>
                 </div>
+                <p className="text-xs text-center font-medium text-mainBlack">
+                  {" "}
+                  Don’t have an account?{" "}
+                  <Link
+                    to="/register"
+                    className="font-semibold text-red-600 hover:underline transition-all"
+                  >
+                    Sign Up
+                  </Link>
+                </p>
               </div>
             </div>
           </div>

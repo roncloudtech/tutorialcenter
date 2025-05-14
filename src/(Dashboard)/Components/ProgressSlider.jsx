@@ -15,8 +15,8 @@ export default function ProgressSlider() {
   return (
     <>
       {/* PROGRESS LEVEL FOR ALL COURSES AND SUBJECTS */}
-      <div className="w-full overflow-x-hidden">
-        <div className="overflow-x-scroll w-full xl:w-[700px] 2xl:w-full flex  gap-2">
+      <div className="w-full overflow-x-hidden mb-4">
+        <div className="overflow-x-auto w-full xl:w-[700px] 2xl:w-full flex gap-2">
           <div className="min-w-[350px] 2xl:w-full">
             <div className="bg-lightGrey shadow-custom-1 dark:bg-darkMode p-1.5 rounded-[4px] mb-2">
               <ProgressBar bgColor title={"JAMB"} course={"Subjects  4"} />

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function Footer() {
   return (
     <>
-      <div className="footer bg-gradient-to-r from-[#09314F] to-[#E83831] text-white">
+      <div className="footer py-14- bg-gradient-to-r from-[#09314F] to-[#E83831] text-white">
         <div className="h-12 spacer" />
         <div className="Container">
           <div className="area-wrapper flex flex-col items-center justify-center text-center">

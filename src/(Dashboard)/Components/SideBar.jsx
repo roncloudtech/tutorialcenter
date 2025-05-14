@@ -7,7 +7,7 @@ import Menu from "./Menu";
 export default function SideBar({ toggle, setToggle }) {
   return (
     <div
-      className={`scroll position  overflow-y-hidden hidden xl:flex bg-mainWhite dark:bg-darkMode  shadow-custom-1 p-3 flex-col gap-3 rounded-lg relative ${
+      className={`position hidden xl:flex bg-mainWhite dark:bg-darkMode  shadow-custom-1 p-3 flex-col gap-3 rounded-lg relative ${
         toggle ? "" : "items-center"
       }`}
     >
@@ -57,7 +57,7 @@ export default function SideBar({ toggle, setToggle }) {
         </div>
       </div>
       {/* NAVIGATION */}
-      <div className="flex-1 flex flex-col gap-1 overflow-y-scroll">
+      <div className="flex-1 flex flex-col gap-1">
         <Menu />
       </div>
       <div className="space-y-2 w-full my-[2px]">

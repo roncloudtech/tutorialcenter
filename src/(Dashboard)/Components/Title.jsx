@@ -9,7 +9,7 @@ export default function Title({ title }) {
   return (
     <div>
       {/* Tilte || header */}
-      <div className="flex justify-between items-center xl:mt-3 mt-0">
+      <div className="flex justify-between items-center xl:my-3.5 mt-0">
         <div
           className="cursor-pointer xl:hidden"
           onClick={() => setVisible(true)}

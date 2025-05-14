@@ -53,18 +53,6 @@ const program = [
     topic4: "Past question reviews and analysis",
     path: "/learnMore",
   },
-  {
-    title: "JAMB",
-    subject: "4 Subjects",
-    month: "5,000",
-    quarter: "14,000",
-    year: "55,000",
-    topic1: "Comprehensive tutorials",
-    topic2: "Weekly masterclasses",
-    topic3: "Mock tests and practice questions",
-    topic4: "Live Q&A sessions with experts",
-    path: "/learnMore",
-  },
 ];
 
 export default function Program() {
@@ -76,7 +64,7 @@ export default function Program() {
     cssEase: "ease",
     speed: 2000,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 4000,
     slidesToShow: 2,
     slidesToScroll: 2,
     initialSlide: 0,
@@ -101,9 +89,9 @@ export default function Program() {
   };
 
   return (
-    <>
-      <div className="Container">
-        <div className="area-wrapper">
+    <div className="relative">
+      <div className="Container overflow-hidden">
+        <div className="py-10">
           <div className="mb-9">
             <h2 className="uppercase header-title mb-4">Our program</h2>
             <p className="text-sm leading-6">
@@ -114,7 +102,7 @@ export default function Program() {
               with confidence and ease
             </p>
           </div>
-          <div className="hidden">
+          <div className="block">
             <Slider {...settings}>
               {program.map((item, index) => (
                 <ProgramCard
@@ -135,6 +123,6 @@ export default function Program() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

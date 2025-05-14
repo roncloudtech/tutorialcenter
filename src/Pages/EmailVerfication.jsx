@@ -103,7 +103,7 @@ export default function EmailVerfication() {
 
       if (response.status === 200) {
         setToast({ type: "success", message: response.data.message });
-        setMsg(<span className='text-green-500'>{response.data.message}</span>)
+        setMsg(<span className="text-green-500">{response.data.message}</span>);
         setTimeout(() => {
           navigate("/login");
         }, 2500);
@@ -113,7 +113,9 @@ export default function EmailVerfication() {
         type: "error",
         message: error.response?.data?.message || "Verification failed",
       });
-      setMsg(<span className="text-red-500">{error.response.data.message}</span>);
+      setMsg(
+        <span className="text-red-500">{error.response.data.message}</span>
+      );
     } finally {
       setLoading(false);
     }
@@ -125,44 +127,30 @@ export default function EmailVerfication() {
 
       <section className="my-16">
         <div className="Container flex items-center justify-center">
-          <div className="w-96 p-10 bg-white shadow-md rounded-lg flex flex-col items-center justify-center">
-            <p>
-              {toast && (
-                <div
-                  className={`fixed top-5 right-5 z-50 px-4 py-3 rounded shadow-lg text-white transition-all duration-300 ${
-                    toast.type === "success" ? "bg-green-600" : "bg-red-600"
-                  }`}
-                >
-                  {toast.message}
-                </div>
-              )}
-            </p>
+          <div className="md:w-96 w-full md:p-10 bg-white md:shadow-md rounded-lg flex flex-col items-center justify-center">
             <div className="logo mb-4">
               <img
-                className="max-w-[60px] max-md:max-w-[50px]"
+                className="max-w-[80px] max-md:max-w-[70px]"
                 src={logo1}
                 alt="logo"
               />
             </div>
-
+            <div className="description-text">
+              <h2 className="md:text-2xl text-xl font-semibold">
+                Please check your email
+              </h2>
+              <p className="text-sm text-gray-400 mt-2">
+                We've sent code to{" "}
+                <span className="text-black font-semibold">
+                  olarewaju@gmail.com
+                </span>
+              </p>
+            </div>
             <form
               autoComplete="off"
-              className="space-y-3.5"
               onSubmit={handleSubmit}
+              className="verfication code my-5 w-full flex flex-col items-center justify-evenly"
             >
-              <div className="description-text text-center">
-                <p className="text-sm text-gray-400 mt-2">
-                  We've sent a code to{" "}
-                  <span className="text-black font-semibold">
-                    {role ? "Guardian" : "Student"} {identifier}
-                  </span>
-                </p>
-                <h2 className="text-2xl font-semibold mt-2">
-                  Please check your email
-                </h2>
-                <p className="text-center text-sm text-red-500">{msg}</p>
-              </div>
-
               <div className="verification-code my-5 w-full flex items-center justify-evenly gap-2">
                 {["num1", "num2", "num3", "num4", "num5", "num6"].map(
                   (field) => (

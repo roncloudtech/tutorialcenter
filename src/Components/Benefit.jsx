@@ -36,7 +36,7 @@ const benefit = [
 export default function Benefit() {
   return (
     <>
-      <div className="py-8 ">
+      <div className="py-14">
         <div className="Container">
           <div className="mb-4 area-wrapper">
             <h3 className="header-title uppercase text-center mb-4">
@@ -50,8 +50,8 @@ export default function Benefit() {
               with confidence and ease
             </p>
           </div>
-          <div className="area-wrapper !py-0">
-            <h3 className="text-sencondary text-center text-base font-semibold mb-7">
+          <div className="my-6">
+            <h3 className="text-sencondary text-center text-base font-semibold mb-8">
               Here’s why Tutorial Center is your ultimate e-learning partner:
             </h3>
             <div className="grid lg:grid-cols-2 gap-x-10 gap-y-5">

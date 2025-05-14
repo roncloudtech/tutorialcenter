@@ -9,7 +9,9 @@ export default function Hero() {
       <div className="bg-primary py-2 text-center block max-sm:hidden">
         <p className="text-white text-sm">
           Click here to join our students in archiving excellence...{" "}
-          <span className="text-ascent font-bold">Apply Now</span>
+          <Link to="/register" className="text-ascent font-bold">
+            Apply Now
+          </Link>
         </p>
       </div>
       {/* Hero Section for extra large screen */}

@@ -12,14 +12,14 @@ export default function Calender() {
   return (
     <>
       <DashboardLayout>
-        <div className="grid grid-cols-[1fr_0.45fr] w-full pt-0.5">
-          <div className="px-4 ">
+        <div className="xl:grid grid-cols-[1fr_0.38fr] p-2.5 xl:p-0 h-full scroll overflow-y-auto">
+          <div className="item1 xl:px-4 overflow-y-auto">
             <Title title={"CALENDER"} />
             <div className="w-full h-full">
               <BigCalender />
             </div>
           </div>
-          <div className="dark:bg-whiteFade dark:text-lightGrey shadow-custom-1 p-2.5 rounded-md space-y-6">
+          <div className="dark:bg-whiteFade dark:text-lightGrey shadow-custom-1 p-2.5 overflow-y-auto rounded-md space-y-6">
             <SmallCalendar />
             <div className="flex justify-between items-center">
               <h3 className="text-sm font-medium">My Calender</h3>
@@ -35,7 +35,7 @@ export default function Calender() {
             </div>
             <div
               className={`flex flex-col gap-4 transition-height  ${
-                toggle ? "invisible h-0" : "visible h-auto"
+                toggle ? "hidden" : "block"
               }`}
             >
               <div className="flex items-center justify-between">
@@ -89,7 +89,7 @@ export default function Calender() {
             </div>
             <div
               className={`flex flex-col gap-4 transition-height ${
-                toggle1 ? "visible h-auto" : "invisible h-0"
+                toggle1 ? "block" : "hidden"
               }`}
             >
               <div className="flex items-center justify-between">

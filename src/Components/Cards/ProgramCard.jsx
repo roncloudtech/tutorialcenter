@@ -31,8 +31,10 @@ export default function ProgramCard({
           </div>
           <h2 className="text-base font-semibold mb-4 text-primary">{title}</h2>
           <div className="flex gap-3 [&_li]:text-[5px] [&_li]:pb-3  mb-6">
-            <div className="">
-              <p className=" text-ascent font-semibold mb-4">Duration:</p>
+            <div className="duration">
+              <p className=" text-ascent text-sm font-semibold mb-4">
+                Duration:
+              </p>
               <ul className="[&_li]:text-nowrap [&_span]:text-ascent [&_span]:font-semibold [&_span]:pl-3 flex flex-col items-center">
                 <li>
                   Monthly: <span>₦{month}</span>
@@ -45,8 +47,10 @@ export default function ProgramCard({
                 </li>
               </ul>
             </div>
-            <div className="">
-              <p className=" text-ascent font-semibold mb-3">Includes:</p>
+            <div className="includes">
+              <p className="text-sm text-ascent font-semibold mb-3">
+                Includes:
+              </p>
               <ul className="border-l-2 border-sencondary pl-2">
                 <li>{topic1}</li>
                 <li>{topic2}</li>
@@ -55,7 +59,10 @@ export default function ProgramCard({
               </ul>
             </div>
           </div>
-          <Link to={path} className="flex justify-end gap-1 text-sencondary font-semibold text-xs">
+          <Link
+            to={path}
+            className="flex justify-end gap-1 text-sencondary font-semibold text-xs"
+          >
             <span>Learn More</span>{" "}
             <Icon
               icon="lets-icons:arrow-right-light"

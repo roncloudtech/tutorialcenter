@@ -229,8 +229,8 @@ export default function Menu() {
                 <ul
                   className={`${
                     visibleItems[index]
-                      ? "h-[160px] opacity-100 visible"
-                      : "h-0 opacity-0 invisible"
+                      ? "h-[160px] opacity-100 block"
+                      : "h-0 opacity-0 hidden"
                   } ml-6 my-1 border-l-2 border-solid border-gray-500 transition-all ease-custom duration-300`}
                 >
                   {item.list.map((subItem, index) => (

@@ -2,32 +2,22 @@ import React, { useState } from "react";
 import DashboardLayout from "../../DashboardLayout";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Chat from "../../Components/Chat";
+import Title from "../../Components/Title";
 
 export default function Help() {
   return (
     <>
       <DashboardLayout>
-        <div className="grid grid-cols-[1fr_300px]">
-          <div className="px-5">
+        <div className="xl:grid grid-cols-[1fr_0.40fr] p-2.5 xl:p-0 h-full scroll overflow-y-auto">
+          <div className="item1 xl:px-4 overflow-y-auto">
             {/* header */}
-            <div className="flex justify-between items-center  py-2 rounded-md mb-4">
-              <h3 className="uppercase text-mainBlue dark:text-lightGrey font-semibold">
-                HELP
-              </h3>
-              <div className="w-9 h-9 flex justify-center items-center bg-mainBlue text-lightGrey dark:bg-lightGrey dark:text-mainBlue rounded-md">
-                <Icon
-                  icon="iconoir:bell-notification-solid"
-                  width="24"
-                  height="24"
-                />
-              </div>
-            </div>
+            <Title title={"help"} />
             <p className="text-sm font-semibold dark:text-lightGrey text-mainBlack">
               Customer Care
             </p>
             <Chat />
           </div>
-          <div className="dark:bg-darkMode bg-mainWhite shadow-custom-1 dark:text-lightGrey rounded-lg p-3 m-0.5">
+          <div className="dark:bg-darkMode bg-mainWhite  scroll overflow-y-auto shadow-custom-1 dark:text-lightGrey rounded-lg p-3 m-0.5">
             <h2 className="uppercase text-xs font-semibold p-3 rounded-custom bg-ascent text-mainWhite dark:text-lightGrey">
               contact us
             </h2>
@@ -109,7 +99,7 @@ const FAQ = () => {
   return (
     <div className="faqs">
       {FaqQuestion.map((item, index) => (
-        <div
+        <button
           className={`p-2 mb-2 ${
             visible[index] ? "dark:bg-lightGrey bg-mainBlue rounded-xl" : ""
           } `}
@@ -142,7 +132,7 @@ const FAQ = () => {
               {item.answers}
             </p>
           </div>
-        </div>
+        </button>
       ))}
     </div>
   );
