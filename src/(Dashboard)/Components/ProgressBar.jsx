@@ -4,7 +4,9 @@ import React from "react";
 export default function ProgressBar({ course, title, bgColor }) {
   return (
     <div
-      className={`progress bg-[${bgColor}] p-2 rounded-md dark:text-lightGrey text-mainBlack`}
+      className={`progress ${
+        bgColor ? `bg-[${bgColor}]` : null
+      } p-2 rounded-md dark:text-lightGrey text-mainBlack`}
     >
       <div className="flex justify-between items-center mb-3">
         <div className="flex items-center gap-3">

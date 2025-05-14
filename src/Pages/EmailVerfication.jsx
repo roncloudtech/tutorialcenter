@@ -103,7 +103,7 @@ export default function EmailVerfication() {
 
       if (response.status === 200) {
         setToast({ type: "success", message: response.data.message });
-        setMsg(<span className='text-green-500'>{response.data.message}</span>)
+        setMsg(<span className="text-green-500">{response.data.message}</span>);
         setTimeout(() => {
           navigate("/login");
         }, 2500);
@@ -113,7 +113,9 @@ export default function EmailVerfication() {
         type: "error",
         message: error.response?.data?.message || "Verification failed",
       });
-      setMsg(<span className="text-red-500">{error.response.data.message}</span>);
+      setMsg(
+        <span className="text-red-500">{error.response.data.message}</span>
+      );
     } finally {
       setLoading(false);
     }
@@ -144,11 +146,11 @@ export default function EmailVerfication() {
                 </span>
               </p>
             </div>
-            <div className="verfication code my-5 w-full flex items-center justify-evenly">
-              <div className="ring-1 rounded-sm ring-gray-300 flex items-center justify-center text-sm text-gray-300 w-8 h-8">
-                1
-              </div>
-
+            <form
+              autoComplete="off"
+              onSubmit={handleSubmit}
+              className="verfication code my-5 w-full flex flex-col items-center justify-evenly"
+            >
               <div className="verification-code my-5 w-full flex items-center justify-evenly gap-2">
                 {["num1", "num2", "num3", "num4", "num5", "num6"].map(
                   (field) => (

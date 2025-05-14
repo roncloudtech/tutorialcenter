@@ -1,27 +1,17 @@
 import React, { useState } from "react";
 import DashboardLayout from "../../DashboardLayout";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import Title from "../../Components/Title";
 
 export default function Exampage() {
   const [active, setActive] = useState(true);
   return (
     <DashboardLayout>
-      <div className="grid grid-cols-[1fr_290px] h-full">
+      <div className="xl:grid grid-cols-[1fr_0.38fr] p-2.5 xl:p-0 h-full scroll overflow-y-auto">
         {/* LEFT SIDE  */}
-        <div className="px-4">
-          {/* hearder */}
-          <div className="flex justify-between items-center  py-2 rounded-md mb-4">
-            <h3 className="uppercase text-mainBlue dark:text-lightGrey font-semibold">
-              exam practice
-            </h3>
-            <div className="w-9 h-9 flex justify-center items-center bg-mainBlue text-lightGrey dark:bg-lightGrey dark:text-mainBlue rounded-md">
-              <Icon
-                icon="iconoir:bell-notification-solid"
-                width="24"
-                height="24"
-              />
-            </div>
-          </div>
+        <div className="item1 xl:px-4 overflow-y-auto">
+          {/* header */}
+          <Title title={"exam practice"} />
           {active ? (
             // Exam Instructions
             <ExamInstruction setActive={setActive} />
@@ -30,7 +20,9 @@ export default function Exampage() {
             <ExamPractice setActive={setActive} />
           )}
         </div>
-        <div className="bg-[#EAEBEC] rounded-md"></div>
+        <div className="bg-mainWhite dark:bg-whiteFade scroll overflow-y-auto shadow-custom-1 rounded-md p-2">
+          CALCULATOR
+        </div>
       </div>
     </DashboardLayout>
   );

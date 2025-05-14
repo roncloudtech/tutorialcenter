@@ -41,7 +41,7 @@
   right: 0;
 }
 .scroll ::-webkit-scrollbar-thumb {
-  background: #09314f;
+  background: transparent;
   border-radius: 10px;
 }
 

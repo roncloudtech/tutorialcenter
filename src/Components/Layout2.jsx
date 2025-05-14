@@ -14,7 +14,7 @@ export default function Layout2({
         reverse ? "flex-row-reverse" : ""
       } w-screen lg:flex overflow-y-hidden scroll`}
     >
-      <div className="lg:w-[57%] w-full h-screen bg-white overflow-y-scroll">
+      <div className="lg:w-[57%] w-full h-screen bg-white overflow-y-auto">
         {children}
       </div>
       <div
