@@ -10,8 +10,8 @@ export default function Title({ title }) {
     <div>
       {/* Tilte || header */}
       <div className="flex justify-between items-center xl:my-3.5 mt-0">
-        <div
-          className="cursor-pointer xl:hidden"
+        <button
+          className="hidden sm:block xl:hidden"
           onClick={() => setVisible(true)}
         >
           <Icon
@@ -20,7 +20,7 @@ export default function Title({ title }) {
             height="26"
             className="text-mainBlue dark:text-lightGrey"
           />
-        </div>
+        </button>
 
         <h3 className="uppercase font-bold text-mainBlue dark:text-lightGrey">
           {title}

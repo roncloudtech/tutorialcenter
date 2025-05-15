@@ -53,6 +53,7 @@ body {
   background: white;
   margin: 0;
   padding: 0;
+  position: relative;
 }
 a {
   font-weight: 500;
@@ -183,4 +184,30 @@ textarea:focus {
 }
 abbr:where([title]) {
   text-decoration: none !important;
+}
+
+/* animate navbar  */
+.animate-header {
+  animation: headerSlideDown 0.45s ease forwards;
+  will-change: transform;
+}
+@keyframes headerSlideDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.animate-mobile {
+  animation: mobileSlideDown 0.45s ease forwards;
+  will-change: transform;
+}
+@keyframes mobileSlideDown {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }

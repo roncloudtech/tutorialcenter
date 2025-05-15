@@ -8,7 +8,7 @@ export default function Help() {
   return (
     <>
       <DashboardLayout>
-        <div className="xl:grid grid-cols-[1fr_0.40fr] p-2.5 xl:p-0 h-full scroll overflow-y-auto">
+        <div className="xl:grid grid-cols-[1fr_0.40fr] p-2.5 xl:p-0 h-full scroll sm:overflow-y-auto">
           <div className="item1 xl:px-4 overflow-y-auto">
             {/* header */}
             <Title title={"help"} />

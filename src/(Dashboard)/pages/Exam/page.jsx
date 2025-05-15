@@ -7,7 +7,7 @@ export default function Exampage() {
   const [active, setActive] = useState(true);
   return (
     <DashboardLayout>
-      <div className="xl:grid grid-cols-[1fr_0.38fr] p-2.5 xl:p-0 h-full scroll overflow-y-auto">
+      <div className="xl:grid grid-cols-[1fr_0.38fr] p-2.5 xl:p-0 h-full scroll sm:overflow-y-auto">
         {/* LEFT SIDE  */}
         <div className="item1 xl:px-4 overflow-y-auto">
           {/* header */}
@@ -20,7 +20,7 @@ export default function Exampage() {
             <ExamPractice setActive={setActive} />
           )}
         </div>
-        <div className="bg-mainWhite dark:bg-whiteFade scroll overflow-y-auto shadow-custom-1 rounded-md p-2">
+        <div className="bg-mainWhite dark:bg-whiteFade scroll sm:overflow-y-auto shadow-custom-1 rounded-md p-2">
           CALCULATOR
         </div>
       </div>

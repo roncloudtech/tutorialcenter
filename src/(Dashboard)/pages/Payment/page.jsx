@@ -9,7 +9,7 @@ export default function PaymentPage() {
   return (
     <>
       <DashboardLayout>
-        <div className="xl:px-4 overflow-y-auto h-full scroll">
+        <div className="xl:px-4 sm:overflow-y-auto h-full scroll">
           <Title title={"PAYMENT"} />
           {payment ? (
             <div className={`space-y-2 ${training ? "" : "hidden"}`}>
