@@ -2,55 +2,54 @@ import React, { useState } from "react";
 import Title from "./Cards/Title";
 import { Icon } from "@iconify/react/dist/iconify.js";
 
-const FaqQuestion = [
-  {
-    questions: "What is Tutorial Center?",
-    answers:
-      " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
-  },
-  {
-    questions: "What subjects are covered on Tutorial Center?",
-    answers:
-      " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
-  },
-  {
-    questions: "How much does it cost to enroll in a program?",
-    answers:
-      " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
-  },
-  {
-    questions: "How do I register for classes? ",
-    answers:
-      " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
-  },
-  {
-    questions: "Can I attend classes at my convenience?",
-    answers:
-      " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
-  },
-  {
-    questions: "Are the classes taught by qualified teachers?",
-    answers:
-      " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
-  },
-  {
-    questions: "What happens if I miss a live class?",
-    answers:
-      " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
-  },
-  {
-    questions: "How do I make payments?",
-    answers:
-      " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
-  },
-];
 export default function Faq() {
-  const questionLengths = Array(FaqQuestion.length).fill(false);
-  const [visible, setVisible] = useState(questionLengths);
+  const FaqQuestion = [
+    {
+      questions: "What is Tutorial Center?",
+      answers:
+        " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
+    },
+    {
+      questions: "What subjects are covered on Tutorial Center?",
+      answers:
+        " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
+    },
+    {
+      questions: "How much does it cost to enroll in a program?",
+      answers:
+        " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
+    },
+    {
+      questions: "How do I register for classes? ",
+      answers:
+        " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
+    },
+    {
+      questions: "Can I attend classes at my convenience?",
+      answers:
+        " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
+    },
+    {
+      questions: "Are the classes taught by qualified teachers?",
+      answers:
+        " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
+    },
+    {
+      questions: "What happens if I miss a live class?",
+      answers:
+        " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
+    },
+    {
+      questions: "How do I make payments?",
+      answers:
+        " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
+    },
+  ];
+  const [visible, setVisible] = useState(Array(FaqQuestion.length).fill(false));
   // function to toggle the display of the faq answers when the question is clicked
   const toggleVisible = (index) => {
     setVisible((prev) => {
-      const newVisibleItems = questionLengths; // Reset all to false
+      const newVisibleItems = Array(prev.length).fill(false); // Reset all to false
       newVisibleItems[index] = !prev[index]; // Toggle the clicked item
       return newVisibleItems;
     });

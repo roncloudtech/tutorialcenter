@@ -10,7 +10,7 @@ export default function Group() {
   const [section, setSection] = useState(false);
   return (
     <DashboardLayout>
-      <div className="xl:grid grid-cols-[1fr_0.38fr] p-2.5 xl:p-0 h-full scroll overflow-y-auto">
+      <div className="xl:grid grid-cols-[1fr_0.38fr] p-2.5 xl:p-0 h-full scroll sm:overflow-y-auto">
         {section ? (
           <TeacherGroupChatSection
             active={active}
