@@ -45,7 +45,7 @@ const GroupInfo = ({ setActive }) => {
       <div className="flex gap-1 dark:text-lightGrey">
         <div className="WAEC">
           <p className="text-[13px]">WAEC ENGLISH</p>
-          <p className="text-[8px] font-thin ">
+          <p className="text-[8px] font-thin">
             <span className="font-medium">Grace:</span> Hey there! 🌼 Did you
             catch the latest episode of this series, it...
           </p>
@@ -65,14 +65,14 @@ const GroupInfo = ({ setActive }) => {
 const SubjectGroup = ({ role, setRole }) => {
   return (
     <div className="Group Subject">
-      <div className="grid grid-cols-2 relative text-xs mb-2">
+      <div className="grid grid-cols-2 max-sm:gap-2.5 max-sm:my-3 relative text-xs mb-2">
         <button
           onClick={() => setRole(false)}
           className={`border-solid ${
             role
-              ? "text-mainGrey cursor-pointer"
-              : "border-b-[3px] text-ascent pointer-events-none"
-          }  pb-1.5 text-center text-[16px] border-ascent font-bold uppercase`}
+              ? "text-mainGrey cursor-pointer max-sm:bg-lightGrey max-sm:rounded-custom max-sm:text-black max-sm:py-2.5"
+              : "border-b-[3px] text-ascent pointer-events-none  max-sm:bg-ascent max-sm:rounded-custom max-sm:text-white max-sm:py-2.5"
+          }  pb-1.5 text-center text-[16px] border-ascent font-bold uppercase `}
         >
           subject
         </button>
@@ -80,8 +80,8 @@ const SubjectGroup = ({ role, setRole }) => {
           onClick={() => setRole(true)}
           className={`border-solid ${
             role
-              ? "text-ascent border-b-[3px] pointer-events-none"
-              : "text-mainGrey cursor-pointer"
+              ? "border-b-[3px] text-ascent pointer-events-none  max-sm:bg-ascent max-sm:rounded-custom max-sm:text-white max-sm:py-2.5"
+              : "text-mainGrey cursor-pointer max-sm:bg-lightGrey max-sm:rounded-custom max-sm:text-black max-sm:py-2.5"
           }  pb-1.5 text-center text-[16px] border-ascent font-bold uppercase`}
         >
           Teachers
@@ -147,14 +147,14 @@ const SubjectGroup = ({ role, setRole }) => {
 const TeacherGroup = ({ role, setRole }) => {
   return (
     <div className="Group Subject">
-      <div className="grid grid-cols-2 relative text-xs mb-2">
+      <div className="grid grid-cols-2 max-sm:gap-2.5 max-sm:my-3 relative text-xs mb-2">
         <button
           onClick={() => setRole(false)}
           className={`border-solid ${
             role
-              ? "text-mainGrey cursor-pointer"
-              : "border-b-[3px] text-ascent pointer-events-none"
-          }  pb-1.5 text-center text-[16px] border-ascent font-bold uppercase`}
+              ? "text-mainGrey cursor-pointer max-sm:bg-lightGrey max-sm:rounded-custom max-sm:text-black max-sm:py-2.5"
+              : "border-b-[3px] text-ascent pointer-events-none  max-sm:bg-ascent max-sm:rounded-custom max-sm:text-white max-sm:py-2.5"
+          }  pb-1.5 text-center text-[16px] border-ascent font-bold uppercase `}
         >
           subject
         </button>
@@ -162,8 +162,8 @@ const TeacherGroup = ({ role, setRole }) => {
           onClick={() => setRole(true)}
           className={`border-solid ${
             role
-              ? "text-ascent border-b-[3px] pointer-events-none"
-              : "text-mainGrey cursor-pointer"
+              ? "border-b-[3px] text-ascent pointer-events-none  max-sm:bg-ascent max-sm:rounded-custom max-sm:text-white max-sm:py-2.5"
+              : "text-mainGrey cursor-pointer max-sm:bg-lightGrey max-sm:rounded-custom max-sm:text-black max-sm:py-2.5"
           }  pb-1.5 text-center text-[16px] border-ascent font-bold uppercase`}
         >
           Teachers
@@ -354,7 +354,7 @@ const SubjectGroupChatSection = ({ active, setActive, role, setRole }) => {
         )}
       </div>
       {/* SIDE BAR */}
-      <div className="bg-mainWhite dark:bg-darkMode shadow-custom-1 rounded-md p-2 space-y-3 my-0.5 scroll overflow-y-auto">
+      <div className="hidden xl:block bg-mainWhite dark:bg-darkMode shadow-custom-1 rounded-md p-2 space-y-3 my-0.5 scroll overflow-y-auto">
         <div className="bg-ascent py-4 pl-3 rounded-custom">
           <h3 className="text-xs font-semibold capitalize text-mainWhite">
             Groups Chats
@@ -393,7 +393,7 @@ const TeacherGroupChatSection = ({ active, setActive, role, setRole }) => {
         )}
       </div>
       {/* SIDE BAR */}
-      <div className="bg-mainWhite dark:bg-darkMode shadow-custom-1 rounded-md p-2 space-y-3 my-0.5 scroll overflow-y-auto">
+      <div className="hidden xl:block bg-mainWhite dark:bg-darkMode shadow-custom-1 rounded-md p-2 space-y-3 my-0.5 scroll overflow-y-auto">
         <div className="bg-ascent py-4 pl-3 rounded-custom">
           <h3 className="text-xs font-semibold capitalize text-mainWhite">
             Groups Chats

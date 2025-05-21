@@ -211,3 +211,7 @@ abbr:where([title]) {
     transform: translateY(0);
   }
 }
+
+.transition-drop-down {
+  transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 300ms;
+}

@@ -3,56 +3,69 @@ import Title from "./Cards/Title";
 import { Icon } from "@iconify/react/dist/iconify.js";
 
 export default function Faq() {
-  const FaqQuestion = [
+  const [faqs, setFaqs] = useState([
     {
       questions: "What is Tutorial Center?",
       answers:
         " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
+      open: true,
     },
     {
       questions: "What subjects are covered on Tutorial Center?",
       answers:
         " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
+      open: false,
     },
     {
       questions: "How much does it cost to enroll in a program?",
       answers:
         " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
+      open: false,
     },
     {
       questions: "How do I register for classes? ",
       answers:
         " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
+
+      open: false,
     },
     {
       questions: "Can I attend classes at my convenience?",
       answers:
         " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
+      open: false,
     },
     {
       questions: "Are the classes taught by qualified teachers?",
       answers:
         " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
+      open: false,
     },
     {
       questions: "What happens if I miss a live class?",
       answers:
         " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
+      open: false,
     },
     {
       questions: "How do I make payments?",
       answers:
         " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
+      open: false,
     },
-  ];
-  const [visible, setVisible] = useState(Array(FaqQuestion.length).fill(false));
-  // function to toggle the display of the faq answers when the question is clicked
-  const toggleVisible = (index) => {
-    setVisible((prev) => {
-      const newVisibleItems = Array(prev.length).fill(false); // Reset all to false
-      newVisibleItems[index] = !prev[index]; // Toggle the clicked item
-      return newVisibleItems;
-    });
+  ]);
+  // function to toggle the display of the faqs answers when the question is clicked
+  const toggleFaq = (index) => {
+    setFaqs(
+      faqs.map((faq, i) => {
+        if (i === index) {
+          faq.open = !faq.open;
+        } else {
+          faq.open = false;
+        }
+        return faq;
+      })
+    );
   };
   return (
     <>
@@ -68,21 +81,21 @@ export default function Faq() {
             </p>
           </div>
           <div className="faqs space-y-3">
-            {FaqQuestion.map((item, index) => (
+            {faqs.map((faq, index) => (
               <button
                 className={`p-3 block w-full text-start  ${
-                  visible[index] ? "bg-[#E336290D]" : "bg-white shadow"
+                  faq.open ? "bg-[#E336290D]" : "bg-white shadow"
                 } border border-solid border-[rgb(169,193,211)] rounded-xl`}
-                onClick={() => toggleVisible(index)}
+                onClick={() => toggleFaq(index)}
                 key={index}
               >
                 <div className="w-full h-full flex justify-between items-center">
                   <span
                     className={`${
-                      visible[index] ? "text-[#8695A0]" : "text-primary"
+                      faq.open ? "text-[#8695A0]" : "text-primary"
                     } text-primary text-sm font-semibold`}
                   >
-                    {item.questions}
+                    {faq.questions}
                   </span>
                   <Icon
                     icon="hugeicons:arrow-up-01"
@@ -90,16 +103,16 @@ export default function Faq() {
                     height="35"
                     style={{ color: "#000" }}
                     className={`${
-                      visible[index] ? "rotate-180" : "rotate-90"
-                    } transition-all ease-custom duration-300`}
+                      faq.open ? "rotate-180" : "rotate-90"
+                    } transition-drop-down`}
                   />
                 </div>
                 <div
                   className={`${
-                    visible[index] ? "mt-2 visible h-[auto]" : "invisible h-0"
-                  } md:pr-8 transition-height ease-custom duration-300`}
+                    faq.open ? "mt-2 max-h-full" : "overflow-y-hidden max-h-0"
+                  } md:pr-8 transition-drop-down`}
                 >
-                  <p className="text-[14.4px]">{item.answers}</p>
+                  <p className="text-[14.4px]">{faq.answers}</p>
                 </div>
               </button>
             ))}

@@ -9,10 +9,12 @@ export default function PaymentPage() {
   return (
     <>
       <DashboardLayout>
-        <div className="xl:px-4 sm:overflow-y-auto h-full scroll">
+        <div className="xl:px-4 p-2.5 sm:overflow-y-auto h-full scroll">
           <Title title={"PAYMENT"} />
           {payment ? (
-            <div className={`space-y-2 ${training ? "" : "hidden"}`}>
+            <div
+              className={`space-y-2 max-sm:my-3 ${training ? "" : "hidden"}`}
+            >
               <button
                 onClick={() => setPayment(false)}
                 className="flex items-center justify-between bg-mainWhite text-mainBlack dark:bg-whiteFade dark:text-lightGrey shadow-custom-1 p-3.5 rounded-lg w-full"
@@ -40,7 +42,7 @@ const RenewPayment = ({ setPayment }) => {
   const [isTransfer, setIsTransfer] = useState(false);
   return (
     <>
-      <div className="flex items-center mb-5 text-mainBlack dark:text-lightGrey">
+      <div className="max-sm:my-3 flex items-center mb-5 text-mainBlack dark:text-lightGrey">
         <button onClick={() => setPayment(true)}>
           <Icon
             icon="iconamoon:arrow-left-2-light"
@@ -51,8 +53,8 @@ const RenewPayment = ({ setPayment }) => {
         </button>
         <h3 className="text-xs font-semibold">RENEW PAYMENT</h3>
       </div>
-      <div className="mb-5 dark:text-lightGrey">
-        <p className="text-sm font-medium mb-1.5">Pay With:</p>
+      <div className="my-5 dark:text-lightGrey">
+        <p className="text-sm font-medium my-2.5">Pay With:</p>
         <div className="flex items-center gap-8">
           <div className="flex items-center gap-2">
             <div
@@ -137,12 +139,12 @@ const Training = ({ setTraining }) => {
 };
 const CardDetails = () => {
   return (
-    <div className="CARD DETAILS text-mainBlack dark:text-lightGrey h-full scroll">
+    <div className="CARD DETAILS text-mainBlack dark:text-lightGrey w-full scroll">
       <p className="text-sm font-medium mb-2 dark:text-lightGrey text-mainBlack">
         Select Card
       </p>
       <div className="flex gap-4">
-        <div className="w-[31%] bg-lightGrey p-3.5 rounded-xl flex justify-between items-center">
+        <div className="sm:w-[31%] bg-lightGrey p-3.5 rounded-xl flex justify-between items-center">
           <div className="flex gap-2">
             <div className="flex items-center justify-center">
               <div className="w-[18px] h-[18px] bg-[#ED0006] rounded-full translate-x-2.5" />
@@ -173,7 +175,7 @@ const CardDetails = () => {
         <input
           type="number"
           placeholder="1234  5678  9101  1121"
-          className="ring-[1.5px] ring-[#ACACAC] text-mainLightBlue rounded-md w-full p-1.5 mt-1"
+          className="ring-[1.5px] ring-[#ACACAC] text-mainLightBlue rounded-md w-full p-2.5 my-2"
         />
       </label>
       <div className="flex items-center gap-3 mt-5 mb-3">
@@ -181,7 +183,7 @@ const CardDetails = () => {
           Expiration Date
           <input
             type="date"
-            className="ring-[1.5px] ring-[#ACACAC] text-mainLightBlue rounded-md w-full p-1.5 mt-1"
+            className="ring-[1.5px] ring-[#ACACAC] text-mainLightBlue rounded-md w-full p-2.5 my-2"
           />
         </label>
         <label htmlFor="card number" className="text-xs font-medium w-full">
@@ -189,7 +191,7 @@ const CardDetails = () => {
           <input
             type="number"
             placeholder="123"
-            className="ring-[1.5px] ring-[#ACACAC] text-mainLightBlue rounded-md w-full p-1.5 mt-1"
+            className="ring-[1.5px] ring-[#ACACAC] text-mainLightBlue rounded-md w-full p-2.5 my-2"
           />
         </label>
       </div>

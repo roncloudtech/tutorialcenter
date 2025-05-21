@@ -3,6 +3,7 @@ import DashboardLayout from "../../DashboardLayout";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Chat from "../../Components/Chat";
 import Title from "../../Components/Title";
+import FaqBtn from "../../Components/FaqBtn";
 
 export default function Help() {
   return (
@@ -12,13 +13,15 @@ export default function Help() {
           <div className="item1 xl:px-4 overflow-y-auto">
             {/* header */}
             <Title title={"help"} />
-            <p className="text-sm font-semibold dark:text-lightGrey text-mainBlack">
-              Customer Care
-            </p>
-            <Chat />
+            <div className="xl:block hidden">
+              <p className="text-sm font-semibold dark:text-lightGrey text-mainBlack">
+                Customer Care
+              </p>
+              <Chat />
+            </div>
           </div>
-          <div className="dark:bg-darkMode bg-mainWhite  scroll overflow-y-auto shadow-custom-1 dark:text-lightGrey rounded-lg p-3 m-0.5">
-            <h2 className="uppercase text-xs font-semibold p-3 rounded-custom bg-ascent text-mainWhite dark:text-lightGrey">
+          <div className="dark:bg-darkMode bg-mainWhite  scroll overflow-y-auto sm:shadow-custom-1 dark:text-lightGrey rounded-lg sm:p-3 sm:m-0.5 max-sm:mt-4">
+            <h2 className="uppercase text-xs max-sm:text-center font-semibold p-3 rounded-custom bg-ascent text-mainWhite dark:text-lightGrey">
               contact us
             </h2>
             <div className="mt-6">
@@ -44,95 +47,79 @@ export default function Help() {
 }
 
 const FAQ = () => {
-  const FaqQuestion = [
+  const [faqs, setFaqs] = useState([
     {
       questions: "What is Tutorial Center?",
       answers:
         " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
+      open: true,
     },
     {
       questions: "What subjects are covered on Tutorial Center?",
       answers:
         " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
+      open: false,
     },
     {
       questions: "How much does it cost to enroll in a program?",
       answers:
         " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
+      open: false,
     },
     {
       questions: "How do I register for classes? ",
       answers:
         " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
+
+      open: false,
     },
     {
       questions: "Can I attend classes at my convenience?",
       answers:
         " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
+      open: false,
     },
     {
       questions: "Are the classes taught by qualified teachers?",
       answers:
         " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
+      open: false,
     },
     {
       questions: "What happens if I miss a live class?",
       answers:
         " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
+      open: false,
     },
     {
       questions: "How do I make payments?",
       answers:
         " Tutorial Center is an online e-learning platform designed to help Nigerian students prepare for major exams like JAMB,  WAEC, NECO, and GCE through interactive tutorials, live  classes, and exam-focused resources.",
+      open: false,
     },
-  ];
-  const questionLengths = Array(FaqQuestion.length).fill(false);
-  const [visible, setVisible] = useState(questionLengths);
-  // function to toggle the display of the faq answers when the question is clicked
+  ]);
+  // function to toggle the display of the faqs answers when the question is clicked
   const toggleVisible = (index) => {
-    setVisible((prev) => {
-      const newVisibleItems = questionLengths;
-      newVisibleItems[index] = !prev[index];
-      return newVisibleItems;
-    });
+    setFaqs(
+      faqs.map((faq, i) => {
+        if (i === index) {
+          faq.open = !faq.open;
+        } else {
+          faq.open = false;
+        }
+        return faq;
+      })
+    );
   };
   return (
     <div className="faqs">
-      {FaqQuestion.map((item, index) => (
-        <button
-          className={`p-2 mb-2 ${
-            visible[index] ? "dark:bg-lightGrey bg-mainBlue rounded-xl" : ""
-          } `}
-          onClick={() => toggleVisible(index)}
+      {faqs.map((faq, index) => (
+        <FaqBtn
           key={index}
-        >
-          <button className="w-full h-full flex items-center">
-            <Icon
-              icon="hugeicons:arrow-up-01"
-              width="25"
-              height="25"
-              className={`${
-                visible[index] ? "rotate-180 text-ascent" : "rotate-90"
-              } `}
-            />
-            <span
-              className={`${
-                visible[index] ? "text-ascent" : "dark:text-lightGrey"
-              } text-[14px] font-semibold `}
-            >
-              {item.questions}
-            </span>
-          </button>
-          <div
-            className={`${
-              visible[index] ? "mt-2 visible h-[auto]" : "invisible hidden"
-            }  `}
-          >
-            <p className="text-[12px] pl-2 dark:text-mainBlack text-mainWhite">
-              {item.answers}
-            </p>
-          </div>
-        </button>
+          faq={faq}
+          index={index}
+          toggleVisible={toggleVisible}
+        />
       ))}
     </div>
   );
