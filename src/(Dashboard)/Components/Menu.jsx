@@ -178,13 +178,6 @@ const menuItems = [
 ];
 
 export default function Menu() {
-  const [visibleItems, setVisibleItems] = useState({});
-  const toggleMenu = (index) => {
-    setVisibleItems((prev) => ({
-      ...prev,
-      [index]: !prev[index],
-    }));
-  };
   const { toggle } = useSchoolContext();
 
   return (
@@ -192,67 +185,29 @@ export default function Menu() {
       {menuItems.map((item, index) => {
         if (item.visible?.includes(role)) {
           return (
-            <div key={index}>
-              <NavLink
-                className="flex justify-between p-2 dark:text-lightGrey text-mainBlue [&.active]:bg-mainBlue [&.active]:text-mainWhite [&.active]:dark:bg-lightGrey [&.active]:dark:text-mainBlue [&.active]:font-bold rounded-lg"
-                onClick={() => toggleMenu(index)}
-                to={item.path}
-              >
-                <div className="flex gap-2 relative group">
-                  <div className="">{item.icon}</div>
-                  <span
-                    className={`${
-                      toggle ? "block" : "hidden"
-                    } text-[13px] 2xl:text-sm `}
+            <NavLink
+              className="flex justify-between p-2 dark:text-lightGrey text-mainBlue [&.active]:bg-mainBlue [&.active]:text-mainWhite [&.active]:dark:bg-lightGrey [&.active]:dark:text-mainBlue [&.active]:font-bold rounded-lg"
+              to={item.path}
+              key={index}
+            >
+              <div className="flex gap-2 relative group">
+                <div className="">{item.icon}</div>
+                <span
+                  className={`${
+                    toggle ? "block" : "hidden"
+                  } text-[13px] 2xl:text-sm `}
+                >
+                  {item.label}
+                </span>
+                {!toggle && (
+                  <div
+                    className={`absolute left-full  rounded-md  px-2 py-1 ml-2 bg-white  text-black text-xs z-40 invisible opacity-20 -translate-x-3 transition-all group-hover:visible group-hover:opacity-100 group-hover:translate-x-0`}
                   >
                     {item.label}
-                  </span>
-                  {!toggle && (
-                    <div
-                      className={`absolute left-full  rounded-md  px-2 py-1 ml-2 bg-white  text-black text-xs z-40 invisible opacity-20 -translate-x-3 transition-all group-hover:visible group-hover:opacity-100 group-hover:translate-x-0`}
-                    >
-                      {item.label}
-                    </div>
-                  )}
-                </div>
-                {item.ArrowIcon && (
-                  <div
-                    className={` ${
-                      visibleItems[index] ? "rotate-90" : "rotate-0"
-                    } transition-all ease-custom duration-300`}
-                  >
-                    {item.ArrowIcon}
                   </div>
                 )}
-              </NavLink>
-              {item.list && (
-                <ul
-                  className={`${
-                    visibleItems[index]
-                      ? "h-[160px] opacity-100 block"
-                      : "h-0 opacity-0 hidden"
-                  } ml-6 my-1 border-l-2 border-solid border-gray-500 transition-all ease-custom duration-300`}
-                >
-                  {item.list.map((subItem, index) => (
-                    <li key={index}>
-                      <NavLink
-                        to={subItem.path}
-                        className="flex gap-2 p-[10px] [&.active]:bg-white rounded-lg"
-                      >
-                        {subItem.icon}{" "}
-                        <div
-                          className={`${
-                            toggle ? "block" : "hidden"
-                          } text-[10px]`}
-                        >
-                          {subItem.label}
-                        </div>
-                      </NavLink>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
+              </div>
+            </NavLink>
           );
         }
       })}

@@ -8,7 +8,7 @@ export default function Settings() {
   return (
     <>
       <DashboardLayout>
-        <div className="xl:grid grid-cols-[1fr_0.38fr] p-2.5 xl:p-0 h-full scroll overflow-y-auto">
+        <div className="xl:grid grid-cols-[1fr_0.38fr] p-2.5 xl:p-0 h-full scroll sm:overflow-y-auto">
           <div className="item1 xl:px-4 overflow-y-auto">
             {/* header */}
             <Title title={"settings"} />
@@ -24,7 +24,7 @@ export default function Settings() {
                 <input
                   type="text"
                   placeholder="input first name"
-                  className=" w-full px-3 py-2 rounded-md  ring-[1px] ring-whiteFade shadow-custom-1 text-mainLightBlue"
+                  className=" w-full px-3 py-2.5 rounded-md  ring-[1px] ring-whiteFade shadow-custom-1"
                 />
 
                 <label htmlFor="lastname" className="text-xs font-medium ">
@@ -33,7 +33,7 @@ export default function Settings() {
                 <input
                   type="text"
                   placeholder="input last name"
-                  className="w-full px-3 py-2 rounded-md  ring-[1px] ring-whiteFade shadow-custom-1 text-mainLightBlue"
+                  className="w-full px-3 py-2.5 rounded-md  ring-[1px] ring-whiteFade shadow-custom-1"
                 />
 
                 <label htmlFor="phone number" className="text-xs font-medium ">
@@ -42,11 +42,11 @@ export default function Settings() {
                 <input
                   type="number"
                   placeholder="input phone number"
-                  className="w-full px-3 py-2 rounded-md  ring-[1px] ring-whiteFade shadow-custom-1 text-mainLightBlue"
+                  className="w-full px-3 py-2.5 rounded-md  ring-[1px] ring-whiteFade shadow-custom-1"
                 />
               </div>
 
-              <button className="mt-6 w-full py-2 rounded-md text-xs font-semibold shadow-custom-1 bg-mainBlue text-mainWhite dark:bg-darkMode dark:text-lightGrey ">
+              <button className="mt-6 w-full py-2.5 rounded-md text-xs font-semibold shadow-custom-1 bg-mainBlue text-mainWhite dark:bg-darkMode dark:text-lightGrey ">
                 DONE
               </button>
             </div>

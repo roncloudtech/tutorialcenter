@@ -12,14 +12,14 @@ export default function Calender() {
   return (
     <>
       <DashboardLayout>
-        <div className="xl:grid grid-cols-[1fr_0.38fr] p-2.5 xl:p-0 h-full scroll overflow-y-auto">
+        <div className="xl:grid grid-cols-[1fr_0.38fr] p-2.5 xl:p-0 h-full scroll sm:overflow-y-auto">
           <div className="item1 xl:px-4 overflow-y-auto">
             <Title title={"CALENDER"} />
             <div className="w-full h-full">
               <BigCalender />
             </div>
           </div>
-          <div className="dark:bg-whiteFade dark:text-lightGrey shadow-custom-1 p-2.5 overflow-y-auto rounded-md space-y-6">
+          <div className="hidden xl:block dark:bg-whiteFade dark:text-lightGrey shadow-custom-1 p-2.5 sm:overflow-y-auto rounded-md space-y-6">
             <SmallCalendar />
             <div className="flex justify-between items-center">
               <h3 className="text-sm font-medium">My Calender</h3>
