@@ -90,8 +90,8 @@ export default function Program() {
 
   return (
     <div className="relative">
-      <div className="Container overflow-hidden">
-        <div className="py-10">
+      <div className="Container scroll">
+        <div className="py-10 w-full overflow-hidden">
           <div className="mb-9">
             <h2 className="uppercase header-title mb-4">Our program</h2>
             <p className="text-sm leading-6">
@@ -102,7 +102,7 @@ export default function Program() {
               with confidence and ease
             </p>
           </div>
-          <div className="block">
+          <div className="block space-x-3">
             <Slider {...settings}>
               {program.map((item, index) => (
                 <ProgramCard

@@ -6,7 +6,7 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 
 export default function ParentPayment() {
   const [payment, setPayment] = useState(true);
-  const [training, setTraining] = useState(true);
+  const [training, setTraining] = useState(false);
   return (
     <DashboardLayout>
       <div className="xl:grid grid-cols-[1fr_0.39fr] p-2.5 xl:p-0">
@@ -31,7 +31,7 @@ export default function ParentPayment() {
           ) : (
             <RenewPayment setPayment={setPayment} />
           )}
-          {training ? "" : <Training setTraining={setTraining} />}
+          {training && <Training setTraining={setTraining} />}
         </div>
         {/* LEFT SIDE */}
         <StudentProfileList />

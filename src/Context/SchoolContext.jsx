@@ -5,10 +5,10 @@ const SchoolContext = createContext(null);
 export const useSchoolContext = () => useContext(SchoolContext);
 
 const SchoolContextProvider = ({ children }) => {
-  const [toggle, setToggle] = useState(true);
+  const [expandSideBar, setExpandSideBar] = useState(true);
   const contextValue = {
-    toggle,
-    setToggle,
+    expandSideBar,
+    setExpandSideBar,
   };
   return (
     <SchoolContext.Provider value={contextValue}>

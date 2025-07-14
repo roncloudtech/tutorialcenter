@@ -99,7 +99,7 @@ const FAQ = () => {
     },
   ]);
   // function to toggle the display of the faqs answers when the question is clicked
-  const toggleVisible = (index) => {
+  const toggleFaq = (index) => {
     setFaqs(
       faqs.map((faq, i) => {
         if (i === index) {
@@ -114,12 +114,7 @@ const FAQ = () => {
   return (
     <div className="faqs">
       {faqs.map((faq, index) => (
-        <FaqBtn
-          key={index}
-          faq={faq}
-          index={index}
-          toggleVisible={toggleVisible}
-        />
+        <FaqBtn key={index} faq={faq} index={index} toggleVisible={toggleFaq} />
       ))}
     </div>
   );

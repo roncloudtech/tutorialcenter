@@ -20,7 +20,7 @@ export default function StudentDashboard() {
           <ProgressSlider />
         </div>
         {/* LEFT SIDE */}
-        <div className="dark:bg-darkMode scroll bg-mainWhite shadow-custom-1 rounded-md py-2 pl-2  sm:overflow-y-auto hidden xl:block">
+        <div className="dark:bg-darkMode scroll bg-mainWhite shadow-custom-1 rounded-md py-2 pl-2 m-0.5  sm:overflow-y-auto hidden xl:block">
           <SmallCalendar />
           <Notification />
         </div>

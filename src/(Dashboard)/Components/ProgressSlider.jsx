@@ -81,10 +81,6 @@ const SubjectProgressBar = ({ subjects }) => {
               30%{" "}
             </label>
           </div>
-          <div className="flex justify-between items-center text-[8px] text-black dark:text-lightGrey">
-            <p>START</p>
-            <p>FINISH</p>
-          </div>
         </div>
       </div>
     </>

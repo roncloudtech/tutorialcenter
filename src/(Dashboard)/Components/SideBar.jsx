@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../Assets/tutorial_logo.png";
 import logo2 from "../../Assets/TC 1.png";
@@ -6,21 +6,21 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import Menu from "./Menu";
 import { role } from "../../data";
 import useScrollVisibility from "../../Hooks/useScrollVisibility";
-export default function SideBar({ toggle, setToggle }) {
+export default function SideBar({ expandSideBar, setExpandSideBar }) {
   return (
     <>
       <div
-        className={`position hidden xl:flex bg-mainWhite dark:bg-darkMode  shadow-custom-1 p-3 flex-col gap-3 rounded-lg relative ${
-          toggle ? "" : "items-center"
+        className={`h-full position hidden xl:flex bg-mainWhite dark:bg-darkMode  shadow-custom-1 p-3 flex-col gap-3 rounded-lg relative ${
+          expandSideBar ? "" : "items-center"
         }`}
       >
         <Link className="flex justify-center items-center ">
-          {toggle ? (
+          {expandSideBar ? (
             <img
               src={logo}
               alt=""
               className={`overflow-hidden transition-all ease-custom ${
-                toggle ? "w-20" : "w-0"
+                expandSideBar ? "w-20" : "w-0"
               }`}
             />
           ) : (
@@ -28,7 +28,7 @@ export default function SideBar({ toggle, setToggle }) {
               src={logo2}
               alt=""
               className={`overflow-hidden transition-all ease-custom ${
-                toggle ? "w-0" : "w-10"
+                expandSideBar ? "w-0" : "w-10"
               }`}
             />
           )}
@@ -38,9 +38,11 @@ export default function SideBar({ toggle, setToggle }) {
           icon="iconamoon:arrow-left-2-light"
           width="20"
           height="20"
-          onClick={() => setToggle(!toggle)}
+          onClick={() => setExpandSideBar(!expandSideBar)}
           className={`${
-            toggle ? "absolute right-0 rotate-0" : " -right-[20px] rotate-180"
+            expandSideBar
+              ? "absolute right-0 rotate-0"
+              : " -right-[20px] rotate-180"
           } transition-all ease-custom rounded-l-lg bg-mainBlue text-mainWhite dark:bg-lightGrey dark:text-darkMode  flex justify-center items-center cursor-pointer absolute top-[130px]`}
         />
 
@@ -52,7 +54,7 @@ export default function SideBar({ toggle, setToggle }) {
             height="30"
             className="text-mainBlue dark:text-lightGrey"
           />
-          <div className={`${toggle ? "block mb-2" : "hidden"}`}>
+          <div className={`${expandSideBar ? "block mb-2" : "hidden"}`}>
             <p className="text-[12px] font-medium text-ascent">Welcome!</p>
             <h3 className="text-xs font-medium text-mainBlue dark:text-lightGrey">
               John Doe
@@ -73,7 +75,7 @@ export default function SideBar({ toggle, setToggle }) {
             />
             <span
               className={`${
-                toggle ? "block" : "hidden"
+                expandSideBar ? "block" : "hidden"
               } text-[13px] font-medium`}
             >
               Logout
@@ -87,15 +89,22 @@ export default function SideBar({ toggle, setToggle }) {
 }
 
 const ToggleMode = () => {
-  const [mode, setMode] = useState(false);
-  const darkModeHandler = () => {
-    setMode(!mode);
-    document.body.classList.toggle("dark");
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  useLayoutEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
   };
   return (
     <button
       className="text-white text-xs flex items-center justify-between cursor-pointer w-full transition-all"
-      onClick={() => darkModeHandler()}
+      onClick={() => toggleTheme()}
     >
       <div>
         <Icon
@@ -108,7 +117,7 @@ const ToggleMode = () => {
       <div className="w-full h-[20px] bg-mainBlue dark:bg-lightGrey relative mx-3 rounded-2xl cursor-pointer transition-all ease-custom">
         <div
           className={`bg-white dark:bg-mainBlue shadow-md w-[16px] h-[16px] absolute top-[2px] rounded-2xl transition-all ease-custom duration-300 ${
-            mode ? "left-[2px]" : "left-[calc(100%-18px)]"
+            theme === "dark" ? "left-[calc(100%-18px)]" : "left-[2px] "
           }`}
         />
       </div>
@@ -254,6 +263,16 @@ const MobileScreenNavigation = () => {
 
 // SIDE BAR FOR MOBILE MENU
 const MobileScreenSideBar = ({ setVisible, visible }) => {
+  useEffect(() => {
+    if (visible) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
+    }
+    return () => {
+      document.body.classList.remove("no-scroll");
+    };
+  }, [visible]);
   return (
     <div
       className={`w-full h-full relative z-[60] flex xl:hidden ${
