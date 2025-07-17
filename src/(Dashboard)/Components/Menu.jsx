@@ -19,7 +19,7 @@ const menuItems = [
     path: "/courses",
     icon: <Icon icon="tdesign:course-filled" width="20" height="20" />,
     ArrowIcon: <Icon icon="weui:arrow-filled" width="20" height="20" />,
-    visible: ["student", "admin"],
+    visible: ["student"],
     list: [
       {
         icon: <Icon icon="hugeicons:course" width="20" height="20" />,
@@ -175,10 +175,25 @@ const menuItems = [
     icon: <Icon icon="material-symbols:help-center" width="20" height="20" />,
     visible: ["teacher"],
   },
+  // ADMIN ROUTES
+  {
+    label: "Dashboard",
+    path: "/admin-dashboard",
+    icon: (
+      <Icon icon="material-symbols:dashboard-rounded" width="20" height="20" />
+    ),
+    visible: ["admin"],
+  },
+  {
+    label: "Students",
+    path: "/student-list",
+    icon: <Icon icon="mdi:human-male" width="20" height="20" />,
+    visible: ["admin"],
+  },
 ];
 
 export default function Menu() {
-  const { toggle } = useSchoolContext();
+  const { expandSideBar } = useSchoolContext();
 
   return (
     <>
@@ -194,12 +209,12 @@ export default function Menu() {
                 <div className="">{item.icon}</div>
                 <span
                   className={`${
-                    toggle ? "block" : "hidden"
+                    expandSideBar ? "block" : "hidden"
                   } text-[13px] 2xl:text-sm `}
                 >
                   {item.label}
                 </span>
-                {!toggle && (
+                {!expandSideBar && (
                   <div
                     className={`absolute left-full  rounded-md  px-2 py-1 ml-2 bg-white  text-black text-xs z-40 invisible opacity-20 -translate-x-3 transition-all group-hover:visible group-hover:opacity-100 group-hover:translate-x-0`}
                   >

@@ -28,6 +28,8 @@ import TeacherSettings from "./(TEACHER)/pages/Settings";
 import TeacherResult from "./(TEACHER)/pages/Result";
 import EmailVerfication from "./Pages/EmailVerfication";
 import CourseChats from "./(Dashboard)/pages/Course/CourseChats";
+import AdminDashboard from "./ADMIN/pages/Dashboard";
+import AllStudents from "./ADMIN/Lists/Students";
 
 export default function App() {
   return (
@@ -71,6 +73,10 @@ export default function App() {
           <Route path="/teacher-group" element={<TeacherGroups />} />
           <Route path="/teacher-settings" element={<TeacherSettings />} />
           <Route path="/teacher-result" element={<TeacherResult />} />
+
+          {/* ADMIN ROUTES */}
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/student-list" element={<AllStudents />} />
         </Routes>
       </BrowserRouter>
     </>

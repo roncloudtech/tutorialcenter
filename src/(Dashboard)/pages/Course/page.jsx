@@ -21,13 +21,10 @@ export default function Coursepage() {
               <Title title={"COURSE"} />
               {/* PROGRESS SECTION */}
               <div className="w-full mt-3">
-                <div className="jamb progress bar hidden xl:block">
-                  <ProgressBar title="jamb progress bar" />
-                </div>
+                <MediumScreenCourseProgressBar />
                 <div className="progress bar">
                   <ProgressBar title="mathematics progress bar" />
                 </div>
-                <MediumScreenCourseProgressBar />
               </div>
               <div className="mt-3 sm:flex">
                 <MediumScreenTopicLists setTopic={setShow} />
@@ -148,7 +145,7 @@ export default function Coursepage() {
               </div>
             </div>
             {/* Right Side */}
-            <div className="hidden xl:block bg-mainWhite dark:bg-whiteFade scroll sm:overflow-y-auto shadow-custom-1 rounded-md p-2 space-y-2">
+            <div className="hidden xl:block bg-mainWhite dark:bg-whiteFade scroll sm:overflow-y-auto shadow-custom-1 rounded-md p-2 m-0.5 space-y-2">
               <div className="ring-[0.5px] ring-mainBlue dark:bg-darkMode px-2 py-3 rounded-md">
                 <div className="flex justify-between text-[10px] font-bold text-mainBlack dark:text-lightGrey mb-2">
                   <h3>MASTER CLASS [JAMB]</h3>
@@ -194,14 +191,14 @@ export default function Coursepage() {
 const MediumScreenCourseProgressBar = () => {
   const [showProgress, setShowProgress] = useState(false);
   return (
-    <div className="xl:hidden relative mt-2 mb-4">
+    <div className="relative mt-2 mb-4">
       <button
         onClick={() => setShowProgress((prev) => !prev)}
         className={`${
           showProgress ? " rounded-t-lg" : " rounded-lg"
         } flex items-center justify-between w-full text-white p-2 bg-mainBlue shadow-custom-1`}
       >
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 flex-1">
           <Icon
             icon="streamline:business-progress-bar-2-solid"
             width="18"
@@ -209,19 +206,33 @@ const MediumScreenCourseProgressBar = () => {
           />
           <h3 className="text-[14px] font-medium uppercase">Jamb Progress</h3>
         </div>
-        <Icon
-          icon="hugeicons:arrow-up-01"
-          width="30"
-          height="30"
-          className={`${showProgress ? "-rotate-[135]" : "rotate-180"}`}
-        />
+        <div className="flex items-center gap-3 flex-1">
+          <div
+            className={`w-full h-2.5 bg-mainWhite  dark:bg-whiteFade rounded-sm relative`}
+          >
+            <div className="h-full bg-[#A8C7DF] dark:bg-lightGrey rounded-sm w-1/4 " />
+            <label className="text-[8px] text-mainWhite dark:text-darkMode font-medium absolute left-4 -top-[2px]">
+              6%{" "}
+            </label>
+          </div>
+          <Icon
+            icon="hugeicons:arrow-up-01"
+            width="30"
+            height="30"
+            className={`${
+              showProgress ? "-rotate-[135]" : "rotate-180"
+            } transition-drop-down`}
+          />
+        </div>
       </button>
       <div
         className={`${
-          showProgress ? "block" : "hidden"
-        } absolute top-9 z-20 w-full text-white p-2 bg-mainBlue shadow-custom-1 rounded-b-lg`}
+          showProgress
+            ? "max-h-96 overflow-y-auto"
+            : "max-h-0 overflow-y-hidden invisible"
+        } transition-drop-down absolute top-9 z-20 w-full text-white p-2 bg-mainBlue shadow-custom-1 rounded-b-lg`}
       >
-        <div className="mb-3 space-y-1">
+        <div className="mb-2 space-y-1">
           <div className="flex items-center gap-3 px-1 py-[3px] uppercase bg-white text-mainBlue rounded-custom">
             <Icon
               icon="streamline:business-progress-bar-2-solid"
@@ -254,18 +265,6 @@ const MediumScreenCourseProgressBar = () => {
             />
             <h3 className="text-[14px] font-medium">Neco</h3>
           </div>
-        </div>
-        <div
-          className={`w-full h-2.5 bg-mainWhite  dark:bg-whiteFade rounded-sm relative`}
-        >
-          <div className="h-full bg-[#A8C7DF] dark:bg-lightGrey rounded-sm w-1/4 " />
-          <label className="text-[8px] text-mainWhite dark:text-darkMode font-medium absolute left-4 -top-[2px]">
-            6%{" "}
-          </label>
-        </div>
-        <div className="flex justify-between items-center text-[8px] font-medium">
-          <p>START</p>
-          <p>FINISH</p>
         </div>
       </div>
     </div>

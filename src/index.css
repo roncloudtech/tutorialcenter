@@ -9,6 +9,10 @@
     --ascent-color: #bb9e7f;
   }
 }
+.no-scroll {
+  overflow-y: hidden;
+  padding-right: 16px;
+}
 .header-title {
   font-size: 32px;
   font-weight: 900;
@@ -59,6 +63,19 @@ a {
   font-weight: 500;
   font-size: 16px;
 }
+table {
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+th {
+  font-weight: 600;
+  font-size: 17px;
+}
+td {
+  font-weight: 400;
+  font-size: 15px;
+}
 li {
   list-style-type: none;
 }
@@ -74,10 +91,17 @@ form {
   background: inherit;
   font-size: 16px;
 }
-input:focus,
-select:focus {
-  outline: none;
+input {
+  appearance: none;
+  transition: all 0.25s cubic-bezier(0.65, 0.05, 0.36, 1);
+  background: none;
+}
+
+select,
+input:focus {
   border: none;
+  outline: none;
+  background: transparent;
 }
 textarea:focus {
   outline: none;
@@ -88,7 +112,7 @@ textarea:focus {
   font-size: 16px;
 }
 .Container {
-  @apply 2xl:max-w-[1600px] xl:max-w-[1200px]   w-full mx-auto 2xl:px-9 lg:px-8 px-5 relative;
+  @apply 2xl:max-w-[1600px] xl:max-w-[1200px]  w-full mx-auto 2xl:px-9 lg:px-8 px-5 relative;
 }
 /* background cover */
 .background-shadow {
@@ -213,5 +237,5 @@ abbr:where([title]) {
 }
 
 .transition-drop-down {
-  transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 300ms;
+  transition: all 0.4s ease;
 }

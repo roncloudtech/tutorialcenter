@@ -82,39 +82,43 @@ export default function Faq() {
           </div>
           <div className="faqs space-y-3">
             {faqs.map((faq, index) => (
-              <button
-                className={`p-3 block w-full text-start  ${
+              <div
+                className={`w-full text-start  ${
                   faq.open ? "bg-[#E336290D]" : "bg-white shadow"
                 } border border-solid border-[rgb(169,193,211)] rounded-xl`}
-                onClick={() => toggleFaq(index)}
                 key={index}
               >
-                <div className="w-full h-full flex justify-between items-center">
+                <button
+                  onClick={() => toggleFaq(index)}
+                  className="w-full h-full flex justify-between items-center p-3 relative"
+                >
                   <span
                     className={`${
                       faq.open ? "text-[#8695A0]" : "text-primary"
-                    } text-primary text-sm font-semibold`}
+                    } text-primary text-sm font-semibold  pr-6`}
                   >
                     {faq.questions}
                   </span>
-                  <Icon
-                    icon="hugeicons:arrow-up-01"
-                    width="35"
-                    height="35"
-                    style={{ color: "#000" }}
-                    className={`${
-                      faq.open ? "rotate-180" : "rotate-90"
-                    } transition-drop-down`}
-                  />
-                </div>
+                  <div className="absolute top-1/2 -translate-y-1/2 right-[9.6px] ">
+                    <Icon
+                      icon="hugeicons:arrow-up-01"
+                      width="35"
+                      height="35"
+                      style={{ color: "#000" }}
+                      className={`${
+                        faq.open ? "rotate-180" : "rotate-90"
+                      } transition-drop-down`}
+                    />
+                  </div>
+                </button>
                 <div
                   className={`${
-                    faq.open ? "mt-2 max-h-full" : "overflow-y-hidden max-h-0"
-                  } md:pr-8 transition-drop-down`}
+                    faq.open ? "max-h-full py-2" : "max-h-0 invisible opacity-0"
+                  } md:pr-4 px-3 transition-drop-down overflow-y-hidden`}
                 >
-                  <p className="text-[14.4px]">{faq.answers}</p>
+                  <p className="text-xs leading-5">{faq.answers}</p>
                 </div>
-              </button>
+              </div>
             ))}
           </div>
           <div className="text-center mb-3 mt-10 max-w-[650px] mx-auto">

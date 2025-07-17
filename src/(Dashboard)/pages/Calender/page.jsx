@@ -8,7 +8,7 @@ import Title from "../../Components/Title";
 
 export default function Calender() {
   const [toggle, setToggle] = useToggleState(true);
-  const [toggle1, setToggle1] = useToggleState(true);
+  const [toggle1, setToggle1] = useToggleState(false);
   return (
     <>
       <DashboardLayout>
@@ -19,9 +19,9 @@ export default function Calender() {
               <BigCalender />
             </div>
           </div>
-          <div className="hidden xl:block dark:bg-whiteFade dark:text-lightGrey shadow-custom-1 p-2.5 sm:overflow-y-auto rounded-md space-y-6">
+          <div className="hidden xl:block dark:bg-whiteFade dark:text-lightGrey shadow-custom-1 p-2.5 m-0.5 sm:overflow-y-auto rounded-md space-y-5">
             <SmallCalendar />
-            <div className="flex justify-between items-center">
+            <button className="w-full flex justify-between items-center">
               <h3 className="text-sm font-medium">My Calender</h3>
               <Icon
                 icon="weui:arrow-filled"
@@ -32,10 +32,10 @@ export default function Calender() {
                 }`}
                 onClick={setToggle}
               />
-            </div>
+            </button>
             <div
-              className={`flex flex-col gap-4 transition-height  ${
-                toggle ? "hidden" : "block"
+              className={`flex flex-col gap-4 overflow-hidden transition-drop-down  ${
+                toggle ? "invisible max-h-0" : "visible max-h-full mb-2"
               }`}
             >
               <div className="flex items-center justify-between">
@@ -75,7 +75,7 @@ export default function Calender() {
                 <Icon icon="nrk:more" width="20" height="20" />
               </div>
             </div>
-            <div className="flex justify-between items-center">
+            <button className="w-full flex justify-between items-center">
               <h3 className="text-sm font-medium">Other Calender</h3>
               <Icon
                 icon="weui:arrow-filled"
@@ -86,10 +86,10 @@ export default function Calender() {
                 }`}
                 onClick={setToggle1}
               />
-            </div>
+            </button>
             <div
-              className={`flex flex-col gap-4 transition-height ${
-                toggle1 ? "block" : "hidden"
+              className={`flex flex-col gap-4 overflow-hidden transition-drop-down  ${
+                toggle1 ? "invisible max-h-0" : "visible max-h-full "
               }`}
             >
               <div className="flex items-center justify-between">
