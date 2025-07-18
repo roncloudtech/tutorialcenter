@@ -4,13 +4,15 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import bookIcon from "../../../Assets/Vector.png";
 import Chat from "../../Components/Chat";
 import Title from "../../Components/Title";
+import PerfectScrollbar from "react-perfect-scrollbar";
+import "react-perfect-scrollbar/dist/css/styles.css";
 
 export default function Group() {
   const [active, setActive] = useState(true);
   const [section, setSection] = useState(false);
   return (
     <DashboardLayout>
-      <div className="xl:grid grid-cols-[1fr_0.38fr] p-2.5 xl:p-0 h-full scroll sm:overflow-y-auto">
+      <div className="xl:grid grid-cols-[1fr_0.38fr] h-full scroll sm:overflow-y-auto">
         {section ? (
           <TeacherGroupChatSection
             active={active}
@@ -343,79 +345,87 @@ const TeacherGroupChat = ({ setActive }) => {
 const SubjectGroupChatSection = ({ active, setActive, role, setRole }) => {
   return (
     <>
-      <div className="item1 xl:px-4 overflow-y-auto">
-        {/* header */}
-        <Title title={"groups"} />
+      <PerfectScrollbar options={{ suppressScrollX: true }}>
+        <div className="item1 xl:px-4 p-2.5 overflow-y-auto">
+          {/* header */}
+          <Title title={"groups"} />
 
-        {active ? (
-          <SubjectGroup role={role} setRole={setRole} />
-        ) : (
-          <SubjectGroupChat setActive={setActive} />
-        )}
-      </div>
+          {active ? (
+            <SubjectGroup role={role} setRole={setRole} />
+          ) : (
+            <SubjectGroupChat setActive={setActive} />
+          )}
+        </div>
+      </PerfectScrollbar>
       {/* SIDE BAR */}
-      <div className="hidden xl:block bg-mainWhite dark:bg-darkMode shadow-custom-1 rounded-md p-2 space-y-3 my-0.5 scroll overflow-y-auto">
-        <div className="bg-ascent py-4 pl-3 rounded-custom">
-          <h3 className="text-xs font-semibold capitalize text-mainWhite">
-            Groups Chats
-          </h3>
+      <PerfectScrollbar className="hidden xl:block">
+        <div className="bg-mainWhite dark:bg-darkMode shadow-custom-1 rounded-md p-2 space-y-3 my-0.5 scroll overflow-y-auto">
+          <div className="bg-ascent py-4 pl-3 rounded-custom">
+            <h3 className="text-xs font-semibold capitalize text-mainWhite">
+              Groups Chats
+            </h3>
+          </div>
+          <div className="flex items-center gap-4 bg-lightGrey dark:bg-whiteFade dark:text-lightGrey py-2.5 pl-4 rounded-2xl">
+            <Icon icon="ri:search-line" width="24" height="24" />
+            <input
+              type="text"
+              placeholder="Search group"
+              className="w-full h-full placeholder:text-[10px] rounded-r-2xl bg-transparent"
+            />
+          </div>
+          <div className="space-y-3">
+            <GroupInfo setActive={setActive} />
+            <GroupInfo setActive={setActive} />
+            <GroupInfo setActive={setActive} />
+            <GroupInfo setActive={setActive} />
+            <GroupInfo setActive={setActive} />
+            <GroupInfo setActive={setActive} />
+          </div>
         </div>
-        <div className="flex items-center gap-4 bg-lightGrey dark:bg-whiteFade dark:text-lightGrey py-2.5 pl-4 rounded-2xl">
-          <Icon icon="ri:search-line" width="24" height="24" />
-          <input
-            type="text"
-            placeholder="Search group"
-            className="w-full h-full placeholder:text-[10px] rounded-r-2xl bg-transparent"
-          />
-        </div>
-        <div className="space-y-3">
-          <GroupInfo setActive={setActive} />
-          <GroupInfo setActive={setActive} />
-          <GroupInfo setActive={setActive} />
-          <GroupInfo setActive={setActive} />
-          <GroupInfo setActive={setActive} />
-          <GroupInfo setActive={setActive} />
-        </div>
-      </div>
+      </PerfectScrollbar>
     </>
   );
 };
 const TeacherGroupChatSection = ({ active, setActive, role, setRole }) => {
   return (
     <>
-      <div className="item1 xl:px-4 overflow-y-auto">
-        {/* header */}
-        <Title title={"groups"} />
-        {active ? (
-          <TeacherGroup role={role} setRole={setRole} />
-        ) : (
-          <TeacherGroupChat setActive={setActive} />
-        )}
-      </div>
+      <PerfectScrollbar options={{ suppressScrollX: true }}>
+        <div className="item1 xl:px-4 p-2.5">
+          {/* header */}
+          <Title title={"groups"} />
+          {active ? (
+            <TeacherGroup role={role} setRole={setRole} />
+          ) : (
+            <TeacherGroupChat setActive={setActive} />
+          )}
+        </div>
+      </PerfectScrollbar>
       {/* SIDE BAR */}
-      <div className="hidden xl:block bg-mainWhite dark:bg-darkMode shadow-custom-1 rounded-md p-2 space-y-3 my-0.5 scroll overflow-y-auto">
-        <div className="bg-ascent py-4 pl-3 rounded-custom">
-          <h3 className="text-xs font-semibold capitalize text-mainWhite">
-            Groups Chats
-          </h3>
+      <PerfectScrollbar className="hidden xl:block">
+        <div className="bg-mainWhite dark:bg-darkMode shadow-custom-1 rounded-md p-2 space-y-3 my-0.5 scroll overflow-y-auto">
+          <div className="bg-ascent py-4 pl-3 rounded-custom">
+            <h3 className="text-xs font-semibold capitalize text-mainWhite">
+              Groups Chats
+            </h3>
+          </div>
+          <div className="flex items-center gap-4 bg-lightGrey dark:bg-whiteFade dark:text-lightGrey py-2.5 pl-4 rounded-2xl">
+            <Icon icon="ri:search-line" width="24" height="24" />
+            <input
+              type="text"
+              placeholder="Search group"
+              className="w-full h-full placeholder:text-[10px] rounded-r-2xl bg-transparent"
+            />
+          </div>
+          <div className="space-y-3">
+            <GroupInfo setActive={setActive} />
+            <GroupInfo setActive={setActive} />
+            <GroupInfo setActive={setActive} />
+            <GroupInfo setActive={setActive} />
+            <GroupInfo setActive={setActive} />
+            <GroupInfo setActive={setActive} />
+          </div>
         </div>
-        <div className="flex items-center gap-4 bg-lightGrey dark:bg-whiteFade dark:text-lightGrey py-2.5 pl-4 rounded-2xl">
-          <Icon icon="ri:search-line" width="24" height="24" />
-          <input
-            type="text"
-            placeholder="Search group"
-            className="w-full h-full placeholder:text-[10px] rounded-r-2xl bg-transparent"
-          />
-        </div>
-        <div className="space-y-3">
-          <GroupInfo setActive={setActive} />
-          <GroupInfo setActive={setActive} />
-          <GroupInfo setActive={setActive} />
-          <GroupInfo setActive={setActive} />
-          <GroupInfo setActive={setActive} />
-          <GroupInfo setActive={setActive} />
-        </div>
-      </div>
+      </PerfectScrollbar>
     </>
   );
 };

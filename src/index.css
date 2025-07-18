@@ -35,7 +35,7 @@
   @apply px-10 py-2 rounded-full bg-gradient-to-r from-[#09314F] to-[#E83831] text-white;
 }
 
-.scroll ::-webkit-scrollbar {
+/* .scroll ::-webkit-scrollbar {
   width: 5px;
   height: 5px;
 }
@@ -47,7 +47,7 @@
 .scroll ::-webkit-scrollbar-thumb {
   background: transparent;
   border-radius: 10px;
-}
+} */
 
 * {
   box-sizing: border-box;
@@ -238,4 +238,8 @@ abbr:where([title]) {
 
 .transition-drop-down {
   transition: all 0.4s ease;
+}
+.grid-5 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
 }

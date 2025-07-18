@@ -6,89 +6,93 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import Menu from "./Menu";
 import { role } from "../../data";
 import useScrollVisibility from "../../Hooks/useScrollVisibility";
+import PerfectScrollbar from "react-perfect-scrollbar";
+import "react-perfect-scrollbar/dist/css/styles.css";
 export default function SideBar({ expandSideBar, setExpandSideBar }) {
   return (
     <>
-      <div
-        className={`h-full position hidden xl:flex bg-mainWhite dark:bg-darkMode  shadow-custom-1 p-3 flex-col gap-3 rounded-lg relative ${
-          expandSideBar ? "" : "items-center"
-        }`}
-      >
-        <Link className="flex justify-center items-center ">
-          {expandSideBar ? (
-            <img
-              src={logo}
-              alt=""
-              className={`overflow-hidden transition-all ease-custom ${
-                expandSideBar ? "w-20" : "w-0"
-              }`}
-            />
-          ) : (
-            <img
-              src={logo2}
-              alt=""
-              className={`overflow-hidden transition-all ease-custom ${
-                expandSideBar ? "w-0" : "w-10"
-              }`}
-            />
-          )}
-        </Link>
-        {/* toogle the icon and the label */}
-        <Icon
-          icon="iconamoon:arrow-left-2-light"
-          width="20"
-          height="20"
-          onClick={() => setExpandSideBar(!expandSideBar)}
-          className={`${
-            expandSideBar
-              ? "absolute right-0 rotate-0"
-              : " -right-[20px] rotate-180"
-          } transition-all ease-custom rounded-l-lg bg-mainBlue text-mainWhite dark:bg-lightGrey dark:text-darkMode  flex justify-center items-center cursor-pointer absolute top-[130px]`}
-        />
-
-        {/* PROFILE */}
-        <div className="flex items-center gap-2 mt-3">
+      <PerfectScrollbar className="hidden xl:block">
+        <div
+          className={`h-full position xl:flex bg-mainWhite dark:bg-darkMode  shadow-custom-1 p-3 flex-col gap-3 rounded-lg relative ${
+            expandSideBar ? "" : "items-center"
+          }`}
+        >
+          <Link className="flex justify-center items-center ">
+            {expandSideBar ? (
+              <img
+                src={logo}
+                alt=""
+                className={`overflow-hidden transition-all ease-custom ${
+                  expandSideBar ? "w-20" : "w-0"
+                }`}
+              />
+            ) : (
+              <img
+                src={logo2}
+                alt=""
+                className={`overflow-hidden transition-all ease-custom ${
+                  expandSideBar ? "w-0" : "w-10"
+                }`}
+              />
+            )}
+          </Link>
+          {/* toogle the icon and the label */}
           <Icon
-            icon="radix-icons:avatar"
-            width="30"
-            height="30"
-            className="text-mainBlue dark:text-lightGrey"
+            icon="iconamoon:arrow-left-2-light"
+            width="20"
+            height="20"
+            onClick={() => setExpandSideBar(!expandSideBar)}
+            className={`${
+              expandSideBar
+                ? "absolute rotate-0 rounded-l-lg  top-[120px]"
+                : "rotate-180 rounded-r-lg  top-[100px]"
+            } right-0 transition-all ease-custom bg-mainBlue text-mainWhite dark:bg-lightGrey dark:text-darkMode  flex justify-center items-center cursor-pointer absolute`}
           />
-          <div className={`${expandSideBar ? "block mb-2" : "hidden"}`}>
-            <p className="text-[12px] font-medium text-ascent">Welcome!</p>
-            <h3 className="text-xs font-medium text-mainBlue dark:text-lightGrey">
-              John Doe
-            </h3>
-          </div>
-        </div>
-        {/* NAVIGATION */}
-        <div className="flex-1 flex flex-col gap-1">
-          <Menu />
-        </div>
-        <div className="space-y-2 w-full my-[2px]">
-          <ToggleMode />
-          <div className="flex items-center gap-2 text-mainBlue dark:text-lightGrey">
+
+          {/* PROFILE */}
+          <div className="flex items-center gap-2 mt-3">
             <Icon
-              icon="material-symbols:logout-rounded"
-              width="20"
-              height="20"
+              icon="radix-icons:avatar"
+              width="30"
+              height="30"
+              className="text-mainBlue dark:text-lightGrey"
             />
-            <span
-              className={`${
-                expandSideBar ? "block" : "hidden"
-              } text-[13px] font-medium`}
-            >
-              Logout
-            </span>
+            <div className={`${expandSideBar ? "block mb-2" : "hidden"}`}>
+              <p className="text-[12px] font-medium text-ascent">Welcome!</p>
+              <h3 className="text-xs font-medium text-mainBlue dark:text-lightGrey">
+                John Doe
+              </h3>
+            </div>
+          </div>
+          {/* NAVIGATION */}
+          <div className="flex-1 flex flex-col gap-1">
+            <Menu />
+          </div>
+          <div className="space-y-2 w-full my-[2px]">
+            <ToggleMode expandSideBar={expandSideBar} />
+            <div className="flex items-center gap-2 text-mainBlue dark:text-lightGrey">
+              <Icon
+                icon="material-symbols:logout-rounded"
+                width="20"
+                height="20"
+              />
+              <span
+                className={`${
+                  expandSideBar ? "block" : "hidden"
+                } text-[13px] font-medium`}
+              >
+                Logout
+              </span>
+            </div>
           </div>
         </div>
-      </div>
+      </PerfectScrollbar>
       <MobileScreenNavigation />
     </>
   );
 }
 
-const ToggleMode = () => {
+const ToggleMode = ({ expandSideBar }) => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   useLayoutEffect(() => {
     if (theme === "dark") {
@@ -114,10 +118,14 @@ const ToggleMode = () => {
           className="text-mainBlue dark:text-lightGrey"
         />
       </div>
-      <div className="w-full h-[20px] bg-mainBlue dark:bg-lightGrey relative mx-3 rounded-2xl cursor-pointer transition-all ease-custom">
+      <div
+        className={`${
+          !expandSideBar && "!bg-transparent"
+        } bg-mainBlue dark:bg-lightGrey w-full h-[20px] relative mx-3 rounded-2xl cursor-pointer transition-all ease-custom`}
+      >
         <div
           className={`bg-white dark:bg-mainBlue shadow-md w-[16px] h-[16px] absolute top-[2px] rounded-2xl transition-all ease-custom duration-300 ${
-            theme === "dark" ? "left-[calc(100%-18px)]" : "left-[2px] "
+            theme === "dark" ? "left-[calc(100%-18px)]" : "left-[2px]"
           }`}
         />
       </div>
@@ -152,7 +160,7 @@ const MobileScreenNavigation = () => {
       label: "Courses",
       path: "/courses",
       icon: <Icon icon="tdesign:course-filled" width="20" height="20" />,
-      visible: ["student", "admin"],
+      visible: ["student"],
     },
     {
       label: "Calender",
@@ -217,6 +225,19 @@ const MobileScreenNavigation = () => {
       icon: <Icon icon="uis:calender" width="20" height="20" />,
       visible: ["teacher"],
     },
+    // ADMIN ROUTES
+    {
+      label: "Dashboard",
+      path: "/admin-dashboard",
+      icon: (
+        <Icon
+          icon="material-symbols:dashboard-rounded"
+          width="20"
+          height="20"
+        />
+      ),
+      visible: ["admin"],
+    },
   ];
   const [visible, setVisible] = useState(false);
   const scrollVisible = useScrollVisibility();
@@ -225,9 +246,9 @@ const MobileScreenNavigation = () => {
       <div
         className={`${
           scrollVisible
-            ? "fixed right-0  z-50 bg-mainWhite bottom-0 animate-mobile"
+            ? "fixed right-0  z-50 bg-mainWhite dark:bg-[#2A2A2A] dark:text-lightGrey bottom-0 animate-mobile"
             : "invisible"
-        } flex items-center justify-between  borde-t-[0.1px] border-mainGrey drop-shadow w-full py-2 px-4`}
+        } flex items-center justify-between  border-t-[0.1px] border-mainGrey drop-shadow w-full py-2 px-4 shadow-xl`}
       >
         {menuItems.map((items, i) => {
           if (items.visible?.includes(role)) {
@@ -235,7 +256,7 @@ const MobileScreenNavigation = () => {
               <NavLink
                 key={i}
                 to={items.path}
-                className="[&.active]:bg-mainBlue  [&.active]:shadow-custom-1 p-1.5 text-[10px] rounded-lg text-mainBlue  [&.active]:text-white w-max flex flex-col gap-1 items-center "
+                className="[&.active]:bg-mainBlue [&.active]:dark:bg-lightGrey [&.active]:dark:text-mainBlue  [&.active]:shadow-custom-1 p-1.5 text-[10px] rounded-lg text-mainBlue dark:text-lightGrey  [&.active]:text-white w-max flex flex-col gap-1 items-center "
               >
                 {items.icon}
                 <span>{items.label}</span>
@@ -324,7 +345,7 @@ const MobileScreenSideBar = ({ setVisible, visible }) => {
             <Menu />
           </div>
           <div className="space-y-2 w-full my-[2px]">
-            <ToggleMode />
+            <ToggleMode expandSideBar />
             <div className="flex items-center gap-2 text-mainBlue dark:text-lightGrey">
               <Icon
                 icon="material-symbols:logout-rounded"

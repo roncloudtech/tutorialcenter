@@ -1,45 +1,51 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import DashboardLayout from "../../DashboardLayout";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Chat from "../../Components/Chat";
 import Title from "../../Components/Title";
 import FaqBtn from "../../Components/FaqBtn";
+import PerfectScrollbar from "react-perfect-scrollbar";
+import "react-perfect-scrollbar/dist/css/styles.css";
 
 export default function Help() {
   return (
     <>
       <DashboardLayout>
-        <div className="xl:grid grid-cols-[1fr_0.40fr] p-2.5 xl:p-0 h-full scroll sm:overflow-y-auto">
-          <div className="item1 xl:px-4 overflow-y-auto">
-            {/* header */}
-            <Title title={"help"} />
-            <div className="xl:block hidden">
-              <p className="text-sm font-semibold dark:text-lightGrey text-mainBlack">
-                Customer Care
-              </p>
-              <Chat />
-            </div>
-          </div>
-          <div className="dark:bg-darkMode bg-mainWhite  scroll overflow-y-auto sm:shadow-custom-1 dark:text-lightGrey rounded-lg sm:p-3 sm:m-0.5 max-sm:mt-4">
-            <h2 className="uppercase text-xs max-sm:text-center font-semibold p-3 rounded-custom bg-ascent text-mainWhite dark:text-lightGrey">
-              contact us
-            </h2>
-            <div className="mt-6">
-              <h4 className="uppercase text-xs font-semibold">
-                frequently asked questions
-              </h4>
-              <div className="flex items-center gap-4 dark:bg-whiteFade bg-lightGrey py-2 px-4 my-4 rounded-xl">
-                <input
-                  type="text"
-                  placeholder="Search group"
-                  className="w-full h-full placeholder:text-[10px] rounded-r-2xl text-xs bg-transparent"
-                />
-                <Icon icon="ri:search-line" width="24" height="24" />
+        <div className="xl:grid grid-cols-[1fr_0.40fr] h-full overflow-hidden">
+          <PerfectScrollbar options={{ suppressScrollX: true }}>
+            <div className="item1 xl:px-4 p-2.5">
+              {/* header */}
+              <Title title={"help"} />
+              <div className="">
+                <p className="text-sm font-semibold dark:text-lightGrey text-mainBlack">
+                  Customer Care
+                </p>
+                <Chat />
               </div>
-              {/* FAQ */}
-              <FAQ />
             </div>
-          </div>
+          </PerfectScrollbar>
+          <PerfectScrollbar>
+            <div className="dark:bg-darkMode bg-mainWhite  scroll sm:shadow-custom-1 dark:text-lightGrey rounded-lg sm:p-3 sm:m-0.5 max-sm:mt-4">
+              <h2 className="uppercase text-xs max-sm:text-center font-semibold p-3 rounded-custom bg-ascent text-mainWhite dark:text-lightGrey">
+                contact us
+              </h2>
+              <div className="mt-6">
+                <h4 className="uppercase text-xs font-semibold">
+                  frequently asked questions
+                </h4>
+                <div className="flex items-center gap-4 dark:bg-whiteFade bg-lightGrey py-2 px-4 my-4 rounded-xl">
+                  <input
+                    type="text"
+                    placeholder="Search group"
+                    className="w-full h-full placeholder:text-[10px] rounded-r-2xl text-xs bg-transparent"
+                  />
+                  <Icon icon="ri:search-line" width="24" height="24" />
+                </div>
+                {/* FAQ */}
+                <FAQ />
+              </div>
+            </div>
+          </PerfectScrollbar>
         </div>
       </DashboardLayout>
     </>

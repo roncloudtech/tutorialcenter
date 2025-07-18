@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import DashboardLayout from "../../DashboardLayout";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Title from "../../Components/Title";
+import PerfectScrollbar from "react-perfect-scrollbar";
+import "react-perfect-scrollbar/dist/css/styles.css";
 
 export default function PaymentPage() {
   const [payment, setPayment] = useState(true);
@@ -9,30 +11,34 @@ export default function PaymentPage() {
   return (
     <>
       <DashboardLayout>
-        <div className="xl:px-4 p-2.5 sm:overflow-y-auto h-full scroll">
-          <Title title={"PAYMENT"} />
-          {payment ? (
-            <div
-              className={`space-y-2 max-sm:my-3 ${training ? "" : "hidden"}`}
-            >
-              <button
-                onClick={() => setPayment(false)}
-                className="flex items-center justify-between bg-mainWhite text-mainBlack dark:bg-whiteFade dark:text-lightGrey shadow-custom-1 p-3.5 rounded-lg w-full"
+        <PerfectScrollbar options={{ suppressScrollX: true }}>
+          <div className="xl:px-4 p-2.5 h-full scroll">
+            <Title title={"PAYMENT"} />
+            {payment ? (
+              <div
+                className={`space-y-2 max-sm:my-3 ${training ? "" : "hidden"}`}
               >
-                <p className="text-xs font-semibold">RENEW PAYMENT</p>
-              </button>
-              <button
-                onClick={() => setTraining(false)}
-                className="w-full flex items-center justify-between bg-mainWhite text-mainBlack dark:bg-whiteFade dark:text-lightGrey shadow-custom-1 p-3.5 rounded-lg"
-              >
-                <p className="text-xs font-semibold">ADD / REMOVE TRAINING </p>
-              </button>
-            </div>
-          ) : (
-            <RenewPayment setPayment={setPayment} />
-          )}
-          {training ? "" : <Training setTraining={setTraining} />}
-        </div>
+                <button
+                  onClick={() => setPayment(false)}
+                  className="flex items-center justify-between bg-mainWhite text-mainBlack dark:bg-whiteFade dark:text-lightGrey shadow-custom-1 p-3.5 rounded-lg w-full"
+                >
+                  <p className="text-xs font-semibold">RENEW PAYMENT</p>
+                </button>
+                <button
+                  onClick={() => setTraining(false)}
+                  className="w-full flex items-center justify-between bg-mainWhite text-mainBlack dark:bg-whiteFade dark:text-lightGrey shadow-custom-1 p-3.5 rounded-lg"
+                >
+                  <p className="text-xs font-semibold">
+                    ADD / REMOVE TRAINING{" "}
+                  </p>
+                </button>
+              </div>
+            ) : (
+              <RenewPayment setPayment={setPayment} />
+            )}
+            {training ? "" : <Training setTraining={setTraining} />}
+          </div>
+        </PerfectScrollbar>
       </DashboardLayout>
     </>
   );

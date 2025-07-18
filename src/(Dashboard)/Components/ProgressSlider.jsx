@@ -1,6 +1,7 @@
 import React from "react";
 import ProgressBar from "./ProgressBar";
-
+import PerfectScrollbar from "react-perfect-scrollbar";
+import "react-perfect-scrollbar/dist/css/styles.css";
 const jambSubjects = ["English", "Mathematics", "Chemistry", "Physics"];
 const waecSubjects = [
   "English",
@@ -15,53 +16,55 @@ export default function ProgressSlider() {
   return (
     <>
       {/* PROGRESS LEVEL FOR ALL COURSES AND SUBJECTS */}
-      <div className="w-full overflow-x-hidden mb-4">
-        <div className="overflow-x-auto w-full xl:w-[700px] 2xl:w-full flex gap-2">
-          <div className="min-w-[350px] 2xl:w-full">
-            <div className="bg-lightGrey shadow-custom-1 dark:bg-darkMode p-1.5 rounded-[4px] mb-2">
-              <ProgressBar bgColor title={"JAMB"} course={"Subjects  4"} />
+      <div className="w-full xl:w-[700px] overflow-x-hidden mb-4">
+        <PerfectScrollbar>
+          <div className="w-full 2xl:w-full flex gap-2 mb-4">
+            <div className="min-w-[350px] 2xl:w-full">
+              <div className="bg-lightGrey shadow-custom-1 dark:bg-darkMode p-1.5 rounded-[4px] mb-2">
+                <ProgressBar bgColor title={"JAMB"} course={"Subjects  4"} />
+              </div>
+              <div className="mx-2.5 space-y-1">
+                {/* SUBJECT PROGRESS BAR FOR JAMB */}
+                {jambSubjects.map((sub, i) => (
+                  <SubjectProgressBar key={i} subjects={sub} />
+                ))}
+              </div>
             </div>
-            <div className="mx-2.5 space-y-1">
-              {/* SUBJECT PROGRESS BAR FOR JAMB */}
-              {jambSubjects.map((sub, i) => (
-                <SubjectProgressBar key={i} subjects={sub} />
-              ))}
+            <div className="min-w-[350px] 2xl:w-full">
+              <div className="bg-lightGrey shadow-custom-1 dark:bg-darkMode p-1.5 rounded-[4px] mb-2">
+                <ProgressBar bgColor title={"WAEC"} course={"Subjects 9"} />
+              </div>
+              <div className="mx-2.5 space-y-1">
+                {/* SUBJECT PROGRESS BAR FOR WAEC */}
+                {waecSubjects.map((sub, i) => (
+                  <SubjectProgressBar key={i} subjects={sub} />
+                ))}
+              </div>
+            </div>
+            <div className="min-w-[350px] 2xl:w-full">
+              <div className="bg-lightGrey shadow-custom-1 dark:bg-darkMode p-1.5 rounded-[4px] mb-2">
+                <ProgressBar bgColor title={"NECO"} course={"Subjects 9"} />
+              </div>
+              <div className="mx-2.5 space-y-1">
+                {/* SUBJECT PROGRESS BAR FOR WAEC */}
+                {waecSubjects.map((sub, i) => (
+                  <SubjectProgressBar key={i} subjects={sub} />
+                ))}
+              </div>
+            </div>
+            <div className="min-w-[350px] 2xl:w-full">
+              <div className="bg-lightGrey shadow-custom-1 dark:bg-darkMode p-1.5 rounded-[4px] mb-2">
+                <ProgressBar bgColor title={"GCE"} course={"Subjects 9"} />
+              </div>
+              <div className="mx-2.5 space-y-1">
+                {/* SUBJECT PROGRESS BAR FOR WAEC */}
+                {waecSubjects.map((sub, i) => (
+                  <SubjectProgressBar key={i} subjects={sub} />
+                ))}
+              </div>
             </div>
           </div>
-          <div className="min-w-[350px] 2xl:w-full">
-            <div className="bg-lightGrey shadow-custom-1 dark:bg-darkMode p-1.5 rounded-[4px] mb-2">
-              <ProgressBar bgColor title={"WAEC"} course={"Subjects 9"} />
-            </div>
-            <div className="mx-2.5 space-y-1">
-              {/* SUBJECT PROGRESS BAR FOR WAEC */}
-              {waecSubjects.map((sub, i) => (
-                <SubjectProgressBar key={i} subjects={sub} />
-              ))}
-            </div>
-          </div>
-          <div className="min-w-[350px] 2xl:w-full">
-            <div className="bg-lightGrey shadow-custom-1 dark:bg-darkMode p-1.5 rounded-[4px] mb-2">
-              <ProgressBar bgColor title={"NECO"} course={"Subjects 9"} />
-            </div>
-            <div className="mx-2.5 space-y-1">
-              {/* SUBJECT PROGRESS BAR FOR WAEC */}
-              {waecSubjects.map((sub, i) => (
-                <SubjectProgressBar key={i} subjects={sub} />
-              ))}
-            </div>
-          </div>
-          <div className="min-w-[350px] 2xl:w-full">
-            <div className="bg-lightGrey shadow-custom-1 dark:bg-darkMode p-1.5 rounded-[4px] mb-2">
-              <ProgressBar bgColor title={"GCE"} course={"Subjects 9"} />
-            </div>
-            <div className="mx-2.5 space-y-1">
-              {/* SUBJECT PROGRESS BAR FOR WAEC */}
-              {waecSubjects.map((sub, i) => (
-                <SubjectProgressBar key={i} subjects={sub} />
-              ))}
-            </div>
-          </div>
-        </div>
+        </PerfectScrollbar>
       </div>
     </>
   );
