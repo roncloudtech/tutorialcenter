@@ -5,25 +5,32 @@ import SmallCalendar from "../../Components/Calender";
 import DashboardLayout from "../../DashboardLayout";
 import Title from "../../Components/Title";
 import ProgressSlider from "../../Components/ProgressSlider";
+import PerfectScrollbar from "react-perfect-scrollbar";
+import "react-perfect-scrollbar/dist/css/styles.css";
 
 export default function StudentDashboard() {
   return (
     <DashboardLayout>
-      <div className="xl:grid grid-cols-[1fr_0.38fr] p-2.5 xl:p-0 h-full scroll sm:overflow-y-auto">
+      <div className="xl:grid grid-cols-[1fr_0.38fr] h-full overflow-hidden">
         {/* RIGHT SIDE */}
-        <div className="xl:px-4 scroll overflow-y-auto">
-          <Title title={"DASHBOARD"} />
-          {/* PROGRESS LEVEL */}
-          <div className="my-3">
-            <ProgressBar title={"Progress Level"} course={"Courses  4"} />
+        <PerfectScrollbar options={{ suppressScrollX: true }}>
+          <div className="xl:px-4 p-2.5 scroll h-full">
+            <Title title={"DASHBOARD"} />
+            {/* PROGRESS LEVEL */}
+            <div className="my-3">
+              <ProgressBar title={"Progress Level"} course={"Courses  4"} />
+            </div>
+            <ProgressSlider />
           </div>
-          <ProgressSlider />
-        </div>
+        </PerfectScrollbar>
         {/* LEFT SIDE */}
-        <div className="dark:bg-darkMode scroll bg-mainWhite shadow-custom-1 rounded-md py-2 pl-2 m-0.5  sm:overflow-y-auto hidden xl:block">
-          <SmallCalendar />
-          <Notification />
-        </div>
+
+        <PerfectScrollbar className="hidden xl:block">
+          <div className="dark:bg-darkMode scroll bg-mainWhite shadow-custom-1 rounded-md p-2 m-0.5">
+            <SmallCalendar />
+            <Notification />
+          </div>
+        </PerfectScrollbar>
       </div>
     </DashboardLayout>
   );

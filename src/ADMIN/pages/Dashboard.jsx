@@ -23,9 +23,9 @@ export default function AdminDashboard() {
   return (
     <DashboardLayout>
       <PerfectScrollbar>
-        <div className="xl:px-4">
+        <div className="xl:px-4 p-2.5">
           <Title title={"Dashboard"} />
-          <div className="grid grid-cols-5 grid-flow-col gap-3 items-center">
+          <div className="grid-5 gap-3 items-center mt-5">
             <UserCard percent="73" total="123,456" user="students" />
             <UserCard percent="30" total="46,045" user="teachers" />
             <UserCard percent="46" total="67,650" user="guardian" />
@@ -34,7 +34,7 @@ export default function AdminDashboard() {
           </div>
           {/* EARNINGS CHART */}
           <EarningsChart />
-          <div className="grid grid-cols-[57fr_43fr] gap-3">
+          <div className="grid md:grid-cols-[57fr_43fr] gap-3">
             <AttendanceChart />
             <CountChart />
           </div>
@@ -46,7 +46,7 @@ export default function AdminDashboard() {
 
 const UserCard = ({ percent, total, user }) => {
   return (
-    <div className="p-6 dark:bg-darkMode rounded-lg">
+    <div className="md:p-6 p-3 dark:bg-darkMode rounded-lg">
       <div className="flex items-center justify-between mb-4">
         <div className="dark:bg-lightGrey flex gap-2 items-center rounded-lg p-1">
           <Icon
@@ -115,21 +115,23 @@ const EarningsChart = () => {
     },
   ];
   return (
-    <div className="dark:bg-[#1E1E1E] p-6 rounded-lg my-6">
+    <div className="dark:bg-[#1E1E1E] md:p-6 p-3 rounded-lg my-6">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-lg font-bold dark:text-lightGrey">Earnings</h2>
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-1.5">
-            <div className="w-2 h-2 rounded-full bg-[#50AF68]" />
-            <span className="capitalize text-[14px] dark:text-lightGrey">
-              income
-            </span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <div className="w-2 h-2 rounded-full bg-mainRed" />
-            <span className="capitalize text-[14px] dark:text-lightGrey">
-              Expense
-            </span>
+        <div className="flex max-sm:flex-col max-sm:items-end items-center gap-4">
+          <div className="flex gap-4">
+            <div className="flex items-center gap-1.5">
+              <div className="w-2 h-2 rounded-full bg-[#50AF68]" />
+              <span className="capitalize text-[14px] dark:text-lightGrey">
+                income
+              </span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <div className="w-2 h-2 rounded-full bg-mainRed" />
+              <span className="capitalize text-[14px] dark:text-lightGrey">
+                Expense
+              </span>
+            </div>
           </div>
           <select
             className="p-2 rounded-md dark:text-lightGrey dark:bg-darkMode"
@@ -200,9 +202,9 @@ const AttendanceChart = () => {
     },
   ];
   return (
-    <div className="dark:bg-[#1E1E1E] p-6 rounded-lg">
+    <div className="dark:bg-[#1E1E1E] md:p-6 p-3 rounded-lg">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-lg font-bold dark:text-lightGrey">Earnings</h2>
+        <h2 className="text-lg font-bold dark:text-lightGrey">Attendance</h2>
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-1.5">
             <div className="w-2 h-2 rounded-full bg-[#3980B5]" />
@@ -277,9 +279,9 @@ const CountChart = () => {
     },
   ];
   return (
-    <div className="dark:bg-[#1E1E1E] p-6 rounded-lg">
+    <div className="dark:bg-[#1E1E1E] md:p-6 p-3 rounded-lg">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-lg font-bold dark:text-lightGrey">Earnings</h2>
+        <h2 className="text-lg font-bold dark:text-lightGrey">Students</h2>
         <div className="dark:text-lightGrey">
           <Icon icon="uiw:more" width="17" height="17" />
         </div>

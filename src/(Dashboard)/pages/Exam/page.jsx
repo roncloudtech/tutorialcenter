@@ -1,29 +1,34 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import DashboardLayout from "../../DashboardLayout";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Title from "../../Components/Title";
-import { Link } from "react-router-dom";
+import PerfectScrollbar from "react-perfect-scrollbar";
+import "react-perfect-scrollbar/dist/css/styles.css";
 
 export default function Exampage() {
   const [active, setActive] = useState(true);
   return (
     <DashboardLayout>
-      <div className="xl:grid grid-cols-[1fr_0.38fr] p-2.5 xl:p-0 h-full scroll sm:overflow-y-auto">
+      <div className="xl:grid grid-cols-[1fr_0.38fr] h-full scroll">
         {/* LEFT SIDE  */}
-        <div className="item1 xl:px-4 overflow-y-auto">
-          {/* header */}
-          <Title title={"exam practice"} />
-          {active ? (
-            // Exam Instructions
-            <ExamInstruction setActive={setActive} />
-          ) : (
-            // ExamPractice
-            <ExamPractice setActive={setActive} />
-          )}
-        </div>
-        <div className="hidden xl:block bg-mainWhite dark:bg-whiteFade scroll sm:overflow-y-auto shadow-custom-1 rounded-md p-2">
-          CALCULATOR
-        </div>
+        <PerfectScrollbar options={{ suppressScrollX: true }}>
+          <div className="item1 xl:px-4 p-2.5">
+            {/* header */}
+            <Title title={"exam practice"} />
+            {active ? (
+              // Exam Instructions
+              <ExamInstruction setActive={setActive} />
+            ) : (
+              // ExamPractice
+              <ExamPractice setActive={setActive} />
+            )}
+          </div>
+        </PerfectScrollbar>
+        <PerfectScrollbar className="hidden xl:block">
+          <div className="h-full bg-mainWhite dark:bg-whiteFade scroll sm:overflow-y-auto shadow-custom-1 rounded-md p-2">
+            CALCULATOR
+          </div>
+        </PerfectScrollbar>
       </div>
     </DashboardLayout>
   );

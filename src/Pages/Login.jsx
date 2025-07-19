@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
+  const [userRole, setUserRole] = useState("guardian"); // Default role
   return (
     <>
       <Layout2
@@ -30,91 +31,39 @@ export default function Login() {
                     us.{" "}
                   </p>
                 </div>
-              </div>
-              <div className="max-w-[410px] w-full lg:px-9 py-5 lg:bg-[#FBFAFA] rounded-md lg:shadow-md mt-3">
-                {/* Form Inputs */}
-                <form
-                  action=""
-                  method="post"
-                  autoComplete="off"
-                  className="space-y-5"
-                >
-                  <div>
-                    <label className="block text-sm font-medium text-blue-900 mb-2">
-                      Email Address
-                    </label>
-                    <input
-                      name="email"
-                      type="email"
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent`}
-                    />
-                  </div>
-                  {/* Password Input */}
-                  <div>
-                    <label className="block text-sm font-medium text-blue-900 mb-2">
-                      Password
-                    </label>
-                    <div className="relative">
-                      <input
-                        id="password"
-                        name="password"
-                        type={showPassword ? "text" : "password"}
-                        className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2`}
-                      />
-                      <span
-                        className="absolute right-3 top-3.5 text-gray-400 hover:text-blue-500 transition-colors cursor-pointer"
-                        onClick={() => setShowPassword(!showPassword)}
-                      >
-                        {showPassword ? (
-                          <EyeSlashIcon className="h-4 w-5" />
-                        ) : (
-                          <EyeIcon className="h-4 w-5" />
-                        )}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="formItems flex gap-2 my-5">
-                    <input
-                      type="checkbox"
-                      className="flex justify-start items-start "
-                    />
-                    <span htmlFor="" className="text-[13.5px] font-semibold ">
-                      Remember me
-                    </span>
-                  </div>
-                  <div className="mt-1 flex gap-2 py-[10px] bg-gradient-to-r from-[#09314F] to-[#E83831] rounded-lg shadow-sm w-full">
-                    <button
-                      type="submit"
-                      className="w-full h-full text-white text-[17px] font-semibold"
-                    >
-                      Login
-                    </button>
-                  </div>
-                </form>
-                <div className="flex justify-center items-center my-6 gap-2">
-                  <div className="w-full h-[1.5px] bg-black" />
-                  <p className="text-xs text-nowrap">Or continue with</p>
-                  <div className="w-full h-[1.5px] bg-black" />
-                </div>
-                <div className="grid justify-center mb-5">
-                  <div className="flex gap-3 bg-white shadow-md px-4 py-2 rounded-lg">
-                    <Icon icon="devicon:google" width="20" height="20" />
-                    <span className="text-[#8695A0] text-xs">
-                      Sign up with google
-                    </span>
-                  </div>
-                </div>
-                <p className="text-xs text-center font-medium text-mainBlack">
-                  {" "}
-                  Don’t have an account?{" "}
-                  <Link
-                    to="/register"
-                    className="font-semibold text-red-600 hover:underline transition-all"
+                <div className="grid grid-cols-2 relative text-xs mt-6">
+                  <button
+                    onClick={() => setUserRole("student")}
+                    className={`border-solid ${
+                      userRole === "student"
+                        ? "border-b-2 text-mainBlue pointer-events-none"
+                        : "text-mainGrey cursor-pointer"
+                    }  pb-1.5 text-center border-mainBlue font-bold mr-2`}
                   >
-                    Sign Up
-                  </Link>
-                </p>
+                    Student
+                  </button>
+                  <button
+                    onClick={() => setUserRole("guardian")}
+                    className={`border-solid ${
+                      userRole === "guardian"
+                        ? "border-b-2 text-mainBlue pointer-events-none"
+                        : "text-mainGrey cursor-pointer"
+                    }  pb-1.5 text-center border-mainBlue font-bold`}
+                  >
+                    Guardian / Parents
+                  </button>
+                </div>
               </div>
+              <StudentForm
+                userRole={userRole}
+                setShowPassword={setShowPassword}
+                showPassword={showPassword}
+              />
+              <GuardianForm
+                userRole={userRole}
+                setShowPassword={setShowPassword}
+                showPassword={showPassword}
+              />
             </div>
           </div>
         </div>
@@ -122,3 +71,172 @@ export default function Login() {
     </>
   );
 }
+const GuardianForm = ({ userRole, setShowPassword, showPassword }) => {
+  return (
+    <>
+      <div
+        className={`${
+          userRole === "guardian" ? "block" : "hidden"
+        } max-w-[410px] w-full lg:px-9 py-5 lg:bg-[#FBFAFA] rounded-md lg:shadow-md mt-3`}
+      >
+        {/* Form Inputs */}
+        <form action="" method="post" autoComplete="off" className="space-y-5">
+          <div>
+            <label className="block text-sm font-medium text-blue-900 mb-2">
+              Email Address
+            </label>
+            <input
+              name="email"
+              type="email"
+              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent`}
+            />
+          </div>
+          {/* Password Input */}
+          <div>
+            <label className="block text-sm font-medium text-blue-900 mb-2">
+              Password
+            </label>
+            <div className="relative">
+              <input
+                id="password"
+                name="password"
+                type={showPassword ? "text" : "password"}
+                className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2`}
+              />
+              <span
+                className="absolute right-3 top-3.5 text-gray-400 hover:text-blue-500 transition-colors cursor-pointer"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? (
+                  <EyeSlashIcon className="h-4 w-5" />
+                ) : (
+                  <EyeIcon className="h-4 w-5" />
+                )}
+              </span>
+            </div>
+          </div>
+          <div className="formItems flex gap-2 my-5">
+            <input
+              type="checkbox"
+              className="flex justify-start items-start "
+            />
+            <span htmlFor="" className="text-[13.5px] font-semibold ">
+              Remember me
+            </span>
+          </div>
+          <div className="mt-1 flex gap-2 py-[10px] bg-gradient-to-r from-[#09314F] to-[#E83831] rounded-lg shadow-sm w-full">
+            <button
+              type="submit"
+              className="w-full h-full text-white text-[17px] font-semibold"
+            >
+              Login
+            </button>
+          </div>
+        </form>
+        <div className="flex justify-center items-center my-6 gap-2">
+          <div className="w-full h-[1.5px] bg-black" />
+          <p className="text-xs text-nowrap">Or continue with</p>
+          <div className="w-full h-[1.5px] bg-black" />
+        </div>
+        <div className="grid justify-center mb-5">
+          <div className="flex gap-3 bg-white shadow-md px-4 py-2 rounded-lg">
+            <Icon icon="devicon:google" width="20" height="20" />
+            <span className="text-[#8695A0] text-xs">Sign up with google</span>
+          </div>
+        </div>
+        <p className="text-xs text-center font-medium text-mainBlack">
+          {" "}
+          Don’t have an account?{" "}
+          <Link
+            to="/register"
+            className="font-semibold text-red-600 hover:underline transition-all"
+          >
+            Sign Up
+          </Link>
+        </p>
+      </div>
+    </>
+  );
+};
+const StudentForm = ({ userRole, setShowPassword, showPassword }) => {
+  return (
+    <div
+      className={`${
+        userRole === "student" ? "block" : "hidden "
+      } max-w-[410px] w-full lg:px-9 py-5 lg:bg-[#FBFAFA] rounded-md lg:shadow-md mt-3`}
+    >
+      {/* Form Inputs */}
+      <form action="" method="post" autoComplete="off" className="space-y-5">
+        <div>
+          <label className="block text-sm font-medium text-blue-900 mb-2">
+            Email Address
+          </label>
+          <input
+            name="email"
+            type="email"
+            className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent`}
+          />
+        </div>
+        {/* Password Input */}
+        <div>
+          <label className="block text-sm font-medium text-blue-900 mb-2">
+            Password
+          </label>
+          <div className="relative">
+            <input
+              id="password"
+              name="password"
+              type={showPassword ? "text" : "password"}
+              className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2`}
+            />
+            <span
+              className="absolute right-3 top-3.5 text-gray-400 hover:text-blue-500 transition-colors cursor-pointer"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? (
+                <EyeSlashIcon className="h-4 w-5" />
+              ) : (
+                <EyeIcon className="h-4 w-5" />
+              )}
+            </span>
+          </div>
+        </div>
+        <div className="formItems flex gap-2 my-5">
+          <input type="checkbox" className="flex justify-start items-start " />
+          <span htmlFor="" className="text-[13.5px] font-semibold ">
+            Remember me
+          </span>
+        </div>
+        <div className="mt-1 flex gap-2 py-[10px] bg-gradient-to-r from-[#09314F] to-[#E83831] rounded-lg shadow-sm w-full">
+          <button
+            type="submit"
+            className="w-full h-full text-white text-[17px] font-semibold"
+          >
+            Login
+          </button>
+        </div>
+      </form>
+      <div className="flex justify-center items-center my-6 gap-2">
+        <div className="w-full h-[1.5px] bg-black" />
+        <p className="text-xs text-nowrap">Or continue with</p>
+        <div className="w-full h-[1.5px] bg-black" />
+      </div>
+      <div className="grid justify-center mb-5">
+        <div className="flex gap-3 bg-white shadow-md px-4 py-2 rounded-lg">
+          <Icon icon="devicon:google" width="20" height="20" />
+          <span className="text-[#8695A0] text-xs">Sign up with google</span>
+        </div>
+      </div>
+      <p className="text-xs text-center font-medium text-mainBlack">
+        {" "}
+        Don’t have an account?{" "}
+        <Link
+          to="/register"
+          className="font-semibold text-red-600 hover:underline transition-all"
+        >
+          Sign Up
+        </Link>
+      </p>
+    </div>
+  );
+};

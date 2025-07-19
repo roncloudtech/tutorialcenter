@@ -1,5 +1,4 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
-import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useSchoolContext } from "../../Context/SchoolContext";
 import { role } from "../../data";
@@ -216,7 +215,7 @@ export default function Menu() {
                 </span>
                 {!expandSideBar && (
                   <div
-                    className={`absolute left-full  rounded-md  px-2 py-1 ml-2 bg-white  text-black text-xs z-40 invisible opacity-20 -translate-x-3 transition-all group-hover:visible group-hover:opacity-100 group-hover:translate-x-0`}
+                    className={`absolute bottom-4 -left-5  rounded-md p-1 bg-white dark:bg-black  text-black dark:text-lightGrey text-[10px] z-50 invisible opacity-20 transition-all group-hover:visible group-hover:opacity-100`}
                   >
                     {item.label}
                   </div>
