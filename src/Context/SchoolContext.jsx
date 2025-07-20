@@ -6,9 +6,12 @@ export const useSchoolContext = () => useContext(SchoolContext);
 
 const SchoolContextProvider = ({ children }) => {
   const [expandSideBar, setExpandSideBar] = useState(true);
+  const [authenticatedUser, setAuthenticatedUser] = useState({});
   const contextValue = {
     expandSideBar,
     setExpandSideBar,
+    authenticatedUser,
+    setAuthenticatedUser,
   };
   return (
     <SchoolContext.Provider value={contextValue}>

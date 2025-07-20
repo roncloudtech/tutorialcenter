@@ -2,11 +2,87 @@ import React, { useState } from "react";
 import logo from "../Assets/tutorial_logo.png";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Layout2 from "../Components/Layout2";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+import axios from "axios";
+import { useSchoolContext } from "../Context/SchoolContext";
 export default function Login() {
+  // Importing authenticatedUser context
+  const { setAuthenticatedUser } = useSchoolContext();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [userRole, setUserRole] = useState("guardian"); // Default role
+  const API_BASE_URL = "http://localhost:8000/api/";
+  const [errors, setErrors] = useState({}); // Form State Errors
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  }); // Form Data State
+  const [isLoading, setIsLoading] = useState(false); // Loading State
+
+  // Capture each user entries
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  // Form Validation
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Invalid email address";
+    }
+    if (!formData.password) {
+      newErrors.password = "Password is required";
+    } else if (formData.password.length < 8) {
+      newErrors.password = "Password must be at least 8 characters";
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  // Form Submission
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    if (!validateForm()) return; // Stop submission if validation fails
+    setIsLoading(true);
+    try {
+      const res = await axios.post(
+        `${
+          userRole === "student"
+            ? `${API_BASE_URL}students`
+            : `${API_BASE_URL}guardians`
+        }/login`,
+        {
+          password: formData.password,
+          email: formData.email,
+        }
+      );
+      // clear all form fields
+      setFormData({
+        password: "",
+        email: "",
+      });
+      if (res.status === 200) {
+        userRole === "student"
+          ? navigate("/dashboard")
+          : navigate("/parent-dashboard");
+      }
+      // // Set authenticated user in context
+      const { data } = res.data;
+      setAuthenticatedUser(data);
+    } catch (error) {
+      console.log(error);
+      setErrors(error?.response?.data);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <>
       <Layout2
@@ -58,11 +134,21 @@ export default function Login() {
                 userRole={userRole}
                 setShowPassword={setShowPassword}
                 showPassword={showPassword}
+                formData={formData}
+                errors={errors}
+                handleChange={handleChange}
+                isLoading={isLoading}
+                handleFormSubmit={handleFormSubmit}
               />
               <GuardianForm
                 userRole={userRole}
                 setShowPassword={setShowPassword}
                 showPassword={showPassword}
+                formData={formData}
+                errors={errors}
+                handleChange={handleChange}
+                isLoading={isLoading}
+                handleFormSubmit={handleFormSubmit}
               />
             </div>
           </div>
@@ -71,7 +157,16 @@ export default function Login() {
     </>
   );
 }
-const GuardianForm = ({ userRole, setShowPassword, showPassword }) => {
+const GuardianForm = ({
+  userRole,
+  setShowPassword,
+  showPassword,
+  formData,
+  errors,
+  handleChange,
+  isLoading,
+  handleFormSubmit,
+}) => {
   return (
     <>
       <div
@@ -79,18 +174,40 @@ const GuardianForm = ({ userRole, setShowPassword, showPassword }) => {
           userRole === "guardian" ? "block" : "hidden"
         } max-w-[410px] w-full lg:px-9 py-5 lg:bg-[#FBFAFA] rounded-md lg:shadow-md mt-3`}
       >
+        {/* Log the error message */}
+        {errors.message && (
+          <p className="mb-4 text-xs text-red-500 text-center">
+            {errors.message}
+          </p>
+        )}
         {/* Form Inputs */}
-        <form action="" method="post" autoComplete="off" className="space-y-5">
+        <form
+          onSubmit={handleFormSubmit}
+          action=""
+          method="post"
+          autoComplete="off"
+          className="space-y-5"
+        >
+          {/* Email Input */}
           <div>
             <label className="block text-sm font-medium text-blue-900 mb-2">
               Email Address
             </label>
             <input
+              id="student-email"
               name="email"
               type="email"
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent`}
+              value={formData.email}
+              onChange={handleChange}
+              className={`w-full px-4 py-2 border rounded-lg ${
+                errors.email ? "border-red-500" : "border-gray-300"
+              } focus:ring-2 focus:ring-blue-900 focus:border-transparent`}
             />
+            {errors.email && (
+              <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+            )}
           </div>
+
           {/* Password Input */}
           <div>
             <label className="block text-sm font-medium text-blue-900 mb-2">
@@ -98,10 +215,16 @@ const GuardianForm = ({ userRole, setShowPassword, showPassword }) => {
             </label>
             <div className="relative">
               <input
-                id="password"
+                id="student-password"
                 name="password"
                 type={showPassword ? "text" : "password"}
-                className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2`}
+                value={formData.password}
+                onChange={handleChange}
+                className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 ${
+                  errors.password
+                    ? "border-red-500 focus:ring-red-500"
+                    : "border-gray-300 focus:ring-blue-900"
+                }`}
               />
               <span
                 className="absolute right-3 top-3.5 text-gray-400 hover:text-blue-500 transition-colors cursor-pointer"
@@ -114,7 +237,11 @@ const GuardianForm = ({ userRole, setShowPassword, showPassword }) => {
                 )}
               </span>
             </div>
+            {errors.password && (
+              <p className="mt-1 text-sm text-red-500">{errors.password}</p>
+            )}
           </div>
+
           <div className="formItems flex gap-2 my-5">
             <input
               type="checkbox"
@@ -124,14 +251,21 @@ const GuardianForm = ({ userRole, setShowPassword, showPassword }) => {
               Remember me
             </span>
           </div>
-          <div className="mt-1 flex gap-2 py-[10px] bg-gradient-to-r from-[#09314F] to-[#E83831] rounded-lg shadow-sm w-full">
-            <button
-              type="submit"
-              className="w-full h-full text-white text-[17px] font-semibold"
-            >
-              Login
-            </button>
-          </div>
+          <button
+            type="submit"
+            disabled={isLoading}
+            className={`w-full py-3 px-4 rounded-lg font-medium ${
+              isLoading
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-gradient-to-r from-[#09314F] to-[#E83831] hover:bg-green-800"
+            } text-white transition-colors flex items-center justify-center`}
+          >
+            {isLoading ? (
+              <Icon icon="line-md:loading-loop" width="24" height="24" />
+            ) : (
+              "Login"
+            )}
+          </button>
         </form>
         <div className="flex justify-center items-center my-6 gap-2">
           <div className="w-full h-[1.5px] bg-black" />
@@ -158,24 +292,54 @@ const GuardianForm = ({ userRole, setShowPassword, showPassword }) => {
     </>
   );
 };
-const StudentForm = ({ userRole, setShowPassword, showPassword }) => {
+const StudentForm = ({
+  userRole,
+  setShowPassword,
+  showPassword,
+  formData,
+  errors,
+  handleChange,
+  isLoading,
+  handleFormSubmit,
+}) => {
   return (
     <div
       className={`${
         userRole === "student" ? "block" : "hidden "
       } max-w-[410px] w-full lg:px-9 py-5 lg:bg-[#FBFAFA] rounded-md lg:shadow-md mt-3`}
     >
+      {/* Log the error message */}
+      {errors.message && (
+        <p className="mb-4 text-xs text-red-500 text-center">
+          {errors.message}
+        </p>
+      )}
       {/* Form Inputs */}
-      <form action="" method="post" autoComplete="off" className="space-y-5">
+      <form
+        action=""
+        onSubmit={handleFormSubmit}
+        method="post"
+        autoComplete="off"
+        className="space-y-5"
+      >
+        {/* Email Input */}
         <div>
           <label className="block text-sm font-medium text-blue-900 mb-2">
             Email Address
           </label>
           <input
+            id="student-email"
             name="email"
             type="email"
-            className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent`}
+            value={formData.email}
+            onChange={handleChange}
+            className={`w-full px-4 py-2 border rounded-lg ${
+              errors.email ? "border-red-500" : "border-gray-300"
+            } focus:ring-2 focus:ring-blue-900 focus:border-transparent`}
           />
+          {errors.email && (
+            <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+          )}
         </div>
         {/* Password Input */}
         <div>
@@ -184,10 +348,16 @@ const StudentForm = ({ userRole, setShowPassword, showPassword }) => {
           </label>
           <div className="relative">
             <input
-              id="password"
+              id="student-password"
               name="password"
               type={showPassword ? "text" : "password"}
-              className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2`}
+              value={formData.password}
+              onChange={handleChange}
+              className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 ${
+                errors.password
+                  ? "border-red-500 focus:ring-red-500"
+                  : "border-gray-300 focus:ring-blue-900"
+              }`}
             />
             <span
               className="absolute right-3 top-3.5 text-gray-400 hover:text-blue-500 transition-colors cursor-pointer"
@@ -200,6 +370,9 @@ const StudentForm = ({ userRole, setShowPassword, showPassword }) => {
               )}
             </span>
           </div>
+          {errors.password && (
+            <p className="mt-1 text-sm text-red-500">{errors.password}</p>
+          )}
         </div>
         <div className="formItems flex gap-2 my-5">
           <input type="checkbox" className="flex justify-start items-start " />
@@ -207,14 +380,21 @@ const StudentForm = ({ userRole, setShowPassword, showPassword }) => {
             Remember me
           </span>
         </div>
-        <div className="mt-1 flex gap-2 py-[10px] bg-gradient-to-r from-[#09314F] to-[#E83831] rounded-lg shadow-sm w-full">
-          <button
-            type="submit"
-            className="w-full h-full text-white text-[17px] font-semibold"
-          >
-            Login
-          </button>
-        </div>
+        <button
+          type="submit"
+          disabled={isLoading}
+          className={`w-full py-3 px-4 rounded-lg font-medium ${
+            isLoading
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-gradient-to-r from-[#09314F] to-[#E83831] hover:bg-green-800"
+          } text-white transition-colors flex items-center justify-center`}
+        >
+          {isLoading ? (
+            <Icon icon="line-md:loading-loop" width="24" height="24" />
+          ) : (
+            "Login"
+          )}
+        </button>
       </form>
       <div className="flex justify-center items-center my-6 gap-2">
         <div className="w-full h-[1.5px] bg-black" />
