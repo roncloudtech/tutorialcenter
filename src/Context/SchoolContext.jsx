@@ -6,7 +6,11 @@ export const useSchoolContext = () => useContext(SchoolContext);
 
 const SchoolContextProvider = ({ children }) => {
   const [expandSideBar, setExpandSideBar] = useState(true);
-  const [authenticatedUser, setAuthenticatedUser] = useState({});
+  // get authenticated user from local storage or set to an empty object
+  // this is to ensure that the user data persists even after a page refresh
+  const [authenticatedUser, setAuthenticatedUser] = useState(
+    JSON.parse(localStorage.getItem("userInfo")) || {}
+  );
   const contextValue = {
     expandSideBar,
     setExpandSideBar,

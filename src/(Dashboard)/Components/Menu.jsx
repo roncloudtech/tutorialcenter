@@ -1,7 +1,6 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { NavLink } from "react-router-dom";
 import { useSchoolContext } from "../../Context/SchoolContext";
-import { role } from "../../data";
 
 const menuItems = [
   // STUDENT ROUTES
@@ -194,8 +193,10 @@ const menuItems = [
 export default function Menu() {
   // Get the role from the context
   const { authenticatedUser } = useSchoolContext();
+
   // Get the expandSideBar state from the context
   const { expandSideBar } = useSchoolContext();
+
   return (
     <>
       {menuItems.map((item, index) => {

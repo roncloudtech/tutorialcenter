@@ -67,14 +67,15 @@ export default function Login() {
         password: "",
         email: "",
       });
+      // Set authenticated user in the local storage
+      const { data } = res.data;
+      setAuthenticatedUser(data);
+      localStorage.setItem("userInfo", JSON.stringify(data));
       if (res.status === 200) {
         userRole === "student"
           ? navigate("/dashboard")
           : navigate("/parent-dashboard");
       }
-      // // Set authenticated user in context
-      const { data } = res.data;
-      setAuthenticatedUser(data);
     } catch (error) {
       console.log(error);
       setErrors(error?.response?.data);
