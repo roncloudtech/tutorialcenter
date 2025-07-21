@@ -29,7 +29,7 @@ export default function StudentProfileList() {
     setActive(index);
   };
   return (
-    <div className="dark:bg-darkMode bg-mainWhite shadow-custom-1 rounded-md p-1.5 overflow-scroll hidden xl:block">
+    <div className="dark:bg-darkMode bg-mainWhite shadow-custom-1 rounded-md p-2 hidden xl:block">
       <div className="flex justify-between items-center text-sm font-semibold dark:text-lightGrey text-mainBlack">
         <p>STUDENTS</p>
         <p>5</p>

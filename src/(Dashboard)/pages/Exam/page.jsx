@@ -4,12 +4,13 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import Title from "../../Components/Title";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";
+import Calculator from "../../Components/Calculator";
 
 export default function Exampage() {
   const [active, setActive] = useState(true);
   return (
     <DashboardLayout>
-      <div className="xl:grid grid-cols-[1fr_0.38fr] h-full scroll">
+      <div className="xl:grid grid-cols-[1fr_0.40fr] h-full scroll">
         {/* LEFT SIDE  */}
         <PerfectScrollbar options={{ suppressScrollX: true }}>
           <div className="item1 xl:px-4 p-2.5">
@@ -26,7 +27,7 @@ export default function Exampage() {
         </PerfectScrollbar>
         <PerfectScrollbar className="hidden xl:block">
           <div className="h-full bg-mainWhite dark:bg-whiteFade scroll sm:overflow-y-auto shadow-custom-1 rounded-md p-2">
-            CALCULATOR
+            <Calculator />
           </div>
         </PerfectScrollbar>
       </div>

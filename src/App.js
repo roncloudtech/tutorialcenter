@@ -30,6 +30,8 @@ import EmailVerfication from "./Pages/EmailVerfication";
 import CourseChats from "./(Dashboard)/pages/Course/CourseChats";
 import AdminDashboard from "./ADMIN/pages/Dashboard";
 import AllStudents from "./ADMIN/Lists/Students";
+import PrivateRoute from "./Pages/Auth/PrivateRoute";
+import Unauthorized from "./Pages/Auth/Unauthorized";
 
 export default function App() {
   return (
@@ -45,38 +47,49 @@ export default function App() {
           <Route path="/training-selection" element={<TrainingSelection />} />
           {/*ALL DASHBBOARD ROUTES */}
           {/* STUDENT ROUTES */}
-          <Route path="/dashboard" element={<StudentDashboard />} />
-          <Route path="/courses" element={<Coursepage />} />
-          <Route path="/course-chat" element={<CourseChats />} />
-          <Route path="/calender" element={<Calender />} />
-          <Route path="/exam" element={<Exampage />} />
-          <Route path="/groups" element={<Group />} />
+          <Route element={<PrivateRoute allowedRole="student" />}>
+            <Route path="/dashboard" element={<StudentDashboard />} />
+            <Route path="/courses" element={<Coursepage />} />
+            <Route path="/course-chat" element={<CourseChats />} />
+            <Route path="/calender" element={<Calender />} />
+            <Route path="/exam" element={<Exampage />} />
+            <Route path="/groups" element={<Group />} />
+          </Route>
           <Route path="/payment" element={<PaymentPage />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/help" element={<Help />} />
 
           {/* PARENT ROUTES */}
-          <Route path="/parent-dashboard" element={<ParentDashboard />} />
-          <Route path="/parent-calender" element={<ParentCalender />} />
-          <Route
-            path="/parent-exam-practice"
-            element={<ParentExamPractice />}
-          />
-          <Route path="/parent-payment" element={<ParentPayment />} />
-          <Route path="/parent-settings" element={<ParentSettings />} />
-          <Route path="/parent-help" element={<ParentHelp />} />
-          <Route path="/parent-overview" element={<ParentOverview />} />
+          <Route element={<PrivateRoute allowedRole="guardian" />}>
+            <Route path="/parent-dashboard" element={<ParentDashboard />} />
+            <Route path="/parent-calender" element={<ParentCalender />} />
+            <Route
+              path="/parent-exam-practice"
+              element={<ParentExamPractice />}
+            />
+            <Route path="/parent-payment" element={<ParentPayment />} />
+            <Route path="/parent-settings" element={<ParentSettings />} />
+            <Route path="/parent-help" element={<ParentHelp />} />
+            <Route path="/parent-overview" element={<ParentOverview />} />
+          </Route>
 
           {/* TEACHER ROUTES */}
-          <Route path="/teacher-dashboard" element={<TeacherDashboard />} />
-          <Route path="/teacher-assessment" element={<Assesment />} />
-          <Route path="/teacher-group" element={<TeacherGroups />} />
-          <Route path="/teacher-settings" element={<TeacherSettings />} />
-          <Route path="/teacher-result" element={<TeacherResult />} />
+          <Route element={<PrivateRoute allowedRole="teacher" />}>
+            <Route path="/teacher-dashboard" element={<TeacherDashboard />} />
+            <Route path="/teacher-assessment" element={<Assesment />} />
+            <Route path="/teacher-group" element={<TeacherGroups />} />
+            <Route path="/teacher-settings" element={<TeacherSettings />} />
+            <Route path="/teacher-result" element={<TeacherResult />} />
+          </Route>
 
           {/* ADMIN ROUTES */}
-          <Route path="/admin-dashboard" element={<AdminDashboard />} />
-          <Route path="/student-list" element={<AllStudents />} />
+          <Route element={<PrivateRoute allowedRole="admin" />}>
+            <Route path="/admin-dashboard" element={<AdminDashboard />} />
+            <Route path="/student-list" element={<AllStudents />} />
+          </Route>
+
+          {/* Unauthorized Route */}
+          <Route path="/unauthorized" element={<Unauthorized />} />
         </Routes>
       </BrowserRouter>
     </>

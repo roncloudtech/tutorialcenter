@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../../Assets/tutorial_logo.png";
 import logo2 from "../../Assets/TC 1.png";
 import { Icon } from "@iconify/react/dist/iconify.js";
@@ -8,7 +8,18 @@ import { role } from "../../data";
 import useScrollVisibility from "../../Hooks/useScrollVisibility";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";
+import LogoutModal from "../../Pages/Auth/LogoutModal";
 export default function SideBar({ expandSideBar, setExpandSideBar }) {
+  const navigate = useNavigate();
+  // show logout modal
+  const [logoutModal, setLogoutModal] = useState(false);
+
+  // Function to handle logout
+  const handleLogout = () => {
+    localStorage.removeItem("userInfo");
+    setLogoutModal(false);
+    navigate("/login");
+  };
   return (
     <>
       <PerfectScrollbar className="hidden xl:block">
@@ -70,7 +81,10 @@ export default function SideBar({ expandSideBar, setExpandSideBar }) {
           </div>
           <div className="space-y-2 w-full my-[2px]">
             <ToggleMode expandSideBar={expandSideBar} />
-            <div className="flex items-center gap-2 text-mainBlue dark:text-lightGrey">
+            <button
+              onClick={() => setLogoutModal(true)}
+              className="flex items-center gap-2 text-mainBlue dark:text-lightGrey"
+            >
               <Icon
                 icon="material-symbols:logout-rounded"
                 width="20"
@@ -83,11 +97,16 @@ export default function SideBar({ expandSideBar, setExpandSideBar }) {
               >
                 Logout
               </span>
-            </div>
+            </button>
           </div>
         </div>
       </PerfectScrollbar>
       <MobileScreenNavigation />
+      <LogoutModal
+        modal={logoutModal}
+        setModal={setLogoutModal}
+        handleLogout={handleLogout}
+      />
     </>
   );
 }

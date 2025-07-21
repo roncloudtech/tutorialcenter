@@ -1,7 +1,6 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { NavLink } from "react-router-dom";
 import { useSchoolContext } from "../../Context/SchoolContext";
-import { role } from "../../data";
 
 const menuItems = [
   // STUDENT ROUTES
@@ -88,7 +87,7 @@ const menuItems = [
     icon: (
       <Icon icon="material-symbols:dashboard-rounded" width="20" height="20" />
     ),
-    visible: ["parent"],
+    visible: ["guardian"],
   },
   {
     label: "Overview",
@@ -96,37 +95,37 @@ const menuItems = [
     icon: (
       <Icon icon="material-symbols:dashboard-rounded" width="20" height="20" />
     ),
-    visible: ["parent"],
+    visible: ["guardian"],
   },
   {
     label: "Calender",
     path: "/parent-calender",
     icon: <Icon icon="uis:calender" width="20" height="20" />,
-    visible: ["parent"],
+    visible: ["guardian"],
   },
   {
     label: "Exam Practice",
     path: "/parent-exam-practice",
     icon: <Icon icon="ph:exam-fill" width="20" height="20" />,
-    visible: ["parent"],
+    visible: ["guardian"],
   },
   {
     label: "Payment",
     path: "/parent-payment",
     icon: <Icon icon="fluent:payment-32-filled" width="20" height="20" />,
-    visible: ["parent"],
+    visible: ["guardian"],
   },
   {
     label: "Settings",
     path: "/parent-settings",
     icon: <Icon icon="lets-icons:setting-fill" width="20" height="20" />,
-    visible: ["parent"],
+    visible: ["guardian"],
   },
   {
     label: "Help",
     path: "/help",
     icon: <Icon icon="material-symbols:help-center" width="20" height="20" />,
-    visible: ["parent"],
+    visible: ["guardian"],
   },
 
   // TEACHER || TUTOR ROUTES
@@ -192,12 +191,16 @@ const menuItems = [
 ];
 
 export default function Menu() {
+  // Get the role from the context
+  const { authenticatedUser } = useSchoolContext();
+
+  // Get the expandSideBar state from the context
   const { expandSideBar } = useSchoolContext();
 
   return (
     <>
       {menuItems.map((item, index) => {
-        if (item.visible?.includes(role)) {
+        if (item.visible?.includes(authenticatedUser.role)) {
           return (
             <NavLink
               className="flex justify-between p-2 dark:text-lightGrey text-mainBlue [&.active]:bg-mainBlue [&.active]:text-mainWhite [&.active]:dark:bg-lightGrey [&.active]:dark:text-mainBlue [&.active]:font-bold rounded-lg"
