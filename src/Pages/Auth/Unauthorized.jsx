@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 import { useSchoolContext } from "../../Context/SchoolContext";
 
 export default function Unauthorized() {
-  const { authenticatedUser } = useSchoolContext();
+  const { role } = useSchoolContext();
   // If the user is authenticated, redirect them to their dashboard
   const checkUserRole = () => {
-    if (authenticatedUser && authenticatedUser.role) {
-      switch (authenticatedUser.role) {
+    if (role !== "") {
+      switch (role) {
         case "student":
           return "/dashboard";
         case "guardian":

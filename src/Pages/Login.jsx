@@ -8,7 +8,7 @@ import axios from "axios";
 import { useSchoolContext } from "../Context/SchoolContext";
 export default function Login() {
   // Importing authenticatedUser context
-  const { setAuthenticatedUser } = useSchoolContext();
+  const { setAuthenticatedUser, setRole } = useSchoolContext();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [userRole, setUserRole] = useState("guardian"); // Default role
@@ -67,10 +67,19 @@ export default function Login() {
         password: "",
         email: "",
       });
-      // Set authenticated user in the local storage
-      const { data } = res.data;
-      setAuthenticatedUser(data);
-      localStorage.setItem("userInfo", JSON.stringify(data));
+      console.log("User logged in successfully:", res.data);
+      // Set authenticated user in the local and context state
+      if (userRole === "student") {
+        localStorage.setItem("userInfo", JSON.stringify(res.data.student));
+        localStorage.setItem("userRole", "student");
+        setAuthenticatedUser(res.data.student);
+        setRole("student");
+      } else {
+        localStorage.setItem("userInfo", JSON.stringify(res.data.guardian));
+        localStorage.setItem("userRole", "guardian");
+        setAuthenticatedUser(res.data.guardian);
+        setRole("guardian");
+      }
       if (res.status === 200) {
         userRole === "student"
           ? navigate("/dashboard")

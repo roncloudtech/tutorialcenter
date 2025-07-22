@@ -1,13 +1,13 @@
 import { Outlet, Navigate } from "react-router-dom";
 import { useSchoolContext } from "../../Context/SchoolContext";
 export default function PrivateRoute({ allowedRole }) {
-  const { authenticatedUser } = useSchoolContext();
+  const { role } = useSchoolContext();
   // Check if the user is authenticated
-  if (!authenticatedUser || Object.keys(authenticatedUser).length === 0) {
+  if (!role || role === "") {
     return <Navigate to="/login" replace />;
   }
   // Check for the user role
-  if (authenticatedUser.role !== allowedRole) {
+  if (role !== allowedRole) {
     return <Navigate to="/unauthorized" />;
   }
 

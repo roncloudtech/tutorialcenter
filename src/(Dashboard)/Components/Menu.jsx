@@ -192,7 +192,7 @@ const menuItems = [
 
 export default function Menu() {
   // Get the role from the context
-  const { authenticatedUser } = useSchoolContext();
+  const { role } = useSchoolContext();
 
   // Get the expandSideBar state from the context
   const { expandSideBar } = useSchoolContext();
@@ -200,7 +200,7 @@ export default function Menu() {
   return (
     <>
       {menuItems.map((item, index) => {
-        if (item.visible?.includes(authenticatedUser.role)) {
+        if (item.visible?.includes(role)) {
           return (
             <NavLink
               className="flex justify-between p-2 dark:text-lightGrey text-mainBlue [&.active]:bg-mainBlue [&.active]:text-mainWhite [&.active]:dark:bg-lightGrey [&.active]:dark:text-mainBlue [&.active]:font-bold rounded-lg"

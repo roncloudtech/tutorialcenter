@@ -9,15 +9,20 @@ import useScrollVisibility from "../../Hooks/useScrollVisibility";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import LogoutModal from "../../Pages/Auth/LogoutModal";
+import { useSchoolContext } from "../../Context/SchoolContext";
 export default function SideBar({ expandSideBar, setExpandSideBar }) {
+  // The user coontext
+  const { setAuthenticatedUser, setRole } = useSchoolContext();
   const navigate = useNavigate();
   // show logout modal
   const [logoutModal, setLogoutModal] = useState(false);
 
   // Function to handle logout
   const handleLogout = () => {
-    localStorage.removeItem("userInfo");
+    localStorage.clear();
     setLogoutModal(false);
+    setAuthenticatedUser({});
+    setRole("");
     navigate("/login");
   };
   return (
