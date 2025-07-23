@@ -8,7 +8,7 @@ import axios from "axios";
 import { useSchoolContext } from "../Context/SchoolContext";
 export default function Login() {
   // Importing authenticatedUser context
-  const { setAuthenticatedUser, setRole } = useSchoolContext();
+  const { setAuthenticatedUser, setRole, role } = useSchoolContext();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [userRole, setUserRole] = useState("guardian"); // Default role
@@ -50,6 +50,11 @@ export default function Login() {
     e.preventDefault();
     if (!validateForm()) return; // Stop submission if validation fails
     setIsLoading(true);
+    // check if the user has been authenticated if yes, redirect them to the dashboard
+    if (role && role !== "") {
+      navigate(userRole === "student" ? "/dashboard" : "/parent-dashboard");
+      return;
+    }
     try {
       const res = await axios.post(
         `${
