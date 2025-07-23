@@ -4,7 +4,7 @@ import logo from "../../Assets/tutorial_logo.png";
 import logo2 from "../../Assets/TC 1.png";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Menu from "./Menu";
-import { role } from "../../data";
+// import { role } from "../../data";
 import useScrollVisibility from "../../Hooks/useScrollVisibility";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";
@@ -166,6 +166,8 @@ const ToggleMode = ({ expandSideBar }) => {
 };
 
 const MobileScreenNavigation = () => {
+  // The role context
+  const { role } = useSchoolContext();
   const menuItems = [
     // STUDENT ROUTES
     {
@@ -287,6 +289,7 @@ const MobileScreenNavigation = () => {
               </NavLink>
             );
           }
+          return null;
         })}
         <button
           onClick={() => setVisible(true)}

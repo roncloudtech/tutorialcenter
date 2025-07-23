@@ -1,5 +1,5 @@
-import React from "react";
 import Title from "./Cards/Title";
+import { Link } from "react-router-dom";
 
 export default function Contact() {
   return (
@@ -27,18 +27,18 @@ export default function Contact() {
                     feel free to reach out to us via email or on phone
                   </p>
                   <div className="flex sm:flex-row flex-col gap-6 mt-3">
-                    <a
-                      href=""
+                    <Link
+                      to=""
                       className="text-sencondary font-semibold text-sm"
                     >
                       tutorialcenter@gmail.com
-                    </a>
-                    <a
-                      href=""
+                    </Link>
+                    <Link
+                      to=""
                       className="text-sencondary font-semibold text-sm"
                     >
                       +234XXXXXXXXXX
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

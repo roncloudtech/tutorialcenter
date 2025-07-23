@@ -227,6 +227,7 @@ export default function Menu() {
             </NavLink>
           );
         }
+        return null;
       })}
     </>
   );

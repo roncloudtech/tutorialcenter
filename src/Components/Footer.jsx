@@ -3,6 +3,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
+  const socialLinks = [
+    { path: "", icon: "mage:facebook" },
+    { path: "", icon: "ri:twitter-fill" },
+    { path: "", icon: "mingcute:instagram-fill" },
+    { path: "", icon: "ri:linkedin-fill" },
+    { path: "", icon: "line-md:youtube-filled" },
+  ];
   return (
     <>
       <div className="footer py-14- bg-gradient-to-r from-[#09314F] to-[#E83831] text-white">
@@ -42,69 +49,30 @@ export default function Footer() {
                 <Link className="underline text-[14px]">Privacy Policy</Link> .{" "}
               </p>
               <div className="Social_links flex justify-center items-center gap-3 mb-6">
-                <a
-                  href=""
-                  className="w-9 h-9 flex justify-center items-center rounded-xl bg-white "
-                >
-                  <Icon
-                    icon="mage:facebook"
-                    width="24"
-                    height="24"
-                    className="text-ascent"
-                  />
-                </a>
-                <a
-                  href=""
-                  className="w-9 h-9 flex justify-center items-center rounded-xl bg-white "
-                >
-                  <Icon
-                    icon="ri:twitter-fill"
-                    width="24"
-                    height="24"
-                    className="text-ascent"
-                  />
-                </a>
-                <a
-                  href=""
-                  className="w-9 h-9 flex justify-center items-center rounded-xl bg-white "
-                >
-                  <Icon
-                    icon="mingcute:instagram-fill"
-                    width="24"
-                    height="24"
-                    className="text-ascent"
-                  />
-                </a>
-                <a
-                  href=""
-                  className="w-9 h-9 flex justify-center items-center rounded-xl bg-white "
-                >
-                  <Icon
-                    icon="ri:linkedin-fill"
-                    width="24"
-                    height="24"
-                    className="text-ascent"
-                  />
-                </a>
-                <a
-                  href=""
-                  className="w-9 h-9 flex justify-center items-center rounded-xl bg-white "
-                >
-                  <Icon
-                    icon="line-md:youtube-filled"
-                    width="24"
-                    height="24"
-                    className="text-ascent"
-                  />
-                </a>
+                {socialLinks.map((link, i) => {
+                  return (
+                    <Link
+                      key={i}
+                      to={link.path}
+                      className="w-9 h-9 flex justify-center items-center rounded-xl bg-white "
+                    >
+                      <Icon
+                        icon={link.icon}
+                        width="24"
+                        height="24"
+                        className="text-ascent"
+                      />
+                    </Link>
+                  );
+                })}
               </div>
               <div className="download_app text-[12px]">
                 <p className="mb-3 ">
                   Click to download our app. Download Now!
                 </p>
                 <div className="flex flex-row items-center justify-between gap-4">
-                  <a
-                    href=""
+                  <Link
+                    to=""
                     className="w-full flex justify-center items-center gap-2 bg-sencondary py-[6px] rounded-lg"
                   >
                     <Icon
@@ -114,9 +82,9 @@ export default function Footer() {
                       style={{ color: "white" }}
                     />
                     <span className="text-white  text-[12px]">Apple Store</span>
-                  </a>
-                  <a
-                    href=""
+                  </Link>
+                  <Link
+                    to=""
                     className="w-full flex justify-center items-center gap-2 bg-primary py-[6px] rounded-lg"
                   >
                     <Icon
@@ -126,7 +94,7 @@ export default function Footer() {
                       style={{ color: "white" }}
                     />
                     <span className="text-white text-[12px]">Play Store</span>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
