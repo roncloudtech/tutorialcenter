@@ -3,7 +3,7 @@ import icon from "../../Assets/Group 1000001500.png";
 export default function Title({ title, left }) {
   return (
     <>
-      <div className="bg-primary py-3 relative">
+      <div className="bg-primary py-3 relative Container">
         <h1 className="semi-title text-center text-white uppercase">{title}</h1>
         <div
           className={`absolute -bottom-[75px] ${left ? "left-14" : "right-14"}`}

@@ -37,7 +37,7 @@ export default function Slider() {
     setCurrentSlide((prev) => (prev + 1) % slide.length);
   };
   return (
-    <div className="w-full overflow-hidden mb-8">
+    <div className="w-full max-w-[1200px] overflow-hidden mb-8 mx-auto">
       <div
         className="flex w-full transition-transform ease-custom duration-500"
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
