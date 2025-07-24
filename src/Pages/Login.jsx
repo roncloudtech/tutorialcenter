@@ -72,17 +72,34 @@ export default function Login() {
         password: "",
         email: "",
       });
-      console.log("User logged in successfully:", res.data);
       // Set authenticated user in the local and context state
       if (userRole === "student") {
-        localStorage.setItem("userInfo", JSON.stringify(res.data.student));
+        // This is where the error might occur if the student data is not returned correctly
+        const studentInfo = res.data.student;
+        if (studentInfo === undefined) {
+          console.log(
+            `No student data found, check the login flow.  ${studentInfo}`
+          );
+          return;
+        }
+        // Store user info and role in local storage and context
+        localStorage.setItem("userInfo", JSON.stringify(studentInfo));
         localStorage.setItem("userRole", "student");
-        setAuthenticatedUser(res.data.student);
+        setAuthenticatedUser(studentInfo);
         setRole("student");
       } else {
-        localStorage.setItem("userInfo", JSON.stringify(res.data.guardian));
+        // This is where the error might occur if the guardian data is not returned correctly
+        const guardianInfo = res.data.guardian;
+        if (guardianInfo === undefined) {
+          console.log(
+            `No guardian data found, check the login flow.  ${guardianInfo}`
+          );
+          return;
+        }
+        // Store user info and role in local storage and context
+        localStorage.setItem("userInfo", JSON.stringify(guardianInfo));
         localStorage.setItem("userRole", "guardian");
-        setAuthenticatedUser(res.data.guardian);
+        setAuthenticatedUser(guardianInfo);
         setRole("guardian");
       }
       if (res.status === 200) {
