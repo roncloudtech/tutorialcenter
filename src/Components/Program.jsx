@@ -3,6 +3,7 @@ import ProgramCard from "./Cards/ProgramCard";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Icon } from "@iconify/react/dist/iconify.js";
 
 const program = [
   {
@@ -56,15 +57,37 @@ const program = [
 ];
 
 export default function Program() {
+  // custom arrow for the slider
+  const NextArrow = ({ onClick, style, className }) => {
+    return (
+      <div style={{ ...style }} className={`text-mainBlue ${className}`}>
+        <Icon icon="oui:arrow-right" width="30" height="30" onClick={onClick} />
+      </div>
+    );
+  };
+  const PrevArrow = ({ onClick, style, className }) => {
+    return (
+      <div style={{ ...style }} className={`text-mainBlue ${className}`}>
+        <Icon
+          icon="oui:arrow-left"
+          className="#09314f "
+          width="30"
+          height="30"
+          onClick={onClick}
+        />
+      </div>
+    );
+  };
   // slider settings from react-slick
   var settings = {
     infinite: true,
     fade: false,
     dots: true,
+    lazyLoad: true,
+    speed: 500,
     cssEase: "ease",
-    speed: 2000,
     autoplay: true,
-    autoplaySpeed: 4000,
+    autoplaySpeed: 2000,
     slidesToShow: 2,
     slidesToScroll: 2,
     initialSlide: 0,
@@ -86,12 +109,14 @@ export default function Program() {
         },
       },
     ],
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
   };
 
   return (
     <div className="relative">
-      <div className="Container scroll">
-        <div className="py-10 w-full overflow-hidden">
+      <div className="programs Container scroll">
+        <div className="py-10">
           <div className="mb-9">
             <h2 className="uppercase header-title mb-4">Our program</h2>
             <p className="text-sm leading-6">
@@ -102,7 +127,7 @@ export default function Program() {
               with confidence and ease
             </p>
           </div>
-          <div className="block space-x-3">
+          <div className="">
             <Slider {...settings}>
               {program.map((item, index) => (
                 <ProgramCard
