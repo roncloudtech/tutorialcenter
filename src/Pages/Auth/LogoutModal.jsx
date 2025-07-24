@@ -1,6 +1,31 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
+import { useSchoolContext } from "../../Context/SchoolContext";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { delay } from "../../Utils/Delay";
 
-export default function LogoutModal({ setModal, modal, handleLogout }) {
+export default function LogoutModal({ setModal, modal }) {
+  // Loading state
+  const [isLoading, setIsLoading] = useState(false);
+  // context
+  const { setAuthenticatedUser, setRole } = useSchoolContext();
+  // navigation
+  const navigate = useNavigate();
+
+  // Function to handle logout
+  const handleLogout = () => {
+    setIsLoading(true);
+    // Simulate a delay for logout process
+    delay(2000).then(() => {
+      setIsLoading(false);
+      // Clear local storage and context state
+      localStorage.clear();
+      setModal(false);
+      setAuthenticatedUser({});
+      setRole("");
+      navigate("/login");
+    });
+  };
   return (
     <div
       className={`${
@@ -23,9 +48,13 @@ export default function LogoutModal({ setModal, modal, handleLogout }) {
             <div className="mt-6 flex items-center gap-3">
               <button
                 onClick={handleLogout}
-                className="w-full py-1.5 ring-1 ring-secondaryDark300 text-secondaryDark300 rounded-lg text-base"
+                className="w-full py-1.5 ring-1 ring-secondaryDark300 text-secondaryDark300 rounded-lg text-base flex items-center justify-center"
               >
-                Log me out
+                {isLoading ? (
+                  <Icon icon="line-md:loading-loop" width="24" height="24" />
+                ) : (
+                  " Log me out"
+                )}
               </button>
               <button
                 onClick={() => setModal(false)}

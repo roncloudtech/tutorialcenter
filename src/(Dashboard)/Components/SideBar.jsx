@@ -1,30 +1,18 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useEffect, useLayoutEffect, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import logo from "../../Assets/tutorial_logo.png";
 import logo2 from "../../Assets/TC 1.png";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Menu from "./Menu";
-import { role } from "../../data";
+// import { role } from "../../data";
 import useScrollVisibility from "../../Hooks/useScrollVisibility";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import LogoutModal from "../../Pages/Auth/LogoutModal";
 import { useSchoolContext } from "../../Context/SchoolContext";
 export default function SideBar({ expandSideBar, setExpandSideBar }) {
-  // The user coontext
-  const { setAuthenticatedUser, setRole } = useSchoolContext();
-  const navigate = useNavigate();
   // show logout modal
   const [logoutModal, setLogoutModal] = useState(false);
-
-  // Function to handle logout
-  const handleLogout = () => {
-    localStorage.clear();
-    setLogoutModal(false);
-    setAuthenticatedUser({});
-    setRole("");
-    navigate("/login");
-  };
   return (
     <>
       <PerfectScrollbar className="hidden xl:block">
@@ -107,11 +95,7 @@ export default function SideBar({ expandSideBar, setExpandSideBar }) {
         </div>
       </PerfectScrollbar>
       <MobileScreenNavigation />
-      <LogoutModal
-        modal={logoutModal}
-        setModal={setLogoutModal}
-        handleLogout={handleLogout}
-      />
+      <LogoutModal modal={logoutModal} setModal={setLogoutModal} />
     </>
   );
 }
@@ -166,6 +150,8 @@ const ToggleMode = ({ expandSideBar }) => {
 };
 
 const MobileScreenNavigation = () => {
+  // The role context
+  const { role } = useSchoolContext();
   const menuItems = [
     // STUDENT ROUTES
     {
@@ -287,6 +273,7 @@ const MobileScreenNavigation = () => {
               </NavLink>
             );
           }
+          return null;
         })}
         <button
           onClick={() => setVisible(true)}
