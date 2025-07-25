@@ -1,5 +1,3 @@
-import React from "react";
-import { Icon } from "@iconify/react/dist/iconify.js";
 import ProgressBar from "../../Components/ProgressBar";
 import SmallCalendar from "../../Components/Calender";
 import DashboardLayout from "../../DashboardLayout";
