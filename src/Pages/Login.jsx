@@ -65,6 +65,7 @@ export default function Login() {
         {
           password: formData.password,
           email: formData.email,
+          identifier: formData.email,
         }
       );
       // clear all form fields

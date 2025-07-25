@@ -9,8 +9,7 @@ export default function EmailVerfication() {
   const [searchParams] = useSearchParams();
   const identifier = searchParams.get("identifier");
   const role = searchParams.get("role") === "true";
-  const API_BASE_URL =
-    process.env.REACT_APP_API_URL || "http://tutorialcenter-app.test";
+  const API_BASE_URL = "http://localhost:8000";
 
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -109,6 +108,7 @@ export default function EmailVerfication() {
         }, 2500);
       }
     } catch (error) {
+      console.log(error);
       setToast({
         type: "error",
         message: error.response?.data?.message || "Verification failed",
@@ -145,6 +145,17 @@ export default function EmailVerfication() {
                   olarewaju@gmail.com
                 </span>
               </p>
+            </div>
+            <div className="text-center mt-4">
+              {toast.message && (
+                <p
+                  className={`text-sm ${
+                    toast?.type === "error" ? "text-red-500" : "text-green-500"
+                  }`}
+                >
+                  {toast.message}
+                </p>
+              )}
             </div>
             <form
               autoComplete="off"

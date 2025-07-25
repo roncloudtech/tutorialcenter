@@ -7,8 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Layout2 from "../Components/Layout2";
 
 export default function SignUp() {
-  const API_BASE_URL =
-    process.env.REACT_APP_API_URL || "http://tutorialcenter-app.test";
+  const API_BASE_URL = "http://localhost:8000";
   const [role, setRole] = useState(false);
 
   // Caturing the user info
@@ -16,6 +15,7 @@ export default function SignUp() {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
+    gender: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -42,6 +42,8 @@ export default function SignUp() {
       newErrors.firstName = "First name is required";
 
     if (!formData.lastName.trim()) newErrors.lastName = "Last name is required";
+
+    if (!formData.gender.trim()) newErrors.gender = "Please select your gender";
 
     if (!formData.email.trim()) {
       newErrors.email = "Email is required";
@@ -289,6 +291,29 @@ const Form = ({
         />
         {errors.email && (
           <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+        )}
+      </div>
+
+      {/* Gender Select */}
+      <div>
+        <label className="block text-sm font-medium text-blue-900 mb-2">
+          Gender
+        </label>
+        <select
+          name="gender"
+          value={formData.gender}
+          onChange={handleChange}
+          className={`w-full px-4 py-2 border border-solid rounded-lg ${
+            errors.gender ? "border-red-500" : "border-gray-300"
+          } focus:ring-2 focus:ring-blue-900 focus:border-transparent`}
+        >
+          <option value="">Select Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Others">Others</option>
+        </select>
+        {errors.gender && (
+          <p className="mt-1 text-sm text-red-500">{errors.gender}</p>
         )}
       </div>
 
