@@ -6,13 +6,14 @@ import Title from "../../Components/Title";
 import FaqBtn from "../../Components/FaqBtn";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";
+import TwoColumnLayout from "../../../Components/TwoColumnLayout";
 
 export default function Help() {
   return (
     <>
       <DashboardLayout>
-        <div className="xl:grid grid-cols-[1fr_0.40fr] h-full overflow-hidden">
-          <PerfectScrollbar options={{ suppressScrollX: true }}>
+        <TwoColumnLayout
+          leftContent={
             <div className="item1 xl:px-4 p-2.5">
               {/* header */}
               <Title title={"help"} />
@@ -23,8 +24,8 @@ export default function Help() {
                 <Chat />
               </div>
             </div>
-          </PerfectScrollbar>
-          <PerfectScrollbar>
+          }
+          rightContent={
             <div className="dark:bg-darkMode bg-mainWhite  scroll sm:shadow-custom-1 dark:text-lightGrey rounded-lg sm:p-3 sm:m-0.5 max-sm:mt-4">
               <h2 className="uppercase text-xs max-sm:text-center font-semibold p-3 rounded-custom bg-ascent text-mainWhite dark:text-lightGrey">
                 contact us
@@ -45,8 +46,8 @@ export default function Help() {
                 <FAQ />
               </div>
             </div>
-          </PerfectScrollbar>
-        </div>
+          }
+        />
       </DashboardLayout>
     </>
   );

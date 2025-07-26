@@ -1,15 +1,14 @@
 import DashboardLayout from "../../DashboardLayout";
 import Title from "../../Components/Title";
-import PerfectScrollbar from "react-perfect-scrollbar";
-import "react-perfect-scrollbar/dist/css/styles.css";
+import TwoColumnLayout from "../../../Components/TwoColumnLayout";
 
 export default function Settings() {
   return (
     <>
       <DashboardLayout>
-        <PerfectScrollbar options={{ suppressScrollX: true }}>
-          <div className="xl:grid grid-cols-[1fr_0.38fr] h-full scroll">
-            <div className="item1 xl:px-4 p-2.5 overflow-y-auto">
+        <TwoColumnLayout
+          leftContent={
+            <div className="item1 xl:px-4 p-2.5">
               {/* header */}
               <Title title={"settings"} />
               {/* EDIT PERSONAL INFORMATION*/}
@@ -54,7 +53,9 @@ export default function Settings() {
                 </button>
               </div>
             </div>
-            <div className="bg-mainWhite dark:bg-darkMode shadow-custom-1 scroll rounded-md p-3  dark:text-lightGrey">
+          }
+          rightContent={
+            <div className="bg-mainWhite dark:bg-darkMode shadow-custom-1 scroll rounded-md p-3  dark:text-lightGrey h-full">
               {/* USER PROFILE */}
               <div className="mb-6">
                 <img
@@ -83,8 +84,8 @@ export default function Settings() {
                 </div>
               </div>
             </div>
-          </div>
-        </PerfectScrollbar>
+          }
+        />
       </DashboardLayout>
     </>
   );

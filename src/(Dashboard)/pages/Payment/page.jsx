@@ -9,6 +9,10 @@ import RenewPayment from "../../Components/RenewPayment";
 export default function PaymentPage() {
   const [payment, setPayment] = useState(true);
   const [training, setTraining] = useState(true);
+  const handleGoback = () => {
+    setPayment(true);
+    setTraining(true);
+  };
   return (
     <>
       <DashboardLayout>
@@ -35,7 +39,10 @@ export default function PaymentPage() {
                 </button>
               </div>
             ) : (
-              <RenewPayment setPayment={setPayment} />
+              <RenewPayment
+                handleGoBack={handleGoback}
+                setPayment={setPayment}
+              />
             )}
             {training ? "" : <Training setTraining={setTraining} />}
           </div>

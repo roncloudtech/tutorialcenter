@@ -2,17 +2,15 @@ import { useState } from "react";
 import DashboardLayout from "../../DashboardLayout";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Title from "../../Components/Title";
-import PerfectScrollbar from "react-perfect-scrollbar";
-import "react-perfect-scrollbar/dist/css/styles.css";
 import Calculator from "../../Components/Calculator";
+import TwoColumnLayout from "../../../Components/TwoColumnLayout";
 
 export default function Exampage() {
   const [active, setActive] = useState(true);
   return (
     <DashboardLayout>
-      <div className="xl:grid grid-cols-[1fr_0.40fr] h-full scroll">
-        {/* LEFT SIDE  */}
-        <PerfectScrollbar options={{ suppressScrollX: true }}>
+      <TwoColumnLayout
+        leftContent={
           <div className="item1 xl:px-4 p-2.5">
             {/* header */}
             <Title title={"exam practice"} />
@@ -24,13 +22,13 @@ export default function Exampage() {
               <ExamPractice setActive={setActive} />
             )}
           </div>
-        </PerfectScrollbar>
-        <PerfectScrollbar className="hidden xl:block">
+        }
+        rightContent={
           <div className="h-full bg-mainWhite dark:bg-whiteFade scroll sm:overflow-y-auto shadow-custom-1 rounded-md p-2">
             <Calculator />
           </div>
-        </PerfectScrollbar>
-      </div>
+        }
+      />
     </DashboardLayout>
   );
 }

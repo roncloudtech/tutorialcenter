@@ -8,7 +8,7 @@ import logo1 from "../Assets/TC 1.png";
 export default function EmailVerfication() {
   const [searchParams] = useSearchParams();
   const identifier = searchParams.get("identifier");
-  const role = searchParams.get("role") === "true";
+  const role = searchParams.get("role");
   const API_BASE_URL = "http://localhost:8000";
 
   const navigate = useNavigate();
@@ -65,6 +65,25 @@ export default function EmailVerfication() {
     }
   };
 
+  // Handle paste event
+  const handlePaste = (e) => {
+    e.preventDefault();
+    const pastedData = e.clipboardData.getData("text").slice(0, 6);
+    const newFormData = { ...formData };
+
+    for (let i = 0; i < pastedData.length; i++) {
+      if (i < 6) {
+        newFormData[`num${i + 1}`] = pastedData[i];
+      }
+    }
+
+    setFormData(newFormData);
+
+    // Focus on the last input filled
+    const lastInput = `num${Math.min(pastedData.length, 6)}`;
+    inputRefs[lastInput].current.focus();
+  };
+
   const validateForm = () => {
     const newErrors = {};
     Object.keys(formData).forEach((key) => {
@@ -90,7 +109,7 @@ export default function EmailVerfication() {
     try {
       const response = await axios.post(
         `${
-          role
+          role === "guardian"
             ? `${API_BASE_URL}/api/guardians`
             : `${API_BASE_URL}/api/students`
         }/verify`,
@@ -126,8 +145,8 @@ export default function EmailVerfication() {
       <Navbar />
 
       <section className="my-16">
-        <div className="Container flex items-center justify-center">
-          <div className="md:w-96 w-full md:p-10 bg-white md:shadow-md rounded-lg flex flex-col items-center justify-center">
+        <div className="Container flex items-center justify-center text-center">
+          <div className="md:w-[25rem] w-full md:p-10 bg-white md:shadow-md rounded-lg flex flex-col items-center justify-center">
             <div className="logo mb-4">
               <img
                 className="max-w-[80px] max-md:max-w-[70px]"
@@ -139,21 +158,19 @@ export default function EmailVerfication() {
               <h2 className="md:text-2xl text-xl font-semibold">
                 Please check your email
               </h2>
-              <p className="text-sm text-gray-400 mt-2">
+              <p className="text-sm text-gray-400 mt-2 ">
                 We've sent code to{" "}
-                <span className="text-black font-semibold">
-                  olarewaju@gmail.com
-                </span>
+                <span className="text-black font-semibold">{identifier}</span>
               </p>
             </div>
             <div className="text-center mt-4">
-              {toast.message && (
+              {toast?.message && (
                 <p
                   className={`text-sm ${
                     toast?.type === "error" ? "text-red-500" : "text-green-500"
                   }`}
                 >
-                  {toast.message}
+                  {toast?.message}
                 </p>
               )}
             </div>
@@ -172,6 +189,7 @@ export default function EmailVerfication() {
                       type="text"
                       value={formData[field]}
                       onChange={handleChange}
+                      onPaste={handlePaste}
                       maxLength="1"
                       placeholder="0"
                       className={`p-2 ring-1 rounded-sm ring-gray-300 text-center text-sm text-blue-900 w-10 h-10 border ${

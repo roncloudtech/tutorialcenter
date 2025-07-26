@@ -1,56 +1,59 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import DashboardLayout from "../../(Dashboard)/DashboardLayout";
 import Title from "../../(Dashboard)/Components/Title";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import bookIcon from "../../Assets/Vector.png";
 import Chat from "../../(Dashboard)/Components/Chat";
+import TwoColumnLayout from "../../Components/TwoColumnLayout";
 
 export default function TeacherGroups() {
   const [active, setActive] = useState(true);
   const [viewStudents, setViewStudents] = useState(false);
   return (
     <DashboardLayout>
-      <div className="xl:grid grid-cols-[1fr_0.39fr] p-2.5 xl:p-0 h-full">
-        {/* RIGHT SIDE */}
-        <div className="xl:px-4">
-          <div className="mb-6">
-            <Title title={"GROUPS"} />
+      <TwoColumnLayout
+        leftContent={
+          <div className="item1 xl:px-4 p-2.5">
+            <div className="mb-6">
+              <Title title={"GROUPS"} />
+            </div>
+            {viewStudents ? (
+              <ViewAllStudents
+                viewStudents={viewStudents}
+                setViewStudents={setViewStudents}
+              />
+            ) : active ? (
+              <GroupSubject
+                viewStudents={viewStudents}
+                setViewStudents={setViewStudents}
+              />
+            ) : (
+              <GroupChat setActive={setActive} />
+            )}
           </div>
-          {viewStudents ? (
-            <ViewAllStudents
-              viewStudents={viewStudents}
-              setViewStudents={setViewStudents}
-            />
-          ) : active ? (
-            <GroupSubject
-              viewStudents={viewStudents}
-              setViewStudents={setViewStudents}
-            />
-          ) : (
-            <GroupChat setActive={setActive} />
-          )}
-        </div>
-        {/* SIDE BAR */}
-        <div className="bg-mainWhite dark:bg-darkMode shadow-custom-1 rounded-md p-2 space-y-3 my-0.5">
-          <div className="text-[12px] text-white bg-black flex items-center justify-center gap-3 py-4 pl-3 rounded-custom">
-            <img src={bookIcon} width={20} height={20} alt="" />
-            <span>Auto Quiz</span>
+        }
+        rightContent={
+          <div className="bg-mainWhite dark:bg-darkMode shadow-custom-1 rounded-md p-2 space-y-3 my-0.5">
+            <div className="text-[12px] text-white bg-black flex items-center justify-center gap-3 py-4 pl-3 rounded-custom">
+              <img src={bookIcon} width={20} height={20} alt="" />
+              <span>Auto Quiz</span>
+            </div>
+            <div className="flex items-center gap-4 bg-lightGrey dark:bg-whiteFade dark:text-lightGrey py-2.5 pl-4 rounded-2xl">
+              <Icon icon="ri:search-line" width="24" height="24" />
+              <input
+                type="text"
+                placeholder="Search group"
+                className="w-full h-full placeholder:text-[10px] rounded-r-2xl bg-transparent"
+              />
+            </div>
+            <div className="space-y-3">
+              <GroupInfo setActive={setActive} />
+              <GroupInfo setActive={setActive} />
+              <GroupInfo setActive={setActive} />
+            </div>
           </div>
-          <div className="flex items-center gap-4 bg-lightGrey dark:bg-whiteFade dark:text-lightGrey py-2.5 pl-4 rounded-2xl">
-            <Icon icon="ri:search-line" width="24" height="24" />
-            <input
-              type="text"
-              placeholder="Search group"
-              className="w-full h-full placeholder:text-[10px] rounded-r-2xl bg-transparent"
-            />
-          </div>
-          <div className="space-y-3">
-            <GroupInfo setActive={setActive} />
-            <GroupInfo setActive={setActive} />
-            <GroupInfo setActive={setActive} />
-          </div>
-        </div>
-      </div>
+        }
+      />
     </DashboardLayout>
   );
 }

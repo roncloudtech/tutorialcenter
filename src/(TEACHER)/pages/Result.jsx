@@ -3,6 +3,7 @@ import Title from "../../(Dashboard)/Components/Title";
 import DashboardLayout from "../../(Dashboard)/DashboardLayout";
 import BookIcon from "../../Assets/Vector.png";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import TwoColumnLayout from "../../Components/TwoColumnLayout";
 
 const studentInfo = [
   {
@@ -30,84 +31,87 @@ export default function TeacherResult() {
   const [activeModal, setActiveModal] = useState(false);
   return (
     <DashboardLayout>
-      <div className="xl:grid grid-cols-[1fr_0.39fr] p-2.5 xl:p-0 h-full overflow-hidden">
-        {/* RIGHT SIDE */}
-        <div className="xl:px-4 overflow-auto">
-          <Title title={"RESULT"} />
-          <div className="department my-5 flex items-center justify-between font-semibold text-xs uppercase">
-            <p>sCIENCE</p>
-            <p>200</p>
-          </div>
-          <div className="grid 2xl:grid-cols-3 grid-cols-2 gap-3">
-            {studentInfo.map((item, i) => (
-              <Card
-                setToggleModal={setActiveModal}
-                key={i}
-                name={item.name}
-                department={item.department}
-                training={item.training}
-              />
-            ))}
-          </div>
-        </div>
-        {/* LEFT SIDE */}
-        <div className="bg-[#EAEBEC] rounded-lg p-2 overflow-auto">
-          <div className="select-department mt-4">
-            <h3 className="text-xs text-mainBlack uppercase font-medium mb-3">
-              Select a department
-            </h3>
-            <select
-              name=""
-              id=""
-              className="w-full bg-mainWhite py-2 px-1.5 rounded-custom placeholder:text-black text-xs"
-            >
-              <option value="">Science</option>
-              <option value="">Commercial</option>
-              <option value="">Arts</option>
-            </select>
-          </div>
-          <div className="subjects-topic mt-6">
-            <div className="flex justify-between font-medium text-[14px] uppercase">
-              <p>Subjects</p>
-              <p>topics</p>
+      <TwoColumnLayout
+        leftContent={
+          <div className="item1 xl:px-4 p-2.5">
+            <Title title={"RESULT"} />
+            <div className="department my-5 flex items-center justify-between font-semibold text-xs uppercase">
+              <p>sCIENCE</p>
+              <p>200</p>
             </div>
-            <div className="mt-2 space-y-1">
-              <div className="capitalize py-2 px-1.5 rounded-custom bg-mainWhite flex items-center justify-between text-[10px]">
-                <p>English</p>
-                <p>73</p>
-              </div>
-              <div className="capitalize py-2 px-1.5 rounded-custom flex items-center justify-between text-[10px]">
-                <p>mathematics</p>
-                <p>64</p>
-              </div>
-              <div className="capitalize py-2 px-1.5 rounded-custom flex items-center justify-between text-[10px]">
-                <p>physics</p>
-                <p>70</p>
-              </div>
-              <div className="capitalize py-2 px-1.5 rounded-custom flex items-center justify-between text-[10px]">
-                <p>chemistry</p>
-                <p>64</p>
-              </div>
-              <div className="capitalize py-2 px-1.5 rounded-custom flex items-center justify-between text-[10px]">
-                <p>biology</p>
-                <p>64</p>
-              </div>
-              <div className="capitalize py-2 px-1.5 rounded-custom flex items-center justify-between text-[10px]">
-                <p>agriculture</p>
-                <p>64</p>
-              </div>
-              <div className="capitalize py-2 px-1.5 rounded-custom flex items-center justify-between text-[10px]">
-                <p>geography</p>
-                <p>64</p>
-              </div>
-              <div className="capitalize py-2 px-1.5 rounded-custom flex items-center justify-between text-[10px]">
-                <p>further mathematics</p>
-                <p>64</p>
-              </div>
+            <div className="grid 2xl:grid-cols-3 grid-cols-2 gap-3">
+              {studentInfo.map((item, i) => (
+                <Card
+                  setToggleModal={setActiveModal}
+                  key={i}
+                  name={item.name}
+                  department={item.department}
+                  training={item.training}
+                />
+              ))}
             </div>
           </div>
-        </div>
-      </div>
+        }
+        rightContent={
+          <div className="bg-mainWhite dark:bg-darkMode shadow-custom-1 rounded-md p-2 space-y-3 my-0.5">
+            <div className="select-department mt-4">
+              <h3 className="text-xs text-mainBlack uppercase font-medium mb-3">
+                Select a department
+              </h3>
+              <select
+                name=""
+                id=""
+                className="w-full bg-mainWhite py-2 px-1.5 rounded-custom placeholder:text-black text-xs"
+              >
+                <option value="">Science</option>
+                <option value="">Commercial</option>
+                <option value="">Arts</option>
+              </select>
+            </div>
+            <div className="subjects-topic mt-6">
+              <div className="flex justify-between font-medium text-[14px] uppercase">
+                <p>Subjects</p>
+                <p>topics</p>
+              </div>
+              <div className="mt-2 space-y-1">
+                <div className="capitalize py-2 px-1.5 rounded-custom bg-mainWhite flex items-center justify-between text-[10px]">
+                  <p>English</p>
+                  <p>73</p>
+                </div>
+                <div className="capitalize py-2 px-1.5 rounded-custom flex items-center justify-between text-[10px]">
+                  <p>mathematics</p>
+                  <p>64</p>
+                </div>
+                <div className="capitalize py-2 px-1.5 rounded-custom flex items-center justify-between text-[10px]">
+                  <p>physics</p>
+                  <p>70</p>
+                </div>
+                <div className="capitalize py-2 px-1.5 rounded-custom flex items-center justify-between text-[10px]">
+                  <p>chemistry</p>
+                  <p>64</p>
+                </div>
+                <div className="capitalize py-2 px-1.5 rounded-custom flex items-center justify-between text-[10px]">
+                  <p>biology</p>
+                  <p>64</p>
+                </div>
+                <div className="capitalize py-2 px-1.5 rounded-custom flex items-center justify-between text-[10px]">
+                  <p>agriculture</p>
+                  <p>64</p>
+                </div>
+                <div className="capitalize py-2 px-1.5 rounded-custom flex items-center justify-between text-[10px]">
+                  <p>geography</p>
+                  <p>64</p>
+                </div>
+                <div className="capitalize py-2 px-1.5 rounded-custom flex items-center justify-between text-[10px]">
+                  <p>further mathematics</p>
+                  <p>64</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+      />
+
       {activeModal && <PerformanceModal setToggleModal={setActiveModal} />}
     </DashboardLayout>
   );

@@ -8,7 +8,7 @@ import Layout2 from "../Components/Layout2";
 
 export default function SignUp() {
   const API_BASE_URL = "http://localhost:8000";
-  const [role, setRole] = useState(false);
+  const [userRole, setUserRole] = useState("guardian"); // Default role is guardian
 
   // Caturing the user info
   // For Both Student and Guardian
@@ -79,7 +79,7 @@ export default function SignUp() {
     try {
       const response = await axios.post(
         `${
-          role
+          userRole === "guardian"
             ? `${API_BASE_URL}/api/guardians`
             : `${API_BASE_URL}/api/students`
         }/register`,
@@ -93,7 +93,7 @@ export default function SignUp() {
 
       if (response.status === 201) {
         navigate(
-          `/email-verification?identifier=${formData.email}&role=${role}`
+          `/email-verification?identifier=${formData.email}&role=${userRole}`
         );
       }
     } catch (error) {
@@ -130,22 +130,22 @@ export default function SignUp() {
                       Create an account to get started with us.
                     </p>
                   </div>
-                  <div className="grid grid-cols-2 relative text-xs">
+                  <div className="grid grid-cols-2 relative text-xs mt-6">
                     <button
-                      onClick={() => setRole(false)}
+                      onClick={() => setUserRole("student")}
                       className={`border-solid ${
-                        role
-                          ? "text-mainGrey cursor-pointer"
-                          : "border-b-2 text-mainBlue pointer-events-none"
-                      }  pb-1.5 text-center border-mainBlue font-bold`}
+                        userRole === "student"
+                          ? "border-b-2 text-mainBlue pointer-events-none"
+                          : "text-mainGrey cursor-pointer"
+                      }  pb-1.5 text-center border-mainBlue font-bold mr-2`}
                     >
                       Student
                     </button>
                     <button
-                      onClick={() => setRole(true)}
+                      onClick={() => setUserRole("guardian")}
                       className={`border-solid ${
-                        role
-                          ? "text-mainBlue border-b-2 pointer-events-none"
+                        userRole === "guardian"
+                          ? "border-b-2 text-mainBlue pointer-events-none"
                           : "text-mainGrey cursor-pointer"
                       }  pb-1.5 text-center border-mainBlue font-bold`}
                     >
@@ -155,7 +155,7 @@ export default function SignUp() {
                 </div>
                 <div className="lg:px-9 py-5 lg:bg-[#FBFAFA] lg:shadow-md rounded-md mt-3 w-full">
                   {/* Form Inputs */}
-                  {role ? (
+                  {userRole === "student" ? (
                     /* Show Student Form
                        handle the submit registration logic for the student
                     */
