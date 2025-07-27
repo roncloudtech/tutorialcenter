@@ -343,8 +343,17 @@ const StudentForm = ({
     >
       {/* Log the error message */}
       {errors.message && (
-        <p className="mb-4 text-xs text-red-500 text-center">
+        <p className="mb-4 text-xs text-red-500 text-center  gap-1">
           {errors.message}
+          {/* Check if the error message is email address not verified show the verfication link  */}
+          {errors.message === "Email or Phone not verified" && (
+            <Link
+              to={`/email-verification?identifier=${formData.email}&role=${userRole}`}
+              className="text-[12px] text-gray-600 hover:text-gray-400 transition block text-center"
+            >
+              verify your email
+            </Link>
+          )}
         </p>
       )}
       {/* Form Inputs */}

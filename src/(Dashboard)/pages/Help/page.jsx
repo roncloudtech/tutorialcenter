@@ -4,8 +4,6 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import Chat from "../../Components/Chat";
 import Title from "../../Components/Title";
 import FaqBtn from "../../Components/FaqBtn";
-import PerfectScrollbar from "react-perfect-scrollbar";
-import "react-perfect-scrollbar/dist/css/styles.css";
 import TwoColumnLayout from "../../../Components/TwoColumnLayout";
 
 export default function Help() {

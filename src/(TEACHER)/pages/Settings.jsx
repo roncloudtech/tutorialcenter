@@ -1,4 +1,3 @@
-import React from "react";
 import Title from "../../(Dashboard)/Components/Title";
 import DashboardLayout from "../../(Dashboard)/DashboardLayout";
 import TwoColumnLayout from "../../Components/TwoColumnLayout";
