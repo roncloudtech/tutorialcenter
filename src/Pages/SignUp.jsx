@@ -7,15 +7,15 @@ import { Link, useNavigate } from "react-router-dom";
 import Layout2 from "../Components/Layout2";
 
 export default function SignUp() {
-  const API_BASE_URL =
-    process.env.REACT_APP_API_URL || "http://tutorialcenter-app.test";
-  const [role, setRole] = useState(false);
+  const API_BASE_URL = "http://localhost:8000";
+  const [userRole, setUserRole] = useState("guardian"); // Default role is guardian
 
   // Caturing the user info
   // For Both Student and Guardian
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
+    gender: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -42,6 +42,8 @@ export default function SignUp() {
       newErrors.firstName = "First name is required";
 
     if (!formData.lastName.trim()) newErrors.lastName = "Last name is required";
+
+    if (!formData.gender.trim()) newErrors.gender = "Please select your gender";
 
     if (!formData.email.trim()) {
       newErrors.email = "Email is required";
@@ -77,7 +79,7 @@ export default function SignUp() {
     try {
       const response = await axios.post(
         `${
-          role
+          userRole === "guardian"
             ? `${API_BASE_URL}/api/guardians`
             : `${API_BASE_URL}/api/students`
         }/register`,
@@ -91,7 +93,7 @@ export default function SignUp() {
 
       if (response.status === 201) {
         navigate(
-          `/email-verification?identifier=${formData.email}&role=${role}`
+          `/email-verification?identifier=${formData.email}&role=${userRole}`
         );
       }
     } catch (error) {
@@ -128,22 +130,22 @@ export default function SignUp() {
                       Create an account to get started with us.
                     </p>
                   </div>
-                  <div className="grid grid-cols-2 relative text-xs">
+                  <div className="grid grid-cols-2 relative text-xs mt-6">
                     <button
-                      onClick={() => setRole(false)}
+                      onClick={() => setUserRole("student")}
                       className={`border-solid ${
-                        role
-                          ? "text-mainGrey cursor-pointer"
-                          : "border-b-2 text-mainBlue pointer-events-none"
-                      }  pb-1.5 text-center border-mainBlue font-bold`}
+                        userRole === "student"
+                          ? "border-b-2 text-mainBlue pointer-events-none"
+                          : "text-mainGrey cursor-pointer"
+                      }  pb-1.5 text-center border-mainBlue font-bold mr-2`}
                     >
                       Student
                     </button>
                     <button
-                      onClick={() => setRole(true)}
+                      onClick={() => setUserRole("guardian")}
                       className={`border-solid ${
-                        role
-                          ? "text-mainBlue border-b-2 pointer-events-none"
+                        userRole === "guardian"
+                          ? "border-b-2 text-mainBlue pointer-events-none"
                           : "text-mainGrey cursor-pointer"
                       }  pb-1.5 text-center border-mainBlue font-bold`}
                     >
@@ -153,7 +155,7 @@ export default function SignUp() {
                 </div>
                 <div className="lg:px-9 py-5 lg:bg-[#FBFAFA] lg:shadow-md rounded-md mt-3 w-full">
                   {/* Form Inputs */}
-                  {role ? (
+                  {userRole === "student" ? (
                     /* Show Student Form
                        handle the submit registration logic for the student
                     */
@@ -289,6 +291,29 @@ const Form = ({
         />
         {errors.email && (
           <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+        )}
+      </div>
+
+      {/* Gender Select */}
+      <div>
+        <label className="block text-sm font-medium text-blue-900 mb-2">
+          Gender
+        </label>
+        <select
+          name="gender"
+          value={formData.gender}
+          onChange={handleChange}
+          className={`w-full px-4 py-2 border border-solid rounded-lg ${
+            errors.gender ? "border-red-500" : "border-gray-300"
+          } focus:ring-2 focus:ring-blue-900 focus:border-transparent`}
+        >
+          <option value="">Select Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Others">Others</option>
+        </select>
+        {errors.gender && (
+          <p className="mt-1 text-sm text-red-500">{errors.gender}</p>
         )}
       </div>
 

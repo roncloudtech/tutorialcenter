@@ -1,19 +1,15 @@
-import React from "react";
-import { Icon } from "@iconify/react/dist/iconify.js";
 import ProgressBar from "../../Components/ProgressBar";
 import SmallCalendar from "../../Components/Calender";
 import DashboardLayout from "../../DashboardLayout";
 import Title from "../../Components/Title";
 import ProgressSlider from "../../Components/ProgressSlider";
-import PerfectScrollbar from "react-perfect-scrollbar";
-import "react-perfect-scrollbar/dist/css/styles.css";
+import TwoColumnLayout from "../../../Components/TwoColumnLayout";
 
 export default function StudentDashboard() {
   return (
     <DashboardLayout>
-      <div className="xl:grid grid-cols-[1fr_0.38fr] h-full overflow-hidden">
-        {/* RIGHT SIDE */}
-        <PerfectScrollbar options={{ suppressScrollX: true }}>
+      <TwoColumnLayout
+        leftContent={
           <div className="xl:px-4 p-2.5 scroll h-full">
             <Title title={"DASHBOARD"} />
             {/* PROGRESS LEVEL */}
@@ -22,16 +18,14 @@ export default function StudentDashboard() {
             </div>
             <ProgressSlider />
           </div>
-        </PerfectScrollbar>
-        {/* LEFT SIDE */}
-
-        <PerfectScrollbar className="hidden xl:block">
+        }
+        rightContent={
           <div className="dark:bg-darkMode scroll bg-mainWhite shadow-custom-1 rounded-md p-2 m-0.5">
             <SmallCalendar />
             <Notification />
           </div>
-        </PerfectScrollbar>
-      </div>
+        }
+      ></TwoColumnLayout>
     </DashboardLayout>
   );
 }

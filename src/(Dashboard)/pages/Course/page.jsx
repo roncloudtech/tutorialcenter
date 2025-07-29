@@ -5,8 +5,7 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import Chat from "../../Components/Chat";
 import Title from "../../Components/Title";
 import { Link } from "react-router-dom";
-import PerfectScrollbar from "react-perfect-scrollbar";
-import "react-perfect-scrollbar/dist/css/styles.css";
+import TwoColumnLayout from "../../../Components/TwoColumnLayout";
 
 export default function Coursepage() {
   const [show, setShow] = useState(false);
@@ -16,9 +15,8 @@ export default function Coursepage() {
         <MediumScreenAllTopics setTopic={setShow} />
       ) : (
         <DashboardLayout>
-          <div className="xl:grid grid-cols-[1fr_0.38fr] h-full  overflow-hidden">
-            {/* left Side */}
-            <PerfectScrollbar options={{ suppressScrollX: true }}>
+          <TwoColumnLayout
+            leftContent={
               <div className="item1 xl:px-4 p-2.5 w-full">
                 {/* header */}
                 <Title title={"COURSE"} />
@@ -149,9 +147,8 @@ export default function Coursepage() {
                   </div>
                 </div>
               </div>
-            </PerfectScrollbar>
-            {/* Right Side */}
-            <PerfectScrollbar className="hidden xl:block">
+            }
+            rightContent={
               <div className="bg-mainWhite dark:bg-whiteFade scroll sm:overflow-y-auto shadow-custom-1 rounded-md p-2 m-0.5 space-y-2">
                 <div className="ring-[0.5px] ring-mainBlue dark:bg-darkMode px-2 py-3 rounded-md">
                   <div className="flex justify-between text-[10px] font-bold text-mainBlack dark:text-lightGrey mb-2">
@@ -187,9 +184,9 @@ export default function Coursepage() {
                   </div>
                 </div>
               </div>
-            </PerfectScrollbar>
-            <ChatButton />
-          </div>
+            }
+          />
+          <ChatButton />
         </DashboardLayout>
       )}
     </>

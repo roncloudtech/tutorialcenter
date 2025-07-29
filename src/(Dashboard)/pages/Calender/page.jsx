@@ -5,8 +5,7 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import SmallCalendar from "../../Components/Calender";
 import { useToggleState } from "../../../Hooks/useToggleState";
 import Title from "../../Components/Title";
-import PerfectScrollbar from "react-perfect-scrollbar";
-import "react-perfect-scrollbar/dist/css/styles.css";
+import TwoColumnLayout from "../../../Components/TwoColumnLayout";
 
 export default function Calender() {
   const [toggle, setToggle] = useToggleState(true);
@@ -14,16 +13,16 @@ export default function Calender() {
   return (
     <>
       <DashboardLayout>
-        <div className="xl:grid grid-cols-[1fr_0.38fr] h-full scroll">
-          <PerfectScrollbar options={{ suppressScrollX: true }}>
+        <TwoColumnLayout
+          leftContent={
             <div className="item1 xl:px-4 p-2.5 h-full dark:text-lightGrey">
               <Title title={"CALENDER"} />
               <div className="w-full h-full">
                 <BigCalender />
               </div>
             </div>
-          </PerfectScrollbar>
-          <PerfectScrollbar className="hidden xl:block">
+          }
+          rightContent={
             <div className="dark:bg-whiteFade dark:text-lightGrey shadow-custom-1 p-2 m-0.5 sm:overflow-y-auto rounded-md space-y-5">
               <SmallCalendar />
               <button className="w-full flex justify-between items-center">
@@ -131,8 +130,8 @@ export default function Calender() {
                 </div>
               </div>
             </div>
-          </PerfectScrollbar>
-        </div>
+          }
+        />
       </DashboardLayout>
     </>
   );
