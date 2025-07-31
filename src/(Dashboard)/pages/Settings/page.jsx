@@ -4,10 +4,8 @@ import TwoColumnLayout from "../../../Components/TwoColumnLayout";
 import avatar from "../../assets/Avatar1.jpg";
 
 export default function Settings() {
-
   // fetch userInfo from localstorage
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  // console.log(userInfo);
   const fullname = userInfo.firstname + ", " + userInfo.lastname;
   return (
     <>
@@ -65,46 +63,83 @@ export default function Settings() {
               {/* USER PROFILE */}
               <div className="mb-6">
                 <img
-                  // src="https://www.figma.com/file/C2fHCiSoElx3NBQgrtVrXE/image/9fa492644538aeb8fa7ffd83195864e66d955fde"
                   src={userInfo.profile_picture || avatar}
                   alt={fullname}
                   className="h-[200px] rounded-md mb-2"
-                  style={{objectFit: "contain"}}
+                  style={{ objectFit: "contain" }}
                 />
                 <h4 className="text-[18px] font-semibold">{fullname}</h4>
                 <p className="text-[14px] text-mainGrey font-medium">
-                 {userInfo.email}
+                  {userInfo.email}
                 </p>
               </div>
               <div className="INFORMATION">
                 <h4 className="text-xl font-extrabold">Student Information</h4>
                 <div className="text-[12px] flex justify-between items-center my-2.5">
                   <p className="font-semibold">Name:</p>
-                  <span className={fullname ? 'font-semibold' : 'text-red-500'}>{fullname || "Not yet added..."}</span>
+                  <span className={fullname ? "font-semibold" : "text-red-500"}>
+                    {fullname || "Not yet added..."}
+                  </span>
                 </div>
                 <div className="text-[12px] flex justify-between items-center my-2.5">
                   <p className="font-semibold">Email:</p>
-                  <span className={userInfo.email ? 'font-semibold' : 'text-red-500'}>{userInfo.email || "Not yet added..."}</span>
+                  <span
+                    className={
+                      userInfo.email ? "font-semibold" : "text-red-500"
+                    }
+                  >
+                    {userInfo.email || "Not yet added..."}
+                  </span>
                 </div>
                 <div className="text-[12px] flex justify-between items-center my-2.5">
                   <p className="font-semibold">Phone:</p>
-                  <span className={userInfo.phone ? 'font-semibold' : 'text-red-500'}>{userInfo.phone || "Not yet added..."}</span>
+                  <span
+                    className={
+                      userInfo.phone ? "font-semibold" : "text-red-500"
+                    }
+                  >
+                    {userInfo.phone || "Not yet added..."}
+                  </span>
                 </div>
                 <div className="text-[12px] flex justify-between items-center my-2.5">
                   <p className="font-semibold">Date Of Birth:</p>
-                  <span className={userInfo.date_of_birth ? 'font-semibold' : 'text-red-500'}>{userInfo.date_of_birth || "Not yet added..."}</span>
+                  <span
+                    className={
+                      userInfo.date_of_birth ? "font-semibold" : "text-red-500"
+                    }
+                  >
+                    {userInfo.date_of_birth || "Not yet added..."}
+                  </span>
                 </div>
                 <div className="text-[12px] flex justify-between items-center my-2.5">
                   <p className="font-semibold">Gender:</p>
-                  <span className={userInfo.gender ? 'font-semibold' : 'text-red-500'}>{userInfo.gender || "Not yet added..."}</span>
+                  <span
+                    className={
+                      userInfo.gender ? "font-semibold" : "text-red-500"
+                    }
+                  >
+                    {userInfo.gender || "Not yet added..."}
+                  </span>
                 </div>
                 <div className="text-[12px] flex justify-between items-center my-2.5">
                   <p className="font-semibold">Location:</p>
-                  <span className={userInfo.location ? 'font-semibold' : 'text-red-500'}>{userInfo.location || "Not yet added..."}</span>
+                  <span
+                    className={
+                      userInfo.location ? "font-semibold" : "text-red-500"
+                    }
+                  >
+                    {userInfo.location || "Not yet added..."}
+                  </span>
                 </div>
                 <div className="text-[12px] flex justify-between items-center my-2.5">
                   <p className="font-semibold">Department:</p>
-                  <span className={userInfo.department ? 'font-semibold' : 'text-red-500'}>{userInfo.department || "Not yet added..."}</span>
+                  <span
+                    className={
+                      userInfo.department ? "font-semibold" : "text-red-500"
+                    }
+                  >
+                    {userInfo.department || "Not yet added..."}
+                  </span>
                 </div>
               </div>
             </div>

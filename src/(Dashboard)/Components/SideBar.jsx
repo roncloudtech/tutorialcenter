@@ -18,8 +18,11 @@ export default function SideBar({ expandSideBar, setExpandSideBar }) {
 
   // fetch userInfo from localstorage
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  // console.log(userInfo);
   const fullname = userInfo.firstname + ", " + userInfo.lastname;
+
+  // Fetching userrole
+  const userrole = localStorage.getItem("userRole");
+
   return (
     <>
       <PerfectScrollbar className="hidden xl:block">
@@ -75,7 +78,7 @@ export default function SideBar({ expandSideBar, setExpandSideBar }) {
               style={{objectFit: "contain"}}
             />
             <div className={`${expandSideBar ? "block mb-2" : "hidden"}`}>
-              <p className="text-[12px] font-medium text-ascent">Welcome Student!</p>
+              <p className="text-[12px] font-medium text-ascent">Welcome {userrole.charAt(0).toUpperCase() + userrole.substring(1,)}!</p>
               <h3 className="text-xs font-medium text-mainBlue dark:text-lightGrey">
                 {fullname}
               </h3>
