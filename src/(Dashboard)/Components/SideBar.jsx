@@ -10,9 +10,16 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import LogoutModal from "../../Pages/Auth/LogoutModal";
 import { useSchoolContext } from "../../Context/SchoolContext";
+import avatar from "../assets/Avatar1.jpg";
+
 export default function SideBar({ expandSideBar, setExpandSideBar }) {
   // show logout modal
   const [logoutModal, setLogoutModal] = useState(false);
+
+  // fetch userInfo from localstorage
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  // console.log(userInfo);
+  const fullname = userInfo.firstname + ", " + userInfo.lastname;
   return (
     <>
       <PerfectScrollbar className="hidden xl:block">
@@ -55,16 +62,22 @@ export default function SideBar({ expandSideBar, setExpandSideBar }) {
 
           {/* PROFILE */}
           <div className="flex items-center gap-2 mt-3">
-            <Icon
+            {/* <Icon
               icon="radix-icons:avatar"
               width="30"
               height="30"
               className="text-mainBlue dark:text-lightGrey"
+            /> */}
+            <img
+              src={userInfo.profile_picture || avatar}
+              alt={fullname}
+              className="h-[30px] rounded-full mb-2 "
+              style={{objectFit: "contain"}}
             />
             <div className={`${expandSideBar ? "block mb-2" : "hidden"}`}>
-              <p className="text-[12px] font-medium text-ascent">Welcome!</p>
+              <p className="text-[12px] font-medium text-ascent">Welcome Student!</p>
               <h3 className="text-xs font-medium text-mainBlue dark:text-lightGrey">
-                John Doe
+                {fullname}
               </h3>
             </div>
           </div>
