@@ -88,6 +88,11 @@ export default function Login() {
         localStorage.setItem("userRole", "student");
         setAuthenticatedUser(studentInfo);
         setRole("student");
+        // This is to check if the student has not completed the Training selection or the Course selection.
+        if (studentInfo.department === null) {
+          // if the student has no department, navigate the user to the training selection page
+          return navigate("/training-selection");
+        }
       } else {
         // This is where the error might occur if the guardian data is not returned correctly
         const guardianInfo = res.data.guardian;
