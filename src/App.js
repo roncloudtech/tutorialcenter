@@ -5,6 +5,7 @@ import Contact from "./Pages/Contact";
 import Home from "./Pages/Home";
 import SignUp from "./Pages/SignUp";
 import Login from "./Pages/Login";
+import StaffLogin from "./Pages/StaffLogin";
 import Coursepage from "./(Dashboard)/pages/Course/page";
 import Calender from "./(Dashboard)/pages/Calender/page";
 import Exampage from "./(Dashboard)/pages/Exam/page";
@@ -44,6 +45,7 @@ export default function App() {
           <Route path="/register" element={<SignUp />} />
           <Route path="/email-verification" element={<EmailVerfication />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/staff/login" element={<StaffLogin />} />
           <Route path="/training-selection" element={<TrainingSelection />} />
           {/*ALL DASHBBOARD ROUTES */}
           {/* STUDENT ROUTES */}
