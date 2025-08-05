@@ -13,7 +13,6 @@ import Group from "./(Dashboard)/pages/Group/page";
 import PaymentPage from "./(Dashboard)/pages/Payment/page";
 import Settings from "./(Dashboard)/pages/Settings/page";
 import Help from "./(Dashboard)/pages/Help/page";
-import TrainingSelection from "./Pages/Training";
 import StudentDashboard from "./(Dashboard)/pages/Dashboard/StudentDashboard";
 import ParentDashboard from "./(PARENT)/pages/Dashboard";
 import ParentCalender from "./(PARENT)/pages/Calender";
@@ -33,6 +32,7 @@ import AdminDashboard from "./ADMIN/pages/Dashboard";
 import AllStudents from "./ADMIN/Lists/Students";
 import PrivateRoute from "./Pages/Auth/PrivateRoute";
 import Unauthorized from "./Pages/Auth/Unauthorized";
+import TrainingSelection from "./Pages/TrainingSelection";
 
 export default function App() {
   return (
