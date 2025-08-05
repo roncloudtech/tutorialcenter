@@ -45,7 +45,7 @@ export default function StaffLogin() {
     setIsLoading(true);
 
     try {
-      const res = await axios.post(`${API_BASE_URL}staff/login`, {
+      const res = await axios.post(`${API_BASE_URL}staffs/login`, {
         email: formData.email,
         password: formData.password,
       });
