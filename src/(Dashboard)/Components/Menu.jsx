@@ -150,12 +150,6 @@ const menuItems = [
     visible: ["teacher"],
   },
   {
-    label: "Groups",
-    path: "/teacher-group",
-    icon: <Icon icon="fluent:payment-32-filled" width="20" height="20" />,
-    visible: ["teacher"],
-  },
-  {
     label: "Results",
     path: "/teacher-result",
     icon: <Icon icon="fluent:payment-32-filled" width="20" height="20" />,
@@ -187,6 +181,34 @@ const menuItems = [
     path: "/student-list",
     icon: <Icon icon="mdi:human-male" width="20" height="20" />,
     visible: ["admin"],
+  },
+
+  // STAFF ROUTES
+  {
+    label: "Dashboard",
+    path: "/staff/dashboard",
+    icon: (
+      <Icon icon="material-symbols:dashboard-rounded" width="20" height="20" />
+    ),
+    visible: ["staff"],
+  },
+  {
+    label: "Students",
+    path: "/student-list",
+    icon: <Icon icon="mdi:human-male" width="20" height="20" />,
+    visible: ["staff"],
+  },
+  {
+    label: "Assessment",
+    path: "/staff/assessment",
+    icon: <Icon icon="uis:calender" width="20" height="20" />,
+    visible: ["staff"],
+  },
+  {
+    label: "Settings",
+    path: "/staff/settings",
+    icon: <Icon icon="lets-icons:setting-fill" width="20" height="20" />,
+    visible: ["staff"],
   },
 ];
 
