@@ -11,10 +11,8 @@ export default function Unauthorized() {
           return "/dashboard";
         case "guardian":
           return "/parent-dashboard";
-        case "teacher":
-          return "/teacher-dashboard";
-        case "admin":
-          return "/admin-dashboard";
+        case "staff":
+          return "/staff/dashboard";
         default:
           return "/login"; // Fallback to login if role is unknown
       }

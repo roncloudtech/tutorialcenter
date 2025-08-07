@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
@@ -29,10 +28,13 @@ import TeacherResult from "./(TEACHER)/pages/Result";
 import EmailVerfication from "./Pages/EmailVerfication";
 import CourseChats from "./(Dashboard)/pages/Course/CourseChats";
 import AdminDashboard from "./ADMIN/pages/Dashboard";
-import AllStudents from "./ADMIN/Lists/Students";
+import AllStudents from "./STAFF/Lists/Students";
 import PrivateRoute from "./Pages/Auth/PrivateRoute";
 import Unauthorized from "./Pages/Auth/Unauthorized";
 import TrainingSelection from "./Pages/TrainingSelection";
+import StaffDashboard from "./STAFF/Pages/Dashboard";
+import StaffSettings from "./STAFF/Pages/Settings";
+import StaffAssesment from "./STAFF/Pages/Assesment";
 
 export default function App() {
   return (
@@ -85,9 +87,17 @@ export default function App() {
           </Route>
 
           {/* ADMIN ROUTES */}
-          <Route element={<PrivateRoute allowedRole="admin" />}>
+          {/* <Route element={<PrivateRoute allowedRole="admin" />}>
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
             <Route path="/student-list" element={<AllStudents />} />
+          </Route> */}
+
+          {/* STAFF ROUTES */}
+          <Route element={<PrivateRoute allowedRole="staff" />}>
+            <Route path="/staff/dashboard" element={<StaffDashboard />} />
+            <Route path="/student-list" element={<AllStudents />} />
+            <Route path="/staff/settings" element={<StaffSettings />} />
+            <Route path="/staff/assessment" element={<StaffAssesment />} />
           </Route>
 
           {/* Unauthorized Route */}
