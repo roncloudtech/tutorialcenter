@@ -1,40 +1,44 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Layout2 from "../Components/Layout2";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function TrainingSelection() {
-  const [isDepartment, setIsDepartment] = useState(false);
-  const [isSubject, setIsSubject] = useState(false);
-  const [isTrainingDuration, setIsTrainingDuration] = useState(false);
+  // state flow for the training selection
+  const [state, setState] = useState({
+    isDepartment: false,
+    isSubject: false,
+    isTrainingDuration: false,
+    isPayment: false,
+  });
+  const { isDepartment, isSubject, isTrainingDuration, isPayment } = state;
   const handleBackBtn = () => {
-    setIsDepartment(false);
-    setIsSubject(false);
-    setIsTrainingDuration(false);
+    setState((prev) => ({
+      ...prev,
+      isDepartment: false,
+      isSubject: false,
+      isTrainingDuration: false,
+      isPayment: false,
+    }));
   };
   return (
-    <>
+    <Layout2
+      bgImage={
+        "https://s3-alpha-sig.figma.com/img/7d38/19bf/89f69f01fb13533d24809a0b59801113?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Ym692ngM5DbVrpDBFBkuCGza0Q0Z2MYCXbEibV9sGqegnWMr5~E7BYtx8X7UkjlwjUW5k1dQjjXMugDmdvW~LtXLA-l3YOgYGM1FyWpVscPaIG6Qt0EhJmWGlWjH7uXKGpuTHGfVdzMfHJWDMP54ywkxHdGCjByUhKZ9kIbXSlzkHwEwE~sFKO-48eZ870~8LzgvaBVyd4WhlpaxfJ6CmIixHo6ERHY5F6BcrLLUuwvRaJRcNmECz03KL5DJyYgZkd1u02UrsBWpgSXnRspPSe0O6kXEzl9v0d1jflUJ1GNspUocAgv-ogBajpMpiU9v4KXq1EWGCIo9v9DT2BjaZA__"
+      }
+    >
       {isDepartment ? (
-        <SelectDepartment
-          setIsDepartment={setIsDepartment}
-          setIsSubject={setIsSubject}
-          handleBackBtn={handleBackBtn}
-        />
+        <SelectDepartment handleBackBtn={handleBackBtn} setState={setState} />
       ) : isSubject ? (
-        <SelectSubject
-          handleBackBtn={handleBackBtn}
-          setIsDepartment={setIsDepartment}
-          setIsSubject={setIsSubject}
-          setIsTrainingDuration={setIsTrainingDuration}
-        />
+        <SelectSubject handleBackBtn={handleBackBtn} setState={setState} />
       ) : isTrainingDuration ? (
-        <TrainingDuration handleBackBtn={handleBackBtn} />
+        <TrainingDuration handleBackBtn={handleBackBtn} setState={setState} />
+      ) : isPayment ? (
+        <PaymentSection handleBackBtn={handleBackBtn} setState={setState} />
       ) : (
-        <SelectTraining
-          handleBackBtn={handleBackBtn}
-          setIsDepartment={setIsDepartment}
-        />
+        <SelectTraining setState={setState} handleBackBtn={handleBackBtn} />
       )}
-    </>
+    </Layout2>
   );
 }
 const GoBack = ({ onClick }) => {
@@ -49,7 +53,9 @@ const GoBack = ({ onClick }) => {
     </button>
   );
 };
-const SelectTraining = ({ setIsDepartment, handleBackBtn }) => {
+
+// The select training section component
+const SelectTraining = ({ setState }) => {
   const courseSequences = ["WAEC", "NECO", "NECO"];
   const [courseDisplay, setCourseDisplay] = useState(["JAMB"]);
   const [nextCourseIndex, setNextCourseIndex] = useState(0);
@@ -66,13 +72,8 @@ const SelectTraining = ({ setIsDepartment, handleBackBtn }) => {
   const isButtonDisabled = nextCourseIndex >= courseSequences.length;
 
   return (
-    <Layout2
-      bgImage={
-        "https://s3-alpha-sig.figma.com/img/7d38/19bf/89f69f01fb13533d24809a0b59801113?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Ym692ngM5DbVrpDBFBkuCGza0Q0Z2MYCXbEibV9sGqegnWMr5~E7BYtx8X7UkjlwjUW5k1dQjjXMugDmdvW~LtXLA-l3YOgYGM1FyWpVscPaIG6Qt0EhJmWGlWjH7uXKGpuTHGfVdzMfHJWDMP54ywkxHdGCjByUhKZ9kIbXSlzkHwEwE~sFKO-48eZ870~8LzgvaBVyd4WhlpaxfJ6CmIixHo6ERHY5F6BcrLLUuwvRaJRcNmECz03KL5DJyYgZkd1u02UrsBWpgSXnRspPSe0O6kXEzl9v0d1jflUJ1GNspUocAgv-ogBajpMpiU9v4KXq1EWGCIo9v9DT2BjaZA__"
-      }
-    >
-      <GoBack onClick={handleBackBtn} />
-      <div className="flex flex-col items-center justify-center h-full">
+    <>
+      <div className="flex flex-col items-center justify-center mt-4">
         <div className="text-center font-medium">
           <h2 className="text-2xl font-bold mb-4">Select Training</h2>
           <div className="w-[448px] max-w-full bg-[#FBFAFA] shadow-lg p-6 rounded-lg">
@@ -98,7 +99,13 @@ const SelectTraining = ({ setIsDepartment, handleBackBtn }) => {
               </button>
             )}
             <button
-              onClick={() => setIsDepartment(true)}
+              onClick={() =>
+                setState((prev) => ({
+                  ...prev,
+                  isDepartment: true,
+                  isSubject: false,
+                }))
+              }
               className="mt-6 w-full py-3 px-5 rounded-lg text-sm text-white bg-gradient-to-r from-[#09314F] to-[#E83831]"
             >
               Continue
@@ -106,11 +113,13 @@ const SelectTraining = ({ setIsDepartment, handleBackBtn }) => {
           </div>
         </div>
       </div>
-    </Layout2>
+    </>
   );
 };
 
-const SelectDepartment = ({ setIsDepartment, setIsSubject }) => {
+// The select department section component
+// This component allows the user to select a department for their examination
+const SelectDepartment = ({ setState, handleBackBtn }) => {
   const courses = [
     {
       courseName: "JAMB",
@@ -129,18 +138,10 @@ const SelectDepartment = ({ setIsDepartment, setIsSubject }) => {
       departments: ["Select Department", "Science", "Commercial", "Arts"],
     },
   ];
-  const handleSubject = () => {
-    setIsDepartment(false);
-    setIsSubject(true);
-  };
   return (
-    <Layout2
-      bgImage={
-        "https://s3-alpha-sig.figma.com/img/7d38/19bf/89f69f01fb13533d24809a0b59801113?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Ym692ngM5DbVrpDBFBkuCGza0Q0Z2MYCXbEibV9sGqegnWMr5~E7BYtx8X7UkjlwjUW5k1dQjjXMugDmdvW~LtXLA-l3YOgYGM1FyWpVscPaIG6Qt0EhJmWGlWjH7uXKGpuTHGfVdzMfHJWDMP54ywkxHdGCjByUhKZ9kIbXSlzkHwEwE~sFKO-48eZ870~8LzgvaBVyd4WhlpaxfJ6CmIixHo6ERHY5F6BcrLLUuwvRaJRcNmECz03KL5DJyYgZkd1u02UrsBWpgSXnRspPSe0O6kXEzl9v0d1jflUJ1GNspUocAgv-ogBajpMpiU9v4KXq1EWGCIo9v9DT2BjaZA__"
-      }
-    >
-      <GoBack onClick={() => setIsDepartment(false)} />
-      <div className="flex flex-col items-center justify-center">
+    <>
+      <GoBack onClick={handleBackBtn} />
+      <div className="flex flex-col items-center justify-center mt-4">
         <div className="text-center font-medium">
           <h2 className="text-2xl font-bold mb-8">Select Department</h2>
           <div className="w-[448px] max-w-full">
@@ -166,7 +167,13 @@ const SelectDepartment = ({ setIsDepartment, setIsSubject }) => {
               </div>
             ))}
             <button
-              onClick={handleSubject}
+              onClick={() =>
+                setState((prev) => ({
+                  ...prev,
+                  isDepartment: false,
+                  isSubject: true,
+                }))
+              }
               className="mt-6 w-full py-3 px-5 rounded-lg text-sm text-white bg-gradient-to-r from-[#09314F] to-[#E83831]"
             >
               Continue
@@ -174,16 +181,13 @@ const SelectDepartment = ({ setIsDepartment, setIsSubject }) => {
           </div>
         </div>
       </div>
-    </Layout2>
+    </>
   );
 };
 
-const SelectSubject = ({
-  setIsDepartment,
-  setIsSubject,
-  setIsTrainingDuration,
-  handleBackBtn,
-}) => {
+// The select subject section component
+// This component allows the user to select subjects for their examination
+const SelectSubject = ({ handleBackBtn, setState }) => {
   const subjectsInfo = [
     {
       courseName: "JAMB",
@@ -230,19 +234,11 @@ const SelectSubject = ({
       amount: "0 / 8-9",
     },
   ];
-  const handleTraining = () => {
-    setIsDepartment(false);
-    setIsSubject(false);
-    setIsTrainingDuration(true);
-  };
+
   return (
-    <Layout2
-      bgImage={
-        "https://s3-alpha-sig.figma.com/img/7d38/19bf/89f69f01fb13533d24809a0b59801113?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Ym692ngM5DbVrpDBFBkuCGza0Q0Z2MYCXbEibV9sGqegnWMr5~E7BYtx8X7UkjlwjUW5k1dQjjXMugDmdvW~LtXLA-l3YOgYGM1FyWpVscPaIG6Qt0EhJmWGlWjH7uXKGpuTHGfVdzMfHJWDMP54ywkxHdGCjByUhKZ9kIbXSlzkHwEwE~sFKO-48eZ870~8LzgvaBVyd4WhlpaxfJ6CmIixHo6ERHY5F6BcrLLUuwvRaJRcNmECz03KL5DJyYgZkd1u02UrsBWpgSXnRspPSe0O6kXEzl9v0d1jflUJ1GNspUocAgv-ogBajpMpiU9v4KXq1EWGCIo9v9DT2BjaZA__"
-      }
-    >
+    <>
       <GoBack onClick={handleBackBtn} />
-      <div className="flex flex-col items-center justify-center w-full">
+      <div className="flex flex-col items-center justify-center w-full mt-4">
         <div className="text-center font-medium">
           <h2 className="text-2xl font-bold mb-8">Select Subjects</h2>
           <div className="w-[510px] max-w-full px-8 py-5 rounded-lg shadow-lg bg-[#FBFAFA]">
@@ -276,8 +272,16 @@ const SelectSubject = ({
                 </div>
               ))}
             </div>
+            {/* button to handle the state change and move to the next step */}
             <button
-              onClick={handleTraining}
+              onClick={() =>
+                setState((prev) => ({
+                  ...prev,
+                  isDepartment: false,
+                  isSubject: false,
+                  isTrainingDuration: true,
+                }))
+              }
               className="mt-6 w-full py-3 px-5 rounded-lg text-sm text-white bg-gradient-to-r from-[#09314F] to-[#E83831]"
             >
               Continue
@@ -285,11 +289,13 @@ const SelectSubject = ({
           </div>
         </div>
       </div>
-    </Layout2>
+    </>
   );
 };
 
-const TrainingDuration = ({ setIsDepartment, handleBackBtn }) => {
+// The training duration section component
+// This component allows the user to select the duration for their training
+const TrainingDuration = ({ handleBackBtn, setState }) => {
   const trainingInfo = [
     {
       courseName: "JAMB",
@@ -313,13 +319,9 @@ const TrainingDuration = ({ setIsDepartment, handleBackBtn }) => {
     },
   ];
   return (
-    <Layout2
-      bgImage={
-        "https://s3-alpha-sig.figma.com/img/7d38/19bf/89f69f01fb13533d24809a0b59801113?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Ym692ngM5DbVrpDBFBkuCGza0Q0Z2MYCXbEibV9sGqegnWMr5~E7BYtx8X7UkjlwjUW5k1dQjjXMugDmdvW~LtXLA-l3YOgYGM1FyWpVscPaIG6Qt0EhJmWGlWjH7uXKGpuTHGfVdzMfHJWDMP54ywkxHdGCjByUhKZ9kIbXSlzkHwEwE~sFKO-48eZ870~8LzgvaBVyd4WhlpaxfJ6CmIixHo6ERHY5F6BcrLLUuwvRaJRcNmECz03KL5DJyYgZkd1u02UrsBWpgSXnRspPSe0O6kXEzl9v0d1jflUJ1GNspUocAgv-ogBajpMpiU9v4KXq1EWGCIo9v9DT2BjaZA__"
-      }
-    >
+    <>
       <GoBack onClick={handleBackBtn} />
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center mt-4">
         <div className="text-center font-medium">
           <h2 className="text-2xl font-bold mb-8">Training Duration</h2>
           <div className="w-[510px] max-w-full px-8 py-5 rounded-lg shadow-lg bg-[#FBFAFA]">
@@ -329,8 +331,8 @@ const TrainingDuration = ({ setIsDepartment, handleBackBtn }) => {
             <div className="mt-6">
               <div className="w-full bg-primary p-2.5 text-white text-sm font-semibold flex justify-between items-center rounded-t-lg">
                 <span className="flex-1">Examination</span>
-                <span className="flex-1">Subjects</span>
-                <span className="flex-1">Numbers</span>
+                <span className="flex-1">Duration</span>
+                <span className="flex-1">Amount</span>
               </div>
               {trainingInfo.map((items, i) => (
                 <div
@@ -353,12 +355,54 @@ const TrainingDuration = ({ setIsDepartment, handleBackBtn }) => {
                 </div>
               ))}
             </div>
-            <button className="mt-6 w-full py-3 px-5 rounded-lg text-sm text-white bg-gradient-to-r from-[#09314F] to-[#E83831]">
+            <button
+              onClick={() =>
+                setState((prev) => ({
+                  ...prev,
+                  isTrainingDuration: false,
+                  isPayment: true,
+                }))
+              }
+              className="mt-6 w-full py-3 px-5 rounded-lg text-sm text-white bg-gradient-to-r from-[#09314F] to-[#E83831]"
+            >
               Continue
             </button>
           </div>
         </div>
       </div>
-    </Layout2>
+    </>
+  );
+};
+
+// The payment section component
+// This component displays the payment success message and options
+const PaymentSection = () => {
+  return (
+    <>
+      <div className="flex flex-col items-center justify-center h-full">
+        <div className="w-[510px] max-w-full px-8 py-5 rounded-lg shadow-lg bg-[#FBFAFA] flex flex-col items-center justify-center">
+          <div className="w-[120px] h-[120px] bg-[#E336290D] rounded-full flex items-center justify-center">
+            <div className="w-[80px] h-[80px] bg-mainBlue text-white rounded-full flex items-center justify-center">
+              <Icon icon="mingcute:check-fill" width="45" height="45" />
+            </div>
+          </div>
+          <h2 className="text-2xl text-mainBlue font-semibold mt-4">
+            Payment Successful!
+          </h2>
+          <div className="mt-9 font-medium space-y-1">
+            <p className="text-base text-mainBlue">You now have access for</p>
+            <span className="text-sm text-ascent block text-center">
+              JAMB - Daily
+            </span>
+            <span className="text-sm text-ascent block text-center">
+              WAEC - Monthly
+            </span>
+          </div>
+          <Link className="bg-gradient-to-r from-[#09314F] to-[#E83831] text-white w-full text-center p-3 rounded-lg mt-9">
+            Go To Dashboard
+          </Link>
+        </div>
+      </div>
+    </>
   );
 };
