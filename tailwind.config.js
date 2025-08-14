@@ -18,6 +18,7 @@ module.exports = {
         mainWhite: "#FFFDFD",
         whiteFade: "#FFFFFF1A",
         mainBlack: "#121D24",
+        lightGreen: "#7FD093",
       },
       transitionProperty: {
         width: "width",
