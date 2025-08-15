@@ -48,7 +48,6 @@ export default function App() {
           <Route path="/email-verification" element={<EmailVerfication />} />
           <Route path="/login" element={<Login />} />
           <Route path="/staff/login" element={<StaffLogin />} />
-          <Route path="/training-selection" element={<TrainingSelection />} />
           {/*ALL DASHBBOARD ROUTES */}
           {/* STUDENT ROUTES */}
           <Route element={<PrivateRoute allowedRole="student" />}>
@@ -58,6 +57,7 @@ export default function App() {
             <Route path="/calender" element={<Calender />} />
             <Route path="/exam" element={<Exampage />} />
             <Route path="/groups" element={<Group />} />
+            <Route path="/training-selection" element={<TrainingSelection />} />
           </Route>
           <Route path="/payment" element={<PaymentPage />} />
           <Route path="/settings" element={<Settings />} />
