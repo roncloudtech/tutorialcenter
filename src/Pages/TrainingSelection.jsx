@@ -1,10 +1,6 @@
-import { Icon } from "@iconify/react/dist/iconify.js";
 import Layout2 from "../Components/Layout2";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import PerfectScrollbar from "react-perfect-scrollbar";
-import "react-perfect-scrollbar/dist/css/styles.css";
-import PaystackPop from "@paystack/inline-js";
+import { useState } from "react";
+
 import SelectDepartment from "./TrainingFlow/SelectDepartment";
 import SelectSubject from "./TrainingFlow/SelectSubject";
 import TrainingDuration from "./TrainingFlow/TrainingDuration";

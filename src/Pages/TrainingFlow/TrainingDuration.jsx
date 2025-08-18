@@ -17,10 +17,10 @@ const TrainingDuration = ({
 
   // Pricing table for each course + duration
   const pricingData = {
-    JAMB: { Monthly: 2000, Quarterly: 6000, HalfYear: 15000, Annually: 50000 },
-    WAEC: { Monthly: 3000, Quarterly: 8000, HalfYear: 20000, Annually: 70000 },
-    NECO: { Monthly: 8900, Quarterly: 7000, HalfYear: 18000, Annually: 65000 },
-    GCE: { Monthly: 6750, Quarterly: 7500, HalfYear: 19000, Annually: 68000 },
+    JAMB: { Monthly: 5000, Quarterly: 13500, HalfYear: 27000, Annually: 54000 },
+    WAEC: { Monthly: 8000, Quarterly: 21600, HalfYear: 43200, Annually: 86400 },
+    NECO: { Monthly: 8000, Quarterly: 21600, HalfYear: 43200, Annually: 86400 },
+    GCE: { Monthly: 8000, Quarterly: 21600, HalfYear: 43200, Annually: 86400 },
   };
 
   // State to store duration & amount per course
