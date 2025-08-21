@@ -8,8 +8,8 @@ const SuccessPaymentSection = ({ selectedCourses }) => {
   console.log("Selected Courses:", selectedCourses);
   return (
     <>
-      <div className="flex flex-col items-center justify-center h-full">
-        <div className="w-[510px] max-w-full px-8 py-5 rounded-lg shadow-lg bg-[#FBFAFA] flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center m-4">
+        <div className="max-w-[510px] w-full px-8 py-5 rounded-lg shadow-lg bg-[#FBFAFA] flex flex-col items-center justify-center">
           <div className="w-[120px] h-[120px] bg-[#E336290D] rounded-full flex items-center justify-center">
             <div className="w-[80px] h-[80px] bg-mainBlue text-white rounded-full flex items-center justify-center">
               <Icon icon="mingcute:check-fill" width="45" height="45" />

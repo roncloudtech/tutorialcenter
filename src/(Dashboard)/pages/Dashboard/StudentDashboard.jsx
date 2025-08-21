@@ -4,8 +4,11 @@ import DashboardLayout from "../../DashboardLayout";
 import Title from "../../Components/Title";
 import ProgressSlider from "../../Components/ProgressSlider";
 import TwoColumnLayout from "../../../Components/TwoColumnLayout";
+import useDepartmentCheck from "../../../Hooks/useDepartmentCheck";
 
 export default function StudentDashboard() {
+  // Check if the user has department
+  useDepartmentCheck();
   return (
     <DashboardLayout>
       <TwoColumnLayout

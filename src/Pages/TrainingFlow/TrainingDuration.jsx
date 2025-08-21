@@ -15,12 +15,54 @@ const TrainingDuration = ({
   // Get the authenticated user from context
   const { authenticatedUser } = useSchoolContext();
 
+  const autoCalcCoursePrice = (pricePerMonth, duration) => {
+    let calcDuration;
+    switch (duration) {
+      case "quarterly":
+        calcDuration = 3;
+        break;
+      case "HalfYear":
+        calcDuration = 6;
+        break;
+      case "Annually":
+        calcDuration = 12;
+        break;
+
+      default:
+        calcDuration = 1;
+        break;
+    }
+    const durationAmount = pricePerMonth * calcDuration;
+    const discountPrice = durationAmount * 0.1;
+    const finalPrice = durationAmount - discountPrice;
+    return finalPrice;
+  };
   // Pricing table for each course + duration
   const pricingData = {
-    JAMB: { Monthly: 5000, Quarterly: 13500, HalfYear: 27000, Annually: 54000 },
-    WAEC: { Monthly: 8000, Quarterly: 21600, HalfYear: 43200, Annually: 86400 },
-    NECO: { Monthly: 8000, Quarterly: 21600, HalfYear: 43200, Annually: 86400 },
-    GCE: { Monthly: 8000, Quarterly: 21600, HalfYear: 43200, Annually: 86400 },
+    JAMB: {
+      Monthly: 5000,
+      Quarterly: autoCalcCoursePrice(5000, "quarterly"),
+      HalfYear: autoCalcCoursePrice(5000, "HalfYear"),
+      Annually: autoCalcCoursePrice(5000, "Annually"),
+    },
+    WAEC: {
+      Monthly: 8000,
+      Quarterly: autoCalcCoursePrice(8000, "quarterly"),
+      HalfYear: autoCalcCoursePrice(8000, "HalfYear"),
+      Annually: autoCalcCoursePrice(8000, "Annually"),
+    },
+    NECO: {
+      Monthly: 8000,
+      Quarterly: autoCalcCoursePrice(8000, "quarterly"),
+      HalfYear: autoCalcCoursePrice(8000, "HalfYear"),
+      Annually: autoCalcCoursePrice(8000, "Annually"),
+    },
+    GCE: {
+      Monthly: 8000,
+      Quarterly: autoCalcCoursePrice(8000, "quarterly"),
+      HalfYear: autoCalcCoursePrice(8000, "HalfYear"),
+      Annually: autoCalcCoursePrice(8000, "Annually"),
+    },
   };
 
   // State to store duration & amount per course
@@ -62,6 +104,7 @@ const TrainingDuration = ({
     0
   );
 
+  // Paystack configuration
   const publicKey = "pk_test_baecdbe89b4c293f6a4564d49843b1fcd8c937f9";
   const payWithPaystack = () => {
     const paystack = new PaystackPop();
@@ -73,6 +116,8 @@ const TrainingDuration = ({
       currency: "NGN", // Default is NGN
       onSuccess: () => {
         console.log("Payment successful. Reference:");
+        // This is where you would typically make an API call to update the students's department in the database
+
         // // Move to success page
         setState((prev) => ({
           ...prev,
@@ -108,10 +153,10 @@ const TrainingDuration = ({
     !isPayment && (
       <>
         <GoBack onClick={handleBackBtn} />
-        <div className="flex flex-col items-center justify-center mt-4">
+        <div className="flex flex-col items-center justify-center m-4">
           <div className="text-center font-medium">
             <h2 className="text-2xl font-bold mb-8">Training Duration</h2>
-            <div className="w-[510px] max-w-full px-8 py-5 rounded-lg shadow-lg bg-[#FBFAFA]">
+            <div className="max-w-[510px] w-full px-8 py-5 rounded-lg shadow-lg bg-[#FBFAFA]">
               <p className="text-sm">
                 Select your preferred training duration for your examination.
               </p>

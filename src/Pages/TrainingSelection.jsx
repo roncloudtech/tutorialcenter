@@ -117,10 +117,10 @@ const SelectTraining = ({ setState, setSelectedCourses }) => {
   };
   return (
     <>
-      <div className="flex f lex-col items-center justify-center mt-4">
+      <div className="flex flex-col items-center justify-center m-4">
         <div className="text-center font-medium">
           <h2 className="text-2xl font-bold mb-4">Select Training</h2>
-          <div className="w-[448px] max-w-full bg-[#FBFAFA] shadow-lg p-6 rounded-lg">
+          <div className="max-w-[448px] w-full bg-[#FBFAFA] shadow-lg p-6 rounded-lg">
             <p className="text-sm mb-6">
               Select the examinations you’re about to write, you have the option
               of selecting more than 1 examination.

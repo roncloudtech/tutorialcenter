@@ -126,10 +126,10 @@ const SelectSubject = ({
   return (
     <>
       <GoBack onClick={handleBackBtn} />
-      <div className="flex flex-col items-center justify-center w-full my-5">
+      <div className="flex flex-col items-center justify-center m-4">
         <div className="text-center font-medium">
           <h2 className="text-2xl font-bold mb-8">Select Subjects</h2>
-          <div className="w-[510px] max-w-full px-8 py-5 rounded-lg shadow-lg bg-[#FBFAFA]">
+          <div className="max-w-[510px] w-full px-8 py-5 rounded-lg shadow-lg bg-[#FBFAFA]">
             <p className="text-sm">
               Select your preferred subjects for your examinations.
             </p>

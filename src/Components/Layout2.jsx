@@ -12,7 +12,7 @@ export default function Layout2({
     <div
       className={`${
         reverse ? "flex-row-reverse" : ""
-      } w-screen h-screen  lg:flex overflow-y-hidden scroll`}
+      } w-screen h-screen flex max-lg:flex-col-reverse overflow-hidden scroll`}
     >
       <PerfectScrollbar
         options={{ suppressScrollX: true }}
@@ -21,7 +21,7 @@ export default function Layout2({
         {children}
       </PerfectScrollbar>
       <div
-        className="hidden lg:block w-[43%] h-full bg-primary relative bg-no-repeat bg-cover bg-center"
+        className="block lg:w-[43%] max-lg:h-[25%] h-full bg-primary relative bg-no-repeat bg-cover bg-center"
         style={{ backgroundImage: `url(${bgImage})` }}
       >
         {btnTitle && (
