@@ -54,10 +54,10 @@ const SelectDepartment = ({
   return (
     <>
       <GoBack onClick={handleBackBtn} />
-      <div className="flex flex-col items-center justify-center mt-4">
+      <div className="flex flex-col items-center justify-center m-4">
         <div className="text-center font-medium">
           <h2 className="text-2xl font-bold mb-8">Select Department</h2>
-          <div className="w-[448px] max-w-full bg-[#FBFAFA] shadow-lg p-8 rounded-lg mb-2">
+          <div className="max-w-[448px] w-full bg-[#FBFAFA] shadow-lg p-8 rounded-lg mb-2">
             <p className="text-sm mb-7">
               Select a department to progress with your registration
             </p>

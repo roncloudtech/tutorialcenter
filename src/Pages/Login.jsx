@@ -90,7 +90,7 @@ export default function Login() {
         setRole("student");
         // This is to check if the student has not completed the Training selection or the Course selection.
         if (studentInfo.department === null) {
-          // if the student has no department, navigate the user to the training selection page
+          // if the student has no department, navigate the student to the training selection page
           return navigate("/training-selection");
         }
       } else {
