@@ -311,10 +311,13 @@ const GuardianForm = ({
           <div className="w-full h-[1.5px] bg-black" />
         </div>
         <div className="grid justify-center mb-5">
-          <div className="flex gap-3 bg-white shadow-md px-4 py-2 rounded-lg">
+          <Link
+            to={"http://127.0.0.1:8000/api/guardians/auth/google"}
+            className="flex gap-3 bg-white shadow-md px-4 py-2 rounded-lg"
+          >
             <Icon icon="devicon:google" width="20" height="20" />
             <span className="text-[#8695A0] text-xs">Sign up with google</span>
-          </div>
+          </Link>
         </div>
         <p className="text-xs text-center font-medium text-mainBlack">
           {" "}
@@ -449,10 +452,13 @@ const StudentForm = ({
         <div className="w-full h-[1.5px] bg-black" />
       </div>
       <div className="grid justify-center mb-5">
-        <div className="flex gap-3 bg-white shadow-md px-4 py-2 rounded-lg">
+        <Link
+          to={"http://127.0.0.1:8000/api/students/auth/google"}
+          className="flex gap-3 bg-white shadow-md px-4 py-2 rounded-lg"
+        >
           <Icon icon="devicon:google" width="20" height="20" />
           <span className="text-[#8695A0] text-xs">Sign up with google</span>
-        </div>
+        </Link>
       </div>
       <p className="text-xs text-center font-medium text-mainBlack">
         {" "}

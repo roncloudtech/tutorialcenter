@@ -191,14 +191,17 @@ export default function SignUp() {
                     <p className="text-xs text-nowrap">Or continue with</p>
                     <div className="w-full h-[1.5px] bg-black" />
                   </div>
-                  <button className="w-full flex items-center justify-center mb-5">
+                  <Link
+                    to={`http://localhost:8000/api/${userRole}s/auth/google`}
+                    className="w-full flex items-center justify-center mb-5"
+                  >
                     <div className="flex items-center justify-center w-max gap-3 bg-white shadow-md py-2 px-3.5 rounded-lg">
                       <Icon icon="devicon:google" width="20" height="20" />
                       <span className="text-[#8695A0] text-xs">
                         Sign up with google
                       </span>
                     </div>
-                  </button>
+                  </Link>
                   <p className="text-xs text-center font-medium text-mainBlack">
                     {" "}
                     Already have an account?{" "}
