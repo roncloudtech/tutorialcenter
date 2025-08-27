@@ -35,6 +35,7 @@ import TrainingSelection from "./Pages/TrainingSelection";
 import StaffDashboard from "./STAFF/Pages/Dashboard";
 import StaffSettings from "./STAFF/Pages/Settings";
 import StaffAssesment from "./STAFF/Pages/Assesment";
+import StaffCourses from "./STAFF/Pages/Course";
 
 export default function App() {
   return (
@@ -98,6 +99,7 @@ export default function App() {
             <Route path="/student-list" element={<AllStudents />} />
             <Route path="/staff/settings" element={<StaffSettings />} />
             <Route path="/staff/assessment" element={<StaffAssesment />} />
+            <Route path="/staff/courses" element={<StaffCourses />} />
           </Route>
 
           {/* Unauthorized Route */}
