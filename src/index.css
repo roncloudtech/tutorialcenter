@@ -91,12 +91,17 @@ form {
   background: inherit;
   font-size: 16px;
 }
-input {
+input,
+textarea {
   appearance: none;
   transition: all 0.25s cubic-bezier(0.65, 0.05, 0.36, 1);
   background: none;
 }
-
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 select,
 input:focus {
   border: none;

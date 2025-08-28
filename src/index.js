@@ -3,15 +3,19 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import SchoolContextProvider from "./Context/SchoolContext";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // import reportWebVitals from './reportWebVitals';
 
+const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <SchoolContextProvider>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </SchoolContextProvider>
+  <QueryClientProvider client={queryClient}>
+    <SchoolContextProvider>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </SchoolContextProvider>
+  </QueryClientProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

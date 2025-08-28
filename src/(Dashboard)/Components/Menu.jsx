@@ -205,6 +205,12 @@ const menuItems = [
     visible: ["staff"],
   },
   {
+    label: "Courses",
+    path: "/staff/courses",
+    icon: <Icon icon="uis:calender" width="20" height="20" />,
+    visible: ["staff"],
+  },
+  {
     label: "Settings",
     path: "/staff/settings",
     icon: <Icon icon="lets-icons:setting-fill" width="20" height="20" />,
