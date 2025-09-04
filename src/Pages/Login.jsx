@@ -6,13 +6,18 @@ import { Link, useNavigate } from "react-router-dom";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
 import { useSchoolContext } from "../Context/SchoolContext";
+
+const API_BASE_URL = "http://localhost:8000/api/";
+const loginUser = async (role, data) => {
+  return axios.post(`${API_BASE_URL}${role}s/login`, data);
+};
+
 export default function Login() {
   // Importing authenticatedUser context
   const { setAuthenticatedUser, setRole, role } = useSchoolContext();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const [userRole, setUserRole] = useState("guardian"); // Default role
-  const API_BASE_URL = "http://localhost:8000/api/";
+  const [userRole, setUserRole] = useState("student"); // Default role
   const [errors, setErrors] = useState({}); // Form State Errors
   const [formData, setFormData] = useState({
     email: "",
@@ -56,18 +61,12 @@ export default function Login() {
       return;
     }
     try {
-      const res = await axios.post(
-        `${
-          userRole === "student"
-            ? `${API_BASE_URL}students`
-            : `${API_BASE_URL}guardians`
-        }/login`,
-        {
-          password: formData.password,
-          email: formData.email,
-          identifier: formData.email,
-        }
-      );
+      const res = await loginUser(userRole, {
+        password: formData.password,
+        email: formData.email,
+        identifier: formData.email,
+      });
+
       // clear all form fields
       setFormData({
         password: "",
@@ -350,11 +349,11 @@ const StudentForm = ({
       } max-w-[410px] w-full lg:px-9 py-5 lg:bg-[#FBFAFA] rounded-md lg:shadow-md mt-3`}
     >
       {/* Log the error message */}
-      {errors.message && (
+      {errors?.message && (
         <p className="mb-4 text-xs text-red-500 text-center  gap-1">
-          {errors.message}
+          {errors?.message}
           {/* Check if the error message is email address not verified show the verfication link  */}
-          {errors.message === "Email or Phone not verified" && (
+          {errors?.message === "Email or Phone not verified" && (
             <Link
               to={`/email-verification?identifier=${formData.email}&role=${userRole}`}
               className="text-[12px] text-gray-600 hover:text-gray-400 transition block text-center"
@@ -384,11 +383,11 @@ const StudentForm = ({
             value={formData.email}
             onChange={handleChange}
             className={`w-full px-4 py-2 border rounded-lg ${
-              errors.email ? "border-red-500" : "border-gray-300"
+              errors?.email ? "border-red-500" : "border-gray-300"
             } focus:ring-2 focus:ring-blue-900 focus:border-transparent`}
           />
-          {errors.email && (
-            <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+          {errors?.email && (
+            <p className="mt-1 text-sm text-red-500">{errors?.email}</p>
           )}
         </div>
         {/* Password Input */}

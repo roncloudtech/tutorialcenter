@@ -25,9 +25,9 @@ export default function SideBar({ expandSideBar, setExpandSideBar }) {
 
   return (
     <>
-      <PerfectScrollbar className="hidden xl:block">
+      <PerfectScrollbar className="hidden xl:block bg-mainWhite dark:bg-darkMode  shadow-custom-1 rounded-lg h-full">
         <div
-          className={`h-full position xl:flex bg-mainWhite dark:bg-darkMode  shadow-custom-1 p-3 flex-col gap-3 rounded-lg relative ${
+          className={`h-full position xl:flex    p-3 flex-col gap-3  relative ${
             expandSideBar ? "" : "items-center"
           }`}
         >
@@ -75,10 +75,13 @@ export default function SideBar({ expandSideBar, setExpandSideBar }) {
               src={userInfo.profile_picture || avatar}
               alt={fullname}
               className="h-[30px] rounded-full mb-2 "
-              style={{objectFit: "contain"}}
+              style={{ objectFit: "contain" }}
             />
             <div className={`${expandSideBar ? "block mb-2" : "hidden"}`}>
-              <p className="text-[12px] font-medium text-ascent">Welcome {userrole.charAt(0).toUpperCase() + userrole.substring(1,)}!</p>
+              <p className="text-[12px] font-medium text-ascent">
+                Welcome{" "}
+                {userrole.charAt(0).toUpperCase() + userrole.substring(1)}!
+              </p>
               <h3 className="text-xs font-medium text-mainBlue dark:text-lightGrey">
                 {fullname}
               </h3>

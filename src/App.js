@@ -27,7 +27,6 @@ import TeacherSettings from "./(TEACHER)/pages/Settings";
 import TeacherResult from "./(TEACHER)/pages/Result";
 import EmailVerfication from "./Pages/EmailVerfication";
 import CourseChats from "./(Dashboard)/pages/Course/CourseChats";
-import AdminDashboard from "./ADMIN/pages/Dashboard";
 import AllStudents from "./STAFF/Lists/Students";
 import PrivateRoute from "./Pages/Auth/PrivateRoute";
 import Unauthorized from "./Pages/Auth/Unauthorized";
@@ -36,6 +35,7 @@ import StaffDashboard from "./STAFF/Pages/Dashboard";
 import StaffSettings from "./STAFF/Pages/Settings";
 import StaffAssesment from "./STAFF/Pages/Assesment";
 import StaffCourses from "./STAFF/Pages/Course";
+import StaffRegistration from "./STAFF/Pages/Registration";
 
 export default function App() {
   return (
@@ -100,6 +100,7 @@ export default function App() {
             <Route path="/staff/settings" element={<StaffSettings />} />
             <Route path="/staff/assessment" element={<StaffAssesment />} />
             <Route path="/staff/courses" element={<StaffCourses />} />
+            <Route path="/staff/register" element={<StaffRegistration />} />
           </Route>
 
           {/* Unauthorized Route */}

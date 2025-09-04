@@ -102,6 +102,11 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+select {
+  width: 100%;
+  max-width: 100%;
+  outline: none;
+}
 select,
 input:focus {
   border: none;

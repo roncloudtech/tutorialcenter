@@ -211,6 +211,12 @@ const menuItems = [
     visible: ["staff"],
   },
   {
+    label: "Staff Registration",
+    path: "/staff/register",
+    icon: <Icon icon="medical-icon:i-care-staff-area" width="20" height="20" />,
+    visible: ["staff"],
+  },
+  {
     label: "Settings",
     path: "/staff/settings",
     icon: <Icon icon="lets-icons:setting-fill" width="20" height="20" />,

@@ -6,15 +6,19 @@ import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import { Link, useNavigate } from "react-router-dom";
 import Layout2 from "../Components/Layout2";
 
+const API_BASE_URL = "http://localhost:8000";
+const registerUser = async (role, data) => {
+  return axios.post(`${API_BASE_URL}/api/${role}s/register`, data);
+};
+
 export default function SignUp() {
-  const API_BASE_URL = "http://localhost:8000";
-  const [userRole, setUserRole] = useState("guardian"); // Default role is guardian
+  const [userRole, setUserRole] = useState("student"); // Default role
 
   // Caturing the user info
   // For Both Student and Guardian
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    firstname: "",
+    lastname: "",
     gender: "",
     email: "",
     password: "",
@@ -29,19 +33,62 @@ export default function SignUp() {
 
   // Capture each user entries
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+    let newErrors = { ...errors };
+    switch (name) {
+      case "firstname":
+      case "lastname":
+      case "gender":
+        if (value.trim()) {
+          delete newErrors[name];
+        } else {
+          newErrors[name] = `${
+            name.charAt(0).toUpperCase() + name.slice(1)
+          } is required`;
+        }
+        break;
+      case "email":
+        if (!value.trim()) {
+          newErrors.email = "Email is required";
+        } else if (!/\S+@\S+\.\S+/.test(value)) {
+          newErrors.email = "Invalid email address";
+        } else {
+          delete newErrors.email;
+        }
+        break;
+      case "password":
+        if (!value.trim()) {
+          newErrors.password = "Password is required";
+        } else if (value.length < 8) {
+          newErrors.password = "Password must be at least 8 characters";
+        } else {
+          delete newErrors.password;
+        }
+        break;
+      case "confirmPassword":
+        if (!value.trim()) {
+          newErrors.confirmPassword = "Confirm Password is required";
+        } else if (value !== formData.password) {
+          newErrors.confirmPassword = "Passwords do not match";
+        } else {
+          delete newErrors.confirmPassword;
+        }
+        break;
+      default:
+        break;
+    }
+    setErrors(newErrors);
   };
 
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.firstName.trim())
-      newErrors.firstName = "First name is required";
+    if (!formData.firstname.trim())
+      newErrors.firstname = "First name is required";
 
-    if (!formData.lastName.trim()) newErrors.lastName = "Last name is required";
+    if (!formData.lastname.trim()) newErrors.lastname = "Last name is required";
 
     if (!formData.gender.trim()) newErrors.gender = "Please select your gender";
 
@@ -77,19 +124,13 @@ export default function SignUp() {
 
     setLoading(true);
     try {
-      const response = await axios.post(
-        `${
-          userRole === "guardian"
-            ? `${API_BASE_URL}/api/guardians`
-            : `${API_BASE_URL}/api/students`
-        }/register`,
-        {
-          firstname: formData.firstName,
-          lastname: formData.lastName,
-          email: formData.email,
-          password: formData.password,
-        }
-      );
+      const response = await registerUser(userRole, {
+        firstname: formData.firstname,
+        lastname: formData.lastname,
+        email: formData.email,
+        password: formData.password,
+        gender: formData.gender,
+      });
 
       if (response.status === 201) {
         navigate(
@@ -247,16 +288,16 @@ const Form = ({
           First Name
         </label>
         <input
-          name="firstName"
+          name="firstname"
           type="text"
-          value={formData.firstName}
+          value={formData.firstname}
           onChange={handleChange}
           className={`w-full px-4 py-2 border rounded-lg ${
-            errors.firstName ? "border-red-500" : "border-gray-300"
+            errors.firstname ? "border-red-500" : "border-gray-300"
           } focus:ring-2 focus:ring-blue-900 focus:border-transparent`}
         />
-        {errors.firstName && (
-          <p className="mt-1 text-sm text-red-500">{errors.firstName}</p>
+        {errors.firstname && (
+          <p className="mt-1 text-sm text-red-500">{errors.firstname}</p>
         )}
       </div>
 
@@ -266,16 +307,16 @@ const Form = ({
           Last Name
         </label>
         <input
-          name="lastName"
+          name="lastname"
           type="text"
-          value={formData.lastName}
+          value={formData.lastname}
           onChange={handleChange}
           className={`w-full px-4 py-2 border rounded-lg ${
-            errors.lastName ? "border-red-500" : "border-gray-300"
+            errors.lastname ? "border-red-500" : "border-gray-300"
           } focus:ring-2 focus:ring-blue-900 focus:border-transparent`}
         />
-        {errors.lastName && (
-          <p className="mt-1 text-sm text-red-500">{errors.lastName}</p>
+        {errors.lastname && (
+          <p className="mt-1 text-sm text-red-500">{errors.lastname}</p>
         )}
       </div>
 
