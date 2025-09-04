@@ -11,7 +11,6 @@ export default function LogoutModal({ setModal, modal }) {
   const { setAuthenticatedUser, setRole } = useSchoolContext();
   // navigation
   const navigate = useNavigate();
-
   // Function to handle logout
   const handleLogout = () => {
     setIsLoading(true);
@@ -23,6 +22,7 @@ export default function LogoutModal({ setModal, modal }) {
       setModal(false);
       setAuthenticatedUser({});
       setRole("");
+      // check the role and navigate accordingly
       navigate("/login");
     });
   };

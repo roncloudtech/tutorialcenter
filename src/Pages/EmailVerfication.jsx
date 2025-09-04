@@ -25,6 +25,8 @@ export default function EmailVerfication() {
   const [toast, setToast] = useState(null);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  // Starts the countdown at 60 seconds for resend functionality
+  const [timer, setTimer] = useState(60);
 
   const inputRefs = {
     num1: useRef(null),
@@ -37,7 +39,14 @@ export default function EmailVerfication() {
 
   useEffect(() => {
     inputRefs.num1.current.focus(); // autofocus on first load
-  }, [inputRefs.num1]);
+    let interval;
+    // Start the count down timer
+    if (timer > 0)
+      interval = setInterval(() => {
+        setTimer((prev) => prev - 1);
+      }, 1000);
+    return () => clearInterval(interval);
+  }, [inputRefs.num1, timer]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -83,7 +92,23 @@ export default function EmailVerfication() {
     const lastInput = `num${Math.min(pastedData.length, 6)}`;
     inputRefs[lastInput].current.focus();
   };
-
+  // Handle key down
+  const handleKeyDown = (e) => {
+    const { name, value } = e.target;
+    const currentInputIndex = parseInt(name.replace("num", ""));
+    // Handle backspace
+    if (e.key === "Backspace" && currentInputIndex > 1) {
+      if (value === "") {
+        inputRefs[`num${currentInputIndex - 1}`].current.focus();
+      }
+    }
+    // Handle arrow keys
+    if (e.key === "ArrowLeft" && currentInputIndex > 1) {
+      inputRefs[`num${currentInputIndex - 1}`].current.focus();
+    } else if (e.key === "ArrowRight" && currentInputIndex < 6) {
+      inputRefs[`num${currentInputIndex + 1}`].current.focus();
+    }
+  };
   const validateForm = () => {
     const newErrors = {};
     Object.keys(formData).forEach((key) => {
@@ -139,6 +164,12 @@ export default function EmailVerfication() {
       setLoading(false);
     }
   };
+  // Resend verification code
+  const handleResendCode = () => {
+    // Reset the timer and disable the resend button again
+    setTimer(60);
+    // api call here
+  };
 
   return (
     <>
@@ -146,7 +177,7 @@ export default function EmailVerfication() {
 
       <section className="my-16">
         <div className="Container flex items-center justify-center text-center">
-          <div className="md:w-[25rem] w-full md:p-10 bg-white md:shadow-md rounded-lg flex flex-col items-center justify-center">
+          <div className="md:w-[25rem] w-full md:p-10 bg-white md:shadow-xl rounded-lg flex flex-col items-center justify-center">
             <div className="logo mb-4">
               <img
                 className="max-w-[80px] max-md:max-w-[70px]"
@@ -158,13 +189,13 @@ export default function EmailVerfication() {
               <h2 className="md:text-2xl text-xl font-semibold">
                 Please check your email
               </h2>
-              <p className="text-sm text-gray-400 mt-2 ">
+              <p className="text-sm text-gray-400 mt-2">
                 We've sent code to{" "}
                 <span className="text-black font-semibold">{identifier}</span>
               </p>
             </div>
-            <div className="text-center mt-4">
-              {toast?.message && (
+            {toast?.message && (
+              <div className="text-center mt-4">
                 <p
                   className={`text-sm ${
                     toast?.type === "error" ? "text-red-500" : "text-green-500"
@@ -172,12 +203,12 @@ export default function EmailVerfication() {
                 >
                   {toast?.message}
                 </p>
-              )}
-            </div>
+              </div>
+            )}
             <form
               autoComplete="off"
               onSubmit={handleSubmit}
-              className="verfication code my-5 w-full flex flex-col items-center justify-evenly"
+              className="verfication code my-4 w-full flex flex-col items-center justify-evenly"
             >
               <div className="verification-code my-5 w-full flex items-center justify-evenly gap-2">
                 {["num1", "num2", "num3", "num4", "num5", "num6"].map(
@@ -190,6 +221,7 @@ export default function EmailVerfication() {
                       value={formData[field]}
                       onChange={handleChange}
                       onPaste={handlePaste}
+                      onKeyDown={handleKeyDown}
                       maxLength="1"
                       placeholder="0"
                       className={`p-2 ring-1 rounded-sm ring-gray-300 text-center text-sm text-blue-900 w-10 h-10 border ${
@@ -197,6 +229,25 @@ export default function EmailVerfication() {
                       } focus:ring-2 focus:ring-blue-900`}
                     />
                   )
+                )}
+              </div>
+              <div className="my-3">
+                {timer > 0 ? (
+                  <p className="text-sm text-gray-500">
+                    If you didn’t get verification code yet. Resend code in
+                    <span className="ml-1 font-semibold text-black">
+                      {timer} seconds
+                    </span>
+                  </p>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={handleResendCode}
+                    className="text-base font-semibold text-batext-black"
+                    disabled={timer > 0}
+                  >
+                    Resend code
+                  </button>
                 )}
               </div>
 

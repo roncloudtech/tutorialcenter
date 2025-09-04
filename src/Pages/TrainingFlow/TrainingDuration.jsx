@@ -4,6 +4,17 @@ import { useEffect, useState } from "react";
 import PaystackPop from "@paystack/inline-js";
 import GoBack from "./GoBackBtn";
 import { useSchoolContext } from "../../Context/SchoolContext";
+import axios from "axios";
+
+const API_BASE_URL = "http://localhost:8000/api";
+// Update student Info API call
+const updateStudentDepartment = async (id, department) => {
+  return axios.put(
+    `${API_BASE_URL}/students/${id}`,
+    { department },
+    { withCredentials: true }
+  );
+};
 
 // This component allows the user to select the duration for their training and calculates the total amount based on the selected courses and durations.
 const TrainingDuration = ({
@@ -11,9 +22,10 @@ const TrainingDuration = ({
   setState,
   selectedCourses,
   setSelectedCourses,
+  department,
 }) => {
   // Get the authenticated user from context
-  const { authenticatedUser } = useSchoolContext();
+  const { authenticatedUser, setAuthenticatedUser } = useSchoolContext();
 
   const autoCalcCoursePrice = (pricePerMonth, duration) => {
     let calcDuration;
@@ -114,16 +126,28 @@ const TrainingDuration = ({
       name: authenticatedUser.firstName,
       amount: totalAmount * 100, // Convert to kobo
       currency: "NGN", // Default is NGN
-      onSuccess: () => {
-        console.log("Payment successful. Reference:");
-        // This is where you would typically make an API call to update the students's department in the database
-
-        // // Move to success page
-        setState((prev) => ({
-          ...prev,
-          isTrainingDuration: false,
-          isPayment: true,
-        }));
+      onSuccess: async (tranx) => {
+        console.log("Payment successful. Reference:" + tranx.reference);
+        // Remove the student previous info from local storage
+        try {
+          const res = await updateStudentDepartment(
+            authenticatedUser.id,
+            department
+          );
+          // Update the user in local storage and context
+          localStorage.removeItem("userInfo");
+          localStorage.setItem("userInfo", JSON.stringify(res.data.student));
+          setAuthenticatedUser((prev) => ({ ...prev, department: department }));
+          console.log(res.data.student);
+          // // Move to success page
+          setState((prev) => ({
+            ...prev,
+            isTrainingDuration: false,
+            isPayment: true,
+          }));
+        } catch (error) {
+          console.log(error);
+        }
       },
       onCancel: () => {
         alert("Transaction was not completed");
@@ -179,23 +203,28 @@ const TrainingDuration = ({
                       {course.courseName}
                     </div>
 
-                    <select
-                      value={course.duration}
-                      onChange={(e) =>
-                        handleDurationChange(course.courseName, e.target.value)
-                      }
-                      className="flex-1 p-2.5 rounded-sm text-center text-mainBlack text-xs bg-[#D1D5DB]"
-                    >
-                      <option value="">Select</option>
+                    <div className="bg-[#D1D5DB] flex-1 pr-2 rounded-sm text-center text-mainBlack text-xs">
+                      <select
+                        value={course.duration}
+                        onChange={(e) =>
+                          handleDurationChange(
+                            course.courseName,
+                            e.target.value
+                          )
+                        }
+                        className="p-2.5"
+                      >
+                        <option value="">Select</option>
 
-                      {Object.keys(pricingData[course.courseName]).map(
-                        (duration, idx) => (
-                          <option key={idx} value={duration}>
-                            {duration}
-                          </option>
-                        )
-                      )}
-                    </select>
+                        {Object.keys(pricingData[course.courseName]).map(
+                          (duration, idx) => (
+                            <option key={idx} value={duration}>
+                              {duration}
+                            </option>
+                          )
+                        )}
+                      </select>
+                    </div>
 
                     <div className="flex-1 py-2 text-center text-sm text-mainBlack">
                       ₦{course.amount.toLocaleString()}

@@ -4,41 +4,41 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import GoBack from "./GoBackBtn";
 
+// All available subjects
+const allSubjects = [
+  { name: "English Language", department: ["Science", "Arts", "Commercial"] },
+  { name: "Mathematics", department: ["Science", "Arts", "Commercial"] },
+  { name: "Biology", department: ["Science", "Arts", "Commercial"] },
+  { name: "I.C.T", department: ["Science", "Arts", "Commercial"] },
+  { name: "Economics", department: ["Science", "Arts", "Commercial"] },
+  { name: "Government", department: ["Science", "Arts", "Commercial"] },
+  { name: "Commerce", department: ["Commercial"] },
+  { name: "Financial Accounting", department: ["Commercial"] },
+  { name: "Further Mathematics", department: ["Science"] },
+  { name: "Physics", department: ["Science"] },
+  { name: "Chemistry", department: ["Science"] },
+  { name: "Geography", department: ["Science"] },
+  { name: "Technical Drawing", department: ["Science"] },
+  { name: "Literature in English", department: ["Arts"] },
+  { name: "History", department: ["Arts"] },
+  { name: "C.R.K", department: ["Arts"] },
+  { name: "I.R.K", department: ["Arts"] },
+];
+
+// Subject limits for each exam
+const examConfigs = {
+  JAMB: 4,
+  WAEC: 9,
+  NECO: 9,
+  GCE: 9,
+};
+
 const SelectSubject = ({
   handleBackBtn,
   setState,
   department,
   selectedCourses, // ["JAMB", "WAEC"]
 }) => {
-  // All available subjects
-  const allSubjects = [
-    { name: "English Language", department: ["Science", "Arts", "Commercial"] },
-    { name: "Mathematics", department: ["Science", "Arts", "Commercial"] },
-    { name: "Biology", department: ["Science", "Arts", "Commercial"] },
-    { name: "I.C.T", department: ["Science", "Arts", "Commercial"] },
-    { name: "Economics", department: ["Science", "Arts", "Commercial"] },
-    { name: "Government", department: ["Science", "Arts", "Commercial"] },
-    { name: "Commerce", department: ["Commercial"] },
-    { name: "Financial Accounting", department: ["Commercial"] },
-    { name: "Further Mathematics", department: ["Science"] },
-    { name: "Physics", department: ["Science"] },
-    { name: "Chemistry", department: ["Science"] },
-    { name: "Geography", department: ["Science"] },
-    { name: "Technical Drawing", department: ["Science"] },
-    { name: "Literature in English", department: ["Arts"] },
-    { name: "History", department: ["Arts"] },
-    { name: "C.R.K", department: ["Arts"] },
-    { name: "I.R.K", department: ["Arts"] },
-  ];
-
-  // Subject limits for each exam
-  const examConfigs = {
-    JAMB: 4,
-    WAEC: 8,
-    NECO: 8,
-    GCE: 8,
-  };
-
   const [exams, setExams] = useState([]);
   const [showSubjectModal, setShowSubjectModal] = useState(null);
   const [nextPageErr, setNextPageErr] = useState(false);
@@ -80,12 +80,9 @@ const SelectSubject = ({
     <ul
       className={`${
         showSubjectModal === exam.name ? "block" : "hidden"
-      } bg-[#F9E7E6] rounded-b-md z-50 absolute bottom-0 translate-y-full left-0 w-full h-full min-h-[160px] overflow-hidden`}
+      }  z-50 absolute bottom-0 translate-y-full left-0 w-full h-full bg-[#F9E7E6] rounded-b-md min-h-[170px] overflow-hidden`}
     >
-      <PerfectScrollbar
-        options={{ suppressScrollX: true }}
-        className="w-full space-y-0.5 p-2"
-      >
+      <PerfectScrollbar className="w-full h-full space-y-0.5 p-2 ">
         {allSubjects.map((subject, i) => {
           if (subject.department.includes(department)) {
             const isSelected = exam.selected.includes(subject.name);
@@ -112,7 +109,14 @@ const SelectSubject = ({
 
   // Continue button
   const handleNextPage = () => {
-    const allValid = exams.every((exam) => exam.selected.length === exam.max);
+    const allValid = exams.every((exam) => {
+      // Special case for WAEC, NECO, GCE minimum of 8 subjects and maximum of 9
+      if (exam.name === "WAEC" || exam.name === "NECO" || exam.name === "GCE") {
+        return exam.selected.length >= 8 && exam.selected.length <= 9;
+      } else {
+        return exam.selected.length === exam.max;
+      }
+    });
     if (!allValid) return setNextPageErr(true);
 
     setNextPageErr(false);
@@ -144,7 +148,7 @@ const SelectSubject = ({
               {exams.map((exam, idx) => (
                 <div
                   key={idx}
-                  className="w-full p-2.5 flex justify-between items-center mt-4"
+                  className="w-full p-2.5 flex justify-between items-center mt-3"
                 >
                   <div className="flex-1 py-2 text-center text-sm text-mainBlack">
                     {exam.name}
@@ -156,13 +160,13 @@ const SelectSubject = ({
                           showSubjectModal === exam.name ? null : exam.name
                         )
                       }
-                      className="w-full flex items-center justify-between p-2.5 rounded-sm text-center text-mainBlack bg-[#E336290D]"
+                      className="w-full flex items-center justify-between px-4 py-2.5 rounded-sm text-center text-mainBlack bg-[#E336290D]"
                     >
                       <span className="text-xs">Select</span>
                       <Icon
                         icon="simple-line-icons:arrow-down"
-                        width="14"
-                        height="14"
+                        width="12"
+                        height="12"
                       />
                     </button>
                     <SubjectModal exam={exam} />

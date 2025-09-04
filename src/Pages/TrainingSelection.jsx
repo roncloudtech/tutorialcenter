@@ -5,6 +5,7 @@ import SelectDepartment from "./TrainingFlow/SelectDepartment";
 import SelectSubject from "./TrainingFlow/SelectSubject";
 import TrainingDuration from "./TrainingFlow/TrainingDuration";
 import SuccessPaymentSection from "./TrainingFlow/PaymentSucess";
+import { Icon } from "@iconify/react/dist/iconify.js";
 
 export default function TrainingSelection() {
   // state flow for the training selection
@@ -54,6 +55,7 @@ export default function TrainingSelection() {
           setSelectedCourses={setSelectedCourses}
           handleBackBtn={handleBackBtn}
           setState={setState}
+          department={selectedDepartment}
         />
       ) : isPayment ? (
         <SuccessPaymentSection
@@ -134,9 +136,12 @@ const SelectTraining = ({ setState, setSelectedCourses }) => {
                     items.selected
                       ? "text-white bg-green-600 font-semibold"
                       : "bg-[#E336290D]"
-                  } flex items-center text-sm text-center justify-center py-3 px-5  rounded-lg w-full`}
+                  } flex items-center text-sm text-start justify-between py-3 px-5  rounded-lg w-full`}
                 >
                   {items.name}
+                  {items.selected && (
+                    <Icon icon="meteor-icons:check" width="24" height="24" />
+                  )}
                 </button>
               ))}
             </div>
