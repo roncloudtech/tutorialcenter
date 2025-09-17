@@ -81,6 +81,19 @@ const autoCalcCoursePrice = (pricePerMonth, duration) => {
   return finalPrice;
 };
 
+// Paystack configuration
+const publicKey = "pk_test_baecdbe89b4c293f6a4564d49843b1fcd8c937f9";
+const payWithPaystack = ({ email, amount, onSuccess, onCancel }) => {
+  const paystack = new PaystackPop();
+  paystack.newTransaction({
+    key: publicKey,
+    email,
+    amount,
+    currency: "NGN",
+    onSuccess,
+    onCancel,
+  });
+};
 // This component allows the Student to select the duration for their training and calculates the total amount based on the selected courses and durations.
 const TrainingDuration = ({
   handleBackBtn,
@@ -157,18 +170,20 @@ const TrainingDuration = ({
     (sum, course) => sum + course.amount,
     0
   );
+  // Handle continue button click
+  const handleContinue = () => {
+    // Check if all have durations
+    const allDurationsSelected = courseDurations.every(
+      (course) => course.duration !== ""
+    );
+    if (!allDurationsSelected) return setNextPageErr(true);
+    setNextPageErr(false);
 
-  // Paystack configuration
-  const publicKey = "pk_test_baecdbe89b4c293f6a4564d49843b1fcd8c937f9";
-  const payWithPaystack = () => {
-    const paystack = new PaystackPop();
-    paystack.newTransaction({
-      key: publicKey, // Replace with your public key
+    payWithPaystack({
+      publicKey,
       email: authenticatedUser.email,
       amount: totalAmount * 100, // Convert to kobo
-      currency: "NGN", // Default is NGN
       onSuccess: (tranx) => {
-        console.log(tranx);
         // Register each course payment in the backend
         handlePaymentRegistration(authenticatedUser.id, tranx, courseDurations);
         // Update the student's department in the backend and context
@@ -177,7 +192,7 @@ const TrainingDuration = ({
           department,
           setAuthenticatedUser
         );
-        //   // // Move to success page
+        // Move to success page
         setState((prev) => ({
           ...prev,
           isTrainingDuration: false,
@@ -189,16 +204,6 @@ const TrainingDuration = ({
         alert("Transaction was not completed");
       },
     });
-  };
-  // Handle continue button click
-  const handleContinue = () => {
-    // Check if all have durations
-    const allDurationsSelected = courseDurations.every(
-      (course) => course.duration !== ""
-    );
-    if (!allDurationsSelected) return setNextPageErr(true);
-    setNextPageErr(false);
-    payWithPaystack();
   };
 
   return (

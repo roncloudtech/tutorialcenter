@@ -24,9 +24,10 @@ const SelectSubject = ({
   const [nextPageErr, setNextPageErr] = useState(false);
   // Initialize only the exams the user picked
   useEffect(() => {
-    const initialExams = selectedCourses.map((examName) => ({
-      name: examName.slug,
-      max: examConfigs[examName.slug],
+    const initialExams = selectedCourses.map((exam) => ({
+      id: exam.id,
+      name: exam.slug,
+      max: examConfigs[exam.slug],
       selected: [],
     }));
     setExams(initialExams);
@@ -37,7 +38,7 @@ const SelectSubject = ({
   const handleNextPage = () => {
     const allValid = exams.every((exam) => {
       // Special case for WAEC, NECO, GCE minimum of 8 subjects and maximum of 9
-      if (exam.name === "WAEC" || exam.name === "NECO" || exam.name === "GCE") {
+      if (exam.name === "waec" || exam.name === "neco" || exam.name === "gce") {
         return exam.selected.length >= 8 && exam.selected.length <= 9;
       } else {
         return exam.selected.length === exam.max;
@@ -161,7 +162,10 @@ const SubjectModal = ({ exam, setExams, showSubjectModal, department }) => {
     >
       <PerfectScrollbar className="w-full h-full space-y-0.5 p-2 ">
         {data?.[0]?.map((subject, i) => {
-          if (subject.departments.includes(department)) {
+          if (
+            subject.departments.includes(department) &&
+            subject.courses_ids.includes(exam.id)
+          ) {
             const isSelected = exam.selected.includes(subject.name);
             return (
               <li key={i}>
