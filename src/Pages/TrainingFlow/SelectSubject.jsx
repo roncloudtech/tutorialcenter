@@ -3,109 +3,35 @@ import { useEffect, useState } from "react";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import GoBack from "./GoBackBtn";
-
-// All available subjects
-const allSubjects = [
-  { name: "English Language", department: ["Science", "Arts", "Commercial"] },
-  { name: "Mathematics", department: ["Science", "Arts", "Commercial"] },
-  { name: "Biology", department: ["Science", "Arts", "Commercial"] },
-  { name: "I.C.T", department: ["Science", "Arts", "Commercial"] },
-  { name: "Economics", department: ["Science", "Arts", "Commercial"] },
-  { name: "Government", department: ["Science", "Arts", "Commercial"] },
-  { name: "Commerce", department: ["Commercial"] },
-  { name: "Financial Accounting", department: ["Commercial"] },
-  { name: "Further Mathematics", department: ["Science"] },
-  { name: "Physics", department: ["Science"] },
-  { name: "Chemistry", department: ["Science"] },
-  { name: "Geography", department: ["Science"] },
-  { name: "Technical Drawing", department: ["Science"] },
-  { name: "Literature in English", department: ["Arts"] },
-  { name: "History", department: ["Arts"] },
-  { name: "C.R.K", department: ["Arts"] },
-  { name: "I.R.K", department: ["Arts"] },
-];
+import { useSubjects } from "../../Hooks/useSubjects";
 
 // Subject limits for each exam
 const examConfigs = {
-  JAMB: 4,
-  WAEC: 9,
-  NECO: 9,
-  GCE: 9,
+  jamb: 4,
+  waec: 9,
+  neco: 9,
+  gce: 9,
 };
 
 const SelectSubject = ({
   handleBackBtn,
   setState,
   department,
-  selectedCourses, // ["JAMB", "WAEC"]
+  selectedCourses,
 }) => {
   const [exams, setExams] = useState([]);
   const [showSubjectModal, setShowSubjectModal] = useState(null);
   const [nextPageErr, setNextPageErr] = useState(false);
-
   // Initialize only the exams the user picked
   useEffect(() => {
     const initialExams = selectedCourses.map((examName) => ({
-      name: examName,
-      max: examConfigs[examName],
+      name: examName.slug,
+      max: examConfigs[examName.slug],
       selected: [],
     }));
     setExams(initialExams);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCourses]);
-
-  // Toggle subject for selected exam
-  const toggleSubjectForExam = (examName, subjectName) => {
-    setExams((prev) =>
-      prev.map((exam) => {
-        if (exam.name === examName) {
-          const alreadySelected = exam.selected.includes(subjectName);
-          let newSelected;
-
-          if (alreadySelected) {
-            newSelected = exam.selected.filter((s) => s !== subjectName);
-          } else {
-            if (exam.selected.length >= exam.max) return exam;
-            newSelected = [...exam.selected, subjectName];
-          }
-          return { ...exam, selected: newSelected };
-        }
-        return exam;
-      })
-    );
-  };
-
-  // Subject modal
-  const SubjectModal = ({ exam }) => (
-    <ul
-      className={`${
-        showSubjectModal === exam.name ? "block" : "hidden"
-      }  z-50 absolute bottom-0 translate-y-full left-0 w-full h-full bg-[#F9E7E6] rounded-b-md min-h-[170px] overflow-hidden`}
-    >
-      <PerfectScrollbar className="w-full h-full space-y-0.5 p-2 ">
-        {allSubjects.map((subject, i) => {
-          if (subject.department.includes(department)) {
-            const isSelected = exam.selected.includes(subject.name);
-            return (
-              <li key={i}>
-                <button
-                  className={`${
-                    isSelected
-                      ? "bg-lightGreen text-white font-semibold shadow-lg rounded-md"
-                      : " text-mainGrey hover:bg-[#E336290D] hover:text-mainBlack"
-                  } p-1.5 text-xs w-full disabled:cursor-not-allowed`}
-                  onClick={() => toggleSubjectForExam(exam.name, subject.name)}
-                >
-                  {subject.name}
-                </button>
-              </li>
-            );
-          }
-          return null;
-        })}
-      </PerfectScrollbar>
-    </ul>
-  );
 
   // Continue button
   const handleNextPage = () => {
@@ -150,7 +76,7 @@ const SelectSubject = ({
                   key={idx}
                   className="w-full p-2.5 flex justify-between items-center mt-3"
                 >
-                  <div className="flex-1 py-2 text-center text-sm text-mainBlack">
+                  <div className="uppercase flex-1 py-2 text-center text-sm text-mainBlack">
                     {exam.name}
                   </div>
                   <div className="relative flex-1">
@@ -169,7 +95,12 @@ const SelectSubject = ({
                         height="12"
                       />
                     </button>
-                    <SubjectModal exam={exam} />
+                    <SubjectModal
+                      exam={exam}
+                      setExams={setExams}
+                      showSubjectModal={showSubjectModal}
+                      department={department}
+                    />
                   </div>
                   <div className="flex-1 py-2 text-center text-sm text-mainBlack">
                     {exam.selected.length} / {exam.max}
@@ -197,3 +128,59 @@ const SelectSubject = ({
   );
 };
 export default SelectSubject;
+
+// Subject modal
+const SubjectModal = ({ exam, setExams, showSubjectModal, department }) => {
+  const { data } = useSubjects();
+
+  // Toggle subject for selected exam
+  const toggleSubjectForExam = (examName, subjectName) => {
+    setExams((prev) =>
+      prev.map((exam) => {
+        if (exam.name === examName) {
+          const alreadySelected = exam.selected.includes(subjectName);
+          let newSelected;
+
+          if (alreadySelected) {
+            newSelected = exam.selected.filter((s) => s !== subjectName);
+          } else {
+            if (exam.selected.length >= exam.max) return exam;
+            newSelected = [...exam.selected, subjectName];
+          }
+          return { ...exam, selected: newSelected };
+        }
+        return exam;
+      })
+    );
+  };
+  return (
+    <ul
+      className={`${
+        showSubjectModal === exam.name ? "block" : "hidden"
+      }  z-50 absolute bottom-0 translate-y-full left-0 w-full h-full bg-[#F9E7E6] rounded-b-md min-h-[170px] overflow-hidden`}
+    >
+      <PerfectScrollbar className="w-full h-full space-y-0.5 p-2 ">
+        {data?.[0]?.map((subject, i) => {
+          if (subject.departments.includes(department)) {
+            const isSelected = exam.selected.includes(subject.name);
+            return (
+              <li key={i}>
+                <button
+                  className={`${
+                    isSelected
+                      ? "bg-lightGreen text-white font-semibold shadow-lg rounded-md"
+                      : " text-mainGrey hover:bg-[#E336290D] hover:text-mainBlack"
+                  } p-1.5 text-xs w-full`}
+                  onClick={() => toggleSubjectForExam(exam.name, subject.name)}
+                >
+                  {subject.name}
+                </button>
+              </li>
+            );
+          }
+          return null;
+        })}
+      </PerfectScrollbar>
+    </ul>
+  );
+};

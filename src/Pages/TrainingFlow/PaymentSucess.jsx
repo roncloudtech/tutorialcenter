@@ -21,7 +21,10 @@ const SuccessPaymentSection = ({ selectedCourses }) => {
           <div className="mt-9 font-medium space-y-1">
             <p className="text-base text-mainBlue">You now have access to</p>
             {selectedCourses.map((items, i) => (
-              <span key={i} className="text-sm text-ascent block text-center">
+              <span
+                key={i}
+                className="text-sm text-ascent block text-center capitalize"
+              >
                 {items.courseName} - {items.duration}
               </span>
             ))}

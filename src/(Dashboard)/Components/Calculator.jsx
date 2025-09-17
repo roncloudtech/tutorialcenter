@@ -167,7 +167,7 @@ export default function Calculator() {
   };
   return (
     <div className="calculator">
-      <div className="my-3 w-full text-2xl dark:text-white dark:bg-whiteFade text-right py-4 pr-2 rounded-xl">
+      <div className="my-3 w-full text-2xl shadow-custom-1 bg-lightGrey dark:text-white dark:bg-whiteFade text-right py-4 pr-2 rounded-xl">
         {" "}
         {calcState.num ? calcState.num : calcState.res}
       </div>
@@ -188,7 +188,7 @@ const CalcBtn = ({ btnValues, onClick }) => {
       onClick={onClick}
       className={`${
         btnValues === "=" ? "col-span-2" : ""
-      } flex items-center justify-center p-4 rounded-md dark:text-lightGrey dark:bg-whiteFade text-sm`}
+      } flex items-center justify-center p-4 rounded-md shadow-custom-1 bg-lightGrey dark:text-lightGrey dark:bg-whiteFade text-sm`}
     >
       {btnValues}
     </button>

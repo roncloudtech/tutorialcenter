@@ -16,7 +16,7 @@ export default function Settings() {
               {/* header */}
               <Title title={"settings"} />
               {/* EDIT PERSONAL INFORMATION*/}
-              <div className="EDIT PERSONAL INFORMATION">
+              <div className="EDIT PERSONAL INFORMATION ">
                 <h4 className="text-sm font-semibold my-4 text-mainBlack dark:text-lightGrey">
                   EDIT PERSONAL INFORMATION
                 </h4>
@@ -59,7 +59,7 @@ export default function Settings() {
             </div>
           }
           rightContent={
-            <div className="bg-mainWhite dark:bg-darkMode shadow-custom-1 scroll rounded-md p-3  dark:text-lightGrey h-full">
+            <div className="dark:text-lightGrey dark:bg-darkMode scroll bg-mainWhite shadow-custom-1 rounded-md p-2 m-0.5">
               {/* USER PROFILE */}
               <div className="mb-6">
                 <img

@@ -15,11 +15,11 @@ const SelectDepartment = ({
       selected: false,
     },
     {
-      name: "Arts",
+      name: "Art",
       selected: false,
     },
     {
-      name: "Commercial",
+      name: "commercial",
       selected: false,
     },
   ]);
@@ -44,7 +44,7 @@ const SelectDepartment = ({
   const handleNextPage = () => {
     if (!selectedDepartment) return setNextPageErr(true);
     setNextPageErr(false);
-    setSelectedDepartment(selectedDepartment.name);
+    setSelectedDepartment(selectedDepartment.name.toLocaleLowerCase());
     setState((prev) => ({
       ...prev,
       isDepartment: false,

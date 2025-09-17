@@ -13,8 +13,5 @@ export const useCourses = () => {
     // Store the fresh data for 10 minutes before refetch
     staleTime: 10 * 60 * 1000,
     retry: false,
-    onError: (error) => {
-      console.error("Error fetching courses", error);
-    },
   });
 };

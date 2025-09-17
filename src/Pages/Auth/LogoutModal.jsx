@@ -15,16 +15,19 @@ export default function LogoutModal({ setModal, modal }) {
   const handleLogout = () => {
     setIsLoading(true);
     // Simulate a delay for logout process
-    delay(2000).then(() => {
-      setIsLoading(false);
-      // Clear local storage and context state
-      localStorage.clear();
-      setModal(false);
-      setAuthenticatedUser({});
-      setRole("");
-      // check the role and navigate accordingly
-      navigate("/login");
-    });
+    delay(2000)
+      .then(() => {
+        setIsLoading(false);
+        // Clear local storage and context state
+        localStorage.clear();
+        setModal(false);
+        setAuthenticatedUser(null);
+        setRole("");
+        setIsLoading(false);
+      })
+      .finally(() => {
+        navigate("/login");
+      });
   };
   return (
     <div
