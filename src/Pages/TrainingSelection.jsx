@@ -1,11 +1,13 @@
 import Layout2 from "../Components/Layout2";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import SelectDepartment from "./TrainingFlow/SelectDepartment";
 import SelectSubject from "./TrainingFlow/SelectSubject";
 import TrainingDuration from "./TrainingFlow/TrainingDuration";
 import SuccessPaymentSection from "./TrainingFlow/PaymentSucess";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import { useCourses } from "../Hooks/useCourses";
+import Spinner from "../Components/Spinner";
 
 export default function TrainingSelection() {
   // state flow for the training selection
@@ -75,24 +77,7 @@ export default function TrainingSelection() {
 
 // The select training section component
 const SelectTraining = ({ setState, setSelectedCourses }) => {
-  const [courses, setCourses] = useState([
-    {
-      name: "JAMB",
-      selected: false,
-    },
-    {
-      name: "WAEC",
-      selected: false,
-    },
-    {
-      name: "NECO",
-      selected: false,
-    },
-    {
-      name: "GCE",
-      selected: false,
-    },
-  ]);
+  const [courses, setCourses] = useState([]);
   const handleSelectedCourse = (index) => {
     setCourses((prev) =>
       prev.map((item, i) => {
@@ -110,7 +95,7 @@ const SelectTraining = ({ setState, setSelectedCourses }) => {
       return setNextPageErr(true);
     }
     setNextPageErr(false);
-    setSelectedCourses(selectedCourses.map((item) => item.name));
+    setSelectedCourses(selectedCourses);
     setState((prev) => ({
       ...prev,
       isDepartment: true,
@@ -127,24 +112,11 @@ const SelectTraining = ({ setState, setSelectedCourses }) => {
               Select the examinations you’re about to write, you have the option
               of selecting more than 1 examination.
             </p>
-            <div className="grid grid-cols-2 items-center gap-3 flex-wrap">
-              {courses.map((items, i) => (
-                <button
-                  key={i}
-                  onClick={() => handleSelectedCourse(i)}
-                  className={`${
-                    items.selected
-                      ? "text-white bg-green-600 font-semibold"
-                      : "bg-[#E336290D]"
-                  } flex items-center text-sm text-start justify-between py-3 px-5  rounded-lg w-full`}
-                >
-                  {items.name}
-                  {items.selected && (
-                    <Icon icon="meteor-icons:check" width="24" height="24" />
-                  )}
-                </button>
-              ))}
-            </div>
+            <AllCourses
+              courses={courses}
+              setCourses={setCourses}
+              handleSelectedCourse={handleSelectedCourse}
+            />
 
             <button
               onClick={handleNextPage}
@@ -161,5 +133,35 @@ const SelectTraining = ({ setState, setSelectedCourses }) => {
         </div>
       </div>
     </>
+  );
+};
+// Get all Courses from the backend using react query and show them in the select training section
+const AllCourses = ({ courses, setCourses, handleSelectedCourse }) => {
+  const { data, isLoading } = useCourses();
+  // Store the data in the courses state and pass the selected boolean value to each course
+  useEffect(() => {
+    if (data?.length)
+      return setCourses(data.map((course) => ({ ...course, selected: false }))); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+  if (isLoading) return <Spinner />;
+  return (
+    <div className="grid grid-cols-2 items-center gap-3 flex-wrap">
+      {courses.map((items, i) => (
+        <button
+          key={i}
+          onClick={() => handleSelectedCourse(i)}
+          className={`${
+            items.selected
+              ? "text-white bg-green-600 font-semibold"
+              : "bg-[#E336290D]"
+          } flex items-center text-sm text-start justify-between py-3 px-5  rounded-lg w-full uppercase`}
+        >
+          {items.slug}
+          {items.selected && (
+            <Icon icon="meteor-icons:check" width="24" height="24" />
+          )}
+        </button>
+      ))}
+    </div>
   );
 };

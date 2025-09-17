@@ -13,6 +13,7 @@ export default function PaymentPage() {
     setPayment(true);
     setTraining(true);
   };
+  const [toggleModal, setToggleModal] = useState(false);
   return (
     <>
       <DashboardLayout>
@@ -44,16 +45,24 @@ export default function PaymentPage() {
                 setPayment={setPayment}
               />
             )}
-            {training ? "" : <Training setTraining={setTraining} />}
+            {training ? (
+              ""
+            ) : (
+              <Training
+                setTraining={setTraining}
+                setToggleModal={setToggleModal}
+              />
+            )}
           </div>
         </PerfectScrollbar>
       </DashboardLayout>
+      {/* Modal */}
+      {toggleModal && <Modal setToggleModal={setToggleModal} />}
     </>
   );
 }
 
-const Training = ({ setTraining }) => {
-  const [toggleModal, setToggleModal] = useState(false);
+const Training = ({ setTraining, setToggleModal }) => {
   return (
     <>
       <div className="flex items-center mb-5 text-mainBlack dark:text-lightGrey">
@@ -86,9 +95,6 @@ const Training = ({ setTraining }) => {
       >
         Remove
       </button>
-
-      {/* Modal */}
-      {toggleModal && <Modal setToggleModal={setToggleModal} />}
     </>
   );
 };

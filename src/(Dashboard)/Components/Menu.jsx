@@ -53,14 +53,14 @@ const menuItems = [
     icon: <Icon icon="ph:exam-fill" width="20" height="20" />,
     visible: ["student"],
   },
-  {
-    label: "Groups",
-    path: "/groups",
-    icon: (
-      <Icon icon="material-symbols:groups-rounded" width="20" height="20" />
-    ),
-    visible: ["student"],
-  },
+  // {
+  //   label: "Groups",
+  //   path: "/groups",
+  //   icon: (
+  //     <Icon icon="material-symbols:groups-rounded" width="20" height="20" />
+  //   ),
+  //   visible: ["student"],
+  // },
   {
     label: "Payment",
     path: "/payment",

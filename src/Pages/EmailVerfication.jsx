@@ -5,11 +5,22 @@ import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import logo1 from "../Assets/TC 1.png";
 
+const API_BASE_URL = "http://localhost:8000";
+// API call to resend the verification code
+const handleResendCode = async (identifier, role) => {
+  try {
+    const res = await axios.post(`${API_BASE_URL}/api/${role}s/resend-code`, {
+      email: identifier,
+    });
+    console.log(res.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
 export default function EmailVerfication() {
   const [searchParams] = useSearchParams();
   const identifier = searchParams.get("identifier");
   const role = searchParams.get("role");
-  const API_BASE_URL = "http://localhost:8000";
 
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -36,9 +47,13 @@ export default function EmailVerfication() {
     num5: useRef(null),
     num6: useRef(null),
   };
-
+  // autofocus on first load
   useEffect(() => {
-    inputRefs.num1.current.focus(); // autofocus on first load
+    inputRefs.num1.current.focus();
+  }, [inputRefs.num1]);
+
+  // Countdown timer effect
+  useEffect(() => {
     let interval;
     // Start the count down timer
     if (timer > 0)
@@ -46,7 +61,7 @@ export default function EmailVerfication() {
         setTimer((prev) => prev - 1);
       }, 1000);
     return () => clearInterval(interval);
-  }, [inputRefs.num1, timer]);
+  }, [timer]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -165,10 +180,21 @@ export default function EmailVerfication() {
     }
   };
   // Resend verification code
-  const handleResendCode = () => {
+  const handleResendCode = async () => {
     // Reset the timer and disable the resend button again
     setTimer(60);
-    // api call here
+    // API call to resend the verification code
+    try {
+      const res = await axios.patch(
+        `${API_BASE_URL}/api/${role}s/resend-code`,
+        {
+          email: identifier,
+        }
+      );
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

@@ -24,7 +24,7 @@ export default function Exampage() {
           </div>
         }
         rightContent={
-          <div className="h-full bg-mainWhite dark:bg-whiteFade scroll sm:overflow-y-auto shadow-custom-1 rounded-md p-2">
+          <div className="dark:bg-darkMode scroll bg-mainWhite shadow-custom-1 rounded-md p-2 m-0.5">
             <Calculator />
           </div>
         }
@@ -197,13 +197,19 @@ const ExamInstruction = ({ setActive }) => {
         </div>
         <div className="flex flex-wrap items-center sm:justify-normal sm:gap-6 justify-between text-mainBlack dark:text-lightGrey">
           <h3 className="text-xs font-semibold uppercase">subject</h3>
-          <div className="p-1 w-max flex-1 sm:block flex justify-end flex-wrap sm:bg-lightGrey sm:dark:bg-whiteFade text-mainBlue dark:text-lightGrey rounded-md">
-            <UseButtonEffects
-              items={subjects}
-              classNames={
-                "capitalize font-semibold text-[10px] sm:px-3 px-2 py-[6px] rounded-md"
-              }
-            />
+          <div className="p-1.5 w-max sm:block  sm:bg-lightGrey sm:dark:bg-whiteFade text-mainBlue dark:text-lightGrey rounded-md">
+            <select
+              name="subjects"
+              id="subjects"
+              className="w-max capitalize font-semibold"
+            >
+              <option value="">select Subjects</option>
+              {subjects.map((subject, i) => (
+                <option key={i} value={subject}>
+                  {subject}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
         <div className="flex items-center gap-6 dark:text-lightGrey text-mainBlack">
