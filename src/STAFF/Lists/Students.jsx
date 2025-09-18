@@ -5,9 +5,11 @@ import Title from "../../(Dashboard)/Components/Title";
 import TableSearch from "../../(Dashboard)/Components/TableSearch";
 import Table from "../../(Dashboard)/Components/Table";
 import Pagination from "../../(Dashboard)/Components/Pagination";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import avatar from "../../(Dashboard)/assets/Avatar1.jpg";
 
 const Thead = [
   {
@@ -15,7 +17,7 @@ const Thead = [
     className: "text-start py-3.5 pl-3",
   },
   {
-    headers: "Class",
+    headers: "Email",
     className: "text-start",
   },
   {
@@ -39,21 +41,37 @@ const Thead = [
     className: "text-end pr-3",
   },
 ];
-const data = [
-  {
-    name: "Kola John Olamide",
-    img: "https://www.figma.com/file/C2fHCiSoElx3NBQgrtVrXE/image/9fa492644538aeb8fa7ffd83195864e66d955fde",
-    class: "#001",
-    address: "Lagos, Nigerian",
-    phoneNumber: "081XXXXXXXX",
-    dob: "17/04/99",
-    activity: "Online",
-    action: "carbon:view",
-  },
-];
+
+// const data = [
+//   {
+//     name: "Kola John Olamide",
+//     img: "https://www.figma.com/file/C2fHCiSoElx3NBQgrtVrXE/image/9fa492644538aeb8fa7ffd83195864e66d955fde",
+//     class: "#001",
+//     address: "Lagos, Nigerian",
+//     phoneNumber: "081XXXXXXXX",
+//     dob: "17/04/99",
+//     activity: "Online",
+//     action: "carbon:view",
+//   },
+// ];
+
 export default function AllStudents() {
   const [currentPage, setCurrentPage] = useState(1);
   const [showSinglePage, setShowSinglePage] = useState(false);
+  const [students, setStudents] = useState([]);
+
+  useEffect(() => {
+    async function fetchStudents() {
+      try {
+        const response = await axios.get("http://localhost:8000/api/students/");
+        console.log(response.data);
+        setStudents(response.data);
+      } catch (error) {
+        console.error("Failed to fetch students:", error);
+      }
+    }
+    fetchStudents();
+  }, []);
   // Function to render table body rows
   const Tbody = (items, i) => {
     return (
@@ -62,27 +80,27 @@ export default function AllStudents() {
           <div className="flex items-center gap-2">
             <div className="w-10 h-10 relative rounded-full overflow-hidden">
               <img
-                src={items.img}
+                src={items.img || avatar}
                 className="absolute top-0 right-0 w-full h-full"
                 alt=""
               />
             </div>
-            <span className="text-[12px]">{items.name}</span>
+            <span className="text-[12px]">{items.firstname + " " + items.lastname || "John Doe"}</span>
           </div>
         </td>
-        <td>{items.class}</td>
-        <td>{items.address}</td>
-        <td>{items.phoneNumber}</td>
-        <td>{items.dob}</td>
-        <td>{items.activity}</td>
+        <td>{items.email || "No Email Address"}</td>
+        <td>{items.home_address || "No Address"}</td>
+        <td>{items.phone || "No Phone Number"}</td>
+        <td>{items.date_of_birth || "No Date Of Birth"}</td>
+        <td>{items.status}</td>
         <td className="text-end pr-3">
           <Link
             className="flex justify-end"
             onClick={() => setShowSinglePage(true)}
             to={`#`}
           >
-            <button className="w-9 h-9 flex items-center justify-center rounded-lg bg-darkMode">
-              <Icon icon={items.action} width="20" height="20" />
+            <button className="w-9 h-9 flex items-center justify-center rounded-lg dark:bg-darkMode bg-yellow-600">
+              <Icon icon="carbon:view" width="20" height="20" className="text-white" />
             </button>
           </Link>
         </td>
@@ -100,7 +118,8 @@ export default function AllStudents() {
                 <TableSearch />
               </div>
               <div className="Table mt-5">
-                <Table Thead={Thead} data={data} Tbody={Tbody} />
+                {/* <Table Thead={Thead} data={data} Tbody={Tbody} /> */}
+                <Table Thead={Thead} data={students} Tbody={Tbody} />
               </div>
               <div className="flex items-center justify-center mt-4">
                 <Pagination
