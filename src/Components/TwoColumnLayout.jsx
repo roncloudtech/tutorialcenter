@@ -10,7 +10,7 @@ export default function TwoColumnLayout({ leftContent, rightContent }) {
       </PerfectScrollbar>
       {/* RIGHT-CONTENT */}
       <PerfectScrollbar
-        className="hidden xl:block h-full"
+        className="hidden xl:block"
         options={{ suppressScrollX: true }}
       >
         {rightContent}
