@@ -18,6 +18,7 @@ const SelectSubject = ({
   setState,
   department,
   selectedCourses,
+  setSelectedCourses,
 }) => {
   const [exams, setExams] = useState([]);
   const [showSubjectModal, setShowSubjectModal] = useState(null);
@@ -47,6 +48,7 @@ const SelectSubject = ({
     if (!allValid) return setNextPageErr(true);
 
     setNextPageErr(false);
+    setSelectedCourses(exams);
     setState((prev) => ({
       ...prev,
       isSubject: false,
@@ -135,18 +137,20 @@ const SubjectModal = ({ exam, setExams, showSubjectModal, department }) => {
   const { data } = useSubjects();
 
   // Toggle subject for selected exam
-  const toggleSubjectForExam = (examName, subjectName) => {
+  const toggleSubjectForExam = (examName, subject) => {
     setExams((prev) =>
       prev.map((exam) => {
         if (exam.name === examName) {
-          const alreadySelected = exam.selected.includes(subjectName);
+          const alreadySelected = exam.selected.some(
+            (s) => s.id === subject.id
+          );
           let newSelected;
 
           if (alreadySelected) {
-            newSelected = exam.selected.filter((s) => s !== subjectName);
+            newSelected = exam.selected.filter((s) => s.id !== subject.id);
           } else {
             if (exam.selected.length >= exam.max) return exam;
-            newSelected = [...exam.selected, subjectName];
+            newSelected = [...exam.selected, subject];
           }
           return { ...exam, selected: newSelected };
         }
@@ -166,7 +170,9 @@ const SubjectModal = ({ exam, setExams, showSubjectModal, department }) => {
             subject.departments.includes(department) &&
             subject.courses_ids.includes(exam.id)
           ) {
-            const isSelected = exam.selected.includes(subject.name);
+            const isSelected = exam.selected.some(
+              (sub) => sub.id === subject.id
+            );
             return (
               <li key={i}>
                 <button
@@ -175,7 +181,7 @@ const SubjectModal = ({ exam, setExams, showSubjectModal, department }) => {
                       ? "bg-lightGreen text-white font-semibold shadow-lg rounded-md"
                       : " text-mainGrey hover:bg-[#E336290D] hover:text-mainBlack"
                   } p-1.5 text-xs w-full`}
-                  onClick={() => toggleSubjectForExam(exam.name, subject.name)}
+                  onClick={() => toggleSubjectForExam(exam.name, subject)}
                 >
                   {subject.name}
                 </button>

@@ -48,10 +48,33 @@ const handlePaymentRegistration = async (studentId, tranx, courses) => {
     });
     // Wait for all requests to complete
     const responses = await Promise.all(requests);
-    responses.forEach((res) => {
-      console.log(res.data);
+    responses.forEach((res, id) => {
+      console.log(res.data + " " + `Payment${id + 1} success`);
     });
     console.log("All payments registered successfully");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// API call to Enroll all subjects the student enrolled for
+const handleSubjectEnrollment = async (studentId, courses) => {
+  try {
+    // Build an array of Promises for each course the student picked
+    const requests = courses.map((course) => {
+      return axios.post(`${API_BASE_URL}/enrollments`, {
+        student_id: studentId,
+        course_id: course.courseId,
+        end_date: course.duration,
+        subjects: course.selectedSubjects,
+      });
+    });
+    // Await all requests to complete
+    const res = await Promise.all(requests);
+    // Log all responses
+    res.forEach((r) => {
+      console.log(r.data);
+    });
   } catch (error) {
     console.log(error);
   }
@@ -142,10 +165,11 @@ const TrainingDuration = ({
   // Initialize state from selectedCourses
   useEffect(() => {
     const initData = selectedCourses.map((course) => ({
-      courseName: course.slug,
+      courseName: course.name,
       courseId: course.id,
       duration: "",
       amount: 0,
+      selectedSubjects: course.selected,
     }));
     setCourseDurations(initData);
   }, [selectedCourses]);
@@ -192,13 +216,14 @@ const TrainingDuration = ({
           department,
           setAuthenticatedUser
         );
+        handleSubjectEnrollment(authenticatedUser.id, courseDurations);
+        setSelectedCourses(courseDurations);
         // Move to success page
         setState((prev) => ({
           ...prev,
           isTrainingDuration: false,
           isPayment: true,
         }));
-        setSelectedCourses(courseDurations);
       },
       onCancel: () => {
         alert("Transaction was not completed");

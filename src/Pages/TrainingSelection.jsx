@@ -46,6 +46,7 @@ export default function TrainingSelection() {
         />
       ) : isSubject ? (
         <SelectSubject
+          setSelectedCourses={setSelectedCourses}
           selectedCourses={selectedCourses}
           handleBackBtn={handleBackBtn}
           setState={setState}
