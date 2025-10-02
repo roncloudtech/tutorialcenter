@@ -8,11 +8,7 @@ import axios from "axios";
 const API_BASE_URL = "http://localhost:8000/api";
 
 // This function updates the student's department both in the backend and in local storage
-const handleStudentDeptUpdate = async (
-  id,
-  department,
-  setAuthenticatedUser
-) => {
+const handleStudentDeptUpdate = async (id, department) => {
   // Remove the student previous info from local storage
   try {
     const res = await axios.put(
@@ -20,10 +16,9 @@ const handleStudentDeptUpdate = async (
       { department },
       { withCredentials: true }
     );
-    // Update the user in local storage and context
+    // Update the user in local storage
     localStorage.removeItem("userInfo");
     localStorage.setItem("userInfo", JSON.stringify(res.data.student));
-    setAuthenticatedUser((prev) => ({ ...prev, department: department }));
     console.log(res.data.student);
   } catch (error) {
     console.log(error);
@@ -208,14 +203,11 @@ const TrainingDuration = ({
       email: authenticatedUser.email,
       amount: totalAmount * 100, // Convert to kobo
       onSuccess: (tranx) => {
+        // Update the student's department in the backend and context
+        setAuthenticatedUser((prev) => ({ ...prev, department: department }));
+        handleStudentDeptUpdate(authenticatedUser.id, department);
         // Register each course payment in the backend
         handlePaymentRegistration(authenticatedUser.id, tranx, courseDurations);
-        // Update the student's department in the backend and context
-        handleStudentDeptUpdate(
-          authenticatedUser.id,
-          department,
-          setAuthenticatedUser
-        );
         handleSubjectEnrollment(authenticatedUser.id, courseDurations);
         setSelectedCourses(courseDurations);
         // Move to success page
