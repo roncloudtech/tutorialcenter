@@ -6,9 +6,21 @@ import Chat from "../../Components/Chat";
 import Title from "../../Components/Title";
 import { Link } from "react-router-dom";
 import TwoColumnLayout from "../../../Components/TwoColumnLayout";
+import { useSelectedCourses } from "../../../Hooks/useSelectedCourses";
 
 export default function Coursepage() {
   const [show, setShow] = useState(false);
+  // Fetch all courses and subjects the student enrolled in using custom hook
+  const { data, isLoading } = useSelectedCourses();
+  if (isLoading) {
+    return (
+      <div className="w-full  flex items-center justify-center text-center gap-2 dark:text-lightGrey">
+        <Icon icon="line-md:loading-loop" width="35" height="35" />
+        <span className="text-xs">Loading...</span>
+      </div>
+    );
+  }
+  console.log(data);
   return (
     <>
       {show ? (
