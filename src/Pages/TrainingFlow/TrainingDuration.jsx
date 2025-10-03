@@ -43,8 +43,8 @@ const handlePaymentRegistration = async (studentId, tranx, courses) => {
     });
     // Wait for all requests to complete
     const responses = await Promise.all(requests);
-    responses.forEach((res, id) => {
-      console.log(res.data + " " + `Payment${id + 1} success`);
+    responses.forEach((res) => {
+      console.log(res.data);
     });
     console.log("All payments registered successfully");
   } catch (error) {

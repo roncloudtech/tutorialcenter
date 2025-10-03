@@ -5,6 +5,8 @@ import Title from "../../Components/Title";
 import ProgressSlider from "../../Components/ProgressSlider";
 import TwoColumnLayout from "../../../Components/TwoColumnLayout";
 import useDepartmentCheck from "../../../Hooks/useDepartmentCheck";
+import { Icon } from "@iconify/react/dist/iconify.js";
+import { useSelectedCourses } from "../../../Hooks/useSelectedCourses";
 
 export default function StudentDashboard() {
   // Check if the user has department
@@ -12,16 +14,7 @@ export default function StudentDashboard() {
   return (
     <DashboardLayout>
       <TwoColumnLayout
-        leftContent={
-          <div className="xl:px-4 p-2.5 scroll h-full">
-            <Title title={"DASHBOARD"} />
-            {/* PROGRESS LEVEL */}
-            <div className="my-3">
-              <ProgressBar title={"Progress Level"} course={"Courses  4"} />
-            </div>
-            <ProgressSlider />
-          </div>
-        }
+        leftContent={<LeftContent />}
         rightContent={
           <div className=" dark:bg-darkMode scroll bg-mainWhite shadow-custom-1 rounded-md p-2 m-0.5">
             <SmallCalendar />
@@ -75,6 +68,30 @@ const Notification = () => {
           </div>
         ))}
       </div>
+    </div>
+  );
+};
+
+const LeftContent = () => {
+  // Fetch all courses and subjects the student enrolled in using custom hook
+  const { data, isLoading } = useSelectedCourses();
+  if (isLoading) {
+    return (
+      <div className="w-full  flex items-center justify-center text-center gap-2 dark:text-lightGrey">
+        <Icon icon="line-md:loading-loop" width="35" height="35" />
+        <span className="text-xs">Loading...</span>
+      </div>
+    );
+  }
+
+  return (
+    <div className="xl:px-4 p-2.5 scroll h-full">
+      <Title title={"DASHBOARD"} />
+      {/* PROGRESS LEVEL */}
+      <div className="my-3">
+        <ProgressBar title={"Progress Level"} course={"Courses  4"} />
+      </div>
+      <ProgressSlider data={data} />
     </div>
   );
 };
