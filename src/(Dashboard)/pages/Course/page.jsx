@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import DashboardLayout from "../../DashboardLayout";
 import ProgressBar from "../../Components/ProgressBar";
 import { Icon } from "@iconify/react/dist/iconify.js";
@@ -7,11 +7,14 @@ import Title from "../../Components/Title";
 import { Link } from "react-router-dom";
 import TwoColumnLayout from "../../../Components/TwoColumnLayout";
 import { useSelectedCourses } from "../../../Hooks/useSelectedCourses";
+import PerfectScrollbar from "react-perfect-scrollbar";
+import "react-perfect-scrollbar/dist/css/styles.css";
 
 export default function Coursepage() {
   const [show, setShow] = useState(false);
   // Fetch all courses and subjects the student enrolled in using custom hook
   const { data, isLoading } = useSelectedCourses();
+
   if (isLoading) {
     return (
       <div className="w-full  flex items-center justify-center text-center gap-2 dark:text-lightGrey">
@@ -20,7 +23,21 @@ export default function Coursepage() {
       </div>
     );
   }
-  console.log(data);
+  return <CoursepageContainer data={data} show={show} setShow={setShow} />;
+}
+
+const CoursepageContainer = ({ data, show, setShow }) => {
+  // First course is selected by default
+  const [selectedCourse, setSelectedCourse] = useState(data.courses[0]);
+  // First subject is selected by default
+  const [selectedSubject, setSelectedSubject] = useState(
+    selectedCourse.subjects[0]
+  );
+  // UseEffect to synchronize with the selected course when it changes
+  useEffect(() => {
+    setSelectedSubject(selectedCourse.subjects[0]);
+  }, [selectedCourse]);
+  // console.log(selectedSubject);
   return (
     <>
       {show ? (
@@ -34,60 +51,74 @@ export default function Coursepage() {
                 <Title title={"COURSE"} />
                 {/* PROGRESS SECTION */}
                 <div className="w-full mt-3">
-                  <MediumScreenCourseProgressBar />
+                  <MediumScreenCourseProgressBar
+                    data={data}
+                    setSelectedCourse={setSelectedCourse}
+                    selectedCourse={selectedCourse}
+                  />
                   <div className="progress bar">
-                    <ProgressBar title="mathematics progress bar" />
+                    <SubjectProgressBar subject={selectedSubject} />
                   </div>
                 </div>
-                <div className="mt-3 sm:flex">
+                <div className="mt-3 sm:grid grid-cols-[35fr_65fr] gap-4">
                   <MediumScreenTopicLists setTopic={setShow} />
-                  <div className="hidden sm:block content1 mr-4 ring-[0.5px] ring-mainBlue bg-mainBlue dark:bg-darkMode rounded-lg">
+                  <div className="hidden sm:block content1  ring-[0.5px] ring-mainBlue bg-mainBlue dark:bg-darkMode rounded-lg overflow-hidden">
                     <div className="title w-full flex justify-center text-mainWhite  py-1.5 ">
-                      <h3 className="uppercase text-[16px] font-bold">Jamb</h3>
+                      <h3 className="uppercase text-[16px] font-bold">
+                        {selectedCourse?.name}
+                      </h3>
                     </div>
-                    <div className="bg-lightGrey dark:bg-whiteFade rounded-lg flex w-full [&_li]:text-[9px]  [&_li]:m-[2px] [&_li]:text-mainBlack [&_li]:dark:text-lightGrey  [&_li]:p-1 [&_li]:rounded-lg">
-                      <div className="flex-1">
-                        <p className="text-[12px] uppercase bg-mainLightBlue dark:bg-whiteFade text-mainWhite dark:text-lightGrey px-5 py-2">
-                          Subject
-                        </p>
-                        <ul className="">
-                          <li>Mathemtics</li>
-                          <li>Mathemtics</li>
-                          <li>Mathemtics</li>
-                          <li>Mathemtics</li>
-                        </ul>
-                      </div>
-                      <div className="item">
-                        <div className="w-[1px] h-full bg-mainBlack " />
-                      </div>
-                      <div className="flex-1">
-                        <p className="text-[10px] bg-mainLightBlue dark:bg-whiteFade text-mainWhite dark:text-lightGrey px-5 py-2">
-                          Topics
-                        </p>
-                        <ul>
-                          <li>Number</li>
-                          <li>Measurement</li>
-                          <li>Geometry</li>
-                          <li>Trigonometry</li>
-                          <li>Trigonometry</li>
-                          <li>Trigonometry</li>
-                          <li>Trigonometry</li>
-                          <li>Trigonometry</li>
-                          <li>Trigonometry</li>
-                        </ul>
-                      </div>
+                    <div className="bg-lightGrey dark:bg-whiteFade  overflow-hidden h-[310px]">
+                      <PerfectScrollbar
+                        options={{ suppressScrollX: true }}
+                        className="flex w-full pr-1"
+                      >
+                        <div className="flex-1">
+                          <p className="text-[12px] uppercase bg-mainLightBlue dark:bg-whiteFade text-mainWhite dark:text-lightGrey px-5 py-2">
+                            Subject
+                          </p>
+                          <ul className="subject-Lists h-full py-1 px-1.5">
+                            {selectedCourse?.subjects.map((subject) => (
+                              <li
+                                className={`${
+                                  subject.id === selectedSubject.id
+                                    ? "dark:bg-darkMode dark:text-lightGrey bg-mainBlue text-mainWhite "
+                                    : "text-mainBlack dark:text-lightGrey"
+                                } text-[9px]  p-1.5 rounded-lg cursor-pointer ellipsis inline-block w-[100px]`}
+                                key={subject.id}
+                                onClick={() => setSelectedSubject(subject)}
+                              >
+                                {subject.name}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div className="item">
+                          <div className="w-[1px] h-full bg-mainBlack " />
+                        </div>
+                        <div className="flex-1">
+                          <p className="text-[10px] bg-mainLightBlue dark:bg-whiteFade text-mainWhite dark:text-lightGrey px-5 py-2">
+                            Topics
+                          </p>
+                          <ul>
+                            <li
+                              cl
+                              className="text-[9px] text-mainBlack dark:text-lightGrey  p-1.5 rounded-lg cursor-pointer ellipsis inline-block"
+                            >
+                              Number
+                            </li>
+                          </ul>
+                        </div>
+                      </PerfectScrollbar>
                     </div>
                   </div>
                   {/* Video Section  */}
                   <div className="w-full">
                     <div className="hidden sm:flex justify-between py-1 text-[16px] text-mainBlack dark:text-lightGrey font-semibold">
                       <p>SUBJECT</p>
-                      <p>MATHEMATICS</p>
+                      <p>{selectedSubject.name}</p>
                     </div>
-                    <video
-                      src={null}
-                      className="relative w-full h-[260px] bg-[#EDF7ED] rounded-md"
-                    >
+                    <video className="relative w-full h-[315px] bg-[#EDF7ED] rounded-md">
                       <div className="w-16 h-16 rounded-full bg-white absolute top-1/4 right-1/2 flex justify-center items-center">
                         <Icon
                           icon="solar:play-bold-duotone"
@@ -164,7 +195,9 @@ export default function Coursepage() {
               <div className="bg-mainWhite dark:bg-whiteFade scroll sm:overflow-y-auto shadow-custom-1 rounded-md p-2 m-0.5 space-y-2">
                 <div className="ring-[0.5px] ring-mainBlue dark:bg-darkMode px-2 py-3 rounded-md">
                   <div className="flex justify-between text-[10px] font-bold text-mainBlack dark:text-lightGrey mb-2">
-                    <h3>MASTER CLASS [JAMB]</h3>
+                    <h3 className="ellipsis inline-block w-[160px]">
+                      MASTER CLASS [{selectedCourse?.name}]
+                    </h3>
                     <p>View More</p>
                   </div>
                   <div className="flex justify-between">
@@ -203,17 +236,63 @@ export default function Coursepage() {
       )}
     </>
   );
-}
+};
 
-const MediumScreenCourseProgressBar = () => {
+const SubjectProgressBar = ({ subject, bgColor }) => {
+  return (
+    <div
+      className={`progress p-2 rounded-md dark:text-lightGrey text-mainBlack`}
+    >
+      <div className="flex justify-between items-center mb-3">
+        <div className="flex items-center gap-3">
+          <Icon
+            icon="streamline:business-progress-bar-2-solid"
+            width="18"
+            height="18"
+          />
+          <h3 className="text-[14px] font-medium ">
+            {" "}
+            {subject.name} progress bar
+          </h3>
+        </div>
+      </div>
+      <div className="flex justify-between items-center mb-2 text-[8px] font-medium">
+        <p>START</p>
+        <p>FINISH</p>
+      </div>
+      <div
+        className={`w-full h-2.5 ${
+          bgColor ? "bg-mainLightBlue" : "bg-lightGrey"
+        } dark:bg-whiteFade rounded-sm relative`}
+      >
+        <div
+          className="h-full bg-mainBlue dark:bg-lightGrey rounded-sm"
+          style={{ width: `${subject.progress}px` }}
+        />
+        <label
+          style={{ left: `${subject.progress}px` }}
+          className="text-[8px] text-darkMode dark:text-mainWhite font-medium absolute -top-[2px]"
+        >
+          {subject.progress}%{" "}
+        </label>
+      </div>
+    </div>
+  );
+};
+const MediumScreenCourseProgressBar = ({
+  data,
+  setSelectedCourse,
+  selectedCourse,
+}) => {
   const [showProgress, setShowProgress] = useState(false);
+
   return (
     <div className="relative mt-2 mb-4">
       <button
         onClick={() => setShowProgress((prev) => !prev)}
         className={`${
           showProgress ? " rounded-t-lg" : " rounded-lg"
-        } flex items-center justify-between w-full text-white p-2 bg-mainBlue shadow-custom-1`}
+        } flex items-center justify-between w-full text-white p-2 bg-mainBlue dark:bg-darkMode shadow-custom-1`}
       >
         <div className="flex items-center gap-3 flex-1">
           <Icon
@@ -221,7 +300,9 @@ const MediumScreenCourseProgressBar = () => {
             width="18"
             height="18"
           />
-          <h3 className="text-[14px] font-medium uppercase">Jamb Progress</h3>
+          <h3 className="text-[14px] font-medium uppercase">
+            {selectedCourse?.name} Progress
+          </h3>
         </div>
         <div className="flex items-center gap-3 flex-1">
           <div
@@ -247,41 +328,27 @@ const MediumScreenCourseProgressBar = () => {
           showProgress
             ? "max-h-96 overflow-y-auto"
             : "max-h-0 overflow-y-hidden invisible"
-        } transition-drop-down absolute top-9 z-20 w-full text-white p-2 bg-mainBlue shadow-custom-1 rounded-b-lg`}
+        } transition-drop-down absolute top-9 z-20 w-full text-white p-2 dark:bg-darkMode bg-mainBlue shadow-custom-1 rounded-b-lg`}
       >
         <div className="mb-2 space-y-1">
-          <div className="flex items-center gap-3 px-1 py-[3px] uppercase bg-white text-mainBlue rounded-custom">
-            <Icon
-              icon="streamline:business-progress-bar-2-solid"
-              width="18"
-              height="18"
-            />
-            <h3 className="text-[14px] font-medium">Jamb</h3>
-          </div>
-          <div className="flex items-center gap-3 px-1 py-[2px] uppercase">
-            <Icon
-              icon="streamline:business-progress-bar-2-solid"
-              width="18"
-              height="18"
-            />
-            <h3 className="text-[14px] font-medium">Waec</h3>
-          </div>
-          <div className="flex items-center gap-3 px-1 py-[2px] uppercase">
-            <Icon
-              icon="streamline:business-progress-bar-2-solid"
-              width="18"
-              height="18"
-            />
-            <h3 className="text-[14px] font-medium">Gce</h3>
-          </div>
-          <div className="flex items-center gap-3 px-1 py-[2px] uppercase">
-            <Icon
-              icon="streamline:business-progress-bar-2-solid"
-              width="18"
-              height="18"
-            />
-            <h3 className="text-[14px] font-medium">Neco</h3>
-          </div>
+          {data?.courses?.map((course) => (
+            <button
+              key={course.id}
+              className={`${
+                selectedCourse?.id === course.id
+                  ? "bg-white text-mainBlue"
+                  : "hover:opacity-80"
+              } w-full flex items-center gap-3 p-1 uppercase  rounded-custom hover:bg-white hover:text-mainBlue`}
+              onClick={() => setSelectedCourse(course)}
+            >
+              <Icon
+                icon="streamline:business-progress-bar-2-solid"
+                width="18"
+                height="18"
+              />
+              <h3 className="text-[14px] font-medium">{course.name}</h3>
+            </button>
+          ))}
         </div>
       </div>
     </div>

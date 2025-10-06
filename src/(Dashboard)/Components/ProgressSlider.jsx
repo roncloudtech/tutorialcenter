@@ -59,7 +59,7 @@ const SubjectProgressBar = ({ subject }) => {
             />
             <label
               style={{ left: `${subject.progress}px` }}
-              className="text-[10px] font-medium absolute left-4 -top-[2px] text-mainWhite dark:text-darkMode"
+              className="text-[10px] font-medium absolute  -top-[2px] text-mainWhite dark:text-darkMode"
             >
               {subject.progress}%
             </label>
