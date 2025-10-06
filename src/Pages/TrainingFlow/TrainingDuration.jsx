@@ -16,12 +16,13 @@ const handleStudentDeptUpdate = async (id, department) => {
       { department },
       { withCredentials: true }
     );
-    // Update the user in local storage
-    localStorage.removeItem("userInfo");
-    localStorage.setItem("userInfo", JSON.stringify(res.data.student));
-    console.log(res.data.student);
+    console.log(res.data);
   } catch (error) {
-    console.log(error);
+    const errMsg = {
+      error: error,
+      message: "failed to update the student department",
+    };
+    console.log(errMsg);
   }
 };
 
@@ -203,8 +204,12 @@ const TrainingDuration = ({
       email: authenticatedUser.email,
       amount: totalAmount * 100, // Convert to kobo
       onSuccess: (tranx) => {
-        // Update the student's department in the backend and context
+        // Update the student's department in the backend, context and Local Storage
         setAuthenticatedUser((prev) => ({ ...prev, department: department }));
+        const student = JSON.parse(localStorage.getItem("userInfo"));
+        // Update the student Department and save it back to local storage
+        const updatedStudentdept = { ...student, department };
+        localStorage.setItem("userInfo", JSON.stringify(updatedStudentdept));
         handleStudentDeptUpdate(authenticatedUser.id, department);
         // Register each course payment in the backend
         handlePaymentRegistration(authenticatedUser.id, tranx, courseDurations);
