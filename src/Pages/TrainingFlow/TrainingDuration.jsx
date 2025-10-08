@@ -11,11 +11,9 @@ const API_BASE_URL = "http://localhost:8000/api";
 const handleStudentDeptUpdate = async (id, department) => {
   // Remove the student previous info from local storage
   try {
-    const res = await axios.put(
-      `${API_BASE_URL}/students/${id}`,
-      { department },
-      { withCredentials: true }
-    );
+    const res = await axios.put(`${API_BASE_URL}/students/${id}`, {
+      department,
+    });
     console.log(res.data);
   } catch (error) {
     const errMsg = {
