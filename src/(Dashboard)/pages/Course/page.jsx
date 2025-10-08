@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import DashboardLayout from "../../DashboardLayout";
-import ProgressBar from "../../Components/ProgressBar";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Chat from "../../Components/Chat";
 import Title from "../../Components/Title";
@@ -11,10 +10,8 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";
 
 export default function Coursepage() {
-  const [show, setShow] = useState(false);
   // Fetch all courses and subjects the student enrolled in using custom hook
   const { data, isLoading } = useSelectedCourses();
-
   if (isLoading) {
     return (
       <div className="w-full  flex items-center justify-center text-center gap-2 dark:text-lightGrey">
@@ -23,10 +20,11 @@ export default function Coursepage() {
       </div>
     );
   }
-  return <CoursepageContainer data={data} show={show} setShow={setShow} />;
+  return <CoursepageContainer data={data} />;
 }
 
-const CoursepageContainer = ({ data, show, setShow }) => {
+const CoursepageContainer = ({ data }) => {
+  const [show, setShow] = useState(false);
   // First course is selected by default
   const [selectedCourse, setSelectedCourse] = useState(data.courses[0]);
   // First subject is selected by default
@@ -101,10 +99,7 @@ const CoursepageContainer = ({ data, show, setShow }) => {
                             Topics
                           </p>
                           <ul>
-                            <li
-                              cl
-                              className="text-[9px] text-mainBlack dark:text-lightGrey  p-1.5 rounded-lg cursor-pointer ellipsis inline-block"
-                            >
+                            <li className="text-[9px] text-mainBlack dark:text-lightGrey  p-1.5 rounded-lg cursor-pointer ellipsis inline-block">
                               Number
                             </li>
                           </ul>
