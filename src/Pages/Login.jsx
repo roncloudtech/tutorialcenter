@@ -88,7 +88,7 @@ export default function Login() {
         setAuthenticatedUser(studentInfo);
         setRole("student");
         // This is to check if the student has not completed the Training selection or the Course selection.
-        if (studentInfo.department === null) {
+        if (!studentInfo.department) {
           // if the student has no department, navigate the student to the training selection page
           return navigate("/training-selection");
         }
@@ -231,7 +231,7 @@ const GuardianForm = ({
               Email Address
             </label>
             <input
-              id="student-email"
+              id="guardian-email"
               name="email"
               type="email"
               value={formData.email}
@@ -252,7 +252,7 @@ const GuardianForm = ({
             </label>
             <div className="relative">
               <input
-                id="student-password"
+                id="guardian-password"
                 name="password"
                 type={showPassword ? "text" : "password"}
                 value={formData.password}
