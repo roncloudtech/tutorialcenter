@@ -1,12 +1,37 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DashboardLayout from "../../DashboardLayout";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Title from "../../Components/Title";
 import Calculator from "../../Components/Calculator";
 import TwoColumnLayout from "../../../Components/TwoColumnLayout";
+import { useSelectedCourses } from "../../../Hooks/useSelectedCourses";
 
 export default function Exampage() {
+  // Fetch all courses and subjects the student enrolled in using custom hook
+  const { data, isLoading } = useSelectedCourses();
+  if (isLoading) {
+    return (
+      <div className="w-full  flex items-center justify-center text-center gap-2 dark:text-lightGrey">
+        <Icon icon="line-md:loading-loop" width="35" height="35" />
+        <span className="text-xs">Loading...</span>
+      </div>
+    );
+  }
+  return <ExamPageContainer data={data} />;
+}
+
+const ExamPageContainer = ({ data }) => {
   const [active, setActive] = useState(true);
+  // First course is selected by default
+  const [selectedCourse, setSelectedCourse] = useState(data.courses[0]);
+  // First subject is selected by default
+  const [selectedSubject, setSelectedSubject] = useState(
+    selectedCourse.subjects[0].name
+  );
+  // UseEffect to synchronize with the selected course when it changes
+  useEffect(() => {
+    setSelectedSubject(selectedCourse.subjects[0].name);
+  }, [selectedCourse]);
   return (
     <DashboardLayout>
       <TwoColumnLayout
@@ -16,10 +41,21 @@ export default function Exampage() {
             <Title title={"exam practice"} />
             {active ? (
               // Exam Instructions
-              <ExamInstruction setActive={setActive} />
+              <ExamInstruction
+                setActive={setActive}
+                selectedCourse={selectedCourse}
+                setSelectedCourse={setSelectedCourse}
+                selectedSubject={selectedSubject}
+                setSelectedSubject={setSelectedSubject}
+                data={data}
+              />
             ) : (
               // ExamPractice
-              <ExamPractice setActive={setActive} />
+              <ExamPractice
+                setActive={setActive}
+                selectedCourse={selectedCourse}
+                selectedSubject={selectedSubject}
+              />
             )}
           </div>
         }
@@ -31,9 +67,9 @@ export default function Exampage() {
       />
     </DashboardLayout>
   );
-}
+};
 
-const ExamPractice = ({ setActive }) => {
+const ExamPractice = ({ setActive, selectedCourse, selectedSubject }) => {
   return (
     <>
       <div className="Exam Practice dark:text-lightGrey">
@@ -54,12 +90,12 @@ const ExamPractice = ({ setActive }) => {
         <div className="font-semibold flex justify-between items-center mb-5 dark:text-lightGrey text-mainBlack">
           <div className="flex flex-col justify-center">
             <p className="text-[8px] font-light">course</p>
-            <h3 className="text-sm uppercase">Jamb</h3>
+            <h3 className="text-sm uppercase">{selectedCourse.name}</h3>
           </div>
           <h1 className="text-lg sm:block hidden">50 QUESTIONS</h1>
           <div className="flex flex-col justify-center">
             <p className="text-[8px] uppercase font-light">Subject</p>
-            <h3 className="text-sm ">English</h3>
+            <h3 className="text-sm ">{selectedSubject}</h3>
           </div>
         </div>
         <div className="sm:px-6 sm:py-5 p-2.5 dark:text-lightGrey rounded-md bg-white text-mainBlack dark:bg-whiteFade mb-5">
@@ -156,16 +192,19 @@ const ExamPractice = ({ setActive }) => {
   );
 };
 
-const ExamInstruction = ({ setActive }) => {
-  const courses = ["Jamb", "waec", "neco", "gce"];
-  const subjects = [
-    "mathematics",
-    "english",
-    "chemistry",
-    "physics",
-    "geography",
-    "agriculture",
-  ];
+const ExamInstruction = ({
+  setActive,
+  selectedCourse,
+  setSelectedCourse,
+  selectedSubject,
+  setSelectedSubject,
+  data,
+}) => {
+  // Handle subject change
+  const handleSubjectChange = (e) => {
+    const value = e.target.value;
+    setSelectedSubject(value);
+  };
   return (
     <div className="Exam Instruction space-y-6">
       <div className="sm:px-6 sm:py-5 sm:m-0 my-4  p-3 rounded-md bg-mainWhite dark:bg-whiteFade shadow-custom-1">
@@ -186,13 +225,20 @@ const ExamInstruction = ({ setActive }) => {
       <div className="w-full flex flex-col gap-5">
         <div className="flex items-center sm:justify-normal sm:gap-6 justify-between text-mainBlack dark:text-lightGrey">
           <h3 className="text-xs font-semibold uppercase">course</h3>
-          <div className="p-1 w-max bg-lightGrey dark:bg-whiteFade text-mainBlue dark:text-lightGrey rounded-md">
-            <UseButtonEffects
-              items={courses}
-              classNames={
-                "uppercase font-semibold text-[12px] sm:px-6 px-2.5 py-[6px] rounded-md"
-              }
-            />
+          <div className="p-1 w-full flex justify-between bg-lightGrey dark:bg-whiteFade text-mainBlue dark:text-lightGrey rounded-md">
+            {data?.courses.map((course) => (
+              <button
+                key={course.id}
+                onClick={() => setSelectedCourse(course)}
+                className={`${
+                  course.id === selectedCourse.id
+                    ? "text-mainWhite bg-mainBlue dark:bg-darkMode"
+                    : ""
+                } uppercase font-semibold text-[12px] sm:px-4  px-2.5 py-[7px] rounded-md`}
+              >
+                {course.name}
+              </button>
+            ))}
           </div>
         </div>
         <div className="flex flex-wrap items-center sm:justify-normal sm:gap-6 justify-between text-mainBlack dark:text-lightGrey">
@@ -201,13 +247,12 @@ const ExamInstruction = ({ setActive }) => {
             <select
               name="subjects"
               id="subjects"
-              className="w-max capitalize font-semibold"
+              defaultValue={selectedSubject}
+              className="w-max capitalize font-semibold pr-3"
+              onChange={handleSubjectChange}
             >
-              <option value="">select Subjects</option>
-              {subjects.map((subject, i) => (
-                <option key={i} value={subject}>
-                  {subject}
-                </option>
+              {selectedCourse?.subjects.map((subject) => (
+                <option key={subject.id}>{subject.name}</option>
               ))}
             </select>
           </div>
@@ -215,7 +260,7 @@ const ExamInstruction = ({ setActive }) => {
         <div className="flex items-center gap-6 dark:text-lightGrey text-mainBlack">
           <h3 className="text-[12px] font-semibold uppercase">time</h3>
           <div className="flex items-center gap-4 text-[12px] font-semibold">
-            <span className="px-3 py-1 bg-lightGrey text-mainBlue dark:bg-whiteFade rounded-custom">
+            <span className="px-3 py-1 dark:text-lightGrey bg-lightGrey text-mainBlue dark:bg-whiteFade rounded-custom">
               --:--
             </span>
             <span>/ 50:00 mins</span>
@@ -224,7 +269,7 @@ const ExamInstruction = ({ setActive }) => {
         <div className="flex items-center gap-6 dark:text-lightGrey text-mainBlack">
           <h3 className="text-[12px] font-semibold uppercase">question</h3>
           <div className="flex items-center gap-4 text-[12px] font-semibold">
-            <span className="px-3 py-1 bg-lightGrey text-mainBlue dark:bg-whiteFade rounded-custom">
+            <span className="px-3 py-1 dark:text-lightGrey bg-lightGrey text-mainBlue dark:bg-whiteFade rounded-custom">
               --
             </span>
             <span>/ 100</span>
@@ -239,22 +284,4 @@ const ExamInstruction = ({ setActive }) => {
       </button>
     </div>
   );
-};
-
-const UseButtonEffects = ({ items, classNames }) => {
-  const [active, setActive] = useState(null);
-  const handleClick = (index) => {
-    setActive(index);
-  };
-  return items.map((item, i) => (
-    <button
-      key={i}
-      onClick={() => handleClick(i)}
-      className={`${
-        active === i ? "text-mainWhite bg-mainBlue dark:bg-darkMode" : ""
-      } ${classNames} `}
-    >
-      {item}
-    </button>
-  ));
 };
