@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "../Assets/tutorial_logo.png";
 import { Link, NavLink } from "react-router-dom";
 import { Icon } from "@iconify/react/dist/iconify.js";
@@ -12,7 +12,7 @@ const navigation = [
   { path: "/blog", name: "News / Blog" },
 ];
 export default function Navbar() {
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
   const scrollVisible = useScrollVisibility();
   return (
     <>
@@ -54,10 +54,8 @@ export default function Navbar() {
             {/* Mobile Menu Navigation Links */}
             <div className="block lg:hidden">
               <button
-                onClick={() => {
-                  setVisible(!visible);
-                }}
-                className={`relative z-[500] ${visible ? "block" : "hidden"}`}
+                onClick={() => setVisible(true)}
+                className={`relative z-[500] ${visible ? "hidden" : "block"}`}
               >
                 <Icon
                   icon="quill:hamburger"
@@ -77,63 +75,82 @@ export default function Navbar() {
 }
 
 const MobileNavigation = ({ setVisible, visible }) => {
+  const navLinks = [
+    {
+      name: "Home",
+      path: "/",
+      icon: "mynaui:home-solid",
+    },
+    {
+      name: "Training",
+      path: "/",
+      icon: "healthicons:i-training-class",
+    },
+    {
+      name: "About Us",
+      path: "/about",
+      icon: "ic:outline-info",
+    },
+    {
+      name: "Contact Us",
+      path: "/contact",
+      icon: "grommet-icons:contact",
+    },
+    {
+      name: "News / Blog",
+      path: "/",
+      icon: "streamline-logos:bloglovin-logo-solid",
+    },
+    {
+      name: "Login / Signup",
+      path: "/login",
+      icon: "cuida:login-outline",
+    },
+  ];
+  useEffect(() => {
+    if (visible) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
+    }
+    return () => {
+      document.body.classList.remove("no-scroll");
+    };
+  }, [visible]);
   return (
     <div
-      className={`relative z-[100] ${visible ? "invisible" : "visible p-4"}`}
+      className={`${
+        visible
+          ? "visible opacity-100"
+          : "invisible opacity-0 transition-all ease-in-out duration-1000"
+      } w-full h-full fixed top-0 left-0 bg-black bg-opacity-50 z-[200] flex flex-col items-end justify-end p-2`}
     >
-      {/* background Cover */}
+      <div onClick={() => setVisible(false)} className="w-full h-full" />
       <div
-        className={` background-shadow transition-all duration-300 ease-custom
-                    ${visible ? "opacity-0" : "opacity-full"} `}
-        onClick={() => {
-          setVisible(true);
-        }}
-      />
-      {/* Menu Items */}
-      <div
-        className={`${visible ? "translate-x-full" : "translate-x-0"}
-                  fixed right-0 top-0 bottom-0 z-[600] w-full max-w-[240px] bg-white transition-all duration-300 ease-custom`}
+        className={`${
+          visible ? "translate-x-0" : "translate-x-full"
+        } transition-all ease-in-out duration-500 max-w-56 w-full h-full relative rounded-xl bg-white flex flex-col items-end justify-between p-6`}
       >
-        <div className="flex flex-col justify-end ">
-          <div className="flex flex-col justify-center items-center p-3">
-            <button
-              onClick={() => {
-                setVisible(true);
-              }}
-              className="absolute -left-7 top-0 z-50"
-            >
-              <Icon
-                icon="heroicons:x-mark-20-solid"
-                width="30"
-                height="30"
-                style={{ color: "#fff" }}
-              />
-            </button>
-            {/* Navigation links for mobile menu */}
-            <div className="self-end text-right mb-4">
-              {navigation.map((item, index) => (
-                <Link
-                  to={item.path}
-                  key={index}
-                  className="text-sm block font-semibold text-gray-800 hover:text-gray-900 my-3"
-                >
-                  {item.name}
-                </Link>
-              ))}
-              {/* Apply button for mobile menu */}
-            </div>
-            <div className="flex flex-col md:flex-row items-center justify-center gap-3 self-end">
-              <Link className="block text-xs bg-primary text-white py-2 px-3 rounded-xl">
-                Apply Now
-              </Link>
-              <Link
-                to="/login"
-                className="block font-bold border border-[#94A3B8] bg-white shadow rounded-xl px-3 py-2"
-              >
-                Login
-              </Link>
-            </div>
-          </div>
+        <button
+          onClick={() => setVisible(false)}
+          className="absolute transition-all top-0 left-0 -translate-y-1/4 -translate-x-1/2 close-modal-button flex items-center justify-center w-[50px] h-[50px] rounded-full shadow-[0_4px_10px_#0000002b] bg-white text-[#563725] z-50"
+        >
+          <Icon
+            icon="uil:plus"
+            width="35"
+            height="35"
+            className={`rotate-45`}
+          />
+        </button>
+        <div className="flex flex-col gap-8 items-end">
+          {navLinks.map((items, i) => (
+            <a key={i} href={items.path} className="flex items-center gap-3">
+              <Icon icon={items.icon} width="24" height="24" />
+              <span className="text-sm font-medium dark:text-darkGray">
+                {items.name}
+              </span>
+            </a>
+          ))}
         </div>
       </div>
     </div>

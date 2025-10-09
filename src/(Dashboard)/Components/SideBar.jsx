@@ -113,7 +113,7 @@ export default function SideBar({ expandSideBar, setExpandSideBar }) {
           </div>
         </div>
       </PerfectScrollbar>
-      <MobileScreenNavigation />
+      <MobileScreenNavigation setLogoutModal={setLogoutModal} />
       <LogoutModal modal={logoutModal} setModal={setLogoutModal} />
     </>
   );
@@ -168,7 +168,7 @@ const ToggleMode = ({ expandSideBar }) => {
   );
 };
 
-const MobileScreenNavigation = () => {
+const MobileScreenNavigation = ({ setLogoutModal }) => {
   // The role context
   const { role } = useSchoolContext();
   const menuItems = [
@@ -307,13 +307,17 @@ const MobileScreenNavigation = () => {
           <span>Menu</span>
         </button>
       </div>
-      <MobileScreenSideBar setVisible={setVisible} visible={visible} />
+      <MobileScreenSideBar
+        setLogoutModal={setLogoutModal}
+        setVisible={setVisible}
+        visible={visible}
+      />
     </div>
   );
 };
 
 // SIDE BAR FOR MOBILE MENU
-const MobileScreenSideBar = ({ setVisible, visible }) => {
+const MobileScreenSideBar = ({ setVisible, visible, setLogoutModal }) => {
   useEffect(() => {
     if (visible) {
       document.body.classList.add("no-scroll");
@@ -324,28 +328,40 @@ const MobileScreenSideBar = ({ setVisible, visible }) => {
       document.body.classList.remove("no-scroll");
     };
   }, [visible]);
+  const showLogoutModal = () => {
+    setVisible(false);
+    setLogoutModal(true);
+  };
   return (
     <div
-      className={`w-full h-full relative z-[60] flex xl:hidden ${
-        visible ? "" : "invisible"
-      }`}
+      className={`${
+        visible
+          ? "visible opacity-100"
+          : "invisible opacity-0 transition-all ease-in-out duration-1000"
+      } w-full h-full fixed top-0 left-0 bg-black bg-opacity-50 z-50 flex flex-col items-end justify-end`}
     >
-      {/* background Cover */}
       <div
-        className={`background-shadow transition-all  duration-300 ease-custom ${
-          visible ? "opacity-100" : "opacity-0 invisible"
-        } `}
-        onClick={() => {
-          setVisible(false);
-        }}
+        onClick={() => setVisible(false)}
+        className="w-full h-full cursor-pointer"
       />
       <div
-        className={`w-[350px] max-w-[calc(100vw-150px)] fixed left-0 top-0 bottom-0 z-50 transition-all duration-300 ease-custom ${
+        className={`m-1.5 max-w-52 w-full  fixed left-0 top-0 bottom-0 z-[100] transition-all duration-300 ease-custom ${
           visible ? "-translate-x-0" : "-translate-x-full invisible"
         } `}
       >
+        <button
+          onClick={() => setVisible(false)}
+          className="absolute transition-all top-0 right-0 translate-x-3 -translate-y-1  close-modal-button flex items-center justify-center w-[35px] h-[35px] rounded-full shadow-[0_4px_10px_#0000002b] dark:bg-white bg-mainBlue text-white dark:text-[#563725] z-50"
+        >
+          <Icon
+            icon="uil:plus"
+            width="30"
+            height="30"
+            className={`rotate-45`}
+          />
+        </button>
         <div
-          className={`scroll position  overflow-y-hidden flex xl:hidden bg-mainWhite dark:bg-darkMode  shadow-custom-1 p-3 flex-col gap-3 relative h-full`}
+          className={`scroll position  overflow-y-hidden flex xl:hidden bg-mainWhite dark:bg-darkMode rounded-lg  shadow-custom-1 p-3 flex-col gap-3 relative h-full`}
         >
           <Link className="flex">
             <img
@@ -376,23 +392,18 @@ const MobileScreenSideBar = ({ setVisible, visible }) => {
           </div>
           <div className="space-y-2 w-full my-[2px]">
             <ToggleMode expandSideBar />
-            <div className="flex items-center gap-2 text-mainBlue dark:text-lightGrey">
+            <button
+              onClick={showLogoutModal}
+              className="flex items-center gap-2 text-mainBlue dark:text-lightGrey"
+            >
               <Icon
                 icon="material-symbols:logout-rounded"
                 width="20"
                 height="20"
               />
               <span className={"text-[13px] font-medium"}>Logout</span>
-            </div>
+            </button>
           </div>
-          <button
-            onClick={() => {
-              setVisible(false);
-            }}
-            className="absolute text-red-800 z-50 top-0 right-0"
-          >
-            <Icon icon="heroicons:x-mark-20-solid" width="24" height="24" />
-          </button>
         </div>
       </div>
     </div>
