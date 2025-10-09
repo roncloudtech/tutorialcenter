@@ -11,7 +11,7 @@
 }
 .no-scroll {
   overflow-y: hidden;
-  padding-right: 16px;
+  padding-right: 10px;
 }
 .header-title {
   font-size: 32px;

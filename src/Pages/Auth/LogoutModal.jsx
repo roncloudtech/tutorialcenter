@@ -26,12 +26,12 @@ export default function LogoutModal({ setModal, modal }) {
   return (
     <div
       className={`${
-        modal ? "opacity-100 visible z-20 hide-scroll" : "opacity-0 invisible"
+        modal ? "opacity-100 visible z-[70] hide-scroll" : "opacity-0 invisible"
       } fixed inset-0 flex items-center justify-center cursor-[url(https://yomicasual.africa/wp-content/themes/minimog/assets/images/cursor/light-close.png),_pointer]`}
     >
       <div onClick={() => setModal(false)} className="modal-overlay"></div>
       <div
-        className={`opacity-100 z-50 max-w-[calc(100vw - 50px)] w-[400px] cursor-auto relative`}
+        className={`opacity-100 z-50 max-w-[400px] w-full cursor-auto relative mx-4 `}
       >
         <button
           onClick={() => setModal(false)}
@@ -41,11 +41,13 @@ export default function LogoutModal({ setModal, modal }) {
         </button>
         <div className="modal-content-wrap opacity-100 visible z-50 max-h-[calc(100vh - 60px)] w-full h-full rounded-md bg-white overflow-auto">
           <div className="p-6 text-center">
-            <h2 className="text-2xl ">Are you sure you want to Log out?</h2>
+            <h2 className="lg:text-2xl text-xl">
+              Are you sure you want to Log out?
+            </h2>
             <div className="mt-6 flex items-center gap-3">
               <button
                 onClick={handleLogout}
-                className="w-full py-1.5 ring-1 ring-secondaryDark300 text-secondaryDark300 rounded-lg text-base flex items-center justify-center"
+                className="max-sm:text-sm font-medium w-full p-1.5 ring-1 ring-secondaryDark300 text-secondaryDark300 rounded-lg text-base flex items-center justify-center"
               >
                 {isLoading ? (
                   <Icon icon="line-md:loading-loop" width="24" height="24" />
@@ -55,7 +57,7 @@ export default function LogoutModal({ setModal, modal }) {
               </button>
               <button
                 onClick={() => setModal(false)}
-                className="w-full py-1.5 ring-1 ring-secondaryDark300 bg-secondaryDark300  rounded-lg text-base"
+                className="max-sm:text-sm font-medium w-full p-1.5 ring-1 ring-secondaryDark300 bg-secondaryDark300  rounded-lg text-base"
               >
                 Stay logged in
               </button>
