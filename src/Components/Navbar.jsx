@@ -123,17 +123,20 @@ const MobileNavigation = ({ setVisible, visible }) => {
         visible
           ? "visible opacity-100"
           : "invisible opacity-0 transition-all ease-in-out duration-1000"
-      } w-full h-full fixed top-0 left-0 bg-black bg-opacity-50 z-[200] flex flex-col items-end justify-end p-2`}
+      } w-full h-full fixed  top-0 left-0 bg-black bg-opacity-50 z-[100] flex flex-col items-end justify-end p-2`}
     >
-      <div onClick={() => setVisible(false)} className="w-full h-full" />
+      <div
+        onClick={() => setVisible(false)}
+        className="w-full h-full absolute top-0 left-0"
+      />
       <div
         className={`${
           visible ? "translate-x-0" : "translate-x-full"
-        } transition-all ease-in-out duration-500 max-w-56 w-full h-full relative rounded-xl bg-white flex flex-col items-end justify-between p-6`}
+        }  z-[500] transition-all ease-in-out duration-500 max-w-56 w-full h-full relative rounded-xl bg-white flex flex-col items-end justify-between p-6`}
       >
         <button
           onClick={() => setVisible(false)}
-          className="absolute transition-all top-0 left-0 -translate-y-1/4 -translate-x-1/2 close-modal-button flex items-center justify-center w-[50px] h-[50px] rounded-full shadow-[0_4px_10px_#0000002b] bg-white text-[#563725] z-50"
+          className="absolute transition-all top-0 left-0 -translate-y-[10%] -translate-x-1/2 close-modal-button flex items-center justify-center w-[50px] h-[50px] rounded-full shadow-[0_4px_10px_#0000002b] bg-white text-[#563725] z-50"
         >
           <Icon
             icon="uil:plus"
@@ -142,7 +145,7 @@ const MobileNavigation = ({ setVisible, visible }) => {
             className={`rotate-45`}
           />
         </button>
-        <div className="flex flex-col gap-8 items-end">
+        <div className="flex flex-col gap-8 items-end overflow-auto">
           {navLinks.map((items, i) => (
             <a key={i} href={items.path} className="flex items-center gap-3">
               <Icon icon={items.icon} width="24" height="24" />

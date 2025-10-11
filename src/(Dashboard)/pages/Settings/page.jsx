@@ -5,15 +5,17 @@ import avatar from "../../assets/Avatar1.jpg";
 import { useState } from "react";
 import axios from "axios";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { useNavigate } from "react-router-dom";
+import { useSchoolContext } from "../../../Context/SchoolContext";
 
 const formatDate = (dateString) => {
   if (!dateString) return "";
   return dateString.split("T")[0];
 };
 export default function Settings() {
+  const { authenticatedUser } = useSchoolContext();
   // fetch userInfo from localstorage
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const userInfo = authenticatedUser;
+  console.log(userInfo);
   const fullname = userInfo.firstname + ", " + userInfo.lastname;
   const dateOfBirth = formatDate(userInfo.date_of_birth);
   return (
@@ -119,9 +121,10 @@ export default function Settings() {
 }
 
 // Component to edit student personal Information
-
 const EditProfile = ({ userInfo }) => {
   const API_BASE_URL = "http://localhost:8000";
+  const { setAuthenticatedUser } = useSchoolContext();
+
   // Form Data
   const [formData, setFormData] = useState({
     firstname: userInfo.firstname || "",
@@ -131,10 +134,11 @@ const EditProfile = ({ userInfo }) => {
     homeAddress: userInfo.home_address || "",
     location: userInfo.location || "",
   });
+  const [profile, setProfile] = useState();
+  const [profileErr, setProfileErr] = useState("");
   const [formErrors, setFormErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [successMsg, setSucessMsg] = useState(false);
-  const navigate = useNavigate();
   // Capture user info
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -182,11 +186,31 @@ const EditProfile = ({ userInfo }) => {
     }
     setFormErrors(newErrors);
   };
+  // File Upload
+
+  // Validate File Upload
+  const handleFileUpload = (e) => {
+    const image = e.target?.files[0];
+    if (
+      image.type === "image/jpeg" ||
+      image.type === "image/jpg" ||
+      image.type === "image/png"
+    ) {
+      if (image.size > 2 * 1024 * 1024) {
+        setProfileErr("Image size is too large");
+      } else {
+        setProfileErr("");
+        setProfile(image);
+      }
+    } else {
+      setProfileErr("file type is not supported");
+    }
+  };
+  const checkFormErrors = () => Object.keys(formErrors).length > 0;
   // Form Submit
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    if (Object.keys(formErrors).length > 0)
-      return console.log("Error form submission");
+    if (checkFormErrors()) return console.log("Error form submission");
     setIsLoading(true);
     // Update the User Information in the Backend(Server) and update the localstorage with the data
     try {
@@ -203,10 +227,33 @@ const EditProfile = ({ userInfo }) => {
       );
       console.log(res);
       if (res.status === 200) {
-        // Update the Local storage with the response data
-        localStorage.removeItem("userInfo");
+        // Update the Local storage and Context with the response data
+        setAuthenticatedUser((prev) => ({ ...prev, ...res.data.student }));
         localStorage.setItem("userInfo", JSON.stringify(res.data.student));
         setSucessMsg(true);
+      }
+      // Upload profile picture if available
+      if (profile) {
+        const profileRes = await axios.post(
+          `${API_BASE_URL}/api/students/${userInfo.id}/profile-picture`,
+          {
+            profile_picture: profile,
+          }
+        );
+        if (profileRes.status === 200) {
+          console.log(profileRes.data.profile_picture_url);
+          setAuthenticatedUser((prev) => ({
+            ...prev,
+            profile_picture: profileRes.data.profile_picture_url,
+          }));
+          localStorage.setItem(
+            "userInfo",
+            JSON.stringify({
+              ...userInfo,
+              profile_picture: profileRes.data.profile_picture_url,
+            })
+          );
+        }
       }
     } catch (error) {
       console.log(error);
@@ -221,7 +268,7 @@ const EditProfile = ({ userInfo }) => {
       </h4>
       {successMsg && (
         <span className="flex items-center justify-center my-2 text-sm text-green-500 w-full">
-          Profile Update Sucessfully
+          Profile Updated Sucessfully
         </span>
       )}
       <form
@@ -285,6 +332,23 @@ const EditProfile = ({ userInfo }) => {
             placeholder={"Enter location"}
             onchange={handleInputChange}
           />
+          <label htmlFor="course_image" className="text-sm dark:text-lightGrey">
+            Upload Profile Image (JPG, PNG)
+            <input
+              id="course_image"
+              name="course_image"
+              type="file"
+              onChange={handleFileUpload}
+              className={`mt-1 w-full px-4 py-2 border rounded-lg ${
+                profileErr
+                  ? "border-red-500"
+                  : "dark:border-whiteFade border-mainBlue"
+              } focus:ring-2 focus:ring-gray-300  focus:border-transparent transition`}
+            />
+            {profileErr && (
+              <p className="mt-1 text-xs text-red-500">{profileErr}</p>
+            )}
+          </label>
         </div>
         <button
           type="submit"
