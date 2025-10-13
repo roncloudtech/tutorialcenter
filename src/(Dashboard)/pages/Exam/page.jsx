@@ -60,7 +60,7 @@ const ExamPageContainer = ({ data }) => {
           </div>
         }
         rightContent={
-          <div className="dark:bg-darkMode scroll bg-mainWhite shadow-custom-1 rounded-md p-2 m-0.5">
+          <div className="">
             <Calculator />
           </div>
         }
