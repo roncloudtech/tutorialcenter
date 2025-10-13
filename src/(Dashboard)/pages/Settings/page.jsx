@@ -15,9 +15,12 @@ export default function Settings() {
   const { authenticatedUser } = useSchoolContext();
   // fetch userInfo from localstorage
   const userInfo = authenticatedUser;
-  console.log(userInfo);
   const fullname = userInfo.firstname + ", " + userInfo.lastname;
   const dateOfBirth = formatDate(userInfo.date_of_birth);
+  const profile_picture_url = userInfo.profile_picture
+    ? `http://localhost:8000/storage/${userInfo.profile_picture}`
+    : null;
+
   return (
     <>
       <DashboardLayout>
@@ -35,10 +38,9 @@ export default function Settings() {
               {/* USER PROFILE */}
               <div className="mb-6">
                 <img
-                  src={userInfo.profile_picture || avatar}
+                  src={profile_picture_url || avatar}
                   alt={fullname}
                   className="h-[200px] rounded-md mb-2"
-                  style={{ objectFit: "contain" }}
                 />
                 <h4 className="text-[18px] font-semibold">{fullname}</h4>
                 <p className="text-[14px] text-mainGrey font-medium">
@@ -238,6 +240,11 @@ const EditProfile = ({ userInfo }) => {
           `${API_BASE_URL}/api/students/${userInfo.id}/profile-picture`,
           {
             profile_picture: profile,
+          },
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
           }
         );
         if (profileRes.status === 200) {
@@ -253,6 +260,7 @@ const EditProfile = ({ userInfo }) => {
               profile_picture: profileRes.data.profile_picture_url,
             })
           );
+          console.log(profileRes.data);
         }
       }
     } catch (error) {

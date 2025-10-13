@@ -18,9 +18,12 @@ export default function LogoutModal({ setModal, modal }) {
     await delay(3000);
     setIsLoading(false);
     setModal(false);
+    // Set user and role to null in the local storage and context
     setAuthenticatedUser({});
     setRole("");
-    localStorage.clear();
+    localStorage.setItem("userInfo", JSON.stringify({}));
+    localStorage.setItem("role", "");
+    // Navigate to login page
     navigate("/login");
   };
   return (
@@ -40,7 +43,7 @@ export default function LogoutModal({ setModal, modal }) {
           <Icon icon="hugeicons:cancel-01" width="18" height="18" />
         </button>
         <div className="modal-content-wrap opacity-100 visible z-50 max-h-[calc(100vh - 60px)] w-full h-full rounded-md bg-white overflow-auto">
-          <div className="p-6 text-center">
+          <div className="md:p-6 p-4 text-center">
             <h2 className="lg:text-2xl text-xl">
               Are you sure you want to Log out?
             </h2>

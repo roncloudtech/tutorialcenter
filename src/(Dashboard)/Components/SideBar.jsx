@@ -13,13 +13,16 @@ import { useSchoolContext } from "../../Context/SchoolContext";
 import avatar from "../assets/Avatar1.jpg";
 
 export default function SideBar({ expandSideBar, setExpandSideBar }) {
+  const { authenticatedUser } = useSchoolContext();
   // show logout modal
   const [logoutModal, setLogoutModal] = useState(false);
 
   // fetch userInfo from localstorage
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const userInfo = authenticatedUser;
   const fullname = userInfo.firstname + ", " + userInfo.lastname;
-
+  const profile_picture_url = userInfo.profile_picture
+    ? `http://localhost:8000/storage/${userInfo.profile_picture}`
+    : null;
   // Fetching userrole
   const userrole = localStorage.getItem("userRole");
 
@@ -72,15 +75,13 @@ export default function SideBar({ expandSideBar, setExpandSideBar }) {
               className="text-mainBlue dark:text-lightGrey"
             /> */}
             <img
-              src={userInfo.profile_picture || avatar}
+              src={profile_picture_url || avatar}
               alt={fullname}
-              className="h-[30px] rounded-full mb-2 "
-              style={{ objectFit: "contain" }}
+              className="h-[30px] w-[30px] rounded-full mb-2 "
             />
             <div className={`${expandSideBar ? "block mb-2" : "hidden"}`}>
-              <p className="text-[12px] font-medium text-ascent">
-                Welcome{" "}
-                {userrole.charAt(0).toUpperCase() + userrole.substring(1)}!
+              <p className="text-[12px] font-medium text-ascent capitalize">
+                Welcome {userrole}!
               </p>
               <h3 className="text-xs font-medium text-mainBlue dark:text-lightGrey">
                 {fullname}
@@ -318,6 +319,10 @@ const MobileScreenNavigation = ({ setLogoutModal }) => {
 
 // SIDE BAR FOR MOBILE MENU
 const MobileScreenSideBar = ({ setVisible, visible, setLogoutModal }) => {
+  const { authenticatedUser } = useSchoolContext();
+  const profile_picture_url = authenticatedUser.profile_picture
+    ? `http://localhost:8000/storage/${authenticatedUser.profile_picture}`
+    : null;
   useEffect(() => {
     if (visible) {
       document.body.classList.add("no-scroll");
@@ -363,7 +368,7 @@ const MobileScreenSideBar = ({ setVisible, visible, setLogoutModal }) => {
         <div
           className={`scroll position  overflow-y-hidden flex xl:hidden bg-mainWhite dark:bg-darkMode rounded-lg  shadow-custom-1 p-3 flex-col gap-3 relative h-full`}
         >
-          <Link className="flex">
+          <Link to={"/dashboard"} className="flex">
             <img
               src={logo}
               alt=""
@@ -373,11 +378,10 @@ const MobileScreenSideBar = ({ setVisible, visible, setLogoutModal }) => {
 
           {/* PROFILE */}
           <div className="flex items-center gap-2 mt-3">
-            <Icon
-              icon="radix-icons:avatar"
-              width="30"
-              height="30"
-              className="text-mainBlue dark:text-lightGrey"
+            <img
+              src={profile_picture_url || avatar}
+              alt={authenticatedUser.firstname}
+              className="h-[30px] w-[30px] rounded-full mb-2 "
             />
             <div className="items">
               <p className="text-[12px] font-medium text-ascent">Welcome!</p>
