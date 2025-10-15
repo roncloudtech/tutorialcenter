@@ -23,7 +23,7 @@ export default function Calender() {
             </div>
           }
           rightContent={
-            <div className="dark:bg-whiteFade dark:text-lightGrey shadow-custom-1 p-2 m-0.5 sm:overflow-y-auto rounded-md space-y-5">
+            <div className=" dark:text-lightGrey  space-y-5">
               <SmallCalendar />
               <button className="w-full flex justify-between items-center">
                 <h3 className="text-sm font-medium">My Calender</h3>

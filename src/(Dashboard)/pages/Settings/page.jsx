@@ -34,7 +34,7 @@ export default function Settings() {
             </div>
           }
           rightContent={
-            <div className="dark:text-lightGrey dark:bg-darkMode scroll bg-mainWhite shadow-custom-1 rounded-md p-2 m-0.5">
+            <div className="dark:text-lightGrey scroll">
               {/* USER PROFILE */}
               <div className="mb-6">
                 <img

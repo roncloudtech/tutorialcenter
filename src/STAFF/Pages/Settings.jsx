@@ -54,7 +54,7 @@ export default function StaffSettings() {
             </div>
           }
           rightContent={
-            <div className="bg-mainWhite dark:bg-darkMode shadow-custom-1 rounded-lg p-3 m-0.5 dark:text-lightGrey">
+            <div className="dark:text-lightGrey">
               {/* USER PROFILE */}
               <div className="mb-6">
                 <img

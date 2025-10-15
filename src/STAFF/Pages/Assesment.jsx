@@ -136,9 +136,9 @@ export default function StaffAssesment() {
           </div>
         }
         rightContent={
-          <div className="dark:bg-darkMode bg-mainWhite  scroll sm:shadow-custom-1 dark:text-lightGrey rounded-lg sm:p-3 sm:m-0.5 max-sm:mt-4">
+          <div className=" dark:text-lightGrey ">
             <div className="select-department mt-4">
-              <h3 className="text-xs text-mainBlack uppercase font-medium mb-3">
+              <h3 className="text-xs  uppercase font-medium mb-3">
                 Select a department
               </h3>
               <select

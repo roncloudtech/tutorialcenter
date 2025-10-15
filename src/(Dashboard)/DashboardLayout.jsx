@@ -7,7 +7,7 @@ export default function DashboardLayout({ children }) {
     <>
       <div
         className={`${
-          expandSideBar ? " grid-cols-[210px_1fr]" : "grid-cols-[100px_1fr]"
+          expandSideBar ? "grid-cols-[210px_1fr]" : "grid-cols-[100px_1fr]"
         } scroll h-screen xl:grid xl:p-2 transition-all ease-custom sm:overflow-hidden bg-mainWhite dark:bg-[#2A2A2A]`}
       >
         {/* LEFT */}

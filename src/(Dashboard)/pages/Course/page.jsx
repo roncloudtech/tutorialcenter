@@ -186,7 +186,7 @@ const CoursepageContainer = ({ data }) => {
           }
           rightContent={
             <div className="space-y-2">
-              <div className="ring-[0.5px] ring-mainBlue dark:bg-darkMode px-2 py-3 rounded-md">
+              <div className="border-[0.5px] border-mainBlue dark:bg-darkMode px-2 py-3 rounded-md">
                 <div className="flex justify-between text-[10px] font-bold text-mainBlack dark:text-lightGrey mb-2">
                   <h3 className="ellipsis inline-block w-[160px]">
                     MASTER CLASS [{selectedCourse?.name}]
@@ -214,10 +214,10 @@ const CoursepageContainer = ({ data }) => {
               </div>
               {/* TOPIC CONVERSATION */}
               <div className="chat">
-                <div className="py-2 pl-4 rounded-t-lg bg-mainBlue dark:bg-ascent text-xs text-mainWhite">
+                <div className="py-2 text-center rounded-t-lg bg-mainBlue dark:bg-ascent text-xs text-mainWhite">
                   <p>Topic Conversation</p>
                 </div>
-                <div className="py-2 px-1.5  ring-[0.5px] ring-mainBlue rounded-b-lg">
+                <div className="py-2 px-1.5  border-[0.5px] border-mainBlue rounded-b-lg">
                   <Chat />
                 </div>
               </div>
