@@ -26,7 +26,6 @@ import TeacherGroups from "./(TEACHER)/pages/Groups";
 import TeacherSettings from "./(TEACHER)/pages/Settings";
 import TeacherResult from "./(TEACHER)/pages/Result";
 import EmailVerfication from "./Pages/EmailVerfication";
-import CourseChats from "./(Dashboard)/pages/Course/CourseChats";
 import AllStudents from "./STAFF/Lists/Students";
 import PrivateRoute from "./Pages/Auth/PrivateRoute";
 import Unauthorized from "./Pages/Auth/Unauthorized";
@@ -54,7 +53,6 @@ export default function App() {
           <Route element={<PrivateRoute allowedRole="student" />}>
             <Route path="/dashboard" element={<StudentDashboard />} />
             <Route path="/courses" element={<Coursepage />} />
-            <Route path="/course-chat" element={<CourseChats />} />
             <Route path="/calender" element={<Calender />} />
             <Route path="/exam" element={<Exampage />} />
             <Route path="/groups" element={<Group />} />

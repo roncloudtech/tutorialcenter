@@ -24,7 +24,7 @@ export default function Help() {
             </div>
           }
           rightContent={
-            <div className="dark:text-lightGrey dark:bg-darkMode scroll bg-mainWhite shadow-custom-1 rounded-md p-2 m-0.5">
+            <div className="dark:text-lightGrey scroll ">
               <h2 className="uppercase text-xs max-sm:text-center font-semibold p-3 rounded-custom bg-ascent text-mainWhite dark:text-lightGrey">
                 contact us
               </h2>
