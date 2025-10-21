@@ -15,9 +15,9 @@ export default function Calender() {
       <DashboardLayout>
         <TwoColumnLayout
           leftContent={
-            <div className="item1 xl:px-4 p-2.5 h-full dark:text-lightGrey">
+            <div className="item1 xl:px-4 p-2.5 h-full dark:text-lightGrey mb-10">
               <Title title={"CALENDER"} />
-              <div className="w-full h-full">
+              <div className="w-full">
                 <BigCalender />
               </div>
             </div>

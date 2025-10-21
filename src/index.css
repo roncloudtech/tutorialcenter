@@ -166,6 +166,9 @@ button:disabled {
   color: black;
   border: none;
 }
+a.fc-event {
+  cursor: pointer;
+}
 .fc-h-event {
   background: transparent;
   border: none;
