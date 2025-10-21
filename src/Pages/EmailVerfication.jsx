@@ -6,17 +6,7 @@ import Footer from "../Components/Footer";
 import logo1 from "../Assets/TC 1.png";
 
 const API_BASE_URL = "http://localhost:8000";
-// API call to resend the verification code
-const handleResendCode = async (identifier, role) => {
-  try {
-    const res = await axios.post(`${API_BASE_URL}/api/${role}s/resend-code`, {
-      email: identifier,
-    });
-    console.log(res.data);
-  } catch (error) {
-    console.log(error);
-  }
-};
+
 export default function EmailVerfication() {
   const [searchParams] = useSearchParams();
   const identifier = searchParams.get("identifier");
