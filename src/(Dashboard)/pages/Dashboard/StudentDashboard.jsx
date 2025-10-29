@@ -11,10 +11,21 @@ import { useSelectedCourses } from "../../../Hooks/useSelectedCourses";
 export default function StudentDashboard() {
   // Check if the user has department
   useDepartmentCheck();
+
+  // Fetch all courses and subjects the student enrolled in using custom hook
+  const { data, isLoading } = useSelectedCourses();
+  if (isLoading) {
+    return (
+      <div className="w-full  flex items-center justify-center text-center gap-2 dark:text-lightGrey">
+        <Icon icon="line-md:loading-loop" width="35" height="35" />
+        <span className="text-xs">Loading...</span>
+      </div>
+    );
+  }
   return (
     <DashboardLayout>
       <TwoColumnLayout
-        leftContent={<LeftContent />}
+        leftContent={<LeftContent data={data} />}
         rightContent={
           <>
             <SmallCalendar />
@@ -72,18 +83,7 @@ const Notification = () => {
   );
 };
 
-const LeftContent = () => {
-  // Fetch all courses and subjects the student enrolled in using custom hook
-  const { data, isLoading } = useSelectedCourses();
-  if (isLoading) {
-    return (
-      <div className="w-full  flex items-center justify-center text-center gap-2 dark:text-lightGrey">
-        <Icon icon="line-md:loading-loop" width="35" height="35" />
-        <span className="text-xs">Loading...</span>
-      </div>
-    );
-  }
-
+const LeftContent = ({ data }) => {
   return (
     <div className="xl:px-4 p-2.5 scroll h-full">
       <Title title={"DASHBOARD"} />
