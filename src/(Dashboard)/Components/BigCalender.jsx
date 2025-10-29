@@ -115,11 +115,10 @@ export default function BigCalender() {
           center: "title",
           right: "dayGridMonth,timeGridWeek,timeGridDay",
         }}
-        weekends={false} // Hide weekends
         height={600}
         slotMinTime="08:00:00" // Start time for the day
         slotMaxTime="18:00:00" // End time for the day
-        allDaySlot={false} // Hide all-day slot
+        allDaySlot={true} // Hide all-day slot
         eventClick={handleEventClick}
       />
       <EventModal
