@@ -17,7 +17,7 @@ export const useSelectedCourses = () => {
     queryKey: ["coursesSelected"],
     queryFn: () => fectchAllCourses(authenticatedUser),
     // Store the fresh data for 10 minutes before refetch
-    staleTime: 10 * 60 * 1000,
-    retry: false,
+    // staleTime: 10 * 60 * 1000,
+    // retry: false,
   });
 };
