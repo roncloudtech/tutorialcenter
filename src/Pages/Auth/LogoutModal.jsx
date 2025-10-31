@@ -21,8 +21,13 @@ export default function LogoutModal({ setModal, modal }) {
     // Set user and role to null in the local storage and context
     setAuthenticatedUser({});
     setRole("");
-    localStorage.setItem("userInfo", JSON.stringify({}));
-    localStorage.setItem("role", "");
+    // localStorage.setItem("userInfo", JSON.stringify({}));
+    // localStorage.setItem("role", "");
+    localStorage.removeItem('userInfo');
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('user');
+    localStorage.removeItem('role');
+    localStorage.removeItem('token');
     // Navigate to login page
     navigate("/login");
   };
