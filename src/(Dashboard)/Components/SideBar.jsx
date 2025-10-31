@@ -21,8 +21,9 @@ export default function SideBar({ expandSideBar, setExpandSideBar }) {
   const userInfo = authenticatedUser;
   const fullname = userInfo.firstname + ", " + userInfo.lastname;
   const profile_picture_url = userInfo.profile_picture
-    ? `http://localhost:8000/storage/${userInfo.profile_picture}`
-    : null;
+    // ? `http://localhost:8000/storage/${userInfo.profile_picture}`
+    ? `${userInfo.profile_picture}`
+    : avatar;
   // Fetching userrole
   const userrole = localStorage.getItem("userRole");
 
