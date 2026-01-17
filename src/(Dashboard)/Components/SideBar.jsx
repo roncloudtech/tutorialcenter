@@ -21,8 +21,7 @@ export default function SideBar({ expandSideBar, setExpandSideBar }) {
   const userInfo = authenticatedUser;
   const fullname = userInfo.firstname + ", " + userInfo.lastname;
   const profile_picture_url = userInfo.profile_picture
-    // ? `http://localhost:8000/storage/${userInfo.profile_picture}`
-    ? `${userInfo.profile_picture}`
+    ? `${process.env.REACT_APP_API_BASE_URL || "http://localhost:8000/"}storage/${userInfo.profile_picture}`
     : avatar;
   // Fetching userrole
   const userrole = localStorage.getItem("userRole");
@@ -322,7 +321,7 @@ const MobileScreenNavigation = ({ setLogoutModal }) => {
 const MobileScreenSideBar = ({ setVisible, visible, setLogoutModal }) => {
   const { authenticatedUser } = useSchoolContext();
   const profile_picture_url = authenticatedUser.profile_picture
-    ? `http://localhost:8000/storage/${authenticatedUser.profile_picture}`
+    ? `${process.env.REACT_APP_API_BASE_URL || "http://localhost:8000/"}storage/${authenticatedUser.profile_picture}`
     : null;
   useEffect(() => {
     if (visible) {

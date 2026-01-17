@@ -233,7 +233,7 @@ export default function SignUp() {
                     <div className="w-full h-[1.5px] bg-black" />
                   </div>
                   <Link
-                    to={`http://localhost:8000/api/${userRole}s/auth/google`}
+                    to={`${API_BASE_URL}api/${userRole}s/auth/google`}
                     className="w-full flex items-center justify-center mb-5"
                   >
                     <div className="flex items-center justify-center w-max gap-3 bg-white shadow-md py-2 px-3.5 rounded-lg">

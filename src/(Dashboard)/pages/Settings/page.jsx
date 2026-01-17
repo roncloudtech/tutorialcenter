@@ -18,8 +18,7 @@ export default function Settings() {
   const fullname = userInfo.firstname + ", " + userInfo.lastname;
   const dateOfBirth = formatDate(userInfo.date_of_birth);
   const profile_picture_url = userInfo.profile_picture
-    // ? `http://localhost:8000/storage/${userInfo.profile_picture}`
-    ? `${userInfo.profile_picture}`
+    ? `${process.env.REACT_APP_API_BASE_URL || "http://localhost:8000/"}storage/${userInfo.profile_picture}`
     : avatar;
 
   return (

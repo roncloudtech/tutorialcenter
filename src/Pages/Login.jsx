@@ -311,7 +311,7 @@ const GuardianForm = ({
         </div>
         <div className="grid justify-center mb-5">
           <Link
-            to={"http://127.0.0.1:8000/api/guardians/auth/google"}
+            to={`${API_BASE_URL}api/guardians/auth/google`}
             className="flex gap-3 bg-white shadow-md px-4 py-2 rounded-lg"
           >
             <Icon icon="devicon:google" width="20" height="20" />
@@ -452,7 +452,7 @@ const StudentForm = ({
       </div>
       <div className="grid justify-center mb-5">
         <Link
-          to={"http://127.0.0.1:8000/api/students/auth/google"}
+          to={`${API_BASE_URL}api/students/auth/google`}
           className="flex gap-3 bg-white shadow-md px-4 py-2 rounded-lg"
         >
           <Icon icon="devicon:google" width="20" height="20" />
