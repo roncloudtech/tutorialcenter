@@ -89,7 +89,7 @@ const calendarEvents = [
   },
 ];
 export default function BigCalender() {
-  const [view, setView] = useState("timeGridWeek"); // Default view
+  const [view] = useState("timeGridWeek"); // Default view
   const [eventModalOpen, setEventModalOpen] = useState(false);
   const [eventInfo, setEventInfo] = useState({});
   const handleEventClick = (eventInfo) => {

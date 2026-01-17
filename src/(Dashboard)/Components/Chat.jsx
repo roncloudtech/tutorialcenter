@@ -1,5 +1,3 @@
-import { useState } from "react";
-import bookIcon from "../../Assets/Vector.png";
 import { Icon } from "@iconify/react/dist/iconify.js";
 
 export default function Chat() {
