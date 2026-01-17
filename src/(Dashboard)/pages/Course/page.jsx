@@ -386,34 +386,6 @@ const MediumScreenTopicLists = ({
   );
 };
 
-const MediumScreenAllTopics = ({ setTopic }) => {
-  return (
-    <div className="py-4 px-2">
-      <div className="flex items-center gap-3 mb-4">
-        <button onClick={() => setTopic(false)}>
-          <Icon icon="iconamoon:arrow-left-2-light" width="35" height="35" />
-        </button>
-        <h2 className="uppercase text-lg font-semibold">Topics</h2>
-      </div>
-      <div className="mx-4">
-        <ul className="text-xs space-y-2">
-          <li className="flex justify-between items-center bg-[#EAEBEC] px-4 py-2 rounded-lg">
-            Number <span>74%</span>
-          </li>
-          <li className="flex justify-between items-center bg-[#EAEBEC] px-4 py-2 rounded-lg">
-            Measurement <span>74%</span>
-          </li>
-          <li className="flex justify-between items-center bg-[#EAEBEC] px-4 py-2 rounded-lg">
-            Geometry <span>74%</span>
-          </li>
-          <li className="flex justify-between items-center bg-[#EAEBEC] px-4 py-2 rounded-lg">
-            Algebra <span>74%</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-  );
-};
 const ChatButton = ({ setViewCourseChat }) => {
   return (
     <button

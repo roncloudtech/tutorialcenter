@@ -2,16 +2,7 @@ import React from "react";
 import ProgressBar from "./ProgressBar";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";
-const jambSubjects = ["English", "Mathematics", "Chemistry", "Physics"];
-const waecSubjects = [
-  "English",
-  "Mathematics",
-  "Chemistry",
-  "Physics",
-  "Agriculture",
-  "Geography",
-  "Biology",
-];
+
 export default function ProgressSlider({ data }) {
   // console.log(data);
   return (
