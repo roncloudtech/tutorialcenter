@@ -47,9 +47,7 @@ const roleOptions = [
     label: "Staff",
   },
 ];
-export default function StaffRegistration() {
-  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
-  // Loading State
+export default function StaffRegistration() {  
   const [isLoading, setIsLoading] = useState(false);
   const [profilePicture, setProfilePicture] = useState();
   const [profileErr, setProfileErr] = useState("");
