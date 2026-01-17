@@ -5,13 +5,13 @@ import GoBack from "./GoBackBtn";
 import { useSchoolContext } from "../../Context/SchoolContext";
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:8000/api";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8000/";
 
 // This function updates the student's department both in the backend and in local storage
 const handleStudentDeptUpdate = async (id, department) => {
   // Remove the student previous info from local storage
   try {
-    const res = await axios.put(`${API_BASE_URL}/students/${id}`, {
+    const res = await axios.put(`${API_BASE_URL}api/students/${id}`, {
       department,
     });
     console.log(res.data);
@@ -29,7 +29,7 @@ const handlePaymentRegistration = async (studentId, tranx, courses) => {
   try {
     // Build an array of promises for each course payment registration
     const requests = courses.map((course) => {
-      return axios.post(`${API_BASE_URL}/payments`, {
+      return axios.post(`${API_BASE_URL}api/payments`, {
         student_id: studentId,
         course_id: course.courseId,
         course_name: course.courseName,
@@ -56,7 +56,7 @@ const handleSubjectEnrollment = async (studentId, courses) => {
   try {
     // Build an array of Promises for each course the student picked
     const requests = courses.map((course) => {
-      return axios.post(`${API_BASE_URL}/enrollments`, {
+      return axios.post(`${API_BASE_URL}api/enrollments`, {
         student_id: studentId,
         course_id: course.courseId,
         end_date: course.duration,

@@ -7,9 +7,9 @@ import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
 import { useSchoolContext } from "../Context/SchoolContext";
 
-const API_BASE_URL = "http://localhost:8000/api/";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8000/";
 const loginUser = async (role, data) => {
-  return axios.post(`${API_BASE_URL}${role}s/login`, data);
+  return axios.post(`${API_BASE_URL}api/${role}s/login`, data);
 };
 
 export default function Login() {

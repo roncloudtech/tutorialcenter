@@ -6,9 +6,9 @@ import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import { Link, useNavigate } from "react-router-dom";
 import Layout2 from "../Components/Layout2";
 
-const API_BASE_URL = "http://localhost:8000";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8000/";
 const registerUser = async (role, data) => {
-  return axios.post(`${API_BASE_URL}/api/${role}s/register`, data);
+  return axios.post(`${API_BASE_URL}api/${role}s/register`, data);
 };
 
 export default function SignUp() {

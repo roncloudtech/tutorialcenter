@@ -5,7 +5,7 @@ import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import logo1 from "../Assets/TC 1.png";
 
-const API_BASE_URL = "http://localhost:8000";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8000/";
 
 export default function EmailVerfication() {
   const [searchParams] = useSearchParams();
@@ -139,8 +139,8 @@ export default function EmailVerfication() {
       const response = await axios.post(
         `${
           role === "guardian"
-            ? `${API_BASE_URL}/api/guardians`
-            : `${API_BASE_URL}/api/students`
+            ? `${API_BASE_URL}api/guardians`
+            : `${API_BASE_URL}api/students`
         }/verify`,
         {
           identifier: identifier,
@@ -171,7 +171,7 @@ export default function EmailVerfication() {
     // API call to resend the verification code
     try {
       const res = await axios.patch(
-        `${API_BASE_URL}/api/${role}s/resend-code`,
+        `${API_BASE_URL}api/${role}s/resend-code`,
         {
           email: identifier,
         }

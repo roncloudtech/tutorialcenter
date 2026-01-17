@@ -17,7 +17,7 @@ export default function StaffLogin() {
   });
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const API_BASE_URL = "http://localhost:8000/api/"; // Update with your actual API base URL
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8000/";
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -45,7 +45,7 @@ export default function StaffLogin() {
     setIsLoading(true);
 
     try {
-      const res = await axios.post(`${API_BASE_URL}staffs/login`, {
+      const res = await axios.post(`${API_BASE_URL}api/staffs/login`, {
         email: formData.email,
         password: formData.password,
       });

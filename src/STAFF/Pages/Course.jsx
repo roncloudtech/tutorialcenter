@@ -10,7 +10,7 @@ import { queryClient } from "../..";
 import { useTutors } from "../../Hooks/useTutors";
 import { useSchoolContext } from "../../Context/SchoolContext";
 
-const API_BASE_URL = "http://localhost:8000/api";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8000/";
 export default function StaffCourses() {
   const [isRegisteredCourses, setIsRegisteredCourses] = useState(false);
   const checkClases = (bool) => {
@@ -152,7 +152,7 @@ const CourseRegistrationForm = () => {
     setIsLoading(true);
     try {
       const res = await axios.post(
-        `${API_BASE_URL}/courses/`,
+        `${API_BASE_URL}api/courses/`,
         {
           name: formData.name,
           description: formData.description,
@@ -624,7 +624,7 @@ const SubjectRegistrationForm = () => {
     setIsLoading(true);
     try {
       const res = await axios.post(
-        `${API_BASE_URL}/subjects/`,
+        `${API_BASE_URL}api/subjects/`,
         {
           name: formData.name,
           description: formData.description,

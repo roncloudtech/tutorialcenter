@@ -125,7 +125,7 @@ export default function Settings() {
 
 // Component to edit student personal Information
 const EditProfile = ({ userInfo }) => {
-  const API_BASE_URL = "http://localhost:8000";
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8000/";
   const { setAuthenticatedUser } = useSchoolContext();
 
   // Form Data
@@ -218,7 +218,7 @@ const EditProfile = ({ userInfo }) => {
     // Update the User Information in the Backend(Server) and update the localstorage with the data
     try {
       const res = await axios.put(
-        `${API_BASE_URL}/api/students/${userInfo.id}`,
+        `${API_BASE_URL}api/students/${userInfo.id}`,
         {
           firstname: formData.firstname,
           lastname: formData.lastname,
@@ -238,7 +238,7 @@ const EditProfile = ({ userInfo }) => {
       // Upload profile picture if available
       if (profile) {
         const profileRes = await axios.post(
-          `${API_BASE_URL}/api/students/${userInfo.id}/profile-picture`,
+          `${API_BASE_URL}api/students/${userInfo.id}/profile-picture`,
           {
             profile_picture: profile,
           },
