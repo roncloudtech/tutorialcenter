@@ -1,11 +1,11 @@
-import { useState } from "react";
-import logo from "../Assets/tutorial_logo.png";
-import { Icon } from "@iconify/react/dist/iconify.js";
-import Layout2 from "../Components/Layout2";
-import { Link, useNavigate } from "react-router-dom";
-import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
+import { useState } from "react";
+import Layout2 from "../Components/Layout2";
+import logo from "../Assets/tutorial_logo.png";
+import { Link, useNavigate } from "react-router-dom";
+import { Icon } from "@iconify/react/dist/iconify.js";
 import { useSchoolContext } from "../Context/SchoolContext";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8000/";
 const loginUser = async (role, data) => {
@@ -85,6 +85,7 @@ export default function Login() {
         // Store user info and role in local storage and context
         localStorage.setItem("userInfo", JSON.stringify(studentInfo));
         localStorage.setItem("userRole", "student");
+        localStorage.setItem("token", res.data.token);
         setAuthenticatedUser(studentInfo);
         setRole("student");
         // This is to check if the student has not completed the Training selection or the Course selection.
@@ -104,6 +105,7 @@ export default function Login() {
         // Store user info and role in local storage and context
         localStorage.setItem("userInfo", JSON.stringify(guardianInfo));
         localStorage.setItem("userRole", "guardian");
+        localStorage.setItem("token", res.data.token);
         setAuthenticatedUser(guardianInfo);
         setRole("guardian");
       }
