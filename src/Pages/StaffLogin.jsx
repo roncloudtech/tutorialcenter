@@ -17,7 +17,8 @@ export default function StaffLogin() {
   });
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const API_BASE_URL = "http://localhost:8000/api/";
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL + "api/" || "http://localhost:8000/api/";
+  // const API_BASE_URL = "http://localhost:8000/api/";
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
