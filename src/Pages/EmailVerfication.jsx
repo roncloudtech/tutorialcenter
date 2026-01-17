@@ -22,7 +22,6 @@ export default function EmailVerfication() {
     num6: "",
   });
 
-  const [msg, setMsg] = useState("");
   const [toast, setToast] = useState(null);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -151,7 +150,6 @@ export default function EmailVerfication() {
 
       if (response.status === 200) {
         setToast({ type: "success", message: response.data.message });
-        setMsg(<span className="text-green-500">{response.data.message}</span>);
         setTimeout(() => {
           navigate("/login");
         }, 2500);
@@ -162,9 +160,6 @@ export default function EmailVerfication() {
         type: "error",
         message: error.response?.data?.message || "Verification failed",
       });
-      setMsg(
-        <span className="text-red-500">{error.response.data.message}</span>
-      );
     } finally {
       setLoading(false);
     }

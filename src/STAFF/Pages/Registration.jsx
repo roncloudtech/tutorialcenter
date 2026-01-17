@@ -48,7 +48,7 @@ const roleOptions = [
   },
 ];
 export default function StaffRegistration() {  
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
   const [profilePicture, setProfilePicture] = useState();
   const [profileErr, setProfileErr] = useState("");
   // Form Data State
