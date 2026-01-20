@@ -78,7 +78,7 @@ export default function Login() {
         const studentInfo = res.data.student;
         if (studentInfo === undefined) {
           console.log(
-            `No student data found, check the login flow.  ${studentInfo}`
+            `No student data found, check the login flow.  ${studentInfo}`,
           );
           return;
         }
@@ -98,7 +98,7 @@ export default function Login() {
         const guardianInfo = res.data.guardian;
         if (guardianInfo === undefined) {
           console.log(
-            `No guardian data found, check the login flow.  ${guardianInfo}`
+            `No guardian data found, check the login flow.  ${guardianInfo}`,
           );
           return;
         }
